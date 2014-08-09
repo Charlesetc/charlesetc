@@ -1,0 +1,148 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:200)
+
+*
+	margin:0
+	padding:0
+	font-family: 'Raleway', Times
+	font-weight:200
+	z-index:2
+	
+a
+	color:black
+	text-decoration:none
+
+body
+	background:#27F
+	animation: grad 30s
+	-webkit-animation: grad 30s infinite linear
+	-moz-animation: grad 30s infinite linear
+	-o-animation: grad 30s infinite linear
+	-official-animation: grad 30s infinite linear
+
+#background
+	position:fixed
+	top:0px
+	left:0px
+	height:100vh
+	width:100%
+	z-index:-1
+	background: url(alum.png)
+	background-repeat: repeat
+	opacity: 1
+	
+nav
+	position:relative
+	top:20vh
+	font-size:80px
+	text-align:center
+	list-style:none
+	width:600px
+	margin:auto
+	
+	a
+		color:black
+		text-decoration:none
+
+	li
+		position:relative
+		cursor: pointer
+		padding: 5px 0px
+	
+		&:hover
+			background: rgba(255,255,255,.3)
+			
+			span
+				display:block
+	
+		span
+			position:fixed
+			width:100%
+			bottom:3vh
+			left:0px
+			display:none
+			color:black
+			
+#contact, #portfolio, #photo
+	display:none
+	opacity: 0
+	position:absolute
+	top:30vh
+	text-align:center
+	font-size: 40px
+	width:100%
+	
+	ul
+	
+		list-style:none
+		text-align:center
+	
+		li 
+			padding-bottom: 10px
+			padding-top:10px
+			margin:auto
+			width:600px
+			position:relative
+			
+			&:hover
+				background: rgba(255,255,255,.3)
+				
+				span
+					display:block
+					
+			span
+				position:fixed
+				width:100%
+				bottom:6vh
+				left:0px
+				display:none
+				opacity: 0.6
+				
+		.twitter img
+			height: 110px
+			padding-bottom:15px
+		
+		.github img
+			height: 140px
+		
+		.email img
+			height:80px
+			padding-bottom:25px
+			
+
+#photo
+
+	#photo_container
+		width:300px
+		margin:auto
+		text-align:center
+		position:relative
+		
+		img
+			position:absolute
+			top:0vh
+			left:0px
+			border-radius:2000px
+			width: 300px
+		
+		#photo1
+			opacity:1
+			transition: opacity 0.5s
+			
+			&:hover
+				opacity:0
+			
+		#photo2
+			opacity:0
+			transition: opacity 0.5s
+			
+			&:hover
+				opacity:1
+			
+			
+@keyframes grad
+	0% { background: #27F }
+	20% { background: #9900CC }
+	40% { background: #FF5050 }
+	60% { background: #E6E600 }
+	80% { background: #52CC29 }
+	100% { background: #27F }

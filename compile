@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+output = `stylus master.styl`
+output += `coffee -c master.coffee`
+
+puts output
