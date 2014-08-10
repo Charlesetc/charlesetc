@@ -2,5 +2,7 @@
 
 output = `stylus master.styl`
 output += `coffee -c master.coffee`
+output += `coffee -c error.coffee`
+
 
 puts output
