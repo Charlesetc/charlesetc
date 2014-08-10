@@ -15,6 +15,9 @@
         opacity: 1
       }, 200);
     };
+    if (!$('body').hasClass('backup')) {
+      $('#main nav li a').removeAttr('href');
+    }
     $('#photo1, #photo2').click(function() {
       return $('.charles').click();
     });
@@ -103,7 +106,7 @@
             opacity: 0
           }, 500);
           return $('.chamberlain').animate({
-            top: -1 * $(window).height() * 0.40
+            top: -1 * $(window).height() * 0.38
           }, 500, function() {
             show_section('#portfolio');
             $('.chamberlain span').text('Home');

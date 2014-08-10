@@ -12,11 +12,26 @@ a {
 }
 body {
   background: #27f;
-  animation: grad 30s;
+  min-height: 100vh;
   -webkit-animation: grad 30s infinite linear;
   -moz-animation: grad 30s infinite linear;
   -o-animation: grad 30s infinite linear;
-  -official-animation: grad 30s infinite linear;
+  -ms-animation: grad 30s infinite linear;
+  animation: grad 30s infinite linear;
+}
+body::selection {
+  background: none;
+}
+body::-moz-selection {
+  background: none;
+}
+*::selection,
+html::selection {
+  background: none;
+}
+*::-moz-selection,
+html::-moz-selection {
+  background: none;
 }
 #background {
   position: fixed;
@@ -60,6 +75,15 @@ nav li span {
   left: 0px;
   display: none;
   color: #000;
+}
+#contact.backup,
+#portfolio.backup,
+#photo.backup {
+  display: block;
+  opacity: 1;
+}
+.backup nav {
+  top: 10vh;
 }
 #contact,
 #portfolio,
@@ -124,6 +148,24 @@ nav li span {
   height: 80px;
   padding-bottom: 25px;
 }
+#portfolio span {
+  opacity: 1;
+  font-size: 25px;
+}
+#photo span {
+  opacity: 0;
+  position: relative;
+  top: 320px;
+  left: 0.5%;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+#photo #photo_container:hover ~ span {
+  opacity: 1;
+}
 #photo #photo_container {
   width: 300px;
   margin: auto;
@@ -134,11 +176,19 @@ nav li span {
   position: absolute;
   top: 0vh;
   left: 0px;
+  -webkit-border-radius: 2000px;
+  -moz-border-radius: 2000px;
+  -o-border-radius: 2000px;
+  -ms-border-radius: 2000px;
   border-radius: 2000px;
   width: 300px;
 }
 #photo #photo_container #photo1 {
   opacity: 1;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
   transition: opacity 0.5s;
 }
 #photo #photo_container #photo1:hover {
@@ -146,10 +196,74 @@ nav li span {
 }
 #photo #photo_container #photo2 {
   opacity: 0;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
   transition: opacity 0.5s;
 }
 #photo #photo_container #photo2:hover {
   opacity: 1;
+}
+@-wekbit-keyframes grad {
+  0% {
+    background: #27f;
+  }
+  20% {
+    background: #90c;
+  }
+  40% {
+    background: #ff5050;
+  }
+  60% {
+    background: #e6e600;
+  }
+  80% {
+    background: #52cc29;
+  }
+  100% {
+    background: #27f;
+  }
+}
+@-moz-keyframes grad {
+  0% {
+    background: #27f;
+  }
+  20% {
+    background: #90c;
+  }
+  40% {
+    background: #ff5050;
+  }
+  60% {
+    background: #e6e600;
+  }
+  80% {
+    background: #52cc29;
+  }
+  100% {
+    background: #27f;
+  }
+}
+@-o-keyframes grad {
+  0% {
+    background: #27f;
+  }
+  20% {
+    background: #90c;
+  }
+  40% {
+    background: #ff5050;
+  }
+  60% {
+    background: #e6e600;
+  }
+  80% {
+    background: #52cc29;
+  }
+  100% {
+    background: #27f;
+  }
 }
 @-moz-keyframes grad {
   0% {

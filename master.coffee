@@ -11,13 +11,16 @@ $ ->
 		$(section).animate {
 			opacity:1
 		}, 200
-		
-		
+
+
+	unless $('body').hasClass 'backup'
+		$('#main nav li a').removeAttr 'href'
+	
+
 	$('#photo1, #photo2').click ->
 		$('.charles').click()
-		
-	
-	
+
+
 	$('.charles').click ->
 		unless $(this).hasClass 'disabled'
 			$(this).addClass 'disabled'
@@ -105,7 +108,7 @@ $ ->
 					opacity:0
 				}, 500
 				$('.chamberlain').animate {
-					top: (-1 * $(window).height() * 0.40)
+					top: (-1 * $(window).height() * 0.38)
 				}, 500, ->
 					show_section '#portfolio'
 					$('.chamberlain span').text('Home')
