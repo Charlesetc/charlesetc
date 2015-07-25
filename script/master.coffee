@@ -26,7 +26,7 @@ $ ->
 			$(this).addClass 'disabled'
 			if $(this).hasClass 'clicked'
 				$(this).removeClass 'clicked'
-				hide_section("#photo")				
+				hide_section("#photo")
 				# $('.pipin, .chamberlain').css 'left',
 				# 	($(window).width() + 750)
 				$('.charles').animate {
@@ -99,7 +99,7 @@ $ ->
 				$('.chamberlain').animate {
 					top:0
 				}, 500, ->
-					$('.chamberlain span').text('Portfolio')
+					$('.chamberlain span').text('Blog')
 					$('.chamberlain').removeClass 'disabled'
 			else
 				$(this).addClass 'clicked'

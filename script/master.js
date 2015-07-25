@@ -96,7 +96,7 @@
           return $('.chamberlain').animate({
             top: 0
           }, 500, function() {
-            $('.chamberlain span').text('Portfolio');
+            $('.chamberlain span').text('Blog');
             return $('.chamberlain').removeClass('disabled');
           });
         } else {
