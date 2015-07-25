@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-output = `stylus master.styl`
-output += `coffee -c master.coffee`
-output += `coffee -c error.coffee`
+output = `stylus style/master.styl`
+output += `coffee -c script/master.coffee`
+output += `coffee -c script/error.coffee`
 
 
 puts output

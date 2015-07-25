@@ -13,11 +13,11 @@ a {
 body {
   background: #27f;
   min-height: 100vh;
-  -webkit-animation: grad 30s infinite linear;
-  -moz-animation: grad 30s infinite linear;
-  -o-animation: grad 30s infinite linear;
-  -ms-animation: grad 30s infinite linear;
-  animation: grad 30s infinite linear;
+  -webkit-animation: grad 10s infinite linear;
+  -moz-animation: grad 10s infinite linear;
+  -o-animation: grad 10s infinite linear;
+  -ms-animation: grad 10s infinite linear;
+  animation: grad 10s infinite linear;
 }
 body::selection {
   background: none;
@@ -40,7 +40,7 @@ html::-moz-selection {
   height: 100vh;
   width: 100%;
   z-index: -1;
-  background: url("alum.png");
+  background: url("/images/alum.png");
   background-repeat: repeat;
   opacity: 1;
 }
@@ -216,10 +216,10 @@ nav li span {
     background: #ff5050;
   }
   60% {
-    background: #e6e600;
+    background: #ae8f00;
   }
   80% {
-    background: #52cc29;
+    background: #35861a;
   }
   100% {
     background: #27f;
@@ -236,10 +236,10 @@ nav li span {
     background: #ff5050;
   }
   60% {
-    background: #e6e600;
+    background: #ae8f00;
   }
   80% {
-    background: #52cc29;
+    background: #35861a;
   }
   100% {
     background: #27f;
@@ -256,10 +256,10 @@ nav li span {
     background: #ff5050;
   }
   60% {
-    background: #e6e600;
+    background: #ae8f00;
   }
   80% {
-    background: #52cc29;
+    background: #35861a;
   }
   100% {
     background: #27f;
@@ -321,10 +321,10 @@ nav li span {
     background: #ff5050;
   }
   60% {
-    background: #e6e600;
+    background: #ae8f00;
   }
   80% {
-    background: #52cc29;
+    background: #35861a;
   }
   100% {
     background: #27f;
@@ -341,10 +341,10 @@ nav li span {
     background: #ff5050;
   }
   60% {
-    background: #e6e600;
+    background: #ae8f00;
   }
   80% {
-    background: #52cc29;
+    background: #35861a;
   }
   100% {
     background: #27f;
@@ -361,10 +361,10 @@ nav li span {
     background: #ff5050;
   }
   60% {
-    background: #e6e600;
+    background: #ae8f00;
   }
   80% {
-    background: #52cc29;
+    background: #35861a;
   }
   100% {
     background: #27f;
@@ -381,10 +381,10 @@ nav li span {
     background: #ff5050;
   }
   60% {
-    background: #e6e600;
+    background: #ae8f00;
   }
   80% {
-    background: #52cc29;
+    background: #35861a;
   }
   100% {
     background: #27f;
