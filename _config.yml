@@ -3,6 +3,8 @@ title: Charles Chamberlain
 baseurl: ""
 
 # Build settings
+syntax-highlighting:
+  enabled: true
 markdown: kramdown
 kramdown:
   input: GFM
