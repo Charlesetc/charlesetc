@@ -5,6 +5,7 @@ baseurl: ""
 # Build settings
 syntax-highlighting:
   enabled: true
-markdown: kramdown
+markdown: kramdown 
+pygmants: false 
 kramdown:
   input: GFM
