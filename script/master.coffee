@@ -43,7 +43,7 @@ $ ->
 					left: -$(window).width() - 750
 				}, 500
 				$('.charles').animate {
-					top: (-1 * $(window).height() * 0.10)
+					top: - $(this).offset().top + 50
 				}, 500, ->
 					show_section('#photo')
 					$('.charles').removeClass 'disabled'
@@ -76,7 +76,7 @@ $ ->
 					opacity:0
 				}, 500
 				$('.pipin').animate {
-					top: (-1 * $(window).height() * 0.25)
+				  top: - $(this).offset().top + 50
 				}, 500, ->
 					show_section('#contact')
 					# $('#contact').css 'display', 'block'
@@ -108,7 +108,7 @@ $ ->
 					opacity:0
 				}, 500
 				$('.chamberlain').animate {
-					top: (-1 * $(window).height() * 0.38)
+				  top: - $(this).offset().top + 50
 				}, 500, ->
 					show_section '#portfolio'
 					$('.chamberlain span').text('Home')

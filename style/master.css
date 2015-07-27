@@ -94,6 +94,7 @@ html::-moz-selection {
 }
 .post-content pre {
   font-size: 20px;
+  margin-bottom: 10px;
 }
 .post-content pre .line-numbers {
   margin-right: 10px;

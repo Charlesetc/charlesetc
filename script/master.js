@@ -42,7 +42,7 @@
             left: -$(window).width() - 750
           }, 500);
           return $('.charles').animate({
-            top: -1 * $(window).height() * 0.10
+            top: -$(this).offset().top + 50
           }, 500, function() {
             show_section('#photo');
             $('.charles').removeClass('disabled');
@@ -74,7 +74,7 @@
             opacity: 0
           }, 500);
           return $('.pipin').animate({
-            top: -1 * $(window).height() * 0.25
+            top: -$(this).offset().top + 50
           }, 500, function() {
             show_section('#contact');
             $('.pipin span').text('Home');
@@ -106,7 +106,7 @@
             opacity: 0
           }, 500);
           return $('.chamberlain').animate({
-            top: -1 * $(window).height() * 0.38
+            top: -$(this).offset().top + 50
           }, 500, function() {
             show_section('#portfolio');
             $('.chamberlain span').text('Home');
