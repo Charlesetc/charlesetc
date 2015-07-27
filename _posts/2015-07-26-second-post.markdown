@@ -23,7 +23,7 @@ I don't know.
 
 Here's `another` section!
 
-```ruby
+{% highlight ruby %}
 class Test
 
   def hi(there)
@@ -31,6 +31,5 @@ class Test
   end
 
 end
-```
-
+{% endhighlight %}
 

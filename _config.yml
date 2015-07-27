@@ -4,7 +4,6 @@ baseurl: ""
 
 # Build settings
 markdown: kramdown 
- # hightlighter: pygments 
+hightlighter: pygments 
 kramdown:
   input: GFM
-#   syntax_highlighter: pygments 
