@@ -105,12 +105,11 @@ body
     &:hover
       text-decoration: underline
   
-  *:not(pre)
-    code
-      font-family: courier
-      background: white
-      border: 1px solid #888
-      padding:2px;
+  code
+    font-family: courier
+    background: white
+    border: 1px solid #888
+    padding:2px;
 
   pre
     font-size 20px
@@ -118,8 +117,10 @@ body
 
     .line-numbers
       margin-right:10px
-
-
+    code 
+      background transparent
+      border none
+      padding none
 
 html body .post-title
   max-width: 600px

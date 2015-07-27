@@ -86,7 +86,7 @@ html::-moz-selection {
 .post-content a:hover {
   text-decoration: underline;
 }
-.post-content *:not(pre) code {
+.post-content code {
   font-family: courier;
   background: #fff;
   border: 1px solid #888;
@@ -98,6 +98,11 @@ html::-moz-selection {
 }
 .post-content pre .line-numbers {
   margin-right: 10px;
+}
+.post-content pre code {
+  background: transparent;
+  border: none;
+  padding: none;
 }
 html body .post-title {
   max-width: 600px;
