@@ -86,7 +86,7 @@ html::-moz-selection {
 .post-content a:hover {
   text-decoration: underline;
 }
-.post-content code {
+.post-content *:not(pre) code {
   font-family: courier;
   background: #fff;
   border: 1px solid #888;
