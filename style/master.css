@@ -1,9 +1,8 @@
-@import url("http://fonts.googleapis.com/css?family=Raleway:200");
+@import url("https://fonts.googleapis.com/css?family=Raleway:200");
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Raleway', Times;
-  font-weight: 200;
+  font-weight: 300;
   z-index: 2;
 }
 a {
@@ -11,13 +10,9 @@ a {
   text-decoration: none;
 }
 body {
-  background: #27f;
+  font-family: 'Raleway', Courier;
+  background: url("/images/brushed.jpg");
   min-height: 100vh;
-  -webkit-animation: grad 10s infinite linear;
-  -moz-animation: grad 10s infinite linear;
-  -o-animation: grad 10s infinite linear;
-  -ms-animation: grad 10s infinite linear;
-  animation: grad 10s infinite linear;
 }
 body::selection {
   background: none;
@@ -40,9 +35,83 @@ html::-moz-selection {
   height: 100vh;
   width: 100%;
   z-index: -1;
-  background: url("/images/alum.png");
-  background-repeat: repeat;
+  -webkit-animation: grad 10s infinite linear;
+  -moz-animation: grad 10s infinite linear;
+  -o-animation: grad 10s infinite linear;
+  -ms-animation: grad 10s infinite linear;
+  animation: grad 10s infinite linear;
   opacity: 1;
+}
+.post {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 30px;
+  font-size: 30px;
+}
+.post *::selection {
+  background: rgba(0,0,0,0.5);
+}
+.post *::-moz-selection {
+  background: rgba(0,0,0,0.5);
+}
+.post-content {
+  margin-top: 30px;
+  background: rgba(255,255,255,0.3);
+  padding: 30px;
+  margin-bottom: 50px;
+}
+.post-content p {
+  font-family: Arial;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.post-content h1 {
+  font-size: 60px;
+  border-bottom: 1px solid #000;
+  margin-bottom: 20px;
+}
+.post-content h2 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.post-content h3 {
+  font-size: 25px;
+  margin-bottom: 10px;
+  font-family: Arial, Courier;
+  text-decoration: underline;
+}
+.post-content a {
+  color: #fff;
+}
+.post-content a:hover {
+  text-decoration: underline;
+}
+.post-content code {
+  font-family: courier;
+  background: #fff;
+  border: 1px solid #888;
+  padding: 2px;
+}
+.post-content pre {
+  font-size: 20px;
+}
+.post-content pre .line-numbers {
+  margin-right: 10px;
+}
+html body .post-title {
+  max-width: 600px;
+  text-align: center;
+  font-size: 80px;
+  display: block;
+  padding: 5px 0px;
+font-family
+}
+html body .post-title:hover {
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+}
+html body .post-title * {
+  font-family: "Raleway", Times;
 }
 nav {
   position: relative;
@@ -205,66 +274,6 @@ nav li span {
 #photo #photo_container #photo2:hover {
   opacity: 1;
 }
-@-wekbit-keyframes grad {
-  0% {
-    background: #27f;
-  }
-  20% {
-    background: #90c;
-  }
-  40% {
-    background: #ff5050;
-  }
-  60% {
-    background: #ae8f00;
-  }
-  80% {
-    background: #35861a;
-  }
-  100% {
-    background: #27f;
-  }
-}
-@-moz-keyframes grad {
-  0% {
-    background: #27f;
-  }
-  20% {
-    background: #90c;
-  }
-  40% {
-    background: #ff5050;
-  }
-  60% {
-    background: #ae8f00;
-  }
-  80% {
-    background: #35861a;
-  }
-  100% {
-    background: #27f;
-  }
-}
-@-o-keyframes grad {
-  0% {
-    background: #27f;
-  }
-  20% {
-    background: #90c;
-  }
-  40% {
-    background: #ff5050;
-  }
-  60% {
-    background: #ae8f00;
-  }
-  80% {
-    background: #35861a;
-  }
-  100% {
-    background: #27f;
-  }
-}
 #question_one {
   font-size: 300px;
   position: fixed;
@@ -312,81 +321,69 @@ nav li span {
 }
 @-moz-keyframes grad {
   0% {
-    background: #27f;
+    background: rgba(122,122,204,0.4);
   }
-  20% {
-    background: #90c;
+  25% {
+    background: rgba(133,66,179,0.4);
   }
-  40% {
-    background: #ff5050;
+  50% {
+    background: rgba(81,61,230,0.4);
   }
-  60% {
-    background: #ae8f00;
-  }
-  80% {
-    background: #35861a;
+  75% {
+    background: rgba(133,66,179,0.4);
   }
   100% {
-    background: #27f;
+    background: rgba(122,122,204,0.4);
   }
 }
 @-webkit-keyframes grad {
   0% {
-    background: #27f;
+    background: rgba(122,122,204,0.4);
   }
-  20% {
-    background: #90c;
+  25% {
+    background: rgba(133,66,179,0.4);
   }
-  40% {
-    background: #ff5050;
+  50% {
+    background: rgba(81,61,230,0.4);
   }
-  60% {
-    background: #ae8f00;
-  }
-  80% {
-    background: #35861a;
+  75% {
+    background: rgba(133,66,179,0.4);
   }
   100% {
-    background: #27f;
+    background: rgba(122,122,204,0.4);
   }
 }
 @-o-keyframes grad {
   0% {
-    background: #27f;
+    background: rgba(122,122,204,0.4);
   }
-  20% {
-    background: #90c;
+  25% {
+    background: rgba(133,66,179,0.4);
   }
-  40% {
-    background: #ff5050;
+  50% {
+    background: rgba(81,61,230,0.4);
   }
-  60% {
-    background: #ae8f00;
-  }
-  80% {
-    background: #35861a;
+  75% {
+    background: rgba(133,66,179,0.4);
   }
   100% {
-    background: #27f;
+    background: rgba(122,122,204,0.4);
   }
 }
 @keyframes grad {
   0% {
-    background: #27f;
+    background: rgba(122,122,204,0.4);
   }
-  20% {
-    background: #90c;
+  25% {
+    background: rgba(133,66,179,0.4);
   }
-  40% {
-    background: #ff5050;
+  50% {
+    background: rgba(81,61,230,0.4);
   }
-  60% {
-    background: #ae8f00;
-  }
-  80% {
-    background: #35861a;
+  75% {
+    background: rgba(133,66,179,0.4);
   }
   100% {
-    background: #27f;
+    background: rgba(122,122,204,0.4);
   }
 }

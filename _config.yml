@@ -1,0 +1,8 @@
+# Site settings
+title: Charles Chamberlain 
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM

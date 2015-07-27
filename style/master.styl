@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Raleway:200)
+@import url(https://fonts.googleapis.com/css?family=Raleway:200)
 
 
 vendor(prop, args) 
@@ -23,8 +23,7 @@ transition()
 *
 	margin:0
 	padding:0
-	font-family: 'Raleway', Times
-	font-weight:200
+	font-weight:300
 	z-index:2
 	
 a
@@ -32,9 +31,9 @@ a
 	text-decoration:none
 
 body
-	background:#27F
+	font-family: 'Raleway', Courier
+	background: url("/images/brushed.jpg")
 	min-height:100vh // Fix for Safari
-	animation: grad 10s infinite linear
 	// -webkit-animation: grad 30s infinite linear
 	// -moz-animation: grad 30s infinite linear
 	// -o-animation: grad 30s infinite linear
@@ -61,10 +60,81 @@ body
 	height:100vh
 	width:100%
 	z-index:-1
-	background: url(/images/alum.png)
-	background-repeat: repeat
+	//background-repeat: repeat
+	animation: grad 10s infinite linear
 	opacity: 1
-	
+
+.post 
+  max-width: 600px
+  margin:auto
+  margin-top: 30px
+  font-size: 30px
+
+  *
+	  &::selection
+	  	background: rgba(black, 50%)
+	  	
+	  &::-moz-selection
+	  	background: rgba(black, 50%)
+
+.post-content
+  margin-top: 30px
+  background: rgba(255,255,255, .3)
+  padding: 30px
+  margin-bottom:50px;
+  p
+    font-family: Arial
+    font-size: 20px
+    margin-bottom: 10px
+  h1
+    font-size: 60px
+    border-bottom: 1px solid black
+    margin-bottom: 20px
+  h2
+    font-size: 40px
+    margin-bottom: 10px
+  h3
+    font-size: 25px
+    margin-bottom: 10px
+    font-family: Arial, Courier
+    text-decoration: underline
+
+  a
+    color white
+
+    &:hover
+      text-decoration: underline
+
+  code
+    font-family: courier
+    background: white
+    border: 1px solid #888
+    padding:2px;
+
+  pre
+    font-size 20px
+    margin-bottom: 10px
+
+    .line-numbers
+      margin-right:10px
+
+
+
+html body .post-title
+  max-width: 600px
+  text-align:center
+  font-size: 80px
+  display:block
+  padding: 5px 0px
+  font-family 
+  &:hover
+    background: rgba(255,255,255,.3)
+    cursor: pointer
+
+  & *
+	  font-family: "Raleway", Times
+
+
 nav
 	position:relative
 	top:20vh
@@ -198,39 +268,47 @@ nav
 	
 
 
-				
+purple_1 = rgba(#7A7ACC, 0.4)
+purple_2 = rgba(#8542B3, 0.4)
+purple_3 = rgba(#513DE6, 0.4)
+
+
 // Animations			
 @keyframes grad
-	0% { background: #27F }
-	20% { background: #9900CC }
-	40% { background: #FF5050 }
-	60% { background: #AE8F00 }
-	80% { background: #35861A }
-	100% { background: #27F }
+  0% { background: purple_1 }
+  25% { background: purple_2 }
+  50% { background: purple_3 }
+  75% { background: purple_2 }
+  100% { background: purple_1 }
+//   0% { background: #27F }
+//   25% { background: #9900CC }
+//   50% { background: #FF5050 }
+//   75% { background: #35861A }
+//   100% { background: #27F }
 			
-@-wekbit-keyframes grad
-	0% { background: #27F }
-	20% { background: #9900CC }
-	40% { background: #FF5050 }
-	60% { background: #AE8F00 }
-	80% { background: #35861A }
-	100% { background: #27F }
- 	
-@-moz-keyframes grad
-	0% { background: #27F }
-	20% { background: #9900CC }
-	40% { background: #FF5050 }
-	60% { background: #AE8F00 }
-	80% { background: #35861A }
-	100% { background: #27F }
-	
-@-o-keyframes grad
-	0% { background: #27F }
-	20% { background: #9900CC }
-	40% { background: #FF5050 }
-	60% { background: #AE8F00 }
-	80% { background: #35861A }
-	100% { background: #27F }
+// @-wekbit-keyframes grad
+// 	0% { background: #27F }
+// 	20% { background: #9900CC }
+// 	40% { background: #FF5050 }
+// 	60% { background: #AE8F00 }
+// 	80% { background: #35861A }
+// 	100% { background: #27F }
+//  	
+// @-moz-keyframes grad
+// 	0% { background: #27F }
+// 	20% { background: #9900CC }
+// 	40% { background: #FF5050 }
+// 	60% { background: #AE8F00 }
+// 	80% { background: #35861A }
+// 	100% { background: #27F }
+// 	
+// @-o-keyframes grad
+// 	0% { background: #27F }
+// 	20% { background: #9900CC }
+// 	40% { background: #FF5050 }
+// 	60% { background: #AE8F00 }
+// 	80% { background: #35861A }
+// 	100% { background: #27F }
 
 
 // Error Page

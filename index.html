@@ -1,3 +1,7 @@
+---
+layout: none 
+---
+
 <!doctype html>
 <html>
 	<head>
@@ -73,12 +77,18 @@
 		
 		<section id = 'portfolio'>
 			
-			<ul>
-				<a href = 'https://github.com/Charlesetc/redis-struct/#redisstruct' target = '_blank'><li>Redis-Struct</li></a>
-				<a href = 'http://maylogs.herokuapp.com' target = '_blank'><li>MayLogs*<span>* Takes several seconds to load.</span></li></a>
-				<a href = 'http://patrickchamberlain.info' target = '_blank'><li>Patrick Chamberlain</li></a>
-				<a href = 'http://negotiation.uchicago.edu' target = '_blank'><li>UChicago Negotiations*<span>* Takes several seconds to load.</span></li></a>
-			</ul>
+      <ul class="post-list">
+        {% for post in site.posts %}
+          <li>
+            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+    
+              <a class="post-link" 
+              href="{{ post.url | prepend: site.baseurl }}">
+                {{ post.title }}
+              </a>
+          </li>
+        {% endfor %}
+      </ul>
 			
 		</section>
 		
