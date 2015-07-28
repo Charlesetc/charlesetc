@@ -5,3 +5,4 @@ baseurl: ""
 # Build settings
 markdown: redcarpet 
 hightlighter: pygments 
+pygments_options: ['lineanchors']

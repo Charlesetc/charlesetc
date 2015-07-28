@@ -12,7 +12,14 @@ This is a very important test.
 Continuing to test.
 Excellent testing.
 
-{% highlight clojure %}
-(defn test [x y] 
-  (* x (+ y 2)))
+{% highlight ruby linenos=table %}
+class Hello
+  def world(*args)
+    print "Hello"
+    args.each do |a|
+      print " "
+      print a
+    end
+  end
+end
 {% endhighlight %}

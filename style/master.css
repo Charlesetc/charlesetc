@@ -337,6 +337,11 @@ nav li span {
   background: none;
   z-index: 40;
 }
+.linenodiv {
+  position: relative;
+  top: 4px;
+  padding-right: 4px;
+}
 @-moz-keyframes grad {
   0% {
     background: rgba(122,122,204,0.4);
