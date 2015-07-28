@@ -64,6 +64,11 @@ body
 	animation: grad 20s infinite linear
 	opacity: 1
 
+
+.post-list
+  overflow-y:scroll
+  max-height: 50vh
+
 .post 
   max-width: 600px
   margin:auto
@@ -76,6 +81,7 @@ body
 	  	
 	  &::-moz-selection
 	  	background: rgba(black, 50%)
+
 sep = 20px
 .post-content
   margin-top: 30px
@@ -83,9 +89,16 @@ sep = 20px
   padding: 30px
   margin-bottom:50px;
   p
-    font-family: Arial
-    font-size: 20px
+    font-family: Times New Roman, Times
+    font-size: 25px
+    line-height: 1.2
     margin-bottom: sep
+  p:first-of-type::first-letter 
+    font-size: 64px
+    padding-top: 5px
+    padding-right: 5px
+    line-height: 50px
+    float:left
   h1
     font-size: 60px
     border-bottom: 1px solid black

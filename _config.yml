@@ -3,7 +3,5 @@ title: Charles Chamberlain
 baseurl: ""
 
 # Build settings
-markdown: kramdown 
+markdown: redcarpet 
 hightlighter: pygments 
-kramdown:
-  input: GFM
