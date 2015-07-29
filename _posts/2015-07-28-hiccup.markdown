@@ -1,0 +1,14 @@
+---
+layout: post
+title: "Hiccup"
+date: "2015-07-28 18:03:21 -0400"
+---
+
+# My Favorite Library
+
+> &ldquo;Clojure is a dialect of Lisp,
+> and shares with Lisp the code-as-data philosophy&rdquo;
+*&mdash;Rich Hickey*
+
+No other library so fully encompasses this ideal as [Hiccup](http://www.github.com/weavejester/hiccup).
+

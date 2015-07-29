@@ -70,7 +70,7 @@ html::-moz-selection {
   line-height: 1.2;
   margin-bottom: 20px;
 }
-.post-content p:first-of-type::first-letter {
+.post-content> p:first-of-type::first-letter {
   font-size: 64px;
   padding-top: 5px;
   padding-right: 5px;
@@ -93,10 +93,10 @@ html::-moz-selection {
   text-decoration: underline;
 }
 .post-content a {
-  color: #fff;
+  text-decoration: underline;
 }
 .post-content a:hover {
-  text-decoration: underline;
+  color: #fff;
 }
 .post-content code {
   font-family: courier;
@@ -115,6 +115,14 @@ html::-moz-selection {
   background: transparent;
   border: none;
   padding: none;
+}
+.post-content blockquote {
+  border-left: 8px solid rgba(0,0,0,0.5);
+  color: #000;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
 }
 html body .post-title {
   max-width: 600px;

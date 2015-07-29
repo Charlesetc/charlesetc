@@ -93,7 +93,7 @@ sep = 20px
     font-size: 25px
     line-height: 1.2
     margin-bottom: sep
-  p:first-of-type::first-letter 
+  &> p:first-of-type::first-letter 
     font-size: 64px
     padding-top: 5px
     padding-right: 5px
@@ -113,10 +113,10 @@ sep = 20px
     text-decoration: underline
 
   a
-    color white
+    text-decoration: underline
 
     &:hover
-      text-decoration: underline
+      color white
   
   code
     font-family: courier
@@ -134,6 +134,15 @@ sep = 20px
       background transparent
       border none
       padding none
+        
+  blockquote
+    border-left: 8px solid rgba(black, 0.5)
+    color: black
+    padding-left: 15px
+    padding-top: 15px
+    padding-bottom: 5px
+    margin-bottom: sep
+    
 
 html body .post-title
   max-width: 600px

@@ -1,4 +1,19 @@
 
+last_state = false
+done = false
+
+disabled = ->
+  $('.charles').hasClass('disabled') or
+  $('.chamberlain').hasClass('disabled') or
+  $('.pipin').hasClass('disabled')
+
+$(window).on "popstate", ->
+  if not done and not disabled()
+    done = true
+    window.location.pathname = ""
+  else
+    done = false
+
 $ ->
 	
 	hide_section = (section) ->
@@ -12,9 +27,8 @@ $ ->
 			opacity:1
 		}, 200
 
-
-	unless $('body').hasClass 'backup'
-		$('#main nav li a').removeAttr 'href'
+#	unless $('body').hasClass 'backup'
+# 	$('#main nav li a').removeAttr("href")
 	
 
 	$('#photo1, #photo2').click ->
@@ -26,6 +40,7 @@ $ ->
 			$(this).addClass 'disabled'
 			if $(this).hasClass 'clicked'
 				$(this).removeClass 'clicked'
+				#window.history.pushState "", "", "/"
 				hide_section("#photo")
 				# $('.pipin, .chamberlain').css 'left',
 				# 	($(window).width() + 750)
@@ -39,6 +54,7 @@ $ ->
 					$('.charles span').text 'Etc'
 			else
 				$(this).addClass 'clicked'
+				#window.history.pushState "", "", "/charles"
 				$('.pipin, .chamberlain').animate {
 					left: -$(window).width() - 750
 				}, 500
