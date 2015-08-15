@@ -1,8 +1,4 @@
-#!/usr/bin/env ruby
-
-output = `stylus style/master.styl`
-output += `coffee -c script/master.coffee`
-output += `coffee -c script/error.coffee`
-
-
-puts output
+#!/bin/bash
+stylus style/master.styl
+coffee -c script/master.coffee
+coffee -c script/error.coffee
