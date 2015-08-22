@@ -1,6 +1,7 @@
 # Site settings
 title: Charles Chamberlain 
 baseurl: ""
+exclude: ./style/master.styl
 
 # Build settings
 markdown: redcarpet 

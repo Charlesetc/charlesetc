@@ -35,21 +35,45 @@ html::-moz-selection {
   height: 100vh;
   width: 100%;
   z-index: -1;
-  -webkit-animation: grad 20s infinite linear;
-  -moz-animation: grad 20s infinite linear;
-  -o-animation: grad 20s infinite linear;
-  -ms-animation: grad 20s infinite linear;
-  animation: grad 20s infinite linear;
+  -webkit-animation: grad 10s infinite linear;
+  -moz-animation: grad 10s infinite linear;
+  -o-animation: grad 10s infinite linear;
+  -ms-animation: grad 10s infinite linear;
+  animation: grad 10s infinite linear;
   opacity: 1;
 }
 .post-list {
   overflow-y: scroll;
   max-height: 50vh;
 }
+html body .post-title {
+  width: calc(100% + 100px);
+  position: relative;
+  left: -50px;
+  border-top: 50px solid rgba(255,255,255,0.4);
+  text-align: center;
+  font-size: 80px;
+  display: block;
+  padding: 5px 0px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  -webkit-box-shadow: inset 0px 0px 30px #555;
+  -moz-box-shadow: inset 0px 0px 30px #555;
+  -o-box-shadow: inset 0px 0px 30px #555;
+  -ms-box-shadow: inset 0px 0px 30px #555;
+  box-shadow: inset 0px 0px 30px #555;
+  -moz-background-clip: padding; /* Firefox 3.6 */
+  -webkit-background-clip: padding; /* Safari 4 */
+  background-clip: padding-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
+}
+html body .post-title:hover {
+  cursor: pointer;
+}
+html body .post-title * {
+  font-family: "Raleway", Times;
+}
 .post {
-  max-width: 600px;
-  margin: auto;
-  margin-top: 30px;
+  min-height: 100vh;
   font-size: 30px;
 }
 .post *::selection {
@@ -58,11 +82,54 @@ html::-moz-selection {
 .post *::-moz-selection {
   background: rgba(0,0,0,0.5);
 }
+.main-page .home-link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+  -webkit-box-shadow: 0px 0px 8px #444;
+  -moz-box-shadow: 0px 0px 8px #444;
+  -o-box-shadow: 0px 0px 8px #444;
+  -ms-box-shadow: 0px 0px 8px #444;
+  box-shadow: 0px 0px 8px #444;
+}
+.post .home-link {
+  position: absolute;
+  z-index: 30;
+  top: 10px;
+  right: 10px;
+  height: 30px;
+  width: 30px;
+  -webkit-box-shadow: 0px 0px 5px #777;
+  -moz-box-shadow: 0px 0px 5px #777;
+  -o-box-shadow: 0px 0px 5px #777;
+  -ms-box-shadow: 0px 0px 5px #777;
+  box-shadow: 0px 0px 5px #777;
+}
+.post::after {
+  content: "";
+  display: block;
+  height: 80px;
+  -webkit-box-shadow: inset 0px 0px 30px #555;
+  -moz-box-shadow: inset 0px 0px 30px #555;
+  -o-box-shadow: inset 0px 0px 30px #555;
+  -ms-box-shadow: inset 0px 0px 30px #555;
+  box-shadow: inset 0px 0px 30px #555;
+  width: calc(100% + 100px);
+  position: relative;
+  left: -50px;
+}
 .post-content {
-  margin-top: 30px;
-  background: rgba(255,255,255,0.3);
-  padding: 30px;
-  margin-bottom: 50px;
+  background: #f1f1f1;
+  width: 100%;
+  padding: 50px;
+  border-left: 50px solid rgba(255,255,255,0.4);
+  border-right: 50px solid rgba(255,255,255,0.4);
+  -moz-background-clip: padding; /* Firefox 3.6 */
+  -webkit-background-clip: padding; /* Safari 4 */
+  background-clip: padding-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
+  box-sizing: border-box;
 }
 .post-content p {
   font-family: Times New Roman, Times;
@@ -84,10 +151,6 @@ html::-moz-selection {
 }
 .post-content h2 {
   font-size: 40px;
-  margin-bottom: 20px;
-}
-.post-content h3 {
-  font-size: 25px;
   margin-bottom: 10px;
   font-family: Arial, Courier;
   text-decoration: underline;
@@ -123,21 +186,6 @@ html::-moz-selection {
   padding-top: 15px;
   padding-bottom: 5px;
   margin-bottom: 20px;
-}
-html body .post-title {
-  max-width: 600px;
-  text-align: center;
-  font-size: 80px;
-  display: block;
-  padding: 5px 0px;
-font-family
-}
-html body .post-title:hover {
-  background: rgba(255,255,255,0.3);
-  cursor: pointer;
-}
-html body .post-title * {
-  font-family: "Raleway", Times;
 }
 nav {
   position: relative;

@@ -61,7 +61,7 @@ body
 	width:100%
 	z-index:-1
 	//background-repeat: repeat
-	animation: grad 20s infinite linear
+	animation: grad 10s infinite linear
 	opacity: 1
 
 
@@ -69,10 +69,33 @@ body
   overflow-y:scroll
   max-height: 50vh
 
+html body .post-title
+  // max-width: 600px
+  width:calc(100% + 100px)
+  position:relative
+  left: -50px
+  border-top:50px solid rgba(255,255,255,0.4)
+  text-align:center
+  font-size: 80px
+  display:block
+  padding: 5px 0px
+  padding-top: 30px
+  padding-bottom: 30px
+  box-shadow: inset 0px 0px 30px #555
+  -moz-background-clip: padding;     /* Firefox 3.6 */
+  -webkit-background-clip: padding;  /* Safari 4 */
+  background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
+
+  // font-family 
+  &:hover
+    cursor: pointer
+
+  & *
+	  font-family: "Raleway", Times
 .post 
-  max-width: 600px
-  margin:auto
-  margin-top: 30px
+  //max-width: 600px
+  // margin:auto
+  min-height:100vh
   font-size: 30px
 
   *
@@ -80,14 +103,50 @@ body
 	  	background: rgba(black, 50%)
 	  	
 	  &::-moz-selection
-	  	background: rgba(black, 50%)
+      background: rgba(black, 50%)
+
+.main-page .home-link
+  position: absolute
+  top:20px
+  right:20px
+  height: 40px
+  width: 40px
+  box-shadow: 0px 0px 8px #444
+   
+  
+.post .home-link
+  position: absolute
+  z-index:30
+  top:10px
+  right:10px
+  height: 30px
+  width: 30px
+  box-shadow: 0px 0px 5px #777
+
+.post::after
+  content: "" 
+  display:block
+  height:80px
+  box-shadow: inset 0px 0px 30px #555
+  width: calc(100% + 100px)
+  position: relative
+  left: -50px
+
 
 sep = 20px
 .post-content
-  margin-top: 30px
-  background: rgba(255,255,255, .3)
-  padding: 30px
-  margin-bottom:50px;
+  background: #f1f1f1
+  width:100%
+  padding: 50px
+  border-left: 50px solid rgba(255,255,255,0.4)
+  border-right: 50px solid rgba(255,255,255,0.4)
+
+  -moz-background-clip: padding;     /* Firefox 3.6 */
+  -webkit-background-clip: padding;  /* Safari 4 */
+  background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
+                
+  // padding-top: 50px
+  box-sizing: border-box
   p
     font-family: Times New Roman, Times
     font-size: 25px
@@ -105,9 +164,6 @@ sep = 20px
     margin-bottom: 30px
   h2
     font-size: 40px
-    margin-bottom: sep
-  h3
-    font-size: 25px
     margin-bottom: 10px
     font-family: Arial, Courier
     text-decoration: underline
@@ -143,20 +199,6 @@ sep = 20px
     padding-bottom: 5px
     margin-bottom: sep
     
-
-html body .post-title
-  max-width: 600px
-  text-align:center
-  font-size: 80px
-  display:block
-  padding: 5px 0px
-  font-family 
-  &:hover
-    background: rgba(255,255,255,.3)
-    cursor: pointer
-
-  & *
-	  font-family: "Raleway", Times
 
 
 nav
