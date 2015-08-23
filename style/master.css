@@ -47,10 +47,10 @@ html::-moz-selection {
   max-height: 50vh;
 }
 html body .post-title {
-  width: calc(100% + 100px);
+  width: calc(100% + 50px);
   position: relative;
   left: -50px;
-  border-top: 50px solid rgba(255,255,255,0.4);
+  border-top: 80px solid rgba(255,255,255,0.4);
   text-align: center;
   font-size: 80px;
   display: block;
@@ -82,7 +82,7 @@ html body .post-title * {
 .post *::-moz-selection {
   background: rgba(0,0,0,0.5);
 }
-.main-page .home-link {
+.home-link {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -93,14 +93,9 @@ html body .post-title * {
   -o-box-shadow: 0px 0px 8px #444;
   -ms-box-shadow: 0px 0px 8px #444;
   box-shadow: 0px 0px 8px #444;
+  z-index: 30;
 }
 .post .home-link {
-  position: absolute;
-  z-index: 30;
-  top: 10px;
-  right: 10px;
-  height: 30px;
-  width: 30px;
   -webkit-box-shadow: 0px 0px 5px #777;
   -moz-box-shadow: 0px 0px 5px #777;
   -o-box-shadow: 0px 0px 5px #777;
@@ -116,16 +111,17 @@ html body .post-title * {
   -o-box-shadow: inset 0px 0px 30px #555;
   -ms-box-shadow: inset 0px 0px 30px #555;
   box-shadow: inset 0px 0px 30px #555;
-  width: calc(100% + 100px);
+  width: calc(100% + 50px);
   position: relative;
   left: -50px;
 }
 .post-content {
   background: #f1f1f1;
   width: 100%;
-  padding: 50px;
-  border-left: 50px solid rgba(255,255,255,0.4);
-  border-right: 50px solid rgba(255,255,255,0.4);
+  box-sizing: border-box;
+  padding: 70px;
+  border-left: 70px solid rgba(255,255,255,0.4);
+  border-right: 70px solid rgba(255,255,255,0.4);
   -moz-background-clip: padding; /* Firefox 3.6 */
   -webkit-background-clip: padding; /* Safari 4 */
   background-clip: padding-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */

@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:200)
 
-
 vendor(prop, args) 
   -webkit-{prop} args
   -moz-{prop} args
@@ -71,10 +70,10 @@ body
 
 html body .post-title
   // max-width: 600px
-  width:calc(100% + 100px)
+  width:calc(100% + 50px)
   position:relative
   left: -50px
-  border-top:50px solid rgba(255,255,255,0.4)
+  border-top:80px solid rgba(255,255,255,0.4)
   text-align:center
   font-size: 80px
   display:block
@@ -105,22 +104,16 @@ html body .post-title
 	  &::-moz-selection
       background: rgba(black, 50%)
 
-.main-page .home-link
+.home-link
   position: absolute
   top:20px
   right:20px
   height: 40px
   width: 40px
   box-shadow: 0px 0px 8px #444
-   
-  
-.post .home-link
-  position: absolute
   z-index:30
-  top:10px
-  right:10px
-  height: 30px
-  width: 30px
+
+.post .home-link
   box-shadow: 0px 0px 5px #777
 
 .post::after
@@ -128,7 +121,7 @@ html body .post-title
   display:block
   height:80px
   box-shadow: inset 0px 0px 30px #555
-  width: calc(100% + 100px)
+  width: calc(100% + 50px)
   position: relative
   left: -50px
 
@@ -137,9 +130,10 @@ sep = 20px
 .post-content
   background: #f1f1f1
   width:100%
-  padding: 50px
-  border-left: 50px solid rgba(255,255,255,0.4)
-  border-right: 50px solid rgba(255,255,255,0.4)
+  box-sizing:border-box
+  padding: 70px
+  border-left: 70px solid rgba(255,255,255,0.4)
+  border-right: 70px solid rgba(255,255,255,0.4)
 
   -moz-background-clip: padding;     /* Firefox 3.6 */
   -webkit-background-clip: padding;  /* Safari 4 */
