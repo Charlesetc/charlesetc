@@ -1,4 +1,0 @@
-#!/bin/bash
-stylus style/master.styl
-coffee -c script/master.coffee
-coffee -c script/error.coffee

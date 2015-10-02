@@ -1,9 +1,10 @@
 # Site settings
-title: Charles Chamberlain 
-baseurl: ""
-exclude: ['./style/master.styl']
+title: Charles etc
+email: charlespipin@gmail.com
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://www.charlesetc.com" # the base hostname & protocol for your site
+twitter_username: charlesetc
+github_username:  charlesetc
 
 # Build settings
-markdown: redcarpet 
-hightlighter: pygments 
-pygments_options: ['lineanchors']
+markdown: kramdown

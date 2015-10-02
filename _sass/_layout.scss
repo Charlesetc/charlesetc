@@ -1,25 +1,54 @@
 /**
  * Site header
  */
+
+.home .site-header {
+  transition: all 0.5s;
+}
+
+
+.home:hover .site-header {
+  width: 100vh;
+  padding-top: 50px;
+  height: 200px;
+  transform: rotate(-90deg);
+  transform-origin: 0 0;
+  top: 100vh;
+}
+
 .site-header {
-    border-top: 5px solid $grey-color-dark;
-    border-bottom: 1px solid $grey-color-light;
-    min-height: 56px;
+    // border-top: 5px solid $grey-color-dark;
+    // border-bottom: 1px solid $grey-color-light;
+    // min-height: 56px;
 
     // Positioning context for the mobile navigation icon
-    position: relative;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding-top:18px;
+    width: 100%;
+    background: white;
+    height: 150px;
+}
+
+body {
+  background: $grey-color-light;
+  padding-top: 170px;
 }
 
 .site-title {
-    font-size: 26px;
-    line-height: 56px;
+    font-size: 126px;
+    font-family:times;
+    font-weight: 900;
+    line-height: 166px;
     letter-spacing: -1px;
     margin-bottom: 0;
-    float: left;
-
+    // float: left;
     &,
-    &:visited {
-        color: $grey-color-dark;
+    &:visited,
+    &:hover {
+        color: $grey-color-light;
+        text-decoration: none;
     }
 }
 
@@ -163,10 +192,11 @@
  */
 .page-content {
     padding: $spacing-unit 0;
+    background: $grey-color-light;
 }
 
 .page-heading {
-    font-size: 20px;
+    font-size: 40px;
 }
 
 .post-list {
