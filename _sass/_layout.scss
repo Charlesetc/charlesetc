@@ -3,11 +3,88 @@
  */
 
 .home .site-header {
-  transition: all 0.5s;
+  transition: all 0.7s;
 }
 
+#main-links {
+  list-style-type:none;
+  position:absolute;
+  top: 0px;
+  left:250px;
+  width: calc(100% - 300px);
+  padding-top:8vh;
+  color:white;
+  font-size:16.5vh;
+  text-align:left;
+  font-weight:700;
+  font-family:Arial, Helvetica, sans-serif;
+}
 
-.home:hover .site-header {
+#main-links li {
+  display: block;
+  height:20vh;
+  // border:5px solid white;
+  line-height:20vh;
+  margin-left:100px;
+  cursor:pointer;
+  // transition: color 0.2s;
+}
+
+#main-links a, #main-links a:visited {
+  color:white;
+}
+
+#main-links a:hover {
+  text-decoration:none;
+}
+
+#main-links li:nth-child(1) a:hover {
+  color: #E6CCFF;
+}
+
+#main-links li:nth-child(2) a:hover {
+  color: #A3ECFF;
+}
+
+#main-links li:nth-child(3) a:hover {
+  color: #555;
+}
+#main-links li:nth-child(4) a:hover span {
+  animation-iteration-count: infinite;
+  animation-duration:2s;
+  animation-name: pulse;
+  animation-direction: alternate;
+}
+
+#main-links li:nth-child(4) a:hover span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+#main-links li:nth-child(4) a:hover span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+// #main-links li:nth-child(4) a:hover span:nth-child(3) {
+// }
+
+@keyframes pulse {
+  0% {
+    color: #FFFF99;
+  }
+  25% {
+    color: #FFA3C2;
+  }
+  50% {
+    color: #DBB8FF;
+  }
+  75% {
+    color: #99CCFF;
+  }
+  100% {
+    color: #99FF99;
+  }
+}
+
+// .verticle-header {
+.site-header.vertical-header {
   width: 100vh;
   padding-top: 50px;
   height: 200px;
