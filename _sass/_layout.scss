@@ -6,6 +6,10 @@
   transition: all 0.5s linear; // awesome
 }
 
+body {
+  font-size: 20px;
+}
+
 .home .site-header {
   opacity: 0;
 }
@@ -209,6 +213,11 @@ body {
 
 .post-content {
     margin-bottom: $spacing-unit;
+
+    h1 {
+      font-size: 36px;
+      border-bottom: 1px solid black;
+    }
 
     h2 {
         font-size: 32px;
