@@ -5,7 +5,7 @@ class: etc
 permalink: /etc/
 ---
 
-<p>I'm Charles. I'm a software engineer at Uber. I also kind of go to UChicago.</p>
+<p>I'm Charles. I'm a software engineer at Uber.</p>
 
 <p>If you want to talk, my e-mail is "charlespipin" at the largest e-mail provider in history.</p>
 

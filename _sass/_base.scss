@@ -1,3 +1,9 @@
+
+/* vars */
+
+$brand-color: #c69;
+
+
 /**
  * Reset some basic elements
  */
@@ -7,8 +13,6 @@ dl, dd, ol, ul, figure {
     margin: 0;
     padding: 0;
 }
-
-
 
 /**
  * Basic styling
@@ -81,8 +85,8 @@ li {
  */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
+    border-bottom: 2px solid white;
 }
-
 
 
 /**
@@ -130,21 +134,26 @@ code {
     font-size: 15px;
     border: 1px solid $grey-color-light;
     border-radius: 3px;
-    background-color: #eef;
+    background-color: #eee;
 }
 
 code {
     padding: 1px 5px;
+    color: #FF66A3;
+    display: inline-block;
 }
 
 pre {
     padding: 8px 12px;
-    overflow-x: scroll;
+    // overflow-x: scroll;
+
 
     > code {
+        color: inherit;
         border: 0;
         padding-right: 0;
         padding-left: 0;
+        display: inline;
     }
 }
 

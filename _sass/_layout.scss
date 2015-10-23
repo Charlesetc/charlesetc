@@ -7,7 +7,7 @@
 }
 
 body {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .home .site-header {
@@ -187,9 +187,10 @@ body {
     color: $grey-color;
 }
 
-.post-link {
+.post-link, .post-link:hover, .post-link:active, .post-link:visited {
     display: block;
-    font-size: 24px;
+    font-size: 30px;
+    color: black;
 }
 
 
@@ -214,32 +215,25 @@ body {
 .post-content {
     margin-bottom: $spacing-unit;
 
-    h1 {
-      font-size: 36px;
-      border-bottom: 1px solid black;
-    }
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 22px;
 
-    h2 {
-        font-size: 32px;
-
-        // @include media-query($on-laptop) {
-        //     font-size: 28px;
-        // }
-    }
-
-    h3 {
+      &::before {
+        color: white;
         font-size: 26px;
-
-        // @include media-query($on-laptop) {
-        //     font-size: 22px;
-        // }
+      }
     }
 
-    h4 {
-        font-size: 20px;
-
-        // @include media-query($on-laptop) {
-        //     font-size: 18px;
-        // }
+    h1::before {
+      content: "# ";
+    }
+    h2::before {
+      content: "## ";
+    }
+    h3::before {
+      content: "### ";
+    }
+    h4::before {
+      content: "#### ";
     }
 }
