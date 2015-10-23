@@ -51,7 +51,7 @@ Fails on: 2,4,9,10,12
 
 Fails on: 7,9,11
 
-Easily the best so far, but that lack of mutation is a killer. State is so useful in contained snippets.
+Easily the best so far, but that lack of mutation is a killer. State is so useful sometimes.
 You'll notice it's the only one that passes 10, and the only one that fails 11.
 
 ## Rust
