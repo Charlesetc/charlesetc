@@ -2,6 +2,13 @@
  * Site header
  */
 
+@media handheld {
+  .site-title {
+    font-size:50px;
+  }
+}
+
+
 .home .site-header-transition {
   transition: all 0.5s linear; // awesome
 }
