@@ -2,13 +2,43 @@
  * Site header
  */
 
-@media not screen {
+@media all and (max-width: 850px){
+  .site-header {
+      height: 74px;
+  }
   .site-title {
-    font-size:50px;
+    font-size:70px;
+    line-height: 66px;
+  }
+  .site-header.vertical-header {
+    height: 100px;
+  }
+
+  #main-links li {
+    margin-left:0px;
+    position:relative;
+    left:-80px;
   }
 }
 
-@media all  {
+@media all and (min-width: 850px){
+  .site-header {
+      height: 150px;
+  }
+  .site-title {
+    line-height: 166px;
+    font-size: 126px;
+  }
+  .site-header.vertical-header {
+    height: 200px;
+  }
+
+  #main-links li {
+    margin-left:100px;
+  }
+}
+
+@media all {
 
   .home .site-header-transition {
     transition: all 0.5s linear; // awesome
@@ -42,7 +72,6 @@
     height:20vh;
     // border:5px solid white;
     line-height:20vh;
-    margin-left:100px;
     cursor:pointer;
     // transition: color 0.2s;
   }
@@ -104,7 +133,6 @@
   .site-header.vertical-header {
     width: 100vh;
     padding-top: 50px;
-    height: 200px;
     transform: rotate(-90deg);
     transform-origin: 0 0;
     top: 100vh;
@@ -122,7 +150,6 @@
       padding-top:18px;
       width: 100%;
       background: white;
-      height: 150px;
   }
 
   body {
@@ -131,10 +158,8 @@
   }
 
   .site-title {
-      font-size: 126px;
       font-family:times;
       font-weight: 900;
-      line-height: 166px;
       letter-spacing: -1px;
       margin-bottom: 0;
       // float: left;
