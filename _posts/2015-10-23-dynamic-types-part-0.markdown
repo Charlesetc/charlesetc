@@ -11,7 +11,7 @@ Let the race begin.
 
 # The Start
 
-You start typing -- fingers flying across all the alphabetic keys, the only symbols you need are "+", "-", and ".". Line after line of glorious code cascade from your freshly manicured nails. (Props, by the way) That old geezer sitting next to you starts up ghci, gets eclipse going, and has begun installing the latest gcc. You're halfway through the core logic and he's still writing types down on paper.
+You start typing -- using alphabetic keys alone; the only symbols you need are "+", "-", and ".". You've already written 50 lines! That old guy sitting next to you starts up ghci, gets eclipse going, and has begun installing the latest gcc. You're halfway through the core logic and he's still writing types down on paper.
 
 # Lap One
 
@@ -39,7 +39,6 @@ Meanwhile, your friends have gotten tired of the sever errors and timeouts and h
 
 # The End
 
-Obviously it doesn't always go like this. And maybe a crazy good django developer really can program without mistakes. But *Oh My God* is debugging a waste of time. And statically typed languages ensure the only bugs you deal with are actual mistakes, not typos.
+Obviously it doesn't always go like this. And maybe a crazy good django developer really can program without mistakes. But *Oh My God* is debugging a waste of time. And statically typed languages ensure the only bugs you deal with are actual mistakes, not typos. 
 
-[Testing is a joy, too!]({% post_url 2015-10-26-dynamic-types-part-1 %})
-
+I'd argue this saves vast amounts of time and sanity in the long run.
