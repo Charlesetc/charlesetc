@@ -15,7 +15,7 @@ The tests that you get in a dynamic codebase tend to be asking the question "Is 
 
 The fact of the matter is, a codebase in a dynamic language is only well-written if it tests the internals and externals of every single variable, just to make sure it's behaving the way the programmer thought. Now let me ask you, which is more concise:
 
-{% highlight ruby %}
+```ruby
 before :each  {
   stateful_object = function_with_return_value
 }
@@ -29,13 +29,13 @@ test {
     stateful_object.responds_to? :certain_method    # look familiar?
   }
 }
-{% endhighlight %}
+```
 
-{% highlight ruby %}
+```ruby
 define function_with_return_value -> StatefulObjectClass {
   return StatefulObjectClass.new()
 }
-{% endhighlight %}
+```
 
 Each provides the same level of safety assurance. But the former is strictly worse:
 

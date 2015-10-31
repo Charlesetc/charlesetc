@@ -7,4 +7,7 @@ twitter_username: charlesetc
 github_username:  charlesetc
 
 # Build settings
-markdown: kramdown
+#markdown: kramdown
+markdown: redcarpet
+redcarpet:
+  extensions: [tables]

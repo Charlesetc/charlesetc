@@ -61,7 +61,7 @@ This makes sense: If you want to take a reference to something on the function s
 
 In Go, you can do this:
 
-{% highlight go %}
+```go
 func example_function() *int {
   b := 3
   return &b
@@ -70,11 +70,11 @@ func example_function() *int {
 func main() {
   fmt.Println(*example_function());
 }
-{% endhighlight %}
+```
 
 However, you cannot do that in Rust:
 
-{% highlight rust %}
+```rust
 fn example_function<'a>() -> &'a i32 {
   let b = 3;
   &b
@@ -83,7 +83,7 @@ fn example_function<'a>() -> &'a i32 {
 fn main() {
   println!("{}", example_function()); // this does not compile
 }
-{% endhighlight %}
+```
 
 The reason is that `&b` does not live long enough to be dereferenced outside of the function that made it.
 
@@ -114,7 +114,7 @@ Here's how you can make sure of that:
 
 ## Wrong example:
 
-{% highlight rust %}
+```rust
 struct Sheep {
   age: &i32,
 }
@@ -124,15 +124,15 @@ fn main() {
     let s = Sheep { age: &a };
     println!("{};", s)
 }
-{% endhighlight %}
+```
 
 This gives the following error:
 
-{% highlight ruby %}
+```ruby
 error: missing lifetime specifier [E0106]
         age: &i32,
              ^~~~ 
-{% endhighlight %}
+```
 
 Rust is mad. 
 In the struct definition, you haven't told it how long the reference to the `i32` is allowed to stay around.
@@ -140,7 +140,7 @@ And yet, in order for your code to be safe, it has to stick around for at least 
 
 ## Right Example
 
-{% highlight rust %}
+```rust
 struct Sheep<'c> {
   age: &'c i32,
 }
@@ -150,7 +150,7 @@ fn main() {
     let s = Sheep { age: &a };
     println!("{};", s)
 }
-{% endhighlight %}
+```
 
 You'll notice that nothing here has changed but the types. But now Rust has pronounced your code safe &mdash; Hurray! 
 
@@ -177,7 +177,7 @@ It's very similar to structs. Each implementation is an implementation of a cert
 trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.
 
 ## Wrong Example
-{% highlight rust %}
+```rust
 struct Sheep<'c> {                                                             
   age: &'c mut i32,
 }                                                                              
@@ -187,15 +187,15 @@ impl Sheep {
         *self.age += 100
     }                    
 }                   
-{% endhighlight %}
+```
 
 This fails with the following:
 
-{% highlight ruby %}
+```ruby
 error: wrong number of lifetime parameters: expected 1, found 0 [E0107]
         impl Sheep {
              ^~~~~
-{% endhighlight %}
+```
 
 ## Right Example
 
@@ -204,7 +204,7 @@ What's the problem?
 `Sheep` takes a lifetime parameter now, so one must be supplied:
 
 
-{% highlight rust %}
+```rust
 struct Sheep<'c> {                                                             
   age: &'c mut i32,
 }                                                                              
@@ -214,7 +214,7 @@ impl<'c> Sheep<'c> {
         *self.age += 100
     }                    
 }
-{% endhighlight %}
+```
 
 Note that `impl<'c>` names a new lifetime and `Sheep<'c>` says that all 
 `self`'s in this implementation have at least the lifetime `'c`.
