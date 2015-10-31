@@ -2,7 +2,7 @@
 layout: post
 title:  "Dynamic Types: Tests"
 date:   2015-10-26 12:31:33
-categories: jekyll update
+categories: types
 ---
 
 It's pretty much agreed upon that an extensive test suite is the only way to write complicated and changing code.
