@@ -30,7 +30,7 @@ However, anything that is accessed by a pointer needs a lifetimes.
 
 In total, lifetimes fulfill two roles for Rust:
 
-1. As I've said, to know when to deallocate objects on the heap.
+1. To know when to deallocate objects on the heap.
 
 2. The other is to know when it's safe to dereference a pointer, never mind where it points.
 
