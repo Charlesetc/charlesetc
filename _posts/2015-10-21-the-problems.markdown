@@ -19,7 +19,7 @@ Here are the basic essentials for a language to have a chance at being my favori
 6. Parametric Polymorphism
 7. Methods with dot syntax
 8. Fast compilation, fast running
-9. Macros of some sort
+9. Lisp- or scheme-style macros of some sort
 10. User specified Operators with precedence
 11. Mutation
 12. A clean syntax (I'm aware how subjective this is)
