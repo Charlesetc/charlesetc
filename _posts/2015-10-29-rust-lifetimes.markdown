@@ -5,7 +5,7 @@ date:   2015-10-29 12:31:33
 categories: rust lifetimes
 ---
 
-Lifetimes are pretty much what makes rust rust. 
+Lifetimes are pretty much what makes Rust Rust. 
 
 Easy concurrency, straightforward memory allocation, and overall data safety would not be at all possible without lifetimes.
 
@@ -25,10 +25,10 @@ necessary to write it down, but often you will have to explicitly tell the compi
 Things like integers, floats, and other data types whose size can be known at compile time 
 do not need lifetimes because they are stored on the stack,
 and deallocation is handled when the function returns. 
-(Believe it or not, rust can even store some closures this way.)
+(Believe it or not, Rust can even store some closures this way.)
 However, anything that is accessed by a pointer needs a lifetimes.
 
-In total, lifetimes fulfill two roles for rust:
+In total, lifetimes fulfill two roles for Rust:
 
 1. As I've said, to know when to deallocate objects on the heap.
 
@@ -68,7 +68,7 @@ func main() {
 }
 {% endhighlight %}
 
-However, you cannot do that in rust:
+However, you cannot do that in Rust:
 
 {% highlight rust %}
 fn example_function<'a>() -> &'a i32 {
@@ -90,7 +90,7 @@ So just to explicitly point out the syntax:
 `&'a i32` says "This is a reference to an integer that has lifetime `'a`", 
 which means it lasts as long as the function where the lifetime was defined.
 
-(Now at this point you might be asking how you actually would return a reference to `3` in rust... 
+(Now at this point you might be asking how you actually would return a reference to `3` in Rust... 
 that's a more complicated question and the answer is to put it on the heap. Look up the`box` type to learn more.)
 
 But on to bigger fish!
@@ -145,7 +145,7 @@ fn main() {
 }
 {% endhighlight %}
 
-You'll notice that nothing here has changed but the types. But now rust has pronounced your code safe &mdash; Hurray! 
+You'll notice that nothing here has changed but the types. But now Rust has pronounced your code safe &mdash; Hurray! 
 
 Here are the changes:
 
@@ -217,7 +217,7 @@ is strange syntax with the `impl<'c> Sheep<'c>` so I wanted to point it out.
 
 # The End
 
-And that is all I know about lifetimes in rust!
+And that is all I know about lifetimes in Rust!
 
 If you're interested, here is a [concise reference]({% post_url 2015-10-31-lifetime-reference %}) for the syntax used with lifetimes.
 

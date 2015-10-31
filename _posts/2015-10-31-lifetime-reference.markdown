@@ -5,7 +5,7 @@ date:   2015-10-31 12:31:33
 categories: rust lifetimes
 ---
 
-Places where you use any lifetime syntax will fall into two categories:
+Places in Rust where you use any lifetime syntax will fall into two categories:
 
 | Concept       | Category    | Usage  |
 |:--------------| :-----      | :----- |
