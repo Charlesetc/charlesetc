@@ -2,7 +2,7 @@
 layout: post
 title:  "Rust Lifetimes"
 date:   2015-10-29 12:31:33
-categories: rust lifetimes
+categories: rust
 ---
 
 Lifetimes are pretty much what makes Rust Rust. 
@@ -18,22 +18,16 @@ Rust is a unique language in that it deallocates memory on the heap without requ
 while at the same time having no need for a garbage collector.
 Rust knows when it's okay to get rid of an object by keeping track of its lifetime. 
 
-Think of it as explicit reference counting.
+Each time a reference is returned by or passed into a function, Rust checks at compile time to make sure it fulfills the lifetime requirement specified in the type signature.
 
-So every reference in Rust (i.e. pointer) has a lifetime. Sometimes the compiler can figure it out and it's not 
-necessary to write it down, but often you will have to explicitly tell the compiler.
+So every reference in Rust (i.e. pointer) has a lifetime. Sometimes they can be elided 
+and the compiler can infer them. Nonetheless, you cannot program Rust without knowing how to specify lifetimes.
 
-Things like integers, floats, and other data types whose size can be known at compile time 
-do not need lifetimes because they are stored on the stack,
-and deallocation is handled when the function returns. 
-(Believe it or not, Rust can even store some closures this way.)
-Nonetheless, anything that is accessed by a pointer has a lifetime.
+Lifetimes fulfill two roles for Rust:
 
-In total, lifetimes fulfill two roles for Rust:
+1. To know when to deallocate objects
 
-1. To know when to deallocate objects on the heap.
-
-2. To know when it's safe to dereference a pointer, never mind where it points.
+2. To know when it's safe to dereference a pointer
 
 Now, **you are not in charge of defining lifetimes.** 
 
