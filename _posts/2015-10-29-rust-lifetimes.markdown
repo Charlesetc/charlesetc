@@ -7,13 +7,14 @@ categories: rust lifetimes
 
 Lifetimes are pretty much what makes Rust Rust. 
 
-Easy concurrency, straightforward memory allocation, and overall data safety would not be at all possible without lifetimes.
+Easy concurrency, straightforward memory allocation, 
+and overall data safety would not be at all possible without explicit lifetimes.
 
 But they are also tricky, and this is aimed at helping people understand the concepts and syntax.
 
 # What are Lifetimes?
 
-Rust is a unique language in that it deallocates memory on the heap without manually calling `free`, 
+Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call `free`, 
 while at the same time having no need for a garbage collector.
 Rust knows when it's okay to get rid of an object by keeping track of its lifetime. 
 
@@ -26,17 +27,17 @@ Things like integers, floats, and other data types whose size can be known at co
 do not need lifetimes because they are stored on the stack,
 and deallocation is handled when the function returns. 
 (Believe it or not, Rust can even store some closures this way.)
-However, anything that is accessed by a pointer needs a lifetimes.
+Nonetheless, anything that is accessed by a pointer has a lifetime.
 
 In total, lifetimes fulfill two roles for Rust:
 
 1. To know when to deallocate objects on the heap.
 
-2. The other is to know when it's safe to dereference a pointer, never mind where it points.
+2. To know when it's safe to dereference a pointer, never mind where it points.
 
 Now, **you are not in charge of defining lifetimes.** 
 
-Sometimes, however, you will have to give names of existing lifetimes in order to change the default behavior of the compiler.
+Sometimes, however, you will have to give names to existing lifetimes in order to change the default behavior of the compiler.
 
 # Where do Lifetimes come from?
 
@@ -44,6 +45,9 @@ Lifetimes are always named with the same syntax.
 They look like `<'a>`, `<'b>`, or `<'c>`, 
 and they are generally one letter prefaced 
 by an apostrophe.
+
+When you use one, though, there is more syntax involved. 
+Depending on the context they can look like one of: `something<'a>`, `Box<something + 'a>` or `&'a something`
 
 Note well: You will only ever write a lifetime within a type declaration. 
 
@@ -55,7 +59,7 @@ This is a biggie. A function defines a lifetime for everything put on the stack 
 
 This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over.
 
-In go, you can do this:
+In Go, you can do this:
 
 {% highlight go %}
 func example_function() *int {
@@ -64,7 +68,7 @@ func example_function() *int {
 }
 
 func main() {
-  fmt.Println(*example_function);
+  fmt.Println(*example_function());
 }
 {% endhighlight %}
 
@@ -85,10 +89,13 @@ The reason is that `&b` does not live long enough to be dereferenced outside of 
 
 So just to explicitly point out the syntax:
 
-`function_name<'a>` names the lifetime defined by this function, called `'a`.
+`example_function<'a>` names the lifetime defined by this function, called `'a`.
 
 `&'a i32` says "This is a reference to an integer that has lifetime `'a`", 
 which means it lasts as long as the function where the lifetime was defined.
+
+In other words, the reference to `b` is valid for the lifetime of the function `example_function`. 
+When the return value is dereferenced in `main`, Rust complains because `example_function` is over, so it's lifetime has expired.
 
 (Now at this point you might be asking how you actually would return a reference to `3` in Rust... 
 that's a more complicated question and the answer is to put it on the heap. Look up the`box` type to learn more.)
@@ -103,7 +110,7 @@ Think about it like this:
 
 If a struct includes a reference to something, then that reference damn sure better last as long as the struct.
 
-Okay so here's how you can make sure of that:
+Here's how you can make sure of that:
 
 ## Wrong example:
 
@@ -160,13 +167,13 @@ Here are the changes:
 This is **insanely** impressive. 
 With these small additions, Rust will now tell you if there is any chance of you having invalid data,
 even across threads.
-AND it will free all the memory safely!
+AND it will free all the memory safely.
 
 # Implementations
 
 There is one other place where a lifetime can be defined &mdash; Implementations.
 
-This is very similar to structs. Each implementation is an implementation of a certain
+It's very similar to structs. Each implementation is an implementation of a certain
 trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.
 
 ## Wrong Example
