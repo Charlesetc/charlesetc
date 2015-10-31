@@ -27,6 +27,19 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
+table td {
+  padding-right:40px;
+  padding-bottom:3px;
+}
+
+table { 
+  border-collapse: collapse; 
+  margin-bottom:16px;
+}
+
+table tr {
+  border-bottom: 1px solid white;
+}
 
 
 /**

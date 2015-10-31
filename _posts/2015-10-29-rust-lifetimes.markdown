@@ -219,5 +219,5 @@ is strange syntax with the `impl<'c> Sheep<'c>` so I wanted to point it out.
 
 And that is all I know about lifetimes in rust!
 
-If you're interested, here is a [concise reference]() for the syntax used with lifetimes.
+If you're interested, here is a [concise reference]({% post_url 2015-10-31-lifetime-reference %}) for the syntax used with lifetimes.
 
