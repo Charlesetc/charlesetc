@@ -113,11 +113,9 @@ int main(void) {
 
 If you run this, it will print "3".
 
-That's right, the data just change right under your nose. I was honestly scared when I ran that.
+That's right, the data just change right under your nose. I was honestly scared when I ran that. But Rust prevents crazy things like that from taking place!
 
-Rust prevents crazy things like that from taking place.
-
-But on to big fish!
+And now on to bigger fish.
 
 # Structs
 
