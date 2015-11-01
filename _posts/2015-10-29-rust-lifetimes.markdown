@@ -91,7 +91,33 @@ which means it has to last as long as "any lifetime". However, `b` happens to on
 (Now at this point you might be asking how you actually would return a reference to `3` in Rust... 
 that's a more complicated question and the answer is to put it on the heap. Look up the `Box` type to learn more.)
 
-But on to bigger fish!
+Why is this so important? Because this is how it works in C:
+
+```c
+int* example_function(void) {
+  int a = 2;
+  return &a;
+}
+
+void do_something(int b) {
+  // lies, don't do anything
+}
+
+int main(void) {
+  int* c = example_function();
+  do_something(3);
+  int d = 4;
+  printf("%i\n", *c);
+}
+```
+
+If you run this, it will print "3".
+
+That's right, the data just change right under your nose. I was honestly scared when I ran that.
+
+Rust prevents crazy things like that from taking place.
+
+But on to big fish!
 
 # Structs
 
