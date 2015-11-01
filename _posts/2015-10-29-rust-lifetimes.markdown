@@ -91,7 +91,7 @@ which means it has to last as long as "any lifetime". However, `b` happens to on
 (Now at this point you might be asking how you actually would return a reference to `3` in Rust... 
 that's a more complicated question and the answer is to put it on the heap. Look up the `Box` type to learn more.)
 
-Why is this so important? Because this is how it works in C:
+Why is this so important? Because this is what can happen in C:
 
 ```c
 int* example_function(void) {
