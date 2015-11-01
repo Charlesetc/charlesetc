@@ -8,7 +8,7 @@ categories: rust
 Lifetimes are pretty much what makes Rust Rust. 
 
 Easy concurrency, straightforward memory allocation, 
-and overall data safety would not be at all possible without explicit lifetimes.
+and overall data safety would not be possible without explicit lifetimes.
 
 But they are also tricky, and this is aimed at helping people understand the concepts and syntax.
 
@@ -25,9 +25,9 @@ and the compiler can infer them. Nonetheless, you cannot program Rust without kn
 
 Lifetimes fulfill two roles for Rust:
 
-1. To know when to deallocate objects
+1. To know when it's safe to dereference a pointer
 
-2. To know when it's safe to dereference a pointer
+2. To allow data to be shared safely
 
 Now, **you are not in charge of defining lifetimes.** 
 
@@ -49,9 +49,9 @@ So if you don't define lifetimes, what does?
 
 # Functions
 
-This is a biggie. A function defines a lifetime for everything put on the stack during it.
+This is a biggie. A function can define a lifetime that can be used in it's type declarations.
 
-This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over.
+This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over. And if not, you need to make sure it has an appropriate lifetime.
 
 In Go, you can do this:
 
@@ -71,11 +71,11 @@ However, you cannot do that in Rust:
 ```rust
 fn example_function<'a>() -> &'a i32 {
   let b = 3;
-  &b
+  &b // this does not compile
 }
 
 fn main() {
-  println!("{}", example_function()); // this does not compile
+  println!("{}", example_function()); 
 }
 ```
 
@@ -83,16 +83,13 @@ The reason is that `&b` does not live long enough to be dereferenced outside of 
 
 So just to explicitly point out the syntax:
 
-`example_function<'a>` is saying "for any lifetime called `'a`...". You can then use this lifetime in the function.
+`example_function<'a>` is saying "for any lifetime called `'a`...". You can then go on to use this lifetime in the remainder of the type definition.
 
 `&'a i32` says "This is a reference to an integer that has lifetime `'a`", 
-which means it has to last as long as "any lifetime", but it does not, only as long as the function's scope.
-
-In other words, the reference to `b` is valid for the lifetime of the function `example_function`. 
-When the return value is dereferenced in `main`, Rust complains because `example_function` is over, so it's lifetime has expired.
+which means it has to last as long as "any lifetime". However, `b` happens to only have a lifetime that lasts as long as the function's scope, so Rust complains.
 
 (Now at this point you might be asking how you actually would return a reference to `3` in Rust... 
-that's a more complicated question and the answer is to put it on the heap. Look up the`box` type to learn more.)
+that's a more complicated question and the answer is to put it on the heap. Look up the `Box` type to learn more.)
 
 But on to bigger fish!
 
@@ -146,13 +143,13 @@ fn main() {
 }
 ```
 
-You'll notice that nothing here has changed but the types. But now Rust has pronounced your code safe &mdash; Hurray! 
+You'll notice that not much here has changed. But now Rust has pronounced your code safe &mdash; Hurray! 
 
 Here are the changes:
 
 1. `Sheep<'c>` instead of `Sheep`
 
-    This is not doing anything concrete. It's just giving a name to the lifetime that Sheep structs can last for.
+  This is making a parameter for the struct in Rust &mdash; It's lifetime might have to depend on the lifetimes of its fields, so now you are able to say how and which ones. (Note: you can do things like `Sheep<'c, 'd>` if you need more than one lifetime.)
 
 2. `age: &'c i32` instead of `age: &i32`
 
@@ -160,8 +157,7 @@ Here are the changes:
 
 This is **insanely** impressive. 
 With these small additions, Rust will now tell you if there is any chance of you having invalid data,
-even across threads.
-AND it will free all the memory safely.
+even across threads. AND all of this happens at compile time without affecting the efficiency of your code.
 
 # Implementations
 
