@@ -83,10 +83,10 @@ The reason is that `&b` does not live long enough to be dereferenced outside of 
 
 So just to explicitly point out the syntax:
 
-`example_function<'a>` names the lifetime defined by this function, called `'a`.
+`example_function<'a>` is saying "for any lifetime called `'a`...". You can then use this lifetime in the function.
 
 `&'a i32` says "This is a reference to an integer that has lifetime `'a`", 
-which means it lasts as long as the function where the lifetime was defined.
+which means it has to last as long as "any lifetime", but it does not, only as long as the function's scope.
 
 In other words, the reference to `b` is valid for the lifetime of the function `example_function`. 
 When the return value is dereferenced in `main`, Rust complains because `example_function` is over, so it's lifetime has expired.
