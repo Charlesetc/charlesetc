@@ -16,7 +16,7 @@ But they are also tricky, and this is aimed at helping people understand the con
 
 Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call `free`, 
 while at the same time having no need for a garbage collector.
-Rust knows when it's okay to get rid of an object by keeping track of its lifetime. 
+Rust knows when it's okay to use a reference by keeping track of its lifetime. 
 
 Each time a reference is returned by or passed into a function, Rust checks at compile time to make sure it fulfills the lifetime requirement specified in the type signature.
 
