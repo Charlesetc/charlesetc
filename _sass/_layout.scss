@@ -36,6 +36,12 @@
   #main-links li {
     margin-left:100px;
   }
+
+  article.column-content  {
+    columns: 200px 3;
+    -webkit-columns: 200px 3;
+    -moz-columns: 200px 3;
+  }
 }
 
 @media all {
