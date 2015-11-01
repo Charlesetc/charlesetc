@@ -81,16 +81,6 @@ fn main() {
 
 The reason is that `&b` does not live long enough to be dereferenced outside of the function that made it.
 
-So just to explicitly point out the syntax:
-
-`example_function<'a>` is saying "for any lifetime called `'a`...". You can then go on to use this lifetime in the remainder of the type definition.
-
-`&'a i32` says "This is a reference to an integer that has lifetime `'a`", 
-which means it has to last as long as "any lifetime". However, `b` happens to only have a lifetime that lasts as long as the function's scope, so Rust complains.
-
-(Now at this point you might be asking how you actually would return a reference to `3` in Rust... 
-that's a more complicated question and the answer is to put it on the heap. Look up the `Box` type to learn more.)
-
 Why is this so important? Because this is what can happen in C:
 
 ```c
@@ -114,6 +104,16 @@ int main(void) {
 If you run this, it will print "3".
 
 That's right, the data just change right under your nose. I was honestly scared when I ran that. But Rust prevents crazy things like that from taking place!
+
+So just to explicitly point out the syntax:
+
+`example_function<'a>` is saying "for any lifetime called `'a`...". You can then go on to use this lifetime in the remainder of the type definition.
+
+`&'a i32` says "This is a reference to an integer that has lifetime `'a`", 
+which means it has to last as long as "any lifetime". However, `b` happens to only have a lifetime that lasts as long as the function's scope, so Rust complains.
+
+(Now at this point you might be asking how you actually would return a reference to `3` in Rust... 
+that's a more complicated question and the answer is to put it on the heap. Look up the `Box` type to learn more.)
 
 And now on to bigger fish.
 
