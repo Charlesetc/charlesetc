@@ -101,9 +101,9 @@ int main(void) {
 }
 ```
 
-If you run this, it will print "3".
+In C this is Undefined Behavior. When I run this, it just prints "3". 
 
-That's right, the data just change right under your nose. I was honestly scared when I ran that. But Rust prevents crazy things like that from taking place!
+That's right, the data can just change under your nose. I was honestly scared when I ran that. But Rust prevents crazy things like that from taking place!
 
 So just to explicitly point out the syntax:
 
