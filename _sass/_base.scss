@@ -207,6 +207,22 @@ pre {
 }
 
 
+.line-numbers {
+  // position: absolute;
+  min-width: 25px;
+  text-align: right;
+  float: left;
+  padding-right:12px;
+}
+
+.code {
+  position:relative;
+
+  pre {
+    padding:10px 0px;
+  }
+}
+
 
 /**
  * Icons

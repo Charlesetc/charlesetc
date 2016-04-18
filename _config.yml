@@ -8,7 +8,7 @@ github_username:  charlesetc
 permalink: /:categories/:year/:month/:day
 
 # Build settings
-#markdown: kramdown
-markdown: redcarpet
-redcarpet:
-  extensions: [tables]
+markdown: kramdown
+# markdown: redcarpet
+# redcarpe :
+#   extensions: [tables]
