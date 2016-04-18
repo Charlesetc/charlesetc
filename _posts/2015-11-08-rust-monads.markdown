@@ -11,12 +11,13 @@ It's true, Haskell's dependence on them is directly a result of it's immutable n
 
 Anyways, in Haskell, you can do this:
 
-```haskell
+
+~~~haskell
 let a = do
   x <- [2,3,4]
   y <- [4,5,6]
   return [x,y]
-```
+~~~
 
 The result is `a = [[2,4],[2,5],[2,6],[3,4],[3,5],[3,6],[4,4],[4,5],[4,6]]`.
 
@@ -25,14 +26,14 @@ this list comprehension arises from the monadic definition of lists... and can a
 
 By the end of the post, this will compile:
 
-```rust
+~~~rust
 let a: Vec<Vec<i32>> = perform!{
   vec![1,2] => x;
   vec![3,4] => y;
   vec![vec![x, y]];
 };
 
-```
+~~~
 
 And `a` still equals (the vector equivalent of) `[[2,4],[2,5],[2,6],[3,4],[3,5],[3,6],[4,4],[4,5],[4,6]]`.
 
@@ -58,10 +59,10 @@ A definition for a monad relies on two functions: `just` and `bind`.
 
 Here are the possible definitions in Rust.
 
-```rust
+~~~rust
 fn just(inside: T) -> A<T>;
 fn bind<'a>(outside: A<T>, op: Box<Fn(T) -> B<T> + 'a>) -> B<T>;
-```
+~~~
 
 Now `bind` and `just` have very sensible types. Whenever you get a fancy new box you have two questions: 
 
@@ -77,14 +78,14 @@ That said, if we're overly explicit about types we can model how monads behave f
 
 Rust operates with typeclasses similar to Haskell called 'Traits'. Here are the requirements to fulfill the monad trait:
 
-```rust
+~~~rust
 trait Monad<T,A>: Sized {
     // return in haskell
     fn just(inside: T) -> Self;
     // (>>=) in haskell
     fn bind<'a>(outside: Self, op: Box<Fn(T) -> A + 'a>) -> A;  
 }
-```
+~~~
 
 You'll start to see the limitations of Rust here; you have to specify the second type when you're implementing the trait.
 This means we'll potentially need identical implementations of the same trait, all of which Haskell gets for free.
@@ -95,22 +96,22 @@ This means we'll potentially need identical implementations of the same trait, a
 
 So if we want to define `just`, we are trying to put an arbitrary object into a box. This can be done by just saying `Some(object)`. Sweet!
 
-```rust
+~~~rust
 fn just(inside: T) -> Option<T> {
     Some(inside)
 } 
-```
+~~~
 
 In order to implement `bind`, we need to take an box and apply a function to its contents.
 
-```rust
+~~~rust
 fn bind<'a>(outside: Self, op: Box<Fn(T) -> Self + 'a>) -> Self {
     match outside {
         Some(a) => op(a),
         None => None,
     }   
 }
-```
+~~~
 
 This says "If there is something inside the box, apply the function to that, and return the result. Otherwise, just return an empty box."
 
@@ -126,11 +127,11 @@ Now on to the main point: Lists!
 
 Lists, too, can be thought of a box. Let's start with `just`:
 
-```rust
+~~~rust
 fn just(inside: T) -> Vec<T> {
   vec!(inside)
 }
-```
+~~~
 
 Easy, take an element, put in a list. 
 
@@ -144,7 +145,7 @@ Luckily, Haskell can be a savior here: we can `map` and then concatenate the res
 
 It's actually somewhat faster to fold so that's how I've done it here:
 
-```rust
+~~~rust
 fn bind<'a>(outside: Self, op: Box<Fn(T) -> Self + 'a>) -> Self
 {
     outside
@@ -155,7 +156,7 @@ fn bind<'a>(outside: Self, op: Box<Fn(T) -> Self + 'a>) -> Self
             aggregate
         })
 }
-```
+~~~
 
 # Are we there yet?
 
@@ -165,12 +166,12 @@ So with our definition of the Option monad, we can chain functions that return O
 
 Okay first of all you have to realize how amazing Haskell is. Take that example from before:
 
-```haskell
+~~~haskell
 let a = do
   x <- [2,3,4]
   y <- [4,5,6]
   return [x,y]
-```
+~~~
 
 This is actually using the one monadic definition for lists to return a list of lists. That's because the true definition of a monad is more sophisticated than the one's we've defined in rust.
 
@@ -188,7 +189,7 @@ This is where Rust falls behind. There is no way to say 'box of Y' for an unspec
 
 One solution is to write a bunch of code over again. This allows rust to work similarly to Haskell, but you have to specify the types that will work ahead of time, and you have to literally copy the code. &#9785;
 
-```rust
+~~~rust
 impl<T> Monad<T, Vec<T>> for Vec<T> {
 
     fn just(inside: T) -> Self {
@@ -224,11 +225,11 @@ impl<T> Monad<T, Vec<Vec<T>>> for Vec<T> {
             })
     }
 }
-```
+~~~
 
 Ignoring the ugliness for the time being, you'll see this type checks:
 
-```rust
+~~~rust
 let result = Monad::bind(vec![2,3,4], Box::new(|x| 
     Monad::bind(vec![4,5,6], Box::new(|y| 
         vec!(vec![x,y])
@@ -244,7 +245,7 @@ assert_eq!(result, vec![vec![2,4],
                         vec![4,4],
                         vec![4,5],
                         vec![4,6]]);
-```
+~~~
 
 This is pretty good! I mean, both the implementation and the usage are disgusting, but I think you probably understand monads a bit better, and whether you like it or not you've been exposed to [Rust](http://www.rust-lang.org) a bit more! I call that a win-win.
 
