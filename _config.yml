@@ -10,5 +10,8 @@ permalink: /:categories/:year/:month/:day
 # Build settings
 markdown: kramdown
 # markdown: redcarpet
-# redcarpe :
+# redcarpet :
 #   extensions: [tables]
+kramdown:
+  use_coderay: true
+  coderay_css: style
