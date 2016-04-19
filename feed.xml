@@ -1,30 +1,512 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
-    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
-    <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    <title>Charles etc</title>
+    <description></description>
+    <link>http://www.charlesetc.com/</link>
+    <atom:link href="http://www.charlesetc.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 19 Apr 2016 01:16:08 -0700</pubDate>
+    <lastBuildDate>Tue, 19 Apr 2016 01:16:08 -0700</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
-        <category>{{ tag | xml_escape }}</category>
-        {% endfor %}
-        {% for cat in post.categories %}
-        <category>{{ cat | xml_escape }}</category>
-        {% endfor %}
+        <title>What your programming language says about your social life</title>
+        <description>&lt;h1 id=&quot;javascript&quot;&gt;Javascript&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/react.png&quot; alt=&quot;React&quot; /&gt;
+&lt;span&gt;
+You have a large circle of friends. You all hang out together in large groups, engage in spontaneous outings, and overall have a blast. You play volleyball on the beach while intermittently sampling exotic chocolates. When Sunday morning rolls around, you pull up Atom and start hacking with Express and React. How else?&lt;/span&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;python&quot;&gt;Python&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/python.png&quot; alt=&quot;Python&quot; /&gt;
+&lt;span&gt;
+You have 5 or so friends that you stick with. Sure, you might smile at passersby, but your friends are great! You don’t need any more. You have to admit, you and your friends are pretty similar. You all like black coffee and graphic (but not colorful) tees. When it comes to programming, Python is good. Python has what you need. You like Python. And Sublime. Definitely sublime.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;ruby&quot;&gt;Ruby&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/ruby.gif&quot; alt=&quot;Ruby&quot; /&gt;
+&lt;span&gt;
+You’re a social butterfly. You’ll go to indie coffee shops with each of your friends and have fascinating conversations each time. You’ve got lots of friends! Artists, bookworms, so long as they like Chai! Ooh yeah, when it comes to programming, you have fun! Whenever that pesky “undefined method &lt;code&gt;parse&lt;/code&gt; for nil:NilClass” comes up, you just define ‘parse’ on nil. Programming is easy;  this is how programming should be. You use vim - with LOTS of extensions. 😁&lt;/span&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;perl&quot;&gt;Perl&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/perl.gif&quot; alt=&quot;Perl&quot; /&gt;
+&lt;span&gt;
+Your best friend and roommate is a C programmer named Brook. Brook is useful when your patience runs out, but other than that you tend to program alone. You two still play Nintendo 64, because have games really improved since then? Plus, you’ve got a huge collection of games for Nintendo 64. You used to write bash but once you found PHP you were hooked. Honestly, how do people even make lists without that ‘@’. It doesn’t make any sense. You use nano.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;haskell&quot;&gt;Haskell&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/haskell.png&quot; alt=&quot;Haskell&quot; /&gt;
+&lt;span&gt;
+Aw yeah. You’re that one person in the math PHD seminar who still manages to have tons of friends. You don’t sleep very much; why sleep when you can transform monads? You maintain a couple open source parsing libraries and mostly hack on existing mercurial repositories that are accompanied by LaTeX papers. You use pen and paper. You tried vim once but it took too many keystrokes. You once tried to add a type system to your history paper.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;c&quot;&gt;C&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/c.png&quot; alt=&quot;C&quot; /&gt;
+&lt;span&gt;
+When you’re not mapping out dungeons to beguile your friends, or soldering your new mechanical keyboard, you’re programming C. You ssh into your raspberry pi and open up a clean install of vim. Why do people install plugins when there is so much functionality natively? You write C because it’s the most realistic. All other languages are just lying to you. Sometimes you write assembly, but only once you’ve had a few beers. You see your friends once a month for the epic adventure. Other than that you’re room is nice and dark.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;rust&quot;&gt;Rust&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rust.png&quot; alt=&quot;Rust&quot; /&gt;
+&lt;span&gt;
+Dude you like rust too? Have you seen the RFC about macros in type syn- …you wrote a rust concurrency library? Okay - what are you doing tonight?&lt;/span&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 09 Apr 2016 14:47:03 -0700</pubDate>
+        <link>http://www.charlesetc.com/2016/04/09</link>
+        <guid isPermaLink="true">http://www.charlesetc.com/2016/04/09</guid>
+        
+        <category>languages</category>
+        
+        
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>Lifetime Reference</title>
+        <description>&lt;p&gt;Places in Rust where you use any lifetime syntax will fall into two categories:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Concept&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Category&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Usage&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;fn&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;creation&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;fn example_function&amp;lt;&#39;a&amp;gt;()&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;struct&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;creation&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;struct Example&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;enum&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;creation&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;enum Test&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;impl&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;creation&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;impl&amp;lt;&#39;a&amp;gt; Example&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;struct&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;reference&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;some_field: Example&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;enum&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;reference&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;some_field: Test&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;&amp;amp;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;reference&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;next_field: &amp;amp;&#39;a i32&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;&amp;amp;mut&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;reference&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;next_field: &amp;amp;&#39;a mut i32&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Box&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;reference&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;last_field: Box&amp;lt;i32 + &#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;what-does-category-mean&quot;&gt;What does ‘Category’ mean?&lt;/h1&gt;
+
+&lt;p&gt;When I say &lt;em&gt;‘creation’&lt;/em&gt; I mean this is where the lifetime is first defined and named.&lt;/p&gt;
+
+&lt;p&gt;When I say &lt;em&gt;‘reference’&lt;/em&gt; I mean this is where we are being explicit about the lifetime of some reference type, using a lifetime that already exists.&lt;/p&gt;
+
+&lt;p&gt;This is an important distinction that took me a while to get.&lt;/p&gt;
+
+&lt;h1 id=&quot;weird-things&quot;&gt;Weird things&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Yes, we see you &lt;code&gt;Box&lt;/code&gt;, we’re ignoring you.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Notice that ‘struct’ and ‘enum’ are in both categories. That’s because they use pretty much the same syntax for creation as they do for reference; it’s helpful to acknowledge that.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;More&lt;/h1&gt;
+
+&lt;p&gt;I go into more detail about lifetimes &lt;a href=&quot;/rust/2015/10/29&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 31 Oct 2015 05:31:33 -0700</pubDate>
+        <link>http://www.charlesetc.com/rust/2015/10/31</link>
+        <guid isPermaLink="true">http://www.charlesetc.com/rust/2015/10/31</guid>
+        
+        
+        <category>rust</category>
+        
+      </item>
+    
+      <item>
+        <title>Rust Lifetimes</title>
+        <description>&lt;p&gt;Lifetimes are pretty much what makes Rust Rust.&lt;/p&gt;
+
+&lt;p&gt;Easy concurrency, straightforward memory allocation, 
+and overall data safety would not be possible without explicit lifetimes.&lt;/p&gt;
+
+&lt;p&gt;But they are also tricky, and this is aimed at helping people understand the concepts and syntax.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-are-lifetimes&quot;&gt;What are Lifetimes?&lt;/h1&gt;
+
+&lt;p&gt;Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call &lt;code&gt;free&lt;/code&gt;, 
+while at the same time having no need for a garbage collector.
+Rust knows when it’s okay to use a reference by keeping track of its lifetime.&lt;/p&gt;
+
+&lt;p&gt;Each time a reference is returned by or passed into a function, Rust checks at compile time to make sure it fulfills the lifetime requirement specified in the type signature.&lt;/p&gt;
+
+&lt;p&gt;So every reference in Rust (i.e. pointer) has a lifetime. A lifetime is part of the type signature for any reference. Sometimes they can be elided 
+and the compiler can infer them. Nonetheless, you cannot program Rust without knowing how to specify lifetimes.&lt;/p&gt;
+
+&lt;p&gt;Lifetimes fulfill two roles for Rust:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;To know when it’s safe to dereference a pointer&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To allow data to be shared safely&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now, &lt;strong&gt;you are not in charge of defining lifetimes.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Sometimes, however, you will have to give names to existing lifetimes in order to change the default behavior of the compiler.&lt;/p&gt;
+
+&lt;h1 id=&quot;where-do-lifetimes-come-from&quot;&gt;Where do Lifetimes come from?&lt;/h1&gt;
+
+&lt;p&gt;Lifetimes are always named with the same syntax. 
+They look like &lt;code&gt;&amp;lt;&#39;a&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;&#39;b&amp;gt;&lt;/code&gt;, or &lt;code&gt;&amp;lt;&#39;c&amp;gt;&lt;/code&gt;, 
+and they are generally one letter prefaced 
+by an apostrophe.&lt;/p&gt;
+
+&lt;p&gt;When you use one, though, there is more syntax involved. 
+Depending on the context they can look like one of: &lt;code&gt;something&amp;lt;&#39;a&amp;gt;&lt;/code&gt;, &lt;code&gt;Box&amp;lt;something + &#39;a&amp;gt;&lt;/code&gt; or &lt;code&gt;&amp;amp;&#39;a something&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Note well: You will only ever write a lifetime within a type declaration.&lt;/p&gt;
+
+&lt;p&gt;So if you don’t define lifetimes, what does?&lt;/p&gt;
+
+&lt;h1 id=&quot;functions&quot;&gt;Functions&lt;/h1&gt;
+
+&lt;p&gt;This is a biggie. A function can define a lifetime that can be used in it’s type declarations.&lt;/p&gt;
+
+&lt;p&gt;This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over. And if not, you need to make sure it has an appropriate lifetime.&lt;/p&gt;
+
+&lt;p&gt;In Go, you can do this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;func&lt;/span&gt; example_function() *&lt;span style=&quot;color:#0a8;font-weight:bold&quot;&gt;int&lt;/span&gt; {
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;  b := &lt;span style=&quot;color:#00D&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;  &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;return&lt;/span&gt; &amp;amp;b
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;}
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;func&lt;/span&gt; main() {
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;  fmt.Println(*example_function());
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;However, you cannot do that in Rust:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;fn example_function&amp;lt;&#39;a&amp;gt;() -&amp;gt; &amp;amp;&#39;a i32 {
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;  let b = 3;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;  &amp;amp;b // this does not compile
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;}
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;fn main() {
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;  println!(&amp;quot;{}&amp;quot;, example_function()); 
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The reason is that &lt;code&gt;&amp;amp;b&lt;/code&gt; does not live long enough to be dereferenced outside of the function that made it.&lt;/p&gt;
+
+&lt;p&gt;Why is this so important? Because this is what can happen in C:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color:#0a8;font-weight:bold&quot;&gt;int&lt;/span&gt;* example_function(&lt;span style=&quot;color:#088;font-weight:bold&quot;&gt;void&lt;/span&gt;) {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;  &lt;span style=&quot;color:#0a8;font-weight:bold&quot;&gt;int&lt;/span&gt; a = &lt;span style=&quot;color:#00D&quot;&gt;2&lt;/span&gt;;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;  &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;return&lt;/span&gt; &amp;amp;a;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;}
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color:#088;font-weight:bold&quot;&gt;void&lt;/span&gt; do_something(&lt;span style=&quot;color:#0a8;font-weight:bold&quot;&gt;int&lt;/span&gt; b) {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;  &lt;span style=&quot;color:#777&quot;&gt;// lies, don&#39;t do anything&lt;/span&gt;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;}
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n9&quot; name=&quot;n9&quot;&gt;9&lt;/a&gt;&lt;/span&gt;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;strong&gt;&lt;a href=&quot;#n10&quot; name=&quot;n10&quot;&gt;10&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;&lt;span style=&quot;color:#0a8;font-weight:bold&quot;&gt;int&lt;/span&gt; main(&lt;span style=&quot;color:#088;font-weight:bold&quot;&gt;void&lt;/span&gt;) {
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n11&quot; name=&quot;n11&quot;&gt;11&lt;/a&gt;&lt;/span&gt;  &lt;span style=&quot;color:#0a8;font-weight:bold&quot;&gt;int&lt;/span&gt;* c = example_function();
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n12&quot; name=&quot;n12&quot;&gt;12&lt;/a&gt;&lt;/span&gt;  do_something(&lt;span style=&quot;color:#00D&quot;&gt;3&lt;/span&gt;);
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n13&quot; name=&quot;n13&quot;&gt;13&lt;/a&gt;&lt;/span&gt;  &lt;span style=&quot;color:#0a8;font-weight:bold&quot;&gt;int&lt;/span&gt; d = &lt;span style=&quot;color:#00D&quot;&gt;4&lt;/span&gt;;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n14&quot; name=&quot;n14&quot;&gt;14&lt;/a&gt;&lt;/span&gt;  printf(&lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;%i&lt;/span&gt;&lt;span style=&quot;color:#b0b&quot;&gt;\n&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;, *c);
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n15&quot; name=&quot;n15&quot;&gt;15&lt;/a&gt;&lt;/span&gt;}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In C this is Undefined Behavior. When I run this, it just prints “3”.&lt;/p&gt;
+
+&lt;p&gt;That’s right, the data can just change under your nose. I was honestly scared when I ran that. But Rust prevents crazy things like that from taking place!&lt;/p&gt;
+
+&lt;p&gt;So just to explicitly point out the syntax:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;example_function&amp;lt;&#39;a&amp;gt;&lt;/code&gt; is saying “for any lifetime called &lt;code&gt;&#39;a&lt;/code&gt;…”. You can then go on to use this lifetime in the remainder of the type definition.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;amp;&#39;a i32&lt;/code&gt; says “This is a reference to an integer that has lifetime &lt;code&gt;&#39;a&lt;/code&gt;”, 
+which means it has to last as long as “any lifetime”. However, &lt;code&gt;b&lt;/code&gt; happens to only have a lifetime that lasts as long as the function’s scope, so Rust complains.&lt;/p&gt;
+
+&lt;p&gt;(Now at this point you might be asking how you actually would return a reference to &lt;code&gt;3&lt;/code&gt; in Rust… 
+that’s a more complicated question and the answer is to put it on the heap. Look up the &lt;code&gt;Box&lt;/code&gt; type to learn more.)&lt;/p&gt;
+
+&lt;p&gt;And now on to bigger fish.&lt;/p&gt;
+
+&lt;h1 id=&quot;structs&quot;&gt;Structs&lt;/h1&gt;
+
+&lt;p&gt;Structs also define lifetimes.&lt;/p&gt;
+
+&lt;p&gt;Think about it like this:&lt;/p&gt;
+
+&lt;p&gt;If a struct includes a reference to something, then that reference damn sure better last as long as the struct.&lt;/p&gt;
+
+&lt;p&gt;Here’s how you can make sure of that:&lt;/p&gt;
+
+&lt;h2 id=&quot;wrong-example&quot;&gt;Wrong example:&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;struct Sheep {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;  age: &amp;amp;i32,
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;}
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;fn main() {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;    let a = 3;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;    let s = Sheep { age: &amp;amp;a };
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;    println!(&amp;quot;{};&amp;quot;, s)
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n9&quot; name=&quot;n9&quot;&gt;9&lt;/a&gt;&lt;/span&gt;}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This gives the following error:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color:#606&quot;&gt;error&lt;/span&gt;: missing lifetime specifier [&lt;span style=&quot;color:#036;font-weight:bold&quot;&gt;E0106&lt;/span&gt;]
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;        &lt;span style=&quot;color:#606&quot;&gt;age&lt;/span&gt;: &amp;amp;i32,
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;             ^~~~ 
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Rust is mad. 
+In the struct definition, you haven’t told it how long the reference to the &lt;code&gt;i32&lt;/code&gt; is allowed to stay around.
+And yet, in order for your code to be safe, it has to stick around for at least as long as the struct.&lt;/p&gt;
+
+&lt;h2 id=&quot;right-example&quot;&gt;Right Example&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;struct Sheep&amp;lt;&#39;c&amp;gt; {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;  age: &amp;amp;&#39;c i32,
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;}
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;fn main() {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;    let a = 3;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;    let s = Sheep { age: &amp;amp;a };
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;    println!(&amp;quot;{};&amp;quot;, s)
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n9&quot; name=&quot;n9&quot;&gt;9&lt;/a&gt;&lt;/span&gt;}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You’ll notice that not much here has changed. But now Rust has pronounced your code safe — Hurray!&lt;/p&gt;
+
+&lt;p&gt;Here are the changes:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code&gt;Sheep&amp;lt;&#39;c&amp;gt;&lt;/code&gt; instead of &lt;code&gt;Sheep&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This is making a parameter for the struct in Rust — It’s lifetime might have to depend on the lifetimes of its fields, so now you are able to say how and which ones. (Note: you can do things like &lt;code&gt;Sheep&amp;lt;&#39;c, &#39;d&amp;gt;&lt;/code&gt; if you need more than one lifetime.)&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;age: &amp;amp;&#39;c i32&lt;/code&gt; instead of &lt;code&gt;age: &amp;amp;i32&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;Now this says that the integer has to live for as long as the struct.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This is &lt;strong&gt;insanely&lt;/strong&gt; impressive. 
+With these small additions, Rust will now tell you if there is any chance of you having invalid data,
+even across threads. AND all of this happens at compile time without affecting the efficiency of your code.&lt;/p&gt;
+
+&lt;h1 id=&quot;implementations&quot;&gt;Implementations&lt;/h1&gt;
+
+&lt;p&gt;There is one other place where a lifetime can be defined — Implementations.&lt;/p&gt;
+
+&lt;p&gt;It’s very similar to structs. Each implementation is an implementation of a certain
+trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.&lt;/p&gt;
+
+&lt;h2 id=&quot;wrong-example-1&quot;&gt;Wrong Example&lt;/h2&gt;
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;struct Sheep&amp;lt;&#39;c&amp;gt; {                                                             
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;  age: &amp;amp;&#39;c mut i32,
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;}                                                                              
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;                                                                               
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;impl Sheep {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;    fn grow_old(&amp;amp;mut self)  {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;        *self.age += 100
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;    }                    
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n9&quot; name=&quot;n9&quot;&gt;9&lt;/a&gt;&lt;/span&gt;}                   
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This fails with the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color:#606&quot;&gt;error&lt;/span&gt;: wrong number of lifetime &lt;span style=&quot;color:#606&quot;&gt;parameters&lt;/span&gt;: expected &lt;span style=&quot;color:#00D&quot;&gt;1&lt;/span&gt;, found &lt;span style=&quot;color:#00D&quot;&gt;0&lt;/span&gt; [&lt;span style=&quot;color:#036;font-weight:bold&quot;&gt;E0107&lt;/span&gt;]
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;        impl &lt;span style=&quot;color:#036;font-weight:bold&quot;&gt;Sheep&lt;/span&gt; {
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;             ^~~~~
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;right-example-1&quot;&gt;Right Example&lt;/h2&gt;
+
+&lt;p&gt;What’s the problem?&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Sheep&lt;/code&gt; takes a lifetime parameter now, so one must be supplied:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;struct Sheep&amp;lt;&#39;c&amp;gt; {                                                             
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;  age: &amp;amp;&#39;c mut i32,
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;}                                                                              
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;                                                                               
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;impl&amp;lt;&#39;c&amp;gt; Sheep&amp;lt;&#39;c&amp;gt; {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;    fn grow_old(&amp;amp;mut self)  {
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;        *self.age += 100
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;    }                    
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n9&quot; name=&quot;n9&quot;&gt;9&lt;/a&gt;&lt;/span&gt;}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note that &lt;code&gt;impl&amp;lt;&#39;c&amp;gt;&lt;/code&gt; names a new lifetime and &lt;code&gt;Sheep&amp;lt;&#39;c&amp;gt;&lt;/code&gt; says that all 
+&lt;code&gt;self&lt;/code&gt;’s in this implementation have at least the lifetime &lt;code&gt;&#39;c&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is a lot like an extenuation of the lifetimes with structs, but there 
+is strange syntax with the &lt;code&gt;impl&amp;lt;&#39;c&amp;gt; Sheep&amp;lt;&#39;c&amp;gt;&lt;/code&gt; so I wanted to point it out.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-end&quot;&gt;The End&lt;/h1&gt;
+
+&lt;p&gt;And that is all I know about lifetimes in Rust!&lt;/p&gt;
+
+&lt;p&gt;If you’re interested, here is a &lt;a href=&quot;/rust/2015/10/31&quot;&gt;concise reference&lt;/a&gt; for the syntax used with lifetimes.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 29 Oct 2015 05:31:33 -0700</pubDate>
+        <link>http://www.charlesetc.com/rust/2015/10/29</link>
+        <guid isPermaLink="true">http://www.charlesetc.com/rust/2015/10/29</guid>
+        
+        
+        <category>rust</category>
+        
+      </item>
+    
+      <item>
+        <title>the Problems</title>
+        <description>&lt;p&gt;Programming languages are important.&lt;/p&gt;
+
+&lt;p&gt;Go ahead and challenge that if you want, but let’s say it’s true for now.&lt;/p&gt;
+
+&lt;p&gt;Here are the basic essentials for a language to have a chance at being my favorite:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Strict Type Checking&lt;/li&gt;
+  &lt;li&gt;No Nil Pointer&lt;/li&gt;
+  &lt;li&gt;Green Threads with both go-like channels and mutexes.&lt;/li&gt;
+  &lt;li&gt;Compiles to binary, without a virtual machine.&lt;/li&gt;
+  &lt;li&gt;Still runs on all platforms that I care about.&lt;/li&gt;
+  &lt;li&gt;Parametric Polymorphism&lt;/li&gt;
+  &lt;li&gt;Methods with dot syntax&lt;/li&gt;
+  &lt;li&gt;Fast compilation, fast running&lt;/li&gt;
+  &lt;li&gt;Lisp- or scheme-style macros of some sort&lt;/li&gt;
+  &lt;li&gt;User specified Operators with precedence&lt;/li&gt;
+  &lt;li&gt;Mutation&lt;/li&gt;
+  &lt;li&gt;A clean syntax (I’m aware how subjective this is)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Okay! Let’s see how languages do:&lt;/p&gt;
+
+&lt;h2 id=&quot;go&quot;&gt;Go&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,6,9,10&lt;/p&gt;
+
+&lt;p&gt;Nil pointers are annoying but not a dealbreaker.
+Lack of polymorphism is where it falls apart.&lt;/p&gt;
+
+&lt;h2 id=&quot;python&quot;&gt;Python&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 1,2,3,4,8,9,10&lt;/p&gt;
+
+&lt;p&gt;Too many to talk about.&lt;/p&gt;
+
+&lt;h2 id=&quot;c&quot;&gt;C++&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,3,8,9,10,12&lt;/p&gt;
+
+&lt;h2 id=&quot;java&quot;&gt;Java&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,4,9,10,12&lt;/p&gt;
+
+&lt;h2 id=&quot;haskell&quot;&gt;Haskell&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 7,9,11&lt;/p&gt;
+
+&lt;p&gt;Easily the best so far, but that lack of mutation is a killer. State is so useful sometimes.
+You’ll notice it’s the only one that passes 10, and the only one that fails 11.&lt;/p&gt;
+
+&lt;h2 id=&quot;rust&quot;&gt;Rust&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 3,10,12&lt;/p&gt;
+
+&lt;p&gt;The lack of green threads is unfortunate, and damn is it ugly, but other than that rust is a great contender.&lt;/p&gt;
+
+&lt;h2 id=&quot;next&quot;&gt;Next&lt;/h2&gt;
+
+&lt;p&gt;You’ll notice, though, that I haven’t given reasons for any of my opinions. 
+That does &lt;strong&gt;not&lt;/strong&gt; mean that I don’t want to talk about these things, but I need material for more posts, right?&lt;/p&gt;
+
+&lt;p&gt;If you can’t wait, and you really need to spell out the problems with rust or defend C++ on all counts — or if there’s a legitimate error — reach out to me on &lt;a href=&quot;http://www.twitter.com/charlesetc&quot;&gt;twitter&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 21 Oct 2015 05:31:33 -0700</pubDate>
+        <link>http://www.charlesetc.com/languages/2015/10/21</link>
+        <guid isPermaLink="true">http://www.charlesetc.com/languages/2015/10/21</guid>
+        
+        
+        <category>languages</category>
+        
+      </item>
+    
   </channel>
 </rss>

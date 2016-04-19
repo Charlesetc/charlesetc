@@ -6,23 +6,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Charles etc</title>
-  <meta name="description" content="">
+  <title>the Problems</title>
+  <meta name="description" content="Programming languages are important.">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://www.charlesetc.com/">
+  <link rel="canonical" href="http://www.charlesetc.com/languages/2015/10/21">
   <link rel="alternate" type="application/rss+xml" title="Charles etc" href="http://www.charlesetc.com/feed.xml" />
   
 </head>
 
 
-  <body class=" home ">
+  <body class="  ">
 
-    <header class="site-header site-header-transition vertical-header">
+    <header class="site-header site-header-transition ">
 
   <div class="wrapper">
 
-    <a class="site-title" href="/#backtrue">Charles etc</a>
+    <a class="site-title" href="/#back">Charles etc</a>
 
 
 </header>
@@ -30,25 +30,82 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <ul id="main-links">
-  <li><a href="http://www.github.com/charlesetc">Code</a></li>
-  <li><a href="http://www.twitter.com/charlesetc">Tweet</a></li>
-  <li><a class='jekyll-link'>Write</a></li>
-  <li>
-    <a class = "etc-link">
-      <span>E</span><span>t</span><span>c</span>
-    </a>
-  </li>
-</ul>
+        <div class="post">
 
-<!-- Scripts -->
+  <header class="post-header">
+    <p class="post-meta">Oct 21, 2015</p>
+    <h1 class="post-title">the Problems</h1>
+  </header>
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
-<script type="text/javascript" src="/js/jquery.js">
-</script>
+  <article class="post-content">
+    <p>Programming languages are important.</p>
 
-<script type="text/javascript" src="/js/master.js">
-</script>
+<p>Go ahead and challenge that if you want, but let’s say it’s true for now.</p>
+
+<p>Here are the basic essentials for a language to have a chance at being my favorite:</p>
+
+<ol>
+  <li>Strict Type Checking</li>
+  <li>No Nil Pointer</li>
+  <li>Green Threads with both go-like channels and mutexes.</li>
+  <li>Compiles to binary, without a virtual machine.</li>
+  <li>Still runs on all platforms that I care about.</li>
+  <li>Parametric Polymorphism</li>
+  <li>Methods with dot syntax</li>
+  <li>Fast compilation, fast running</li>
+  <li>Lisp- or scheme-style macros of some sort</li>
+  <li>User specified Operators with precedence</li>
+  <li>Mutation</li>
+  <li>A clean syntax (I’m aware how subjective this is)</li>
+</ol>
+
+<p>Okay! Let’s see how languages do:</p>
+
+<h2 id="go">Go</h2>
+
+<p>Fails on: 2,6,9,10</p>
+
+<p>Nil pointers are annoying but not a dealbreaker.
+Lack of polymorphism is where it falls apart.</p>
+
+<h2 id="python">Python</h2>
+
+<p>Fails on: 1,2,3,4,8,9,10</p>
+
+<p>Too many to talk about.</p>
+
+<h2 id="c">C++</h2>
+
+<p>Fails on: 2,3,8,9,10,12</p>
+
+<h2 id="java">Java</h2>
+
+<p>Fails on: 2,4,9,10,12</p>
+
+<h2 id="haskell">Haskell</h2>
+
+<p>Fails on: 7,9,11</p>
+
+<p>Easily the best so far, but that lack of mutation is a killer. State is so useful sometimes.
+You’ll notice it’s the only one that passes 10, and the only one that fails 11.</p>
+
+<h2 id="rust">Rust</h2>
+
+<p>Fails on: 3,10,12</p>
+
+<p>The lack of green threads is unfortunate, and damn is it ugly, but other than that rust is a great contender.</p>
+
+<h2 id="next">Next</h2>
+
+<p>You’ll notice, though, that I haven’t given reasons for any of my opinions. 
+That does <strong>not</strong> mean that I don’t want to talk about these things, but I need material for more posts, right?</p>
+
+<p>If you can’t wait, and you really need to spell out the problems with rust or defend C++ on all counts — or if there’s a legitimate error — reach out to me on <a href="http://www.twitter.com/charlesetc">twitter</a>.</p>
+
+
+  </article>
+
+</div>
 
       </div>
     </div>
