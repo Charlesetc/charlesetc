@@ -5,7 +5,7 @@ date:   2016-04-17 12:31:33
 categories: rust monads
 ---
 
-**Disclaimer**: Rust does not have monads.
+**Disclaimer**: Rust can not have monads.
 
 Rust doesn't have _higher-kinded_ types. Hopefully, in 5 minutes:
 
@@ -23,10 +23,10 @@ let a = do
 
 The result is `a = [[2,4],[2,5],[2,6],[3,4],[3,5],[3,6],[4,4],[4,5],[4,6]]`.
 
-Ignoring the syntax for a moment, this generally maps to:
+Ignoring the syntax, this generally maps to:
 
 ~~~
-If x is one of [2,3,4] and y is one of [4,5,6] what can [x, y] be?
+If x is one of [2,3,4] and y is one of [4,5,6] what can the expression [x, y] be?
 ~~~
 
 Alternatively, these also work:
@@ -53,12 +53,13 @@ let a = do
 
 
 The coolest part is that this isn't built into the language &mdash; 
-this list comprehension arises from the monadic definition of lists... and can almost work in [Rust](http://www.rust-lang.org).
+this way of comprehending lists (_list comprehensions_, if you will) arises from the monadic definition of lists... and can almost work in [Rust](http://www.rust-lang.org).
 
 Let's try to build the same thing in Rust and see where things fall apart!
 
 ## Sneak peek!
-By the end of the post, this will compile:
+
+An example in Rust that's analogous to Haskell's:
 
 ~~~rust
 let a: Vec<Vec<i32>> = perform!{
@@ -71,11 +72,13 @@ let a: Vec<Vec<i32>> = perform!{
 
 And `a` still equals (the vector equivalent of) `[[2,4],[2,5],[2,6],[3,4],[3,5],[3,6],[4,4],[4,5],[4,6]]`.
 
+A Rust macro makes this pretty, but we'll go through the function calls that do the heavy lifting.
+
 # Monads
 
-There's a [fancy set of constraints](https://wiki.haskell.org/Monad_laws) about what makes a true monad and what does not. For now, I'm just going to explain the type signatures and you can look into the rest if you are so inclined :)
+There's a [fancy set of constraints](https://wiki.haskell.org/Monad_laws) about what makes a true monad and what does not. For now, I'm just going to explain the type signatures and you can look into the rest if you are so inclined 😊
 
-These are the type signatures of a monad's defining methods in Haskell:
+These are the Haskell type signatures for the methods that define a monad:
 
 ~~~haskell
 class Monad M where
@@ -87,7 +90,7 @@ class Monad M where
 
   - like a Box of type `M` (A jar, for example)  with something of type `a` inside. (Let's say `a` is candy)
 
-`bind` takes a monad `M` and a function from type `a` to `M b`. `bind` then returns an `M b`.
+`bind` takes a monad `M a` and a function from type `a` to `M b`. `bind` then returns an `M b`.
 
   - Given two parameters: (1) "a jar of candies" and (2) "the action of eating the candies and placing the wrappers in the now empty jar", `bind` defines how one removes the candies from the jar and performs this action.
 
@@ -103,9 +106,9 @@ trait Monad<T,A>: Sized {
 }
 ~~~
 
-You can see Rust is holding it's own here quite well! But there is poison in the wine.
+You can see Rust is holding it's own here quite well! However, darkness falls across the land:
 
-`A` can not be a higher-kinded type. In other words, whenever you provide an implementation of this Monad trait, you can't just say that `A` has to be a Monad, you have to say that it's a Monad of integers, or a Monad of floats. If you want both, you have to copy the implementation for each.
+`A` can not be a higher-kinded type. In other words, whenever you provide an implementation of this Monad trait, you can't just say that `A` has to be a Jar, you have to say that it's a Jar of candies, or a Jar of fireflies. If you want to bind to both, you have to copy the implementations.
 
 But let's try it out anyways, shall we!
 
@@ -164,17 +167,19 @@ fn returns(inside: T) -> Vec<T> {
 }
 ~~~
 
-Easy, take an element, put in a list. 
+Easy, take an element, put it in a list.
 
-Next, `bind` is a little more complicated.
+Next up, `bind`:
 
-We need to come up with a function that will apply an operation (`a -> [a]`) to a list (`[a]`) and get a list of items (`[a]`). You might think "`map` applies an operation to a list!", and you'd be totally right!
+We need to come up with a function that will apply an operation (of type `a -> [a]`) to a vector (of type `[a]`) and get a vector of items (`[a]`). You might think "`map` applies an operation to a vector!", and you'd be totally right!
 
-The only problem is the return value of bind: A list of items (`[a]`).
+The only problem is the return value of bind: A vector of items (`[a]`).
 
-If we map with an operation that produces lists, we'll get a list of list of items (`[[a]]`)
+If we map with an operation that produces vector, we'll get a vector of vector of items (`[[a]]`)
 
-Instead, why don't we concatenate the result? Hurray we return the type `[a]` and the world doesn't end!
+Luckily, we can concatenate the results and the types work out!
+
+(There are probably other ways to implement vectors as monads, but this is how Haskell's standard library does it.)
 
 ~~~rust
 fn bind<'a>(outside: Self, op: Box<Fn(T) -> Vec<T> + 'a>) -> Vec<T>
@@ -195,15 +200,16 @@ You can't replace `T` with a parametrized type, in other words.
 
 # Duplicate Code
 
-One solution is to write a bunch of code over again. This allows rust to work similarly to Haskell, but you have to specify the types that will work ahead of time, and you have to literally copy the code. &#9785;
+One solution is to write a bunch of code over again. This allows rust to work similarly to Haskell, but you have to specify the types that will work ahead of time, and you have to literally copy the code. 😞
 
-I've taken the pleasure of coping the code [beforehand](https://gist.github.com/Charlesetc/683c036e550ea833a70be83dda5ff4e5). This defines the same implementation for:
+I've taken the pleasure of copying the code [ahead of time](https://gist.github.com/Charlesetc/683c036e550ea833a70be83dda5ff4e5). This defines the same implementation for both:
 
 ~~~rust
+impl<T> Monad<T, Vec<T> for Vec<T> { }
 impl<T> Monad<T, Vec<Vec<T>>> for Vec<T> { }
 ~~~
 
-Ignoring the ugliness for the time being, you'll see this actually works:
+Ignoring the ugliness for the time being, you'll see this now works:
 
 ~~~rust
 let result = Monad::bind(vec![2,3,4], Box::new(|x| 
@@ -211,21 +217,25 @@ let result = Monad::bind(vec![2,3,4], Box::new(|x|
         vec!(vec![x,y])
     ))  
 )); 
+~~~
 
-assert_eq!(result, vec![vec![2,4], 
-                        vec![2,5], 
-                        vec![2,6], 
-                        vec![3,4], 
-                        vec![3,5],
-                        vec![3,6],
-                        vec![4,4],
-                        vec![4,5],
-                        vec![4,6]]);
+and `result` equals:
+
+~~~
+vec![vec![2,4],
+     vec![2,5],
+     vec![2,6],
+     vec![3,4],
+     vec![3,5],
+     vec![3,6],
+     vec![4,4],
+     vec![4,5],
+     vec![4,6]]);
 ~~~
 
 This is pretty good! It's nothing compared to Haskell's type system, but it does perform the same function calls and return the same result!
 
-But I still wanted it prettier.
+But I still promised prettier! 🌸
 
 # Macros to the Rescue.
 
