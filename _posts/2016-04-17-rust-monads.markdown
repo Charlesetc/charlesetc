@@ -10,7 +10,7 @@ categories: rust monads
 Rust doesn't have _higher-kinded_ types. Hopefully, in 5 minutes:
 
   1. you understand monads better and
-  2. you understand why not having _higher-kinded_ types means not having monads
+  2. you understand why monads require higher-kinded types.
 
 Anyways, in Haskell, you can do this:
 
@@ -67,7 +67,6 @@ let a: Vec<Vec<i32>> = perform!{
   vec![3,4] => y;
   vec![vec![x, y]];
 };
-
 ~~~
 
 And `a` still equals (the vector equivalent of) `[[2,4],[2,5],[2,6],[3,4],[3,5],[3,6],[4,4],[4,5],[4,6]]`.
@@ -78,21 +77,30 @@ A Rust macro makes this pretty, but we'll go through the function calls that do 
 
 There's a [fancy set of constraints](https://wiki.haskell.org/Monad_laws) about what makes a true monad and what does not. For now, I'm just going to explain the type signatures and you can look into the rest if you are so inclined 😊
 
-These are the Haskell type signatures for the methods that define a monad:
+There are two functions that comprise an implementation for the monad typeclass: `just` and `bind`.
+
+The Haskell type signatures for the methods that define a monad:
 
 ~~~haskell
 class Monad M where
-  returns :: a -> M a
+  just :: a -> M a
   bind :: M a -> (a -> M b) -> M b 
 ~~~
 
-`returns` is a function that takes an arbitrary type and returns a Monad of that type.
+`just` is a function that takes an arbitrary type and returns a monad of that type.
 
   - like a Box of type `M` (A jar, for example)  with something of type `a` inside. (Let's say `a` is candy)
 
 `bind` takes a monad `M a` and a function from type `a` to `M b`. `bind` then returns an `M b`.
 
   - Given two parameters: (1) "a jar of candies" and (2) "the action of eating the candies and placing the wrappers in the now empty jar", `bind` defines how one removes the candies from the jar and performs this action.
+
+**Disclaimers:**
+
+  - `just` is actually called `return` in Haskell. But that's a keyword in Rust, so...
+  - `bind` is referred to as "bind", but Haskell uses the symbol `>>=`.
+  - There is also `>>`, but I'm glossing over it for simplicity. [Link here](http://hackage.haskell.org/package/base-4.8.2.0/docs/Prelude.html#v:-62--62-)
+
 
 
 ## The Trait
@@ -101,7 +109,7 @@ Rust operates with typeclasses similar to Haskell called 'Traits'.
 
 ~~~rust
 trait Monad<T,A>: Sized {
-    fn returns(inside: T) -> Self;
+    fn just(inside: T) -> Self;
     fn bind<'a>(outside: Self, op: Box<Fn(T) -> A + 'a>) -> A;  
 }
 ~~~
@@ -116,10 +124,10 @@ But let's try it out anyways, shall we!
 
 `Option` is the same thing as Haskell's `Maybe`. An `Option<T>` type is either `Some(inside: T)` or `None`.
 
-So if we want to define `returns`, we are trying to put an arbitrary object into a box. This can be done by just saying `Some(object)`. Sweet!
+So if we want to define `just`, we are trying to put an arbitrary object into a box. This can be done by just saying `Some(object)`. Sweet!
 
 ~~~rust
-fn returns(inside: T) -> Option<T> {
+fn just(inside: T) -> Option<T> {
     Some(inside)
 } 
 ~~~
@@ -159,10 +167,10 @@ Sure, we could hardcode a different type - but we can't reference "`M` of `b`" w
 
 But let's try once more: Vectors!
 
-Vectors, too, can be thought of a box. Let's start with `returns`:
+Vectors, too, can be thought of a box. Let's start with `just`:
 
 ~~~rust
-fn returns(inside: T) -> Vec<T> {
+fn just(inside: T) -> Vec<T> {
   vec!(inside)
 }
 ~~~
@@ -200,7 +208,7 @@ You can't replace `T` with a parametrized type, in other words.
 
 # Duplicate Code
 
-One solution is to write a bunch of code over again. This allows rust to work similarly to Haskell, but you have to specify the types that will work ahead of time, and you have to literally copy the code. 😞
+One solution is to write a bunch of code over again. This allows Rust to work similarly to Haskell, but you have to specify the types that will work ahead of time, and you have to literally copy the code. 😞
 
 I've taken the pleasure of copying the code [ahead of time](https://gist.github.com/Charlesetc/683c036e550ea833a70be83dda5ff4e5). This defines the same implementation for both:
 
@@ -221,7 +229,7 @@ let result = Monad::bind(vec![2,3,4], Box::new(|x|
 
 and `result` equals:
 
-~~~
+~~~rust
 vec![vec![2,4],
      vec![2,5],
      vec![2,6],
@@ -235,8 +243,33 @@ vec![vec![2,4],
 
 This is pretty good! It's nothing compared to Haskell's type system, but it does perform the same function calls and return the same result!
 
+This behaviour comes directly from how we defined `bind` for vectors, and this is exactly how list comprehensions in Haskell work!
+
 But I still promised prettier! 🌸
 
 # Macros to the Rescue.
 
+Now if we add [two (fairly simple) macros](https://gist.github.com/Charlesetc/32a5c5be1f1edf1d9d2ca644c50a86cf), we end up with code that looks very similar to the Haskell we saw in the beginning. (Not going into macros in this post, so keep your eyes peeled!)
 
+The macros transform the following code into code that uses only `bind` and `just`.
+
+**Rust:**
+
+~~~rust
+let a: Vec<Vec<i32>> = perform!{
+  vec![1,2] => x;
+  vec![3,4] => y;
+  vec![vec![x, y]];
+};
+~~~
+
+**Haskell:**
+
+~~~haskell
+let a = do
+  x <- [1,2]
+  y <- [3,4]
+  return [x,y]
+~~~
+
+And that's it! Something alone the lines of monads in Rust. All code is on [github](https://github.com/Charlesetc/exploring-monads-with-rust).

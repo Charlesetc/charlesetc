@@ -9,6 +9,7 @@ permalink: /:categories/:year/:month/:day
 
 # Build settings
 markdown: kramdown
+# highlighter: rouge
 # markdown: redcarpet
 # redcarpe :
 #   extensions: [tables]
