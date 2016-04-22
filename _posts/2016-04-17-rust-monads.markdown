@@ -16,9 +16,9 @@ Anyways, in Haskell, you can do this:
 
 ~~~haskell
 let a = do
-  x <- [2,3,4]
-  y <- [4,5,6]
-  return [x,y]
+    x <- [2,3,4]
+    y <- [4,5,6]
+    return [x,y]
 ~~~
 
 The result is `a = [[2,4],[2,5],[2,6],[3,4],[3,5],[3,6],[4,4],[4,5],[4,6]]`.
@@ -32,23 +32,23 @@ If x is one of [2,3,4] and y is one of [4,5,6] what can the expression [x, y] be
 Alternatively, these also work:
 
 ~~~haskell
-let a = do        
-  x <- [2,3,7]    
-  y <- [4,5,6]    
-  return (max x y)
+let a = do
+    x <- [2,3,7]
+    y <- [4,5,6]
+    return (max x y)
 
-  -- This evaluates to:
-  -- [4, 5, 6, 4, 5, 6, 7, 7, 7]
+    -- This evaluates to:
+    -- [4, 5, 6, 4, 5, 6, 7, 7, 7]
 ~~~
  
 ~~~haskell
-let a = do    
-  x <- [2,3,4]
-  y <- [4,5,6]
-  return (x == y)
+let a = do
+    x <- [2,3,4]
+    y <- [4,5,6]
+    return (x == y)
 
-  -- This evaluates to:
-  -- [False, False, False, False, False, False, True, False, False]
+    -- This evaluates to:
+    -- [False, False, False, False, False, False, True, False, False]
 ~~~
 
 
@@ -63,9 +63,9 @@ An example in Rust that's analogous to Haskell's:
 
 ~~~rust
 let a: Vec<Vec<i32>> = perform!{
-  vec![1,2] => x;
-  vec![3,4] => y;
-  vec![vec![x, y]];
+    vec![1,2] => x;
+    vec![3,4] => y;
+    vec![vec![x, y]];
 };
 ~~~
 
@@ -83,8 +83,8 @@ The Haskell type signatures for the methods that define a monad:
 
 ~~~haskell
 class Monad M where
-  just :: a -> M a
-  bind :: M a -> (a -> M b) -> M b 
+    just :: a -> M a
+    bind :: M a -> (a -> M b) -> M b
 ~~~
 
 `just` is a function that takes an arbitrary type and returns a monad of that type.
@@ -110,7 +110,7 @@ Rust operates with typeclasses similar to Haskell called 'Traits'.
 ~~~rust
 trait Monad<T,A>: Sized {
     fn just(inside: T) -> Self;
-    fn bind<'a>(outside: Self, op: Box<Fn(T) -> A + 'a>) -> A;  
+    fn bind<'a>(outside: Self, op: Box<Fn(T) -> A + 'a>) -> A;
 }
 ~~~
 
@@ -118,7 +118,7 @@ You can see Rust is holding it's own here quite well! However, darkness falls ac
 
 `A` can not be a higher-kinded type. In other words, whenever you provide an implementation of this Monad trait, you can't just say that `A` has to be a Jar, you have to say that it's a Jar of candies, or a Jar of fireflies. If you want to bind to both, you have to copy the implementations.
 
-But let's try it out anyways, shall we!
+But let's try it out anyways!
 
 ## The Option Monad
 
@@ -167,11 +167,11 @@ Sure, we could hardcode a different type - but we can't reference "`M` of `b`" w
 
 But let's try once more: Vectors!
 
-Vectors, too, can be thought of a box. Let's start with `just`:
+Vectors, too, can be thought of as a box. Let's start with `just`:
 
 ~~~rust
 fn just(inside: T) -> Vec<T> {
-  vec!(inside)
+    vec!(inside)
 }
 ~~~
 
@@ -179,11 +179,11 @@ Easy, take an element, put it in a list.
 
 Next up, `bind`:
 
-We need to come up with a function that will apply an operation (of type `a -> [a]`) to a vector (of type `[a]`) and get a vector of items (`[a]`). You might think "`map` applies an operation to a vector!", and you'd be totally right!
+We need to come up with a function that will apply an operation (of type `a -> [a]`) to a vector (of type `[a]`) and get a vector of items (`[a]`). You might think "`map` applies an operation to a vector!" - and you'd be totally right!
 
 The only problem is the return value of bind: A vector of items (`[a]`).
 
-If we map with an operation that produces vector, we'll get a vector of vector of items (`[[a]]`)
+If we map with an operation that returns a vector, we'll get a vector of vector of items (`[[a]]`)
 
 Luckily, we can concatenate the results and the types work out!
 
@@ -204,7 +204,7 @@ fn bind<'a>(outside: Self, op: Box<Fn(T) -> Vec<T> + 'a>) -> Vec<T>
 
 Do you see the problem again this time? `T` is not a higher-kinded type. In Rust, one can't say "Let `T` be the type  __vector of something__" -- one can only say "Let `T` be the Integer type" or "Let `T` be the type __vector of f32__".
 
-You can't replace `T` with a parametrized type, in other words.
+You can't replace `T` with a parameterized type, in other words.
 
 # Duplicate Code
 
@@ -223,7 +223,7 @@ Ignoring the ugliness for the time being, you'll see this now works:
 let result = Monad::bind(vec![2,3,4], Box::new(|x| 
     Monad::bind(vec![4,5,6], Box::new(|y| 
         vec!(vec![x,y])
-    ))  
+    ))
 )); 
 ~~~
 
@@ -257,9 +257,9 @@ The macros transform the following code into code that uses only `bind` and `jus
 
 ~~~rust
 let a: Vec<Vec<i32>> = perform!{
-  vec![1,2] => x;
-  vec![3,4] => y;
-  vec![vec![x, y]];
+    vec![1,2] => x;
+    vec![3,4] => y;
+    vec![vec![x, y]];
 };
 ~~~
 
@@ -267,9 +267,9 @@ let a: Vec<Vec<i32>> = perform!{
 
 ~~~haskell
 let a = do
-  x <- [1,2]
-  y <- [3,4]
-  return [x,y]
+    x <- [1,2]
+    y <- [3,4]
+    return [x,y]
 ~~~
 
-And that's it! Something alone the lines of monads in Rust. All code is on [github](https://github.com/Charlesetc/exploring-monads-with-rust).
+And that's it! Something along the lines of monads in Rust. All code is on [github](https://github.com/Charlesetc/exploring-monads-with-rust).
