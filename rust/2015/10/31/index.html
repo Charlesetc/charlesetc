@@ -50,49 +50,49 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code>fn</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">fn</code></td>
       <td style="text-align: left">creation</td>
-      <td style="text-align: left"><code>fn example_function&lt;'a&gt;()</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">fn example_function&lt;'a&gt;()</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code>struct</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">struct</code></td>
       <td style="text-align: left">creation</td>
-      <td style="text-align: left"><code>struct Example&lt;'a&gt;</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">struct Example&lt;'a&gt;</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code>enum</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">enum</code></td>
       <td style="text-align: left">creation</td>
-      <td style="text-align: left"><code>enum Test&lt;'a&gt;</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">enum Test&lt;'a&gt;</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code>impl</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">impl</code></td>
       <td style="text-align: left">creation</td>
-      <td style="text-align: left"><code>impl&lt;'a&gt; Example&lt;'a&gt;</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">impl&lt;'a&gt; Example&lt;'a&gt;</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code>struct</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">struct</code></td>
       <td style="text-align: left">reference</td>
-      <td style="text-align: left"><code>some_field: Example&lt;'a&gt;</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">some_field: Example&lt;'a&gt;</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code>enum</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">enum</code></td>
       <td style="text-align: left">reference</td>
-      <td style="text-align: left"><code>some_field: Test&lt;'a&gt;</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">some_field: Test&lt;'a&gt;</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code>&amp;</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">&amp;</code></td>
       <td style="text-align: left">reference</td>
-      <td style="text-align: left"><code>next_field: &amp;'a i32</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">next_field: &amp;'a i32</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code>&amp;mut</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">&amp;mut</code></td>
       <td style="text-align: left">reference</td>
-      <td style="text-align: left"><code>next_field: &amp;'a mut i32</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">next_field: &amp;'a mut i32</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code>Box</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">Box</code></td>
       <td style="text-align: left">reference</td>
-      <td style="text-align: left"><code>last_field: Box&lt;i32 + 'a&gt;</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">last_field: Box&lt;i32 + 'a&gt;</code></td>
     </tr>
   </tbody>
 </table>
@@ -109,7 +109,7 @@
 
 <ol>
   <li>
-    <p>Yes, we see you <code>Box</code>, we’re ignoring you.</p>
+    <p>Yes, we see you <code class="highlighter-rouge">Box</code>, we’re ignoring you.</p>
   </li>
   <li>
     <p>Notice that ‘struct’ and ‘enum’ are in both categories. That’s because they use pretty much the same syntax for creation as they do for reference; it’s helpful to acknowledge that.</p>

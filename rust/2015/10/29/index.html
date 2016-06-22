@@ -47,7 +47,7 @@ and overall data safety would not be possible without explicit lifetimes.</p>
 
 <h1 id="what-are-lifetimes">What are Lifetimes?</h1>
 
-<p>Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call <code>free</code>, 
+<p>Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call <code class="highlighter-rouge">free</code>, 
 while at the same time having no need for a garbage collector.
 Rust knows when it’s okay to use a reference by keeping track of its lifetime.</p>
 
@@ -74,12 +74,12 @@ and the compiler can infer them. Nonetheless, you cannot program Rust without kn
 <h1 id="where-do-lifetimes-come-from">Where do Lifetimes come from?</h1>
 
 <p>Lifetimes are always named with the same syntax. 
-They look like <code>&lt;'a&gt;</code>, <code>&lt;'b&gt;</code>, or <code>&lt;'c&gt;</code>, 
+They look like <code class="highlighter-rouge">&lt;'a&gt;</code>, <code class="highlighter-rouge">&lt;'b&gt;</code>, or <code class="highlighter-rouge">&lt;'c&gt;</code>, 
 and they are generally one letter prefaced 
 by an apostrophe.</p>
 
 <p>When you use one, though, there is more syntax involved. 
-Depending on the context they can look like one of: <code>something&lt;'a&gt;</code>, <code>Box&lt;something + 'a&gt;</code> or <code>&amp;'a something</code></p>
+Depending on the context they can look like one of: <code class="highlighter-rouge">something&lt;'a&gt;</code>, <code class="highlighter-rouge">Box&lt;something + 'a&gt;</code> or <code class="highlighter-rouge">&amp;'a something</code></p>
 
 <p>Note well: You will only ever write a lifetime within a type declaration.</p>
 
@@ -93,56 +93,50 @@ Depending on the context they can look like one of: <code>something&lt;'a&gt;</c
 
 <p>In Go, you can do this:</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">func</span> example_function() *<span style="color:#0a8;font-weight:bold">int</span> {
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  b := <span style="color:#00D">3</span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>  <span style="color:#080;font-weight:bold">return</span> &amp;b
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span><span style="color:#080;font-weight:bold">func</span> main() {
-<span class="line-numbers"><a href="#n7" name="n7">7</a></span>  fmt.Println(*example_function());
-<span class="line-numbers"><a href="#n8" name="n8">8</a></span>}
-</pre></div>
-</div>
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">example_function</span><span class="p">()</span><span class="x"> </span><span class="o">*</span><span class="kt">int</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">3</span><span class="x">
+  </span><span class="k">return</span><span class="x"> </span><span class="o">&amp;</span><span class="n">b</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">*</span><span class="n">example_function</span><span class="p">());</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
 </div>
 
 <p>However, you cannot do that in Rust:</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>fn example_function&lt;'a&gt;() -&gt; &amp;'a i32 {
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  let b = 3;
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>  &amp;b // this does not compile
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>fn main() {
-<span class="line-numbers"><a href="#n7" name="n7">7</a></span>  println!(&quot;{}&quot;, example_function()); 
-<span class="line-numbers"><a href="#n8" name="n8">8</a></span>}
-</pre></div>
-</div>
+<div class="language-rust highlighter-rouge"><pre class="highlight"><code><span class="k">fn</span> <span class="n">example_function</span><span class="o">&lt;</span><span class="err">'</span><span class="n">a</span><span class="o">&gt;</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="o">&amp;</span><span class="err">'</span><span class="n">a</span> <span class="nb">i32</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="o">&amp;</span><span class="n">b</span> <span class="c">// this does not compile</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="nf">example_function</span><span class="p">());</span> 
+<span class="p">}</span>
+</code></pre>
 </div>
 
-<p>The reason is that <code>&amp;b</code> does not live long enough to be dereferenced outside of the function that made it.</p>
+<p>The reason is that <code class="highlighter-rouge">&amp;b</code> does not live long enough to be dereferenced outside of the function that made it.</p>
 
 <p>Why is this so important? Because this is what can happen in C:</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#0a8;font-weight:bold">int</span>* example_function(<span style="color:#088;font-weight:bold">void</span>) {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  <span style="color:#0a8;font-weight:bold">int</span> a = <span style="color:#00D">2</span>;
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>  <span style="color:#080;font-weight:bold">return</span> &amp;a;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>}
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="color:#088;font-weight:bold">void</span> do_something(<span style="color:#0a8;font-weight:bold">int</span> b) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>  <span style="color:#777">// lies, don't do anything</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>}
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="color:#0a8;font-weight:bold">int</span> main(<span style="color:#088;font-weight:bold">void</span>) {
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>  <span style="color:#0a8;font-weight:bold">int</span>* c = example_function();
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  do_something(<span style="color:#00D">3</span>);
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>  <span style="color:#0a8;font-weight:bold">int</span> d = <span style="color:#00D">4</span>;
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>  printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%i</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, *c);
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
-</pre></div>
-</div>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span><span class="o">*</span> <span class="nf">example_function</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">do_something</span><span class="p">(</span><span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// lies, don't do anything
+</span><span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span><span class="o">*</span> <span class="n">c</span> <span class="o">=</span> <span class="n">example_function</span><span class="p">();</span>
+  <span class="n">do_something</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">c</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
 </div>
 
 <p>In C this is Undefined Behavior. When I run this, it just prints “3”.</p>
@@ -151,13 +145,13 @@ Depending on the context they can look like one of: <code>something&lt;'a&gt;</c
 
 <p>So just to explicitly point out the syntax:</p>
 
-<p><code>example_function&lt;'a&gt;</code> is saying “for any lifetime called <code>'a</code>…”. You can then go on to use this lifetime in the remainder of the type definition.</p>
+<p><code class="highlighter-rouge">example_function&lt;'a&gt;</code> is saying “for any lifetime called <code class="highlighter-rouge">'a</code>…”. You can then go on to use this lifetime in the remainder of the type definition.</p>
 
-<p><code>&amp;'a i32</code> says “This is a reference to an integer that has lifetime <code>'a</code>”, 
-which means it has to last as long as “any lifetime”. However, <code>b</code> happens to only have a lifetime that lasts as long as the function’s scope, so Rust complains.</p>
+<p><code class="highlighter-rouge">&amp;'a i32</code> says “This is a reference to an integer that has lifetime <code class="highlighter-rouge">'a</code>”, 
+which means it has to last as long as “any lifetime”. However, <code class="highlighter-rouge">b</code> happens to only have a lifetime that lasts as long as the function’s scope, so Rust complains.</p>
 
-<p>(Now at this point you might be asking how you actually would return a reference to <code>3</code> in Rust… 
-that’s a more complicated question and the answer is to put it on the heap. Look up the <code>Box</code> type to learn more.)</p>
+<p>(Now at this point you might be asking how you actually would return a reference to <code class="highlighter-rouge">3</code> in Rust… 
+that’s a more complicated question and the answer is to put it on the heap. Look up the <code class="highlighter-rouge">Box</code> type to learn more.)</p>
 
 <p>And now on to bigger fish.</p>
 
@@ -173,48 +167,42 @@ that’s a more complicated question and the answer is to put it on the heap. Lo
 
 <h2 id="wrong-example">Wrong example:</h2>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>struct Sheep {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  age: &amp;i32,
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>}
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>fn main() {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    let a = 3;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    let s = Sheep { age: &amp;a };
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    println!(&quot;{};&quot;, s)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
-</pre></div>
-</div>
+<div class="language-rust highlighter-rouge"><pre class="highlight"><code><span class="k">struct</span> <span class="n">Sheep</span> <span class="p">{</span>
+  <span class="n">age</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">i32</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Sheep</span> <span class="p">{</span> <span class="n">age</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">a</span> <span class="p">};</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{};"</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
 </div>
 
 <p>This gives the following error:</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#606">error</span>: missing lifetime specifier [<span style="color:#036;font-weight:bold">E0106</span>]
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>        <span style="color:#606">age</span>: &amp;i32,
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>             ^~~~ 
-</pre></div>
-</div>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">error: </span><span class="n">missing</span> <span class="n">lifetime</span> <span class="n">specifier</span> <span class="p">[</span><span class="no">E0106</span><span class="p">]</span>
+        <span class="ss">age: </span><span class="o">&amp;</span><span class="n">i32</span><span class="p">,</span>
+             <span class="o">^~~~</span> 
+</code></pre>
 </div>
 
 <p>Rust is mad. 
-In the struct definition, you haven’t told it how long the reference to the <code>i32</code> is allowed to stay around.
+In the struct definition, you haven’t told it how long the reference to the <code class="highlighter-rouge">i32</code> is allowed to stay around.
 And yet, in order for your code to be safe, it has to stick around for at least as long as the struct.</p>
 
 <h2 id="right-example">Right Example</h2>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>struct Sheep&lt;'c&gt; {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  age: &amp;'c i32,
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>}
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>fn main() {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    let a = 3;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    let s = Sheep { age: &amp;a };
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    println!(&quot;{};&quot;, s)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
-</pre></div>
-</div>
+<div class="language-rust highlighter-rouge"><pre class="highlight"><code><span class="k">struct</span> <span class="n">Sheep</span><span class="o">&lt;</span><span class="err">'</span><span class="n">c</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="n">age</span><span class="p">:</span> <span class="o">&amp;</span><span class="err">'</span><span class="n">c</span> <span class="nb">i32</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Sheep</span> <span class="p">{</span> <span class="n">age</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">a</span> <span class="p">};</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{};"</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
 </div>
 
 <p>You’ll notice that not much here has changed. But now Rust has pronounced your code safe — Hurray!</p>
@@ -222,14 +210,14 @@ And yet, in order for your code to be safe, it has to stick around for at least 
 <p>Here are the changes:</p>
 
 <ol>
-  <li><code>Sheep&lt;'c&gt;</code> instead of <code>Sheep</code></li>
+  <li><code class="highlighter-rouge">Sheep&lt;'c&gt;</code> instead of <code class="highlighter-rouge">Sheep</code></li>
 </ol>
 
-<p>This is making a parameter for the struct in Rust — It’s lifetime might have to depend on the lifetimes of its fields, so now you are able to say how and which ones. (Note: you can do things like <code>Sheep&lt;'c, 'd&gt;</code> if you need more than one lifetime.)</p>
+<p>This is making a parameter for the struct in Rust — It’s lifetime might have to depend on the lifetimes of its fields, so now you are able to say how and which ones. (Note: you can do things like <code class="highlighter-rouge">Sheep&lt;'c, 'd&gt;</code> if you need more than one lifetime.)</p>
 
 <ol>
   <li>
-    <p><code>age: &amp;'c i32</code> instead of <code>age: &amp;i32</code></p>
+    <p><code class="highlighter-rouge">age: &amp;'c i32</code> instead of <code class="highlighter-rouge">age: &amp;i32</code></p>
 
     <p>Now this says that the integer has to live for as long as the struct.</p>
   </li>
@@ -247,55 +235,49 @@ even across threads. AND all of this happens at compile time without affecting t
 trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.</p>
 
 <h2 id="wrong-example-1">Wrong Example</h2>
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>struct Sheep&lt;'c&gt; {                                                             
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  age: &amp;'c mut i32,
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>}                                                                              
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>                                                                               
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>impl Sheep {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    fn grow_old(&amp;mut self)  {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        *self.age += 100
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    }                    
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}                   
-</pre></div>
-</div>
+<div class="language-rust highlighter-rouge"><pre class="highlight"><code><span class="k">struct</span> <span class="n">Sheep</span><span class="o">&lt;</span><span class="err">'</span><span class="n">c</span><span class="o">&gt;</span> <span class="p">{</span>                                                             
+  <span class="n">age</span><span class="p">:</span> <span class="o">&amp;</span><span class="err">'</span><span class="n">c</span> <span class="k">mut</span> <span class="nb">i32</span><span class="p">,</span>
+<span class="p">}</span>                                                                              
+                                                                               
+<span class="k">impl</span> <span class="n">Sheep</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">grow_old</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">)</span>  <span class="p">{</span>
+        <span class="o">*</span><span class="k">self</span><span class="py">.age</span> <span class="o">+=</span> <span class="mi">100</span>
+    <span class="p">}</span>                    
+<span class="p">}</span>                   
+</code></pre>
 </div>
 
 <p>This fails with the following:</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#606">error</span>: wrong number of lifetime <span style="color:#606">parameters</span>: expected <span style="color:#00D">1</span>, found <span style="color:#00D">0</span> [<span style="color:#036;font-weight:bold">E0107</span>]
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>        impl <span style="color:#036;font-weight:bold">Sheep</span> {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>             ^~~~~
-</pre></div>
-</div>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">error: </span><span class="n">wrong</span> <span class="n">number</span> <span class="n">of</span> <span class="n">lifetime</span> <span class="ss">parameters: </span><span class="n">expected</span> <span class="mi">1</span><span class="p">,</span> <span class="n">found</span> <span class="mi">0</span> <span class="p">[</span><span class="no">E0107</span><span class="p">]</span>
+        <span class="n">impl</span> <span class="no">Sheep</span> <span class="p">{</span>
+             <span class="o">^~~~~</span>
+</code></pre>
 </div>
 
 <h2 id="right-example-1">Right Example</h2>
 
 <p>What’s the problem?</p>
 
-<p><code>Sheep</code> takes a lifetime parameter now, so one must be supplied:</p>
+<p><code class="highlighter-rouge">Sheep</code> takes a lifetime parameter now, so one must be supplied:</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>struct Sheep&lt;'c&gt; {                                                             
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  age: &amp;'c mut i32,
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>}                                                                              
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>                                                                               
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>impl&lt;'c&gt; Sheep&lt;'c&gt; {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    fn grow_old(&amp;mut self)  {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        *self.age += 100
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    }                    
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
-</pre></div>
-</div>
+<div class="language-rust highlighter-rouge"><pre class="highlight"><code><span class="k">struct</span> <span class="n">Sheep</span><span class="o">&lt;</span><span class="err">'</span><span class="n">c</span><span class="o">&gt;</span> <span class="p">{</span>                                                             
+  <span class="n">age</span><span class="p">:</span> <span class="o">&amp;</span><span class="err">'</span><span class="n">c</span> <span class="k">mut</span> <span class="nb">i32</span><span class="p">,</span>
+<span class="p">}</span>                                                                              
+                                                                               
+<span class="k">impl</span><span class="o">&lt;</span><span class="err">'</span><span class="n">c</span><span class="o">&gt;</span> <span class="n">Sheep</span><span class="o">&lt;</span><span class="err">'</span><span class="n">c</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">grow_old</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">)</span>  <span class="p">{</span>
+        <span class="o">*</span><span class="k">self</span><span class="py">.age</span> <span class="o">+=</span> <span class="mi">100</span>
+    <span class="p">}</span>                    
+<span class="p">}</span>
+</code></pre>
 </div>
 
-<p>Note that <code>impl&lt;'c&gt;</code> names a new lifetime and <code>Sheep&lt;'c&gt;</code> says that all 
-<code>self</code>’s in this implementation have at least the lifetime <code>'c</code>.</p>
+<p>Note that <code class="highlighter-rouge">impl&lt;'c&gt;</code> names a new lifetime and <code class="highlighter-rouge">Sheep&lt;'c&gt;</code> says that all 
+<code class="highlighter-rouge">self</code>’s in this implementation have at least the lifetime <code class="highlighter-rouge">'c</code>.</p>
 
 <p>This is a lot like an extenuation of the lifetimes with structs, but there 
-is strange syntax with the <code>impl&lt;'c&gt; Sheep&lt;'c&gt;</code> so I wanted to point it out.</p>
+is strange syntax with the <code class="highlighter-rouge">impl&lt;'c&gt; Sheep&lt;'c&gt;</code> so I wanted to point it out.</p>
 
 <h1 id="the-end">The End</h1>
 
