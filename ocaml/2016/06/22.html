@@ -65,12 +65,10 @@
 <span class="cm">/*
  * Here's a function that occasionally throws an exception
  */</span>
-<span class="k">let</span> <span class="n">risky_function</span> <span class="k">=&gt;</span> <span class="p">{</span>
-  <span class="nf">switch</span> <span class="p">(</span><span class="n">Random</span><span class="py">.int</span> <span class="mi">3</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
-    <span class="p">|</span> <span class="mi">0</span> <span class="k">=&gt;</span> <span class="k">true</span>
-    <span class="p">|</span> <span class="mi">1</span> <span class="k">=&gt;</span> <span class="k">false</span>
-    <span class="p">|</span> <span class="mi">2</span> <span class="k">=&gt;</span> <span class="n">raise</span> <span class="n">My_exception</span>
-  <span class="p">}</span>
+<span class="k">let</span> <span class="n">risky_function</span> <span class="k">=&gt;</span> <span class="nf">switch</span> <span class="p">(</span><span class="n">Random</span><span class="py">.int</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">|</span> <span class="mi">0</span> <span class="k">=&gt;</span> <span class="k">true</span>
+  <span class="p">|</span> <span class="mi">1</span> <span class="k">=&gt;</span> <span class="k">false</span>
+  <span class="p">|</span> <span class="mi">2</span> <span class="k">=&gt;</span> <span class="n">raise</span> <span class="n">My_exception</span>
 <span class="p">};</span>
 
 <span class="cm">/*
@@ -127,7 +125,7 @@ whereas it looks very hacky in languages using try-catch.</p>
 </code></pre>
 </div>
 
-<p>That's all!</p>
+<p>That’s all!</p>
 
 <h1 id="reason">Reason</h1>
 
