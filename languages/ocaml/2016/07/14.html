@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Charles etc</title>
-  <meta name="description" content="">
+  <title>Semisweet Types</title>
+  <meta name="description" content="I’ve had an on-again, off-again love affair with Haskell, and been forced to write large amounts of python to get paid.">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://www.charlesetc.com/write/">
+  <link rel="canonical" href="http://www.charlesetc.com/languages/ocaml/2016/07/14">
   <link rel="alternate" type="application/rss+xml" title="Charles etc" href="http://www.charlesetc.com/feed.xml" />
   
 </head>
@@ -30,53 +30,54 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <!-- <h1 class="page-heading">Thoughts</h1> -->
+  <header class="post-header">
+    <p class="post-meta">Jul 14, 2016</p>
+    <h1 class="post-title">Semisweet Types</h1>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Jul 14, 2016</span>
+  <article class="post-content">
+    <p>I’ve had an on-again, off-again love affair with Haskell, and been forced to write large amounts of python to get paid.</p>
 
-        <h2>
-          <a class="post-link" href="/languages/ocaml/2016/07/14">Semisweet Types</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 21, 2016</span>
+<p>Pretty much all of my coworkers would opt for a typed language as opposed to python given the choice. C++, Rust, Go, Java; I think we would all switch in a heartbeat.</p>
 
-        <h2>
-          <a class="post-link" href="/ocaml/2016/06/21">Exceptions in OCaml (Reason)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 31, 2015</span>
+<p>The problem is, people code in dynamic languages for a reason. And it’s not because the types are static.</p>
 
-        <h2>
-          <a class="post-link" href="/rust/2015/10/31">Lifetime Reference</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 29, 2015</span>
+<h1 id="side-note">Side Note</h1>
 
-        <h2>
-          <a class="post-link" href="/rust/2015/10/29">Rust Lifetimes</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 21, 2015</span>
+<p>A quick side note: If you say <code class="highlighter-rouge">2 + 2</code> in Ruby or <code class="highlighter-rouge">my_var.append()</code> in python, you’re expecting a certain behavior from those functions.</p>
 
-        <h2>
-          <a class="post-link" href="/languages/2015/10/21">the Problems</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>In ruby, you know that <code class="highlighter-rouge">2</code> is an integer. In python, 99% of the time you’re not writing code for “a generic data type with an append method”. No. You’re expecting <code class="highlighter-rouge">my_var</code> to be a list.</p>
+
+<p>Anytime a fairly experienced developer writes a function, they know exactly what types they expect in that function. So “thinking in types” is <em>not</em> the hard part about typed languages.</p>
+
+<h1 id="type-annotations">Type annotations</h1>
+
+<p>No instead the problem is type annotations.</p>
+
+<p>Typed languages are harder because:</p>
+
+<ol>
+  <li>you have to write the type annotations.</li>
+  <li>you have already written the type annotations.</li>
+</ol>
+
+<p>#2 means that it’s harder for code to change once the types have been written. This is the problem that people face when developing in typed languages: the code has to change more when the underlying types do.</p>
+
+<h1 id="ok">OK…</h1>
+
+<p>For the sake of argument, let’s say you agree with this statement: typed languages are slow because of the annotations. What’s the solution?</p>
+
+<p>Full Program Type inference and OCaml! (Never specify a type annotation when you don’t want to!)</p>
+
+<p>There’s a really cool <a href="http://facebook.github.io/reason">new OCaml parser</a> developed by Facebook that makes the syntax a lot less foreign.</p>
+
+<h1 id="disclaimer">Disclaimer</h1>
+
+<p>Specifying types is good! You get inline documentation and better error messages. However, if you ever want to write a quick script in less lines than python and 10x as fast you should consider OCaml. :)</p>
+
+  </article>
 
 </div>
 
