@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Semisweet Types</title>
-  <meta name="description" content="I given both strongly typed languages and dynamically typed languages a fair play: I’ve had an on-and-off love affair with Haskell, and been forced to write ...">
+  <title>git rebase for fame and power</title>
+  <meta name="description" content="While learning git, people kept telling me “Don’t re-base - you’ll never need to re-base and it can screw things up”.">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://www.charlesetc.com/languages/ocaml/2015/10/21">
+  <link rel="canonical" href="http://www.charlesetc.com/git/2016/07/30">
   <link rel="alternate" type="application/rss+xml" title="Charles etc" href="http://www.charlesetc.com/feed.xml" />
   
 </head>
@@ -33,46 +33,93 @@
         <div class="post">
 
   <header class="post-header">
-    <p class="post-meta">Oct 21, 2015</p>
-    <h1 class="post-title">Semisweet Types</h1>
+    <p class="post-meta">Jul 30, 2016</p>
+    <h1 class="post-title">git rebase for fame and power</h1>
   </header>
 
   <article class="post-content">
-    <p>I given both strongly typed languages and dynamically typed languages a fair play: I’ve had an on-and-off love affair with Haskell, and been forced to write large amounts of python to get paid.</p>
+    <p>While learning git, people kept telling me “Don’t re-base - you’ll never need to re-base and it can screw things up”.</p>
 
-<p>Pretty much all of my coworkers would opt for a typed language as opposed to python given the choice. C++, Rust, Go, Java; I think we would all switch in a heartbeat.</p>
+<p>This is terrible advice!</p>
 
-<p>The problem is, people code in dynamic languages for a reason. Here we go:</p>
+<p>Re-basing is a great tool!</p>
 
-<h1 id="speed">Speed</h1>
+<p>When you hear <code class="highlighter-rouge">Don't do &lt;INSERT TOTALLY COOL THING&gt;, you will break things</code></p>
 
-<p>Everyone talks about how much faster it is to code in a dynamic language. I think this is generally true, but this has nothing to do with compile-time checked types.</p>
+<p><strong><em>do that thing now!</em></strong></p>
 
-<p>Anytime a fairly experienced developer writes a function, they know exactly what types they expect in that function! Maybe they’re thinking along the lines of an interface, but they still have an idea of the data that they are working on. It’s not like people are writing functions in python that are impossible to write in C or Go! I think the vast majority of the functions I write wouldn’t even need higher-kinded types like those seen in Haskell.</p>
+<p><strong>and</strong> break things!</p>
 
-<p>So can we agree that “thinking in types” is <em>not</em> what makes a typed language harder to write?</p>
+<p>Re-basing by itself is not dangerous.</p>
 
-<h1 id="type-annotations">Type annotations</h1>
+<p>As long as you avoid <code class="highlighter-rouge">git push origin master --force</code> and only run <code class="highlighter-rouge">rm -rf .git</code>
+every once in a while, you’ll be totally fine.</p>
 
-<p>Strongly typed languages generally take longer to program in because of the process of physically typing the type annotations.</p>
+<h1 id="git-rebase"><code class="highlighter-rouge">git rebase</code></h1>
 
-<p>Every time you write a type in a function call you’re making an assertion: “This is an integer”. But if later, things change, and you find out you also want it to be able to take a float then you have to rewrite the type assertion that you’ve made to include this new case - maybe you say it’s a <code class="highlighter-rouge">Numeric</code> if we’re talking Haskell.</p>
+<p>When you type <code class="highlighter-rouge">git rebase master</code>, you say:</p>
 
-<p>The problem is that you have to go through your program and rewrite every occurrence of what used to be an <code class="highlighter-rouge">Int</code> to now say <code class="highlighter-rouge">Numeric</code>. This is boring work that has to happen every time your program changes, and is completely unnecessary in a dynamic language.</p>
+<p>“I want to re-base my current branch.”</p>
 
-<h1 id="ok">OK…</h1>
+<p>“Even though I started on <code class="highlighter-rouge">20404df</code>,
+make this branch off of the tip of master instead”</p>
 
-<p>For the sake of argument, let’s say you agree with this statement: typed languages are slow because of the annotations. What’s the solution?</p>
+<p>This works for any git object: commits, tags, branches.</p>
 
-<p>Full Program Type inference! (Never specify a type annotation again!)</p>
+<h1 id="why-would-i-need-to-use-this">Why would I need to use this?</h1>
 
-<p>This already exists in several languages: Haskell (and derivatives) and OCaml, to name my favorite. Haskell isn’t always able to type-infer everything about your program, but OCaml is! Why don’t people use it more often?</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git checkout master <span class="o">&amp;&amp;</span> git log --pretty<span class="o">=</span><span class="s2">"%h -- %s"</span>
+ccccccc -- third commit
+bbbbbbb -- second commit
+aaaaaaa -- first commit
 
-<p>There are advantages to types beyond just simple safety guarantees - you get the nice inline documentation alongside code. So I’m not advocating for everyone to start using a type inferred language and leaving out all the types. Instead, the next time you start writing a 200 line python script to do something just-too-complicated-for-bash, why not give OCaml a try and save both keystrokes and your free time?</p>
+<span class="gp">$ </span>git checkout bbbbbbb
+<span class="c"># make a new branch, based off of "second commit"</span>
+<span class="gp">$ </span>git checkout -b my_new_branch
+<span class="gp">$ </span>touch a_file
+<span class="gp">$ </span>git add a_file
+<span class="gp">$ </span>git commit -m <span class="s1">'I just committed a file!'</span>
+<span class="gp">$ </span>git log --pretty<span class="o">=</span><span class="s2">"%h -- %s"</span>
+ddddddd -- I just committed a file!
+bbbbbbb -- second commit
+aaaaaaa -- first commit
 
-<h1 id="ps">PS</h1>
+<span class="c"># But I meant to make this commit on "third commit", not "second commit"!!!</span>
+<span class="c"># OH NOOOOO</span>
+<span class="c"># wait, I can re-base?</span>
+<span class="gp">$ </span>git rebase ccccccc
+First, rewinding head to replay your work on top of it...
+Applying: I just committed a file!
 
-<p>There’s a really cool <a href="http:/facebook.github.io/reason">new OCaml parser</a> developed by Facebook that makes the syntax a lot less foreign.</p>
+<span class="gp">$ </span>git log --pretty<span class="o">=</span><span class="s2">"%h -- %s"</span>
+ddddddd -- I just committed a file!
+ccccccc -- third commit
+bbbbbbb -- second commit
+aaaaaaa -- first commit
+
+<span class="c"># We just changed where the branch was based!</span>
+</code></pre>
+</div>
+
+<h1 id="if-things-go-wrong">If things go wrong…</h1>
+
+<p>This is a chance you screw everything up. Luckily, there are very few things
+beyond repair in git.</p>
+
+<p>If you do <code class="highlighter-rouge">git reflog</code>, you will see something like:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>234320a HEAD@{0}: rebase finished: returning to refs/heads/my-new-branch
+234320a HEAD@{1}: rebase: added a file
+49211d7 HEAD@{2}: rebase: checkout 49211d7
+8c90682 HEAD@{3}: checkout: moving from master to my-new-branch
+</code></pre>
+</div>
+
+<p>You can then checkout <code class="highlighter-rouge">HEAD@{3}</code> to return to a safe state,
+and then <code class="highlighter-rouge">git checkout -b saved-branch</code> to start committing.</p>
+
+<p>As long as you don’t <code class="highlighter-rouge">rm -rf .git</code>, you should be able to dig
+yourself out of any holes <code class="highlighter-rouge">:)</code></p>
 
   </article>
 
