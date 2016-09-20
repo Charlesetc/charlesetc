@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Hello</title>
-  <meta name="description" content="">
+  <title>Lifetime Reference</title>
+  <meta name="description" content="Places in Rust where you use any lifetime syntax will fall into two categories:">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://www.charlesetc.com/etc/">
+  <link rel="canonical" href="http://www.charlesetc.com/rust/2015/10/31">
   <link rel="alternate" type="application/rss+xml" title="Charles etc" href="http://www.charlesetc.com/feed.xml" />
   
 </head>
 
 
-  <body class=" etc ">
+  <body class="  ">
 
     <header class="site-header site-header-transition ">
 
@@ -33,18 +33,92 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Hello</h1>
+    <p class="post-meta">Oct 31, 2015</p>
+    <h1 class="post-title">Lifetime Reference</h1>
   </header>
 
   <article class="post-content">
-    <p>I'm Charles. I'm a software engineer at Uber.</p>
+    <p>Places in Rust where you use any lifetime syntax will fall into two categories:</p>
 
-<p>If you want to talk, my e-mail is "charlespipin" at the largest e-mail provider in history.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Concept</th>
+      <th style="text-align: left">Category</th>
+      <th style="text-align: left">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code>fn</code></td>
+      <td style="text-align: left">creation</td>
+      <td style="text-align: left"><code>fn example_function&lt;'a&gt;()</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>struct</code></td>
+      <td style="text-align: left">creation</td>
+      <td style="text-align: left"><code>struct Example&lt;'a&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>enum</code></td>
+      <td style="text-align: left">creation</td>
+      <td style="text-align: left"><code>enum Test&lt;'a&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>impl</code></td>
+      <td style="text-align: left">creation</td>
+      <td style="text-align: left"><code>impl&lt;'a&gt; Example&lt;'a&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>struct</code></td>
+      <td style="text-align: left">reference</td>
+      <td style="text-align: left"><code>some_field: Example&lt;'a&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>enum</code></td>
+      <td style="text-align: left">reference</td>
+      <td style="text-align: left"><code>some_field: Test&lt;'a&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>&amp;</code></td>
+      <td style="text-align: left">reference</td>
+      <td style="text-align: left"><code>next_field: &amp;'a i32</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>&amp;mut</code></td>
+      <td style="text-align: left">reference</td>
+      <td style="text-align: left"><code>next_field: &amp;'a mut i32</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>Box</code></td>
+      <td style="text-align: left">reference</td>
+      <td style="text-align: left"><code>last_field: Box&lt;i32 + 'a&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>If you're interested in rust, haskell, ocaml, or vim, see paragraph 1.</p>
+<h1 id="what-does-category-mean">What does ‘Category’ mean?</h1>
 
-<script async="" defer="" src="https://www.recurse-scout.com/loader.js?t=e6f1133041e37aa020c2529120b0aa3d"></script>
+<p>When I say <em>‘creation’</em> I mean this is where the lifetime is first defined and named.</p>
 
+<p>When I say <em>‘reference’</em> I mean this is where we are being explicit about the lifetime of some reference type, using a lifetime that already exists.</p>
+
+<p>This is an important distinction that took me a while to get.</p>
+
+<h1 id="weird-things">Weird things</h1>
+
+<ol>
+  <li>
+    <p>Yes, we see you <code>Box</code>, we’re ignoring you.</p>
+  </li>
+  <li>
+    <p>Notice that ‘struct’ and ‘enum’ are in both categories. That’s because they use pretty much the same syntax for creation as they do for reference; it’s helpful to acknowledge that.</p>
+  </li>
+</ol>
+
+<h1 id="more">More</h1>
+
+<p>I go into more detail about lifetimes <a href="/rust/2015/10/29">here</a>.</p>
 
   </article>
 
