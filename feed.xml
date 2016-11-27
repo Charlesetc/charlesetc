@@ -5,9 +5,57 @@
     <description></description>
     <link>http://www.charlesetc.com/</link>
     <atom:link href="http://www.charlesetc.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 19 Sep 2016 22:36:27 -0700</pubDate>
-    <lastBuildDate>Mon, 19 Sep 2016 22:36:27 -0700</lastBuildDate>
+    <pubDate>Sun, 27 Nov 2016 15:09:56 -0800</pubDate>
+    <lastBuildDate>Sun, 27 Nov 2016 15:09:56 -0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>tmux sessions</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/tmux&quot;&gt;tmux&lt;/a&gt; is an awesome tool! I’ve used it literally constantly for about a year now.&lt;/p&gt;
+
+&lt;p&gt;And guess what! I didn’t know about some very basic commands.&lt;/p&gt;
+
+&lt;h1 id=&quot;list-sessions&quot;&gt;List Sessions&lt;/h1&gt;
+
+&lt;p&gt;Command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;prefix&amp;gt;s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This shows you an interactive screen where you can which session you want to be in:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(0) + 0: 3 windows (attached)
+(1) + 1: 1 windows
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;switch-session&quot;&gt;Switch Session&lt;/h1&gt;
+
+&lt;p&gt;Command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;prefix&amp;gt;(
+# or
+&amp;lt;prefix&amp;gt;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Move back and forth between sessions. Can you imagine!&lt;/p&gt;
+
+&lt;h1 id=&quot;main-development&quot;&gt;Main Development&lt;/h1&gt;
+
+&lt;p&gt;I usually have a single session with several panes and windows. Now this can scale in a whole new dimension with more projects and ideas. Hurray!&lt;/p&gt;
+</description>
+        <pubDate>Sun, 27 Nov 2016 11:14:30 -0800</pubDate>
+        <link>http://www.charlesetc.com/tmux/unix/2016/11/27</link>
+        <guid isPermaLink="true">http://www.charlesetc.com/tmux/unix/2016/11/27</guid>
+        
+        
+        <category>tmux</category>
+        
+        <category>unix</category>
+        
+      </item>
     
       <item>
         <title>git rebase for fame and power</title>
