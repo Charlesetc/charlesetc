@@ -177,16 +177,40 @@ pre {
     height: 74px; }
 
   .site-title {
-    font-size: 70px;
-    line-height: 66px; }
+    font-size: 40px;
+    line-height: 40px; }
+    .site-title a {
+      position: relative;
+      top: 20px; }
 
   .site-header.vertical-header {
-    height: 100px; }
+    height: 30px; }
+    .site-header.vertical-header a {
+      position: relative;
+      top: -30px; }
 
   #main-links li {
-    margin-left: 0px;
     position: relative;
-    left: -80px; } }
+    left: -180px;
+    font-size: 60px; }
+
+  .page-content {
+    overflow-x: hidden; }
+
+  body {
+    padding-top: 75px !important; }
+
+  pre {
+    white-space: pre-wrap;
+    /* css-3 */
+    white-space: -moz-pre-wrap;
+    /* Mozilla, since 1999 */
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    /* Internet Explorer 5.5+ */ } }
 @media all and (min-width: 850px) {
   .site-header {
     height: 150px; }
