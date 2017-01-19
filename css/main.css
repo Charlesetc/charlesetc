@@ -217,7 +217,7 @@ pre {
 
   .site-title {
     line-height: 166px;
-    font-size: 126px; }
+    font-size: 106px; }
 
   .site-header.vertical-header {
     height: 200px; }
@@ -232,7 +232,7 @@ pre {
     font-size: 18px; }
 
   .home .site-header {
-    opacity: 0; }
+    opacity: 1; }
 
   #main-links {
     list-style-type: none;
@@ -246,7 +246,7 @@ pre {
     text-align: left;
     font-weight: 700;
     font-family: Arial, Helvetica, sans-serif;
-    opacity: 0; }
+    opacity: 1; }
 
   #main-links li {
     display: block;
@@ -314,6 +314,7 @@ pre {
   .site-title {
     font-family: times;
     font-weight: 900;
+    white-space: nowrap;
     letter-spacing: -1px;
     margin-bottom: 0; }
     .site-title, .site-title:visited, .site-title:hover {
