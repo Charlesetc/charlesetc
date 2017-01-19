@@ -7,11 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Charles etc</title>
-  <meta name="description" content="">
+  <title>Eqn vs LaTeX</title>
+  <meta name="description" content="Take the LaTeX code:">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://www.charlesetc.com/write/">
+  <link rel="canonical" href="http://www.charlesetc.com/unix/eqn/2017/01/17">
   <link rel="alternate" type="application/rss+xml" title="Charles etc" href="http://www.charlesetc.com/feed.xml" />
   
 </head>
@@ -31,77 +31,65 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <!-- <h1 class="page-heading">Thoughts</h1> -->
+  <header class="post-header">
+    <p class="post-meta">Jan 17, 2017</p>
+    <h1 class="post-title">Eqn vs LaTeX</h1>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Jan 17, 2017</span>
+  <article class="post-content">
+    <p>Take the <code class="highlighter-rouge">LaTeX</code> code:</p>
 
-        <h2>
-          <a class="post-link" href="/unix/eqn/2017/01/17">Eqn vs LaTeX</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 27, 2016</span>
+<div class="language-latex highlighter-rouge"><pre class="highlight"><code>-1 <span class="k">\cdot</span> <span class="k">\frac</span><span class="p">{</span>1<span class="p">}{</span>n<span class="p">}}</span><span class="k">\cup</span> <span class="k">\{</span>-1, <span class="k">\frac</span><span class="p">{</span>1<span class="p">}{</span>n<span class="p">}</span><span class="k">\}</span>
+</code></pre>
+</div>
 
-        <h2>
-          <a class="post-link" href="/tmux/unix/2016/11/27">tmux sessions</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 30, 2016</span>
+<p>Do you know what this means?</p>
 
-        <h2>
-          <a class="post-link" href="/git/2016/07/30">git rebase for fame and power</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 14, 2016</span>
+<ul>
+  <li>difficult parse visually.</li>
+  <li>uses lots of hard-to-type symbols.</li>
+</ul>
 
-        <h2>
-          <a class="post-link" href="/languages/ocaml/2016/07/14">Semisweet Types</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 22, 2016</span>
+<p>Not only that, <code class="highlighter-rouge">TeX</code> by itself takes up 338.8 MB!</p>
 
-        <h2>
-          <a class="post-link" href="/ocaml/2016/06/22">Exceptions in OCaml (Reason)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 31, 2015</span>
+<h1 id="eqn">Eqn</h1>
 
-        <h2>
-          <a class="post-link" href="/rust/2015/10/31">Lifetime Reference</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 29, 2015</span>
+<p>Why not switch to something better!</p>
 
-        <h2>
-          <a class="post-link" href="/rust/2015/10/29">Rust Lifetimes</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 21, 2015</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="o">-</span><span class="mi">1</span> <span class="n">cdot</span> <span class="mi">1</span> <span class="n">over</span> <span class="n">n</span> <span class="n">union</span> <span class="n">left</span> <span class="p">{</span> <span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="n">over</span> <span class="n">n</span> <span class="n">right</span> <span class="p">}</span> 
+</code></pre>
+</div>
 
-        <h2>
-          <a class="post-link" href="/languages/2015/10/21">the Problems</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>How’s that for readability!</p>
+
+<p>This is <a href="http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf">eqn</a>:
+a math preprocessor on the layout engine
+<a href="https://www.gnu.org/software/groff/">groff</a>. By the same metric, groff
+takes up 8 MB.</p>
+
+<p>And it works I promise!</p>
+
+<p><img src="/images/nonsense.png" alt="equation" /></p>
+
+<p>Even if the math is nonsensical, isn’t it pretty!</p>
+
+<h1 id="links">Links</h1>
+
+<p>You might already have groff/eqn on your machine! If not, take a look
+<a href="https://www.gnu.org/software/groff/">here</a>.</p>
+
+<p><a href="https://github.com/Charlesetc/eqn-template">This repo</a> is my template for
+a simple eqn/groff project. <a href="https://github.com/Charlesetc/eqn-template/blob/master/out.pdf">Here’s</a>
+what the pdf looks like.</p>
+
+<p>Lastly, there is
+<a href="http://www.schaffter.ca/mom/momdoc/toc.html">documentation</a> for a groff
+macro system, and <a href="http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf">an in-depth
+guide</a> for eqn!</p>
+
+  </article>
 
 </div>
 
