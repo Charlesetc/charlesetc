@@ -9,24 +9,20 @@ if (document.location.hash == "#back") {
 }
 
 $(document).ready(function() {
-
   // $('.site-header').css("opacity", "0");
 
   if (document.location.hash == "#back") {
-    console.log("hi");
     document.location.hash = "#";
     elements = $('.site-header');
-    elements.addClass('site-header-transition');
-    elements.addClass('vertical-header');
+    elements.removeClass('vertical-header');
     elements.css("opacity", "1");
-    // elements.animate({"opacity": "1"}, 10, 'linear');
-    // setTimeout(function() {
-    elements.addClass('site-header-transition');
-    
-    // setTimeout(function() {
-    //   $('.site-header').addClass('vertical-header');
-    // }, 1000);
-    // // }, 10);
+
+    setTimeout(function() {
+      elements.addClass('site-header-transition');
+      setTimeout(function (){
+        elements.addClass('vertical-header');
+      }, 100);
+    }, 100);
 
     $('#main-links').css('opacity', '0');
     setTimeout(function() { 
