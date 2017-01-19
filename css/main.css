@@ -228,6 +228,9 @@ pre {
   .home .site-header-transition {
     transition: all 0.5s linear; }
 
+  img[alt="equation"] {
+    width: 250px; }
+
   body {
     font-size: 18px; }
 

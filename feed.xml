@@ -5,9 +5,72 @@
     <description></description>
     <link>http://www.charlesetc.com/</link>
     <atom:link href="http://www.charlesetc.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 18 Jan 2017 22:32:01 -0600</pubDate>
-    <lastBuildDate>Wed, 18 Jan 2017 22:32:01 -0600</lastBuildDate>
+    <pubDate>Wed, 18 Jan 2017 23:37:34 -0600</pubDate>
+    <lastBuildDate>Wed, 18 Jan 2017 23:37:34 -0600</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>Eqn vs LaTeX</title>
+        <description>&lt;p&gt;Take the &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; code:&lt;/p&gt;
+
+&lt;div class=&quot;language-latex highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-1 &lt;span class=&quot;k&quot;&gt;\cdot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;n&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\cup&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\{&lt;/span&gt;-1, &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;n&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Do you know what this means?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;difficult parse visually.&lt;/li&gt;
+  &lt;li&gt;uses lots of hard-to-type symbols.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Not only that, &lt;code class=&quot;highlighter-rouge&quot;&gt;TeX&lt;/code&gt; by itself takes up 338.8 MB!&lt;/p&gt;
+
+&lt;h1 id=&quot;eqn&quot;&gt;Eqn&lt;/h1&gt;
+
+&lt;p&gt;Why not switch to something better!&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cdot&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;over&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;union&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;over&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;How’s that for readability!&lt;/p&gt;
+
+&lt;p&gt;This is &lt;a href=&quot;http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf&quot;&gt;eqn&lt;/a&gt;:
+a math preprocessor on the layout engine
+&lt;a href=&quot;https://www.gnu.org/software/groff/&quot;&gt;groff&lt;/a&gt;. By the same metric, groff
+takes up 8 MB.&lt;/p&gt;
+
+&lt;p&gt;And it works I promise!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nonsense.png&quot; alt=&quot;equation&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Even if the math is nonsensical, isn’t it pretty!&lt;/p&gt;
+
+&lt;h1 id=&quot;links&quot;&gt;Links&lt;/h1&gt;
+
+&lt;p&gt;You might already have groff/eqn on your machine! If not, take a look
+&lt;a href=&quot;https://www.gnu.org/software/groff/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Charlesetc/eqn-template&quot;&gt;This repo&lt;/a&gt; is my template for
+a simple eqn/groff project. &lt;a href=&quot;https://github.com/Charlesetc/eqn-template/blob/master/out.pdf&quot;&gt;Here’s&lt;/a&gt;
+what the pdf looks like.&lt;/p&gt;
+
+&lt;p&gt;Lastly, there is
+&lt;a href=&quot;http://www.schaffter.ca/mom/momdoc/toc.html&quot;&gt;documentation&lt;/a&gt; for a groff
+macro system, and &lt;a href=&quot;http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf&quot;&gt;an in-depth
+guide&lt;/a&gt; for eqn!&lt;/p&gt;
+</description>
+        <pubDate>Sun, 27 Nov 2016 13:14:30 -0600</pubDate>
+        <link>http://www.charlesetc.com/unix/eqn/2016/11/27</link>
+        <guid isPermaLink="true">http://www.charlesetc.com/unix/eqn/2016/11/27</guid>
+        
+        
+        <category>unix</category>
+        
+        <category>eqn</category>
+        
+      </item>
     
       <item>
         <title>tmux sessions</title>
