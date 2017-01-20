@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Lora|Slabo|Open+Sans");
 /* vars */
 /**
  * Reset some basic elements
@@ -12,7 +13,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 300;
@@ -103,7 +104,7 @@ blockquote {
  */
 pre,
 code {
-  font-size: 15px;
+  font-size: 18px;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
   background-color: #eee; }
@@ -232,7 +233,7 @@ pre {
     width: 250px; }
 
   body {
-    font-size: 18px; }
+    font-size: 20px; }
 
   .home .site-header {
     opacity: 1; }
@@ -315,8 +316,7 @@ pre {
     padding-top: 170px; }
 
   .site-title {
-    font-family: times;
-    font-weight: 900;
+    font-family: 'Lora';
     white-space: nowrap;
     letter-spacing: -1px;
     margin-bottom: 0; }
@@ -349,6 +349,9 @@ pre {
     font-size: 30px;
     color: black; }
 
+  .post-link, .post-title {
+    font-family: 'Slabo', times, serif; }
+
   /**
    * Posts
    */
@@ -356,7 +359,7 @@ pre {
     margin-bottom: 30px; }
 
   .post-title {
-    font-size: 42px;
+    font-size: 52px;
     letter-spacing: -1px;
     line-height: 1; }
   .post-content {
