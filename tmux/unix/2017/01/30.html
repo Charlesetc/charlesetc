@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html>
+<!-- this is removed if there is javascript loading. -->
+<html class="no-js">
 
   <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Semisweet Types</title>
-  <meta name="description" content="I’ve had an on-again, off-again love affair with Haskell, and been forced to write large amounts of python to get paid.">
+  <title>the 6 programmer's crystals</title>
+  <meta name="description" content="A crystal is a concept shared by languages that is unique and sparkly.They’re quite independent, so if you haven’t encountered one of these,it’s research time!">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://www.charlesetc.com/languages/ocaml/2016/07/14">
+  <link rel="canonical" href="http://www.charlesetc.com/tmux/unix/2017/01/30">
   <link rel="alternate" type="application/rss+xml" title="Charles etc" href="http://www.charlesetc.com/feed.xml" />
   
 </head>
@@ -18,7 +19,8 @@
 
   <body class="  ">
 
-    <header class="site-header site-header-transition ">
+    
+<header class="site-header site-header-transition ">
 
   <div class="wrapper">
 
@@ -33,49 +35,28 @@
         <div class="post">
 
   <header class="post-header">
-    <p class="post-meta">Jul 14, 2016</p>
-    <h1 class="post-title">Semisweet Types</h1>
+    <p class="post-meta">Jan 30, 2017</p>
+    <h1 class="post-title">the 6 programmer's crystals</h1>
   </header>
 
   <article class="post-content">
-    <p>I’ve had an on-again, off-again love affair with Haskell, and been forced to write large amounts of python to get paid.</p>
+    <p>A crystal is a concept shared by languages that is unique and sparkly.
+They’re quite independent, so if you haven’t encountered one of these,
+it’s research time!</p>
 
-<p>Pretty much all of my coworkers would opt for a typed language as opposed to python given the choice. C++, Rust, Go, Java; I think we would all switch in a heartbeat.</p>
+<h1 id="macros---the-pear-crystal">🍐 Macros - The Pear Crystal</h1>
 
-<p>The problem is, people code in dynamic languages for a reason. And it’s not because the types are static.</p>
+<h1 id="pointers---the-honeydew-crystal">🍈 Pointers - The Honeydew Crystal</h1>
 
-<h1 id="side-note">Side Note</h1>
+<h1 id="objects---the-strawberry-crystal">🍓 Objects - The Strawberry Crystal</h1>
 
-<p>A quick side note: If you say <code class="highlighter-rouge">2 + 2</code> in Ruby or <code class="highlighter-rouge">my_var.append()</code> in python, you’re expecting a certain behavior from those functions.</p>
+<h1 id="closures---the-grape-crystal">🍇 Closures - The Grape Crystal</h1>
 
-<p>In ruby, you know that <code class="highlighter-rouge">2</code> is an integer. In python, 99% of the time you’re not writing code for “a generic data type with an append method”. No. You’re expecting <code class="highlighter-rouge">my_var</code> to be a list.</p>
+<h1 id="exceptions---the-hallucination-crystal">🍄 Exceptions - The Hallucination Crystal</h1>
 
-<p>Anytime a fairly experienced developer writes a function, they know exactly what types they expect in that function. So “thinking in types” is <em>not</em> the hard part about typed languages.</p>
+<h1 id="coroutines---the-pineapple-crystal">🍍 Coroutines - The Pineapple Crystal</h1>
 
-<h1 id="type-annotations">Type annotations</h1>
-
-<p>No instead the problem is type annotations.</p>
-
-<p>Typed languages are harder because:</p>
-
-<ol>
-  <li>you have to write the type annotations.</li>
-  <li>you have already written the type annotations.</li>
-</ol>
-
-<p>#2 means that it’s harder for code to change once the types have been written. This is the problem that people face when developing in typed languages: the code has to change more when the underlying types do.</p>
-
-<h1 id="ok">OK…</h1>
-
-<p>For the sake of argument, let’s say you agree with this statement: typed languages are slow because of the annotations. What’s the solution?</p>
-
-<p>Full Program Type inference and OCaml! (Never specify a type annotation when you don’t want to!)</p>
-
-<p>There’s a really cool <a href="http://facebook.github.io/reason">new OCaml parser</a> developed by Facebook that makes the syntax a lot less foreign.</p>
-
-<h1 id="disclaimer">Disclaimer</h1>
-
-<p>Specifying types is good! You get inline documentation and better error messages. However, if you ever want to write a quick script in less lines than python and 10x as fast you should consider OCaml. :)</p>
+<p>Did I miss one? Let me know on <a href="http://twitter.com/charlesetc">twitter</a>.</p>
 
   </article>
 

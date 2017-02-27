@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Lora|Slabo|Open+Sans");
+strong {
+  font-weight: bold; }
+
 /* vars */
 /**
  * Reset some basic elements
