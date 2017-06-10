@@ -173,6 +173,12 @@ pre {
   .icon > svg path {
     fill: #828282; }
 
+.language-bash:before {
+  content: "$";
+  position: absolute;
+  padding-top: 5px;
+  left: -25px; }
+
 /*
  * Site header
  */
@@ -366,6 +372,7 @@ pre {
     letter-spacing: -1px;
     line-height: 1; }
   .post-content {
+    position: relative;
     margin-bottom: 30px; }
     .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
       font-size: 22px; }

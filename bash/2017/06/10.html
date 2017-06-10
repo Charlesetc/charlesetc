@@ -7,11 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Charles etc</title>
-  <meta name="description" content="">
+  <title>& disown</title>
+  <meta name="description" content="I’ve often wanted to start a subprocess as a daemon in bash or zsh.">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://www.charlesetc.com/write/">
+  <link rel="canonical" href="http://www.charlesetc.com/bash/2017/06/10">
   <link rel="alternate" type="application/rss+xml" title="Charles etc" href="http://www.charlesetc.com/feed.xml" />
   
 </head>
@@ -32,85 +32,36 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <!-- <h1 class="page-heading">Thoughts</h1> -->
+  <header class="post-header">
+    <p class="post-meta">Jun 10, 2017</p>
+    <h1 class="post-title">& disown</h1>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Jun 10, 2017</span>
+  <article class="post-content">
+    <p>I’ve often wanted to start a subprocess as a daemon in bash or zsh.</p>
 
-        <h2>
-          <a class="post-link" href="/bash/2017/06/10">& disown</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Feb 26, 2017</span>
+<p>Now I know how!</p>
 
-        <h2>
-          <a class="post-link" href="/ocaml/2017/02/26">OCaml Objects, like wow</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 17, 2017</span>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>the_command &amp; <span class="nb">disown</span>
+</code></pre>
+</div>
 
-        <h2>
-          <a class="post-link" href="/unix/eqn/2017/01/17">Eqn vs LaTeX</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 27, 2016</span>
+<p>You will still see stdout and stderr in the terminal, but you can
+exit from the shell process without killing the command.</p>
 
-        <h2>
-          <a class="post-link" href="/tmux/unix/2016/11/27">tmux sessions</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 30, 2016</span>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nohup the_command
+</code></pre>
+</div>
 
-        <h2>
-          <a class="post-link" href="/git/2016/07/30">git rebase for fame and power</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 22, 2016</span>
+<p><code class="highlighter-rouge">nohup</code> also works, but will send the stdout to a file instead of your
+terminal.</p>
 
-        <h2>
-          <a class="post-link" href="/ocaml/2016/06/22">Exceptions in Reason (OCaml)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 31, 2015</span>
+<p>If you want to do this to a running process,
+you can <code class="highlighter-rouge">&lt;C-z&gt;</code>, run <code class="highlighter-rouge">bg</code>, and then <code class="highlighter-rouge">disown %1</code>.</p>
 
-        <h2>
-          <a class="post-link" href="/rust/2015/10/31">Lifetime Reference</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 29, 2015</span>
-
-        <h2>
-          <a class="post-link" href="/rust/2015/10/29">Rust Lifetimes</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 21, 2015</span>
-
-        <h2>
-          <a class="post-link" href="/languages/2015/10/21">the Problems</a>
-        </h2>
-      </li>
-    
-  </ul>
+  </article>
 
 </div>
 
