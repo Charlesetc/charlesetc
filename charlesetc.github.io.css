@@ -44,7 +44,7 @@ a, a:hover, a:visited {
   color: #ff669e;
 }
 
-h2, h1:not(#title) {
+h2, h1:not(.title) {
   margin-top: 40px;
   font-size: 25px;
   font-weight: normal;

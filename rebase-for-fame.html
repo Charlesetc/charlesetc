@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="generator" content="pandoc" />
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>git rebase for fame and power</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -26,14 +26,17 @@ code > span.an { font-style: italic; } /* Annotation */
 code > span.cv { font-style: italic; } /* CommentVar */
 code > span.in { font-style: italic; } /* Information */
   </style>
-  <link rel="stylesheet" href="/posts.css" type="text/css" />
-  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+  <link rel="stylesheet" href="/posts.css">
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">git rebase for fame and power</h1>
 <h3 class="date">2016-07-30 12:14:30 -0700</h3>
-</div>
+</header>
 <p>While learning git, people kept telling me &quot;Don't re-base - you'll never need to re-base and it can screw things up&quot;.</p>
 <p>This is terrible advice!</p>
 <p>Re-basing is a great tool!</p>
@@ -86,8 +89,8 @@ $ <span class="kw">git</span> log --pretty=<span class="st">&quot;%h -- %s&quot;
 <span class="kw">8c90682</span> HEAD@<span class="dt">{3}</span>: checkout: moving from master to my-new-branch</code></pre></div>
 <p>You can then checkout <code>HEAD@{3}</code> to return to a safe state, and then <code>git checkout -b saved-branch</code> to start committing.</p>
 <p>As long as you don't <code>rm -rf .git</code>, you should be able to dig yourself out of any holes <code>:)</code></p>
-<h1 id = 'title'><a href="/">
+<h1 id = 'title' class='title'><a href="/"><span class='wrapper'>
 <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
-  </a></h1>
+  </span></a></h1>
 </body>
 </html>

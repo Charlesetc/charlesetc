@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="generator" content="pandoc" />
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Rust Lifetimes</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -26,14 +26,17 @@ code > span.an { font-style: italic; } /* Annotation */
 code > span.cv { font-style: italic; } /* CommentVar */
 code > span.in { font-style: italic; } /* Information */
   </style>
-  <link rel="stylesheet" href="/posts.css" type="text/css" />
-  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+  <link rel="stylesheet" href="/posts.css">
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Rust Lifetimes</h1>
 <h3 class="date">2015-10-29 12:31:33</h3>
-</div>
+</header>
 <p>Lifetimes are pretty much what makes Rust Rust.</p>
 <p>Easy concurrency, straightforward memory allocation, and overall data safety would not be possible without explicit lifetimes.</p>
 <p>But they are also tricky, and this is aimed at helping people understand the concepts and syntax.</p>
@@ -42,7 +45,7 @@ code > span.in { font-style: italic; } /* Information */
 <p>Each time a reference is returned by or passed into a function, Rust checks at compile time to make sure it fulfills the lifetime requirement specified in the type signature.</p>
 <p>So every reference in Rust (i.e. pointer) has a lifetime. A lifetime is part of the type signature for any reference. Sometimes they can be elided and the compiler can infer them. Nonetheless, you cannot program Rust without knowing how to specify lifetimes.</p>
 <p>Lifetimes fulfill two roles for Rust:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>To know when it's safe to dereference a pointer</p></li>
 <li><p>To allow data to be shared safely</p></li>
 </ol>
@@ -130,11 +133,11 @@ code > span.in { font-style: italic; } /* Information */
 }</code></pre></div>
 <p>You'll notice that not much here has changed. But now Rust has pronounced your code safe — Hurray!</p>
 <p>Here are the changes:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><code>Sheep&lt;'c&gt;</code> instead of <code>Sheep</code></li>
 </ol>
 <p>This is making a parameter for the struct in Rust — It's lifetime might have to depend on the lifetimes of its fields, so now you are able to say how and which ones. (Note: you can do things like <code>Sheep&lt;'c, 'd&gt;</code> if you need more than one lifetime.)</p>
-<ol start="2" style="list-style-type: decimal">
+<ol start="2" type="1">
 <li><p><code>age: &amp;'c i32</code> instead of <code>age: &amp;i32</code></p>
 <p>Now this says that the integer has to live for as long as the struct.</p></li>
 </ol>
@@ -173,8 +176,8 @@ code > span.in { font-style: italic; } /* Information */
 <h1 id="the-end">The End</h1>
 <p>And that is all I know about lifetimes in Rust!</p>
 <p>If you're interested, here is a <a href="/lifetime-reference.html">concise reference</a> for the syntax used with lifetimes.</p>
-<h1 id = 'title'><a href="/">
+<h1 id = 'title' class='title'><a href="/"><span class='wrapper'>
 <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
-  </a></h1>
+  </span></a></h1>
 </body>
 </html>

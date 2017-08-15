@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="generator" content="pandoc" />
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Eqn vs LaTeX</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -26,14 +26,17 @@ code > span.an { font-style: italic; } /* Annotation */
 code > span.cv { font-style: italic; } /* CommentVar */
 code > span.in { font-style: italic; } /* Information */
   </style>
-  <link rel="stylesheet" href="/old_links.css" type="text/css" />
-  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+  <link rel="stylesheet" href="/old_links.css">
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Eqn vs LaTeX</h1>
 <h3 class="date">2017-01-17 12:14:30 -0700</h3>
-</div>
+</header>
 <p>Take the <code>LaTeX</code> code:</p>
 <div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">-1 \cdot \frac{1}{n}}\cup \{-1, \frac{1}{n}\}</code></pre></div>
 <p>Do you know what this means?</p>
@@ -48,17 +51,16 @@ code > span.in { font-style: italic; } /* Information */
 <p>How's that for readability!</p>
 <p>This is <a href="http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf">eqn</a>: a math preprocessor on the layout engine <a href="https://www.gnu.org/software/groff/">groff</a>. By the same metric, groff takes up 8 MB.</p>
 <p>And it works I promise!</p>
-<div class="figure">
+<figure>
 <img src="/images/nonsense.png" />
-
-</div>
+</figure>
 <p>Even if the math is nonsensical, isn't it pretty!</p>
 <h1 id="links">Links</h1>
 <p>You might already have groff/eqn on your machine! If not, take a look <a href="https://www.gnu.org/software/groff/">here</a>.</p>
 <p><a href="https://github.com/Charlesetc/eqn-template">This repo</a> is my template for a simple eqn/groff project. <a href="https://github.com/Charlesetc/eqn-template/blob/master/out.pdf">Here's</a> what the pdf looks like.</p>
 <p>Lastly, there is <a href="http://www.schaffter.ca/mom/momdoc/toc.html">documentation</a> for a groff macro system, and <a href="http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf">an in-depth guide</a> for eqn!</p>
-<h1 id = 'title'><a href="/">
+<h1 id = 'title' class='title'><a href="/"><span class='wrapper'>
 <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
-  </a></h1>
+  </span></a></h1>
 </body>
 </html>
