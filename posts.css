@@ -5,12 +5,13 @@
   font-size: 50px;
 }
 
-#title a::after{
+#title span.wrapper::after{
   content: "";
   background-image: url("/images/purple.png");
   background-size: 100%;
   display:block;
   position: relative;
+  z-index: -1;
 }
 
 video {
@@ -25,7 +26,7 @@ video {
     left: 30px;
     padding-left: 70px;
   }
-  #title a::after{
+  #title span.wrapper::after{
     width: 50px;
     height: 50px;
     top: -54px;
@@ -40,7 +41,7 @@ video {
   #title {
   left: -245px;
   }
-  #title a::after{
+  #title span.wrapper::after{
   width:129px;
   height:129px;
   left:2px;
@@ -51,7 +52,8 @@ video {
   }
 }
 
-body #header h1 {
+header .title {
+  margin-top: 40px;
   font-size: 44px;
   font-family:"Playfair Display", Times, serif;
   font-weight: normal;
@@ -65,6 +67,7 @@ p {
 
 #title a {
   color: black;
+  outline: none;
 } 
 .date {
   display: none;
