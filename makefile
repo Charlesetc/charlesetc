@@ -22,10 +22,6 @@ run:
 	# images:
 	@mkdir -p build/images
 	@cp  images/* build/images
-	# public
-	@cp public/* build
 
 deploy:
-	rm -rf docs
-	cp -r build docs
-
+	bash publish.sh
