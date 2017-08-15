@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>git rebase for fame and power</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { text-decoration: underline; } /* DataType */
+code > span.co { font-style: italic; } /* Comment */
+code > span.al { font-weight: bold; } /* Alert */
+code > span.er { font-weight: bold; } /* Error */
+code > span.wa { font-style: italic; } /* Warning */
+code > span.cf { font-weight: bold; } /* ControlFlow */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.do { font-style: italic; } /* Documentation */
+code > span.an { font-style: italic; } /* Annotation */
+code > span.cv { font-style: italic; } /* CommentVar */
+code > span.in { font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/old_links.css" type="text/css" />
+  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">git rebase for fame and power</h1>
+<h3 class="date">2016-07-30 12:14:30 -0700</h3>
+</div>
+<p>While learning git, people kept telling me &quot;Don't re-base - you'll never need to re-base and it can screw things up&quot;.</p>
+<p>This is terrible advice!</p>
+<p>Re-basing is a great tool!</p>
+<p>When you hear &quot;Don't do <INSERT TOTALLY COOL THING>, you will break things&quot; <strong><em>do that thing now!</em></strong></p>
+<p><strong>and</strong> break things!</p>
+<p>Re-basing by itself is not dangerous.</p>
+<p>As long as you avoid <code>git push origin master --force</code> and only run <code>rm -rf .git</code> every once in a while, you'll be totally fine.</p>
+<h1 id="git-rebase"><code>git rebase</code></h1>
+<p>When you type <code>git rebase master</code>, you say:</p>
+<p>&quot;I want to re-base my current branch.&quot;</p>
+<p>&quot;Even though I started on <code>20404df</code>, make this branch off of the tip of master instead&quot;</p>
+<p>This works for any git object: commits, tags, branches.</p>
+<h1 id="why-would-i-need-to-use-this">Why would I need to use this?</h1>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> checkout master <span class="kw">&amp;&amp;</span> <span class="kw">git</span> log --pretty=<span class="st">&quot;%h -- %s&quot;</span>
+<span class="kw">ccccccc</span> -- third commit
+<span class="kw">bbbbbbb</span> -- second commit
+<span class="kw">aaaaaaa</span> -- first commit
+
+$ <span class="kw">git</span> checkout bbbbbbb
+<span class="co"># make a new branch, based off of &quot;second commit&quot;</span>
+$ <span class="kw">git</span> checkout -b my_new_branch
+$ <span class="kw">touch</span> a_file
+$ <span class="kw">git</span> add a_file
+$ <span class="kw">git</span> commit -m <span class="st">&#39;I just committed a file!&#39;</span>
+$ <span class="kw">git</span> log --pretty=<span class="st">&quot;%h -- %s&quot;</span>
+<span class="kw">ddddddd</span> -- I just committed a file!
+<span class="kw">bbbbbbb</span> -- second commit
+<span class="kw">aaaaaaa</span> -- first commit
+
+<span class="co"># But I meant to make this commit on &quot;third commit&quot;, not &quot;second commit&quot;!!!</span>
+<span class="co"># OH NOOOOO</span>
+<span class="co"># wait, I can re-base?</span>
+$ <span class="kw">git</span> rebase ccccccc
+<span class="kw">First</span>, rewinding head to replay your work on top of it...
+<span class="kw">Applying</span>: I just committed a file!
+
+$ <span class="kw">git</span> log --pretty=<span class="st">&quot;%h -- %s&quot;</span>
+<span class="kw">ddddddd</span> -- I just committed a file!
+<span class="kw">ccccccc</span> -- third commit
+<span class="kw">bbbbbbb</span> -- second commit
+<span class="kw">aaaaaaa</span> -- first commit
+
+<span class="co"># We just changed where the branch was based!</span></code></pre></div>
+<h1 id="if-things-go-wrong...">If things go wrong...</h1>
+<p>This is a chance you screw everything up. Luckily, there are very few things beyond repair in git.</p>
+<p>If you do <code>git reflog</code>, you will see something like:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">234320a</span> HEAD@<span class="dt">{0}</span>: rebase finished: returning to refs/heads/my-new-branch
+<span class="kw">234320a</span> HEAD@<span class="dt">{1}</span>: rebase: added a file
+<span class="kw">49211d7</span> HEAD@<span class="dt">{2}</span>: rebase: checkout 49211d7
+<span class="kw">8c90682</span> HEAD@<span class="dt">{3}</span>: checkout: moving from master to my-new-branch</code></pre></div>
+<p>You can then checkout <code>HEAD@{3}</code> to return to a safe state, and then <code>git checkout -b saved-branch</code> to start committing.</p>
+<p>As long as you don't <code>rm -rf .git</code>, you should be able to dig yourself out of any holes <code>:)</code></p>
+<h1 id = 'title'><a href="/">
+<span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+  </a></h1>
+</body>
+</html>

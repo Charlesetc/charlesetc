@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>OCaml Objects, like wow</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { text-decoration: underline; } /* DataType */
+code > span.co { font-style: italic; } /* Comment */
+code > span.al { font-weight: bold; } /* Alert */
+code > span.er { font-weight: bold; } /* Error */
+code > span.wa { font-style: italic; } /* Warning */
+code > span.cf { font-weight: bold; } /* ControlFlow */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.do { font-style: italic; } /* Documentation */
+code > span.an { font-style: italic; } /* Annotation */
+code > span.cv { font-style: italic; } /* CommentVar */
+code > span.in { font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/old_links.css" type="text/css" />
+  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">OCaml Objects, like wow</h1>
+<h3 class="date">2017-02-26 12:14:30 -0700</h3>
+</div>
+<p>OCaml is an extremely well-thought out language. Objects might seem like something most languages have, but OCaml brings something pretty special to the table.</p>
+<p>I'll go over:</p>
+<ul>
+<li>records, simple but necessary to understand objects.</li>
+<li><strong>objects</strong> -- herein lies awesome 🚀🎩</li>
+</ul>
+<h1 id="records">Records</h1>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> circle = {
+  radius : float ;
+  color : <span class="dt">string</span> ;
+}</code></pre></div>
+<p>This makes a circle type with radius and color attributes! Not too fancy yet.</p>
+<p>A basic circle instantiation:</p>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">let</span> blue_circle = { radius = <span class="fl">2.0</span> ; color = <span class="st">&quot;blue&quot;</span> }</code></pre></div>
+<h2 id="pattern-matching">Pattern matching</h2>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">match</span> circle <span class="kw">with</span>
+| { radius ; color = <span class="st">&quot;red&quot;</span> } -&gt; string_of_float radius
+| { color ; _ } -&gt; color</code></pre></div>
+<p>In the first branch, <code>radius</code> is a variable for <code>radius</code> field, and we check for only red circles.</p>
+<p>In the second, we ignore all fields other than binding <code>color</code>.</p>
+<h1 id="the-problem">the Problem</h1>
+<p>Let's consider two very alike record types:</p>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* same circle type we started with: *)</span>
+<span class="kw">type</span> circle = {
+  radius : float ;
+  color : <span class="dt">string</span> ;
+}
+
+<span class="co">(* cylinder type is similar but has a height and no color: *)</span>
+<span class="kw">type</span> cylinder = {
+  radius : float ;
+  height : float ;
+}
+
+<span class="co">(* a function to get the radius from an unspecified type *)</span>
+<span class="kw">let</span> get_radius x = <span class="kw">match</span> x <span class="kw">with</span>
+| { radius ; _ } -&gt; radius
+
+<span class="kw">let</span> () =
+  
+  <span class="co">(* define some data *)</span>
+  <span class="kw">let</span> cylinder = { radius = <span class="fl">2.</span> ; height = <span class="fl">3.</span> } <span class="kw">in</span>
+  <span class="kw">let</span> circle = { radius = <span class="fl">1.2</span> ; color = <span class="st">&quot;blue&quot;</span> } <span class="kw">in</span>
+
+  <span class="co">(* print the radius of a cylinder *)</span>
+  <span class="co">(* works just fine *)</span>
+  print_float (get_radius cylinder) ;
+
+  <span class="co">(* THIS DOES NOT COMPILE *)</span>
+  print_float (get_radius circle)</code></pre></div>
+<p>This doesn't work! The problem is that when we use <code>get_radius</code> the first time, its type is inferred to be <code>cylinder -&gt; float</code>.</p>
+<p>Now that OCaml knows <code>get_radius</code> takes a cylinder, it couldn't possibly take a circle!</p>
+<p>What we need is an object.</p>
+<h1 id="objects">Objects</h1>
+<p>Here's the same code using objects instead:</p>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* define a class for cylinders *)</span>
+<span class="kw">class</span> cylinder radius height = <span class="kw">object</span>
+  <span class="kw">method</span> radius : float = radius
+  <span class="kw">method</span> height : float = height
+<span class="kw">end</span>
+
+<span class="co">(* similarly define circles *)</span>
+<span class="kw">class</span> circle radius color = <span class="kw">object</span>
+  <span class="kw">method</span> radius : float = radius
+  <span class="kw">method</span> color : <span class="dt">string</span> = color
+<span class="kw">end</span>
+
+<span class="co">(* our function uses the #radius method call *)</span>
+<span class="kw">let</span> get_radius x = x#radius
+
+<span class="kw">let</span> () =
+  <span class="co">(* make our object instances *)</span>
+  <span class="kw">let</span> circle = <span class="kw">new</span> circle <span class="fl">2.3</span> <span class="st">&quot;blue&quot;</span> <span class="kw">in</span>
+  <span class="kw">let</span> cylinder = <span class="kw">new</span> cylinder <span class="fl">88.</span> <span class="fl">3.5</span> <span class="kw">in</span>
+
+  <span class="co">(* call our function with different types! *)</span>
+  print_float (get_radius circle) ;
+  print_float (get_radius cylinder)</code></pre></div>
+<p>What happens is that <code>get_radius</code> is inferred to have an <strong>open type</strong>, represented in OCaml as <code>&lt; radius : float ; .. &gt;</code>. When you pass in an object, any object will work so long as it has a <code>radius</code> method that returns a float.</p>
+<p>This is awesome! We can write polymorphic code so easily.</p>
+<p>It's called <em>structural typing</em>, and can be compared to compile-time-checked duck typing. (If you ever try to pass an object that doesn't have a radius to <code>get_radius</code>, you'll get a compile time type error.)</p>
+<p>OCaml's object system can ignore what the object is and just focus on what it can do.</p>
+<h1 id="okay-but...">Okay but...</h1>
+<p>Objects in OCaml are not perfect.</p>
+<ul>
+<li>The syntax for defining them is clunkier than records.</li>
+<li>They have dynamic dispatched methods which are generally slower than record access.</li>
+<li>Objects can't be used in pattern matching which is pretty unfortunate.</li>
+</ul>
+<p>Also, most people writing OCaml are allergic to the term &quot;object&quot;.</p>
+<p>Nevertheless, OCaml objects are <strong>so cool</strong> and can help you write clean, reusable code: completely without inheritence or subtyping.</p>
+<p>Structural typing for the win!</p>
+<h1 id = 'title'><a href="/">
+<span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+  </a></h1>
+</body>
+</html>

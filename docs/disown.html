@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>&amp; disown</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { text-decoration: underline; } /* DataType */
+code > span.co { font-style: italic; } /* Comment */
+code > span.al { font-weight: bold; } /* Alert */
+code > span.er { font-weight: bold; } /* Error */
+code > span.wa { font-style: italic; } /* Warning */
+code > span.cf { font-weight: bold; } /* ControlFlow */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.do { font-style: italic; } /* Documentation */
+code > span.an { font-style: italic; } /* Annotation */
+code > span.cv { font-style: italic; } /* CommentVar */
+code > span.in { font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/posts.css" type="text/css" />
+  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">&amp; disown</h1>
+<h3 class="date">2017-06-10 08:14:30 -0700</h3>
+</div>
+<p>I've often wanted to start a subprocess as a daemon in bash or zsh.</p>
+<p>Now I know how!</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">the_command</span> <span class="kw">&amp;</span> <span class="kw">disown</span></code></pre></div>
+<p>You will still see stdout and stderr in the terminal, but you can exit from the shell process without killing the command.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">nohup</span> the_command</code></pre></div>
+<p><code>nohup</code> also works, but will send the stdout to a file instead of your terminal.</p>
+<p>If you want to do this to a running process, you can <code>&lt;C-z&gt;</code>, run <code>bg</code>, and then <code>disown %1</code>.</p>
+<h1 id = 'title'><a href="/">
+<span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+  </a></h1>
+</body>
+</html>
