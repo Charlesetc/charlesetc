@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Open+Sans|Playfair+Display');
 
 * {
   padding: 0;
@@ -7,34 +7,81 @@
 }
 
 body {
-  width: 600px;
+  max-width: 600px;
   margin: auto;
-  font-size: 20px;
-  font-family: "Open Sans";
-  background: #eee;
+  font-size: 20px; font-family: "Open Sans"; background: #eee;
+  padding-bottom: 66px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 p {
   margin-top:20px;
 }
 
-h2 {
+.table-of-contents em {
+  font-size: 16px;
+  width: 103px;
+  display: inline-block;
+}
+
+.table-of-contents a {
+  margin-left:10px;
+}
+
+
+ul {
+  list-style: none;
+  margin-top: 10px;
+}
+ol {
+  margin-top: 10px;
+}
+
+
+a, a:hover, a:visited {
+  text-decoration: none;
+  color: #ff669e;
+}
+
+h2, h1:not(#title) {
   margin-top: 40px;
   font-size: 25px;
   font-weight: normal;
   text-decoration: underline;
 }
 
+h3, h4 {
+  margin-top: 40px;
+  font-size: 22px;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+div.sourceCode {
+  margin-top: 20px;
+  padding: 18px;
+  border-left: 5px solid #ff669e;
+  margin-left: 15px;
+}
+
+
+pre code {
+  font-size: 18px;
+}
+
+p code, table code {
+  color: #ff669e;
+  border: 1px #555 solid;
+  background: #eee;
+  font-size: 16px;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
 #title {
   font-weight: normal;
   font-family: 'Dancing Script', cursive;
-}
-
-#title span {
-  animation-iteration-count: infinite;
-  animation-duration: 2s;
-  animation-name: pulse;
-  animation-direction: alternate;
 }
 
 #title span:nth-child(1) {
