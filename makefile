@@ -19,7 +19,7 @@ run:
 	@rm -rf build/bash
 	@mv build/old_links/bash build/
 	@rmdir build/old_links
-	# images:
+	#images
 	@mkdir -p build/images
 	@cp  images/* build/images
 
