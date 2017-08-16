@@ -5,6 +5,10 @@
   font-size: 50px;
 }
 
+#title .wrapper {
+  white-space: nowrap;
+}
+
 #title span.wrapper::after{
   content: "";
   background-image: url("/images/purple.png");
