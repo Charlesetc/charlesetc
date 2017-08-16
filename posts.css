@@ -25,7 +25,7 @@ video {
   outline: none;
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1180px) {
   #title {
     left: 30px;
     padding-left: 70px;
@@ -41,7 +41,7 @@ video {
   }
 }
 
-@media (min-width: 1120px) {
+@media (min-width: 1180px) {
   #title {
   left: -245px;
   }
