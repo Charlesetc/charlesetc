@@ -20,8 +20,8 @@ run:
 	@mv build/old_links/bash build/
 	@rmdir build/old_links
 	#images
-	@mkdir -p build/images
-	@cp  images/* build/images
+	# @mkdir -p build/images
+	# @cp  images/* build/images
 
 deploy:
 	bash publish.sh
