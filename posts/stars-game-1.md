@@ -21,6 +21,6 @@ So far ([commit ae8efe9](https://gitlab.com/charlesetc/Stars/tree/ae8efe9adf5c80
 
 <div class="table-of-contents">
 * _Aug 15, 2017_ - [Take-off](stars-game-1.html)
-* _Aug 16, 2017_ - [Day 2](stars-game-2.html)
+* _Aug 16, 2017_ - [Stars 002](stars-game-2.html)
 </div>
 

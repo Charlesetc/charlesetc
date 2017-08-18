@@ -9,7 +9,7 @@ If you want to talk, my e-mail is “charlespipin” at the largest e-mail provi
 <div class='table-of-contents'>
 ## Archive
 
-* _Aug 16, 2017_ - [stars day 2](stars-game-2.html)
+* _Aug 16, 2017_ - [stars 002](stars-game-2.html)
 * _Aug 15, 2017_ - [stars game take-off](stars-game-1.html)
 * _Jun 10, 2017_ - [& disown](disown.html)
 * _Feb 26, 2017_ - [ocaml objects, like wow](ocaml-objects.html)

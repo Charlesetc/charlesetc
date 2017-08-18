@@ -1,5 +1,5 @@
 ---
-title:  "Stars Day 2"
+title:  "Stars 002"
 ---
 
 I doubt I will post every day, but this is a summary of the progress
@@ -8,7 +8,7 @@ made so far:
 
 <video width="600" height="504" controls> <source src="/videos/stars-3.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
 
-It turns out rendering two objects is a *lot* harder than rendering one. You have to switch to a different contexts (vertex buffer)
+It turns out rendering two objects is a *lot* harder than rendering one. You have to switch to a different context (vertex buffer)
 each time you draw a shape.
 
 I also converted the while-loop design of the game to an async [pony](https://www.ponylang.org/discover/) behaviour that repeatedly calls itself. This lets the garbage collector run in between renderings and the game run on multiple cores.
@@ -30,6 +30,6 @@ The most immediate step, however, is to render and shade a cube. Fingers crossed
 
 <div class="table-of-contents">
 * _Aug 15, 2017_ - [Take-off](stars-game-1.html)
-* _Aug 16, 2017_ - [Day 2](stars-game-2.html)
+* _Aug 16, 2017_ - [Stars 002](stars-game-2.html)
 </div>
 

@@ -23,6 +23,7 @@ video {
   background: none;
   border: none;
   outline: none;
+  width: 100%;
 }
 
 @media (max-width: 1180px) {

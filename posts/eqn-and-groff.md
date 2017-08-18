@@ -25,8 +25,6 @@ Not only that, `TeX` by itself takes up 338.8 MB!
 
 # Eqn
 
-Why not switch to something better!
-
 ```ruby
 -1 cdot 1 over n union left { -1 , 1 over n right } 
 ```
