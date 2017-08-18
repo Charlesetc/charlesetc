@@ -16,11 +16,3 @@ Oh, and `Stars` is built with the language [Pony](https://www.ponylang.org/disco
 So far ([commit ae8efe9](https://gitlab.com/charlesetc/Stars/tree/ae8efe9adf5c80e21d9dda710ffaad74d8e37247)), I have a beautiful rainbow triangle that I'm very proud of: 
 
 <video width="600" height="504" controls> <source src="/videos/stars-1.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
-
-### Stars posts and adventures:
-
-<div class="table-of-contents">
-* _Aug 15, 2017_ - [Take-off](stars-game-1.html)
-* _Aug 16, 2017_ - [Stars 002](stars-game-2.html)
-</div>
-

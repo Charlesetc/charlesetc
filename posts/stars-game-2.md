@@ -25,11 +25,3 @@ My goal is to parse the `.obj` file that blender can export and then render it w
 `Stars`. Hopefully, this will allow for complicated characters and animations.
 
 The most immediate step, however, is to render and shade a cube. Fingers crossed for tomorrow!
-
-### Stars posts and adventures:
-
-<div class="table-of-contents">
-* _Aug 15, 2017_ - [Take-off](stars-game-1.html)
-* _Aug 16, 2017_ - [Stars 002](stars-game-2.html)
-</div>
-
