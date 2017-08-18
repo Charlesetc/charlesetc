@@ -3,6 +3,8 @@ run:
 	@nspace
 	@mv build/posts/* build/
 	@rmdir build/posts
+	@mv build/stars/* build/
+	@rmdir build/stars
 	# old_links:
 	@rm -rf build/languages
 	@mv build/old_links/languages build/
