@@ -29,10 +29,30 @@ p {
   margin-left:10px;
 }
 
+.table-of-contents ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.table-of-contents ul li::before {
+  content: inherit;
+  padding: none;
+}
+
 ul {
   list-style: none;
   margin-top: 10px;
 }
+
+ul li::before {
+  content: "♪";
+  position: absolute;
+  left: 5px;
+  /* background: url("/images/star-bullet.png") no-repeat; */
+  /* background-size: 12px; */
+  /* background-position: 13px 9px; */
+}
+
 ol {
   margin-top: 10px;
 }

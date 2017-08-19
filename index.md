@@ -9,6 +9,7 @@ If you want to talk, my e-mail is “charlespipin” at the largest e-mail provi
 <div class='table-of-contents'>
 ## Archive
 
+* _Aug 19, 2017_ - [stars 004 - rotating cube](stars-game-4.html)
 * _Aug 17, 2017_ - [stars 003](stars-game-3.html)
 * _Aug 16, 2017_ - [stars 002](stars-game-2.html)
 * _Aug 15, 2017_ - [stars game take-off](stars-game-1.html)
