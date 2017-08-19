@@ -5,8 +5,6 @@ title:  "Stars 004 - rotating cube"
 [Commit 7051262](https://gitlab.com/charlesetc/Stars/tree/7051262a079b50e523421b94e37101ec55a41e33)
 implements the Model-View-Projection method to render a rotating cube.
 
-<video width="600" height="504" controls> <source src="/videos/stars-5.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
-
 # Rasterization
 
 OpenGL is essentially a very generic way to draw triangles.
@@ -49,5 +47,7 @@ MVP works differently:
 * The projection - represents the perspective. (Given where the camera is compared to a triangle, will that triangle be rendered larger or smaller?)
 
 Combine these with matrix multiplication and you're left with one matrix that can be applied to each vertex on the GPU, to determine where on the screen it should fall. And that gives you a cube instead of a square! Want the cube to rotate? Multiply the model by a rotation matrix. This works for the camera too! What would have been a lot of confusing 3D calculations (at least for me), is now one 4-by-4 matrix that is multiplied rapidly in parallel.
+
+<video width="600" height="504" controls> <source src="/videos/stars-5.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
 
 And that's all I know about cube-making! My next objective is to render a more complicated 3D model by parsing a `.obj` file.
