@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Stars 004 - rotating cube</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/stars.css">
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Stars 004 - rotating cube</h1>
+</header>
+<p><a href="https://gitlab.com/charlesetc/Stars/tree/7051262a079b50e523421b94e37101ec55a41e33">Commit 7051262</a> implements the Model-View-Projection method to render a rotating cube.</p>
+<video width="600" height="504" controls>
+<source src="/videos/stars-5.ogv" type='video/ogg; codecs="theora, vorbis"'>
+</video>
+<h1 id="rasterization">Rasterization</h1>
+<p>OpenGL is essentially a very generic way to draw triangles. This is what &quot;rasterization&quot; means: it's the process of taking a shape (in this case, a triangle defined by 3 points), and calculating each pixel it should take up. The cool thing about modern OpenGL, I think, is that there isn't a direct way to say <code>here are triangles; here are their colors; please draw them!</code> Instead, you give the GPU some data and a shader program, and say <code>please run this program once for each n bytes of the data</code>. The shader program, which is run many times in parallel, then constructs vertices from this data. You, as the programmer, write this shader program and dictate how that data translates into vertices. Only then does the GPU take the triangles and draw them.</p>
+<p>This lets you include arbitrarily complex information in each vertex: depth, color, or any other input to your shading code.</p>
+<h1 id="model-view-projection">Model-View-Projection</h1>
+<p>MVP is I think how <em>everyone</em> does 3D rendering. In the <a href="/stars-game-3.html">last post</a>, I did have a 3D perspective, but it was accomplished in a different way:</p>
+<p>When rendering the vertices in the shader program, I said the magnitude of any vertex (the distance away from the origin) should depend on its depth. (i.e. setting <code>w</code> to <code>z</code>) This did produce some sort of strange perspective but the second I tried to rotate the cube, it skewed in a very strange way.</p>
+<video width="600" height="504" controls>
+<source src="/videos/stars-6.ogv" type='video/ogg; codecs="theora, vorbis"'>
+</video>
+<p>That's supposed to be a rotation around the y axis which is sort of visible but clearly very wrong.</p>
+<p>MVP works differently:</p>
+<ul>
+<li>The model - represents the position of the entity you're drawing.</li>
+<li>The view - represents the position of the camera.</li>
+<li>The projection - represents the perspective. (Given where the camera is compared to a triangle, will that triangle be rendered larger or smaller?)</li>
+</ul>
+<p>Combine these with matrix multiplication and you're left with one matrix that can be applied to each vertex on the GPU, to determine where on the screen it should fall. And that gives you a cube instead of a square! Want the cube to rotate? Multiply the model by a rotation matrix. This works for the camera too! What would have been a lot of confusing 3D calculations (at least for me), is now one 4-by-4 matrix that is multiplied rapidly in parallel.</p>
+<p>And that's all I know about cube-making! My next objective is to render a more complicated 3D model by parsing a <code>.obj</code> file.</p>
+<h3 id="stars-posts-and-adventures">Stars posts and adventures:</h3>
+
+<div class="table-of-contents">
+<ul>
+<li><em>Aug 15, 2017</em> - <a href="stars-game-1.html">Take-off</a></li>
+<li><em>Aug 16, 2017</em> - <a href="stars-game-2.html">Stars 002</a></li>
+<li><em>Aug 17, 2017</em> - <a href="stars-game-3.html">Stars 003</a></li>
+<li><em>Aug 19, 2017</em> - <a href="stars-game-4.html">Stars 004 - rotating cube</a></li>
+</ul>
+</div>
+<h1 id = 'title' class='title'><a href="/"><span class='wrapper'>
+<span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+  </span></a></h1>
+</body>
+</html>
