@@ -17,9 +17,6 @@
 <h1 class="title">Stars 004 - rotating cube</h1>
 </header>
 <p><a href="https://gitlab.com/charlesetc/Stars/tree/7051262a079b50e523421b94e37101ec55a41e33">Commit 7051262</a> implements the Model-View-Projection method to render a rotating cube.</p>
-<video width="600" height="504" controls>
-<source src="/videos/stars-5.ogv" type='video/ogg; codecs="theora, vorbis"'>
-</video>
 <h1 id="rasterization">Rasterization</h1>
 <p>OpenGL is essentially a very generic way to draw triangles. This is what &quot;rasterization&quot; means: it's the process of taking a shape (in this case, a triangle defined by 3 points), and calculating each pixel it should take up. The cool thing about modern OpenGL, I think, is that there isn't a direct way to say <code>here are triangles; here are their colors; please draw them!</code> Instead, you give the GPU some data and a shader program, and say <code>please run this program once for each n bytes of the data</code>. The shader program, which is run many times in parallel, then constructs vertices from this data. You, as the programmer, write this shader program and dictate how that data translates into vertices. Only then does the GPU take the triangles and draw them.</p>
 <p>This lets you include arbitrarily complex information in each vertex: depth, color, or any other input to your shading code.</p>
@@ -37,6 +34,9 @@
 <li>The projection - represents the perspective. (Given where the camera is compared to a triangle, will that triangle be rendered larger or smaller?)</li>
 </ul>
 <p>Combine these with matrix multiplication and you're left with one matrix that can be applied to each vertex on the GPU, to determine where on the screen it should fall. And that gives you a cube instead of a square! Want the cube to rotate? Multiply the model by a rotation matrix. This works for the camera too! What would have been a lot of confusing 3D calculations (at least for me), is now one 4-by-4 matrix that is multiplied rapidly in parallel.</p>
+<video width="600" height="504" controls>
+<source src="/videos/stars-5.ogv" type='video/ogg; codecs="theora, vorbis"'>
+</video>
 <p>And that's all I know about cube-making! My next objective is to render a more complicated 3D model by parsing a <code>.obj</code> file.</p>
 <h3 id="stars-posts-and-adventures">Stars posts and adventures:</h3>
 
