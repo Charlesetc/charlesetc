@@ -50,4 +50,7 @@ MVP works differently:
 
 Combine these with matrix multiplication and you're left with one matrix that can be applied to each vertex on the GPU, to determine where on the screen it should fall. And that gives you a cube instead of a square! Want the cube to rotate? Multiply the model by a rotation matrix. This works for the camera too! What would have been a lot of confusing 3D calculations (at least for me), is now one 4-by-4 matrix that is multiplied rapidly in parallel.
 
-And that's all I know about cube-making! My next objective is to render a more complicated 3D model by parsing a `.obj` file.
+This is the same video of the cube spinning:
+<video width="600" height="504" controls> <source src="/videos/stars-5.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
+
+And that's all I know about cube-making! My next objectives are to render a more complicated 3D model by parsing a `.obj` file, and to add light-based shading.
