@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Stars 005 - lopsided monkey</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { text-decoration: underline; } /* DataType */
+code > span.co { font-style: italic; } /* Comment */
+code > span.al { font-weight: bold; } /* Alert */
+code > span.er { font-weight: bold; } /* Error */
+code > span.wa { font-style: italic; } /* Warning */
+code > span.cf { font-weight: bold; } /* ControlFlow */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.do { font-style: italic; } /* Documentation */
+code > span.an { font-style: italic; } /* Annotation */
+code > span.cv { font-style: italic; } /* CommentVar */
+code > span.in { font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/stars.css">
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Stars 005 - lopsided monkey</h1>
+</header>
+<p>I now have a half-complete monkey being rendered. (<a href="https://gitlab.com/charlesetc/Stars/tree/f1f6b152d09d5601525dd908af3a4e46bf29f659">Commit f1f6b15</a>)</p>
+<video width="600" height="504" controls>
+<source src="/videos/stars-7.ogv" type='video/ogg; codecs="theora, vorbis"'>
+</video>
+<p>Note the very problematic right side!</p>
+<p>I think this is happening because either a vertex is incorrectly inserted or a vertex is lost somewhere along the line.</p>
+<p>I'm parsing what's called a <code>.obj</code> file — an ASCII text format for representing 3D objects. Here's an <code>obj</code> representation of a cube:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">mtllib</span> cube.mtl
+<span class="kw">o</span> Cube
+<span class="kw">v</span> 1.000000 -1.000000 -1.000000
+<span class="kw">v</span> 1.000000 -1.000000 1.000000
+<span class="kw">v</span> -1.000000 -1.000000 1.000000
+<span class="kw">v</span> -1.000000 -1.000000 -1.000000
+<span class="kw">v</span> 1.000000 1.000000 -0.999999
+<span class="kw">v</span> 0.999999 1.000000 1.000001
+<span class="kw">v</span> -1.000000 1.000000 1.000000
+<span class="kw">v</span> -1.000000 1.000000 -1.000000
+<span class="kw">vn</span> 0.000000 -1.000000 0.000000
+<span class="kw">vn</span> 0.000000 1.000000 0.000000
+<span class="kw">vn</span> 1.000000 0.000000 0.000000
+<span class="kw">vn</span> -0.000000 -0.000000 1.000000
+<span class="kw">vn</span> -1.000000 -0.000000 -0.000000
+<span class="kw">vn</span> 0.000000 0.000000 -1.000000
+<span class="kw">usemtl</span> Material
+<span class="kw">s</span> off
+<span class="kw">f</span> 1//1 2//1 3//1 4//1
+<span class="kw">f</span> 5//2 8//2 7//2 6//2
+<span class="kw">f</span> 1//3 5//3 6//3 2//3
+<span class="kw">f</span> 2//4 6//4 7//4 3//4
+<span class="kw">f</span> 3//5 7//5 8//5 4//5
+<span class="kw">f</span> 5//6 1//6 4//6 8//6</code></pre></div>
+<p>It's really simple — <code>v</code> loads a vertex, <code>vn</code> loads a vertex normal, and <code>f</code> loads a face (i.e. triangle).</p>
+<p>The color of the monkey currently signifies the normals that have be loaded. You can kind of see how the color changes almost continuously depending on the orientation of the vertex. (Excluding the right side of course.) These normals will be used for lighting and shading the monkey, which is what I plan to implement soon.</p>
+<p>Right after I fix this blasted vertex bug!</p>
+<h3 id="stars-posts-and-adventures">Stars posts and adventures:</h3>
+
+<div class="table-of-contents">
+<ul>
+<li><em>Aug 15, 2017</em> - <a href="stars-game-1.html">Take-off</a></li>
+<li><em>Aug 16, 2017</em> - <a href="stars-game-2.html">Stars 002</a></li>
+<li><em>Aug 17, 2017</em> - <a href="stars-game-3.html">Stars 003</a></li>
+<li><em>Aug 19, 2017</em> - <a href="stars-game-4.html">Stars 004 - rotating cube</a></li>
+<li><em>Aug 22, 2017</em> - <a href="stars-game-5.html">Stars 005 - lopsided monkey</a></li>
+</ul>
+</div>
+<h1 id = 'title' class='title'><a href="/"><span class='wrapper'>
+<span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+  </span></a></h1>
+</body>
+</html>
