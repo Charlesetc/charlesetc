@@ -26,6 +26,11 @@ video {
   width: 100%;
 }
 
+img {
+  padding-top: 20px;
+  width: 100%;
+}
+
 @media (max-width: 1180px) {
   #title {
     left: 30px;
@@ -80,6 +85,20 @@ p {
 
 body {
   position: relative;
+}
+
+ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+:not(.table-of-contents) ul li::before {
+  content: "♪";
+  position: absolute;
+  left: 5px;
+  /* background: url("/images/star-bullet.png") no-repeat; */
+  /* background-size: 12px; */
+  /* background-position: 13px 9px; */
 }
 
 #title a:hover span {
