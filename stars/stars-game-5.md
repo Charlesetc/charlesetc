@@ -2,7 +2,7 @@
 title:  "Stars 005 - lopsided monkey"
 ---
 
-I now have a half-complete monkey being rendered. ([Commit f1f6b15](https://gitlab.com/charlesetc/Stars/tree/f1f6b152d09d5601525dd908af3a4e46bf29f659))
+I now have a half-complete monkey being rendered. ([commit f1f6b15](https://gitlab.com/charlesetc/Stars/tree/f1f6b152d09d5601525dd908af3a4e46bf29f659))
 
 <video width="600" height="504" controls> <source src="/videos/stars-7.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
 
