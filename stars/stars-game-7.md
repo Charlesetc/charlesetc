@@ -92,7 +92,7 @@ And that's all there is to basic shading! I also wanted to do some cel-shading â
 brightness = max(ceil(brightness * 4), 0.0);
 ```
 
-So here are two cel-shaded teapots!
+So here are two cel-shaded teapots! (Sorry I know they skip sometimes.)
 
 <video width="600" height="504" autoplay loop> <source src="/videos/stars-13.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
 <video width="600" height="504" autoplay loop> <source src="/videos/stars-12.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
