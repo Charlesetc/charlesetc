@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Stars Finale</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { text-decoration: underline; } /* DataType */
+code > span.co { font-style: italic; } /* Comment */
+code > span.al { font-weight: bold; } /* Alert */
+code > span.er { font-weight: bold; } /* Error */
+code > span.wa { font-style: italic; } /* Warning */
+code > span.cf { font-weight: bold; } /* ControlFlow */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.do { font-style: italic; } /* Documentation */
+code > span.an { font-style: italic; } /* Annotation */
+code > span.cv { font-style: italic; } /* CommentVar */
+code > span.in { font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/stars.css">
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Stars Finale</h1>
+</header>
+<p><em>I've been working with graphics on a project dubbed 'Stars'. This is its last hurrah!</em></p>
+<p>Without further ado, here's a bourgeois pig:</p>
+<video width="600" height="504" autoplay loop>
+<source src="/videos/stars-11.ogv" type='video/ogg; codecs="theora, vorbis"'>
+</video>
+<p>(It's bourgeois because it's shiny and therefore expensive.)</p>
+<p>So the lighting here comes in three parts. The first is what is called <strong>diffuse</strong> lighting. It's the kind of light that bounces off a surface equally in every direction.</p>
+<p>This is the bit of the fragment shader that renders diffuse light, i.e. the code run for each pixel on the GPU:</p>
+<div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span class="co">// pretend you are given these three vectors</span>
+<span class="dt">vec3</span> position;
+<span class="dt">vec3</span> normal;
+<span class="dt">vec3</span> light_direction;
+
+<span class="co">// calculate how light or dark this pixel should be</span>
+<span class="co">// by combining the normal and light direction</span>
+<span class="dt">float</span> brightness = <span class="fu">dot</span>(normal, light_direction);
+
+<span class="co">// set the color between black and cyan</span>
+outColor = <span class="fu">mix</span>(<span class="dt">vec3</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),
+               <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>),
+               brightness);</code></pre></div>
+<figure>
+<img src="/images/just-diffuse-teapot.png" />
+</figure>
+<p>This does render a teapot! But it's a little dark: the backside is completely black and it looks kind of matt or chalky.</p>
+<p>To make it look less chalky, we're going to add a <strong>specular component</strong>. This is the kind of light that reflects unevenly: instead of the diffuse light that spreads out everywhere equally, the specular light highlights spots where the light is shining directly.</p>
+<div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span class="co">// do some calculation to get the direction</span>
+<span class="co">// and intensity</span>
+<span class="dt">vec3</span> camera_direction = <span class="fu">normalize</span>(-position);
+<span class="dt">vec3</span> half_direction = <span class="fu">normalize</span>(
+    light_direction + camera_direction);
+<span class="dt">float</span> specular = <span class="fu">pow</span>(
+    <span class="fu">dot</span>(half_direction, normal)), <span class="fl">16.0</span>);
+
+<span class="co">// set the color to vary with specular</span>
+outColor = specular * <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>);</code></pre></div>
+<p>This gives us the shiny part of light!</p>
+<figure>
+<img src="/images/just-specular-teapot.png" />
+</figure>
+<p>Combining these two lighting methods, we get a fairly well-lit teapot:</p>
+<figure>
+<img src="/images/added-teapot.png" />
+</figure>
+<p>But it's still strangely black in some places! In reality, there is <strong>ambient</strong> light everywhere, bouncing off of walls and floors.</p>
+<p>Unfortunately, reflected light like that is really computationally intensive to calculate, so there's a widespread hack to add ambient lighting:</p>
+<div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl">outColor = <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>);</code></pre></div>
+<figure>
+<img src="/images/teapot-ambient.png" />
+</figure>
+<p>Yep, we just add a lighter color everywhere. And now we finally get a decently lighted teapot!</p>
+<figure>
+<img src="/images/realistic-teapot.png" />
+</figure>
+<p>And that's all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:</p>
+<div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl">brightness = <span class="fu">max</span>(<span class="fu">ceil</span>(brightness * <span class="dv">4</span>), <span class="fl">0.0</span>);</code></pre></div>
+<p>So here are two cel-shaded teapots!</p>
+<video width="600" height="504" autoplay loop>
+<source src="/videos/stars-13.ogv" type='video/ogg; codecs="theora, vorbis"'>
+</video>
+<video width="600" height="504" autoplay loop>
+<source src="/videos/stars-12.ogv" type='video/ogg; codecs="theora, vorbis"'>
+</video>
+<p>I'm pretty happy with how this project has gone. I've definitely learned a lot about graphics, and even more about <a href="http://www.ponylang.org/discover">Pony</a>. (The entire project is written in Pony.)</p>
+<p>Feel free to check out the <a href="https://gitlab.com/charlesetc/Stars">source code</a> on Gitlab!</p>
+<h3 id="stars-posts-and-adventures">Stars posts and adventures:</h3>
+
+<div class="table-of-contents">
+<ul>
+<li><em>Aug 15, 2017</em> - <a href="stars-game-1.html">Take-off</a></li>
+<li><em>Aug 16, 2017</em> - <a href="stars-game-2.html">Stars 002</a></li>
+<li><em>Aug 17, 2017</em> - <a href="stars-game-3.html">Stars 003</a></li>
+<li><em>Aug 19, 2017</em> - <a href="stars-game-4.html">Stars 004 - rotating cube</a></li>
+<li><em>Aug 22, 2017</em> - <a href="stars-game-5.html">Stars 005 - lopsided monkey</a></li>
+<li><em>Aug 23, 2017</em> - <a href="stars-game-6.html">Stars 006 - dark teapot</a></li>
+<li><em>Aug 24, 2017</em> - <a href="stars-game-7.html">Stars Finale</a></li>
+</ul>
+</div>
+<h1 id = 'title' class='title'><a href="/"><span class='wrapper'>
+<span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+  </span></a></h1>
+</body>
+</html>
