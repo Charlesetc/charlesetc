@@ -88,18 +88,19 @@ body {
 }
 
 ul {
-  list-style: none;
+  /* list-style: bullet; */
   margin-top: 10px;
+  padding-left:30px;
 }
 
-:not(.table-of-contents) ul li::before {
-  content: "♪";
-  position: absolute;
-  left: 5px;
-  /* background: url("/images/star-bullet.png") no-repeat; */
-  /* background-size: 12px; */
-  /* background-position: 13px 9px; */
-}
+/* :not(.table-of-contents) ul li::before { */
+/*   content: "♪"; */
+/*   position: absolute; */
+/*   left: 5px; */
+/*   /1* background: url("/images/star-bullet.png") no-repeat; *1/ */
+/*   /1* background-size: 12px; *1/ */
+/*   /1* background-position: 13px 9px; *1/ */
+/* } */
 
 #title a:hover span {
   animation-iteration-count: infinite;
