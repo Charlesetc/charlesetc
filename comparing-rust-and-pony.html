@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>&amp; disown</title>
+  <title>Comparing Rust and Pony</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
@@ -34,16 +34,24 @@ code > span.in { font-style: italic; } /* Information */
 </head>
 <body>
 <header>
-<h1 class="title">&amp; disown</h1>
-<h3 class="date">2017-06-10 08:14:30 -0700</h3>
+<h1 class="title">Comparing Rust and Pony</h1>
 </header>
-<p>I’ve often wanted to start a subprocess as a daemon in bash or zsh.</p>
-<p>Now I know how!</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">the_command</span> <span class="kw">&amp;</span> <span class="kw">disown</span></code></pre></div>
-<p>You will still see stdout and stderr in the terminal, but you can exit from the shell process without killing the command.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">nohup</span> the_command</code></pre></div>
-<p><code>nohup</code> also works, but will send the stdout to a file instead of your terminal.</p>
-<p>If you want to do this to a running process, you can <code>&lt;C-z&gt;</code>, run <code>bg</code>, and then <code>disown %1</code>.</p>
+<p><a href="https://doc.rust-lang.org/book/first-edition/">Rust</a> and <a href="https://www.ponylang.org/discover/">Pony</a> are two relatively new languages that both use type systems to prevent data races with a focus on performance. How do they compare?</p>
+<h1 id="bias">Bias</h1>
+<p>I'd like to first say I think both of these languages are <strong>super cool</strong>. This is not at all a contest; I just like exploring languages!</p>
+<h1 id="similarities">Similarities</h1>
+<p>Why are these languages worth comparing?</p>
+<h1 id="hello-world">Hello World</h1>
+<p>Rust:</p>
+<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="kw">fn</span> main() {
+  <span class="pp">println!</span>(<span class="st">&quot;Hello world&quot;</span>);
+}</code></pre></div>
+<p>Pony:</p>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml">actor <span class="dt">Main</span>
+  <span class="kw">new</span> create(env: <span class="dt">Env</span>) =&gt;
+    env.out.print(<span class="st">&quot;Hello, world&quot;</span>)</code></pre></div>
+<p>So this actually exposes a lot of the differences between the languages. First of all, there's the <strong>syntax</strong>. Rust looks like a classic C program, Pony looks like a Python program.</p>
+<p>Right of the bat we get a key observation: Rust is targeting system programmers and Pony is aimed at somewhat higher level programming.</p>
 <h1 id = 'title' class='title'><a href="/"><span class='wrapper'>
 <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
   </span></a></h1>

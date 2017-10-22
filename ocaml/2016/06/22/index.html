@@ -38,10 +38,10 @@ code > span.in { font-style: italic; } /* Information */
 <h3 class="date">2017-02-26 12:14:30 -0700</h3>
 </header>
 <p>OCaml is an extremely well-thought out language. Objects might seem like something most languages have, but OCaml brings something pretty special to the table.</p>
-<p>I'll go over:</p>
+<p>I’ll go over:</p>
 <ul>
 <li>records, simple but necessary to understand objects.</li>
-<li><strong>objects</strong> -- herein lies awesome 🚀🎩</li>
+<li><strong>objects</strong> – herein lies awesome 🚀🎩</li>
 </ul>
 <h1 id="records">Records</h1>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> circle = {
@@ -58,7 +58,7 @@ code > span.in { font-style: italic; } /* Information */
 <p>In the first branch, <code>radius</code> is a variable for <code>radius</code> field, and we check for only red circles.</p>
 <p>In the second, we ignore all fields other than binding <code>color</code>.</p>
 <h1 id="the-problem">the Problem</h1>
-<p>Let's consider two very alike record types:</p>
+<p>Let’s consider two very alike record types:</p>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* same circle type we started with: *)</span>
 <span class="kw">type</span> circle = {
   radius : float ;
@@ -87,11 +87,11 @@ code > span.in { font-style: italic; } /* Information */
 
   <span class="co">(* THIS DOES NOT COMPILE *)</span>
   print_float (get_radius circle)</code></pre></div>
-<p>This doesn't work! The problem is that when we use <code>get_radius</code> the first time, its type is inferred to be <code>cylinder -&gt; float</code>.</p>
-<p>Now that OCaml knows <code>get_radius</code> takes a cylinder, it couldn't possibly take a circle!</p>
+<p>This doesn’t work! The problem is that when we use <code>get_radius</code> the first time, its type is inferred to be <code>cylinder -&gt; float</code>.</p>
+<p>Now that OCaml knows <code>get_radius</code> takes a cylinder, it couldn’t possibly take a circle!</p>
 <p>What we need is an object.</p>
 <h1 id="objects">Objects</h1>
-<p>Here's the same code using objects instead:</p>
+<p>Here’s the same code using objects instead:</p>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* define a class for cylinders *)</span>
 <span class="kw">class</span> cylinder radius height = <span class="kw">object</span>
   <span class="kw">method</span> radius : float = radius
@@ -117,16 +117,16 @@ code > span.in { font-style: italic; } /* Information */
   print_float (get_radius cylinder)</code></pre></div>
 <p>What happens is that <code>get_radius</code> is inferred to have an <strong>open type</strong>, represented in OCaml as <code>&lt; radius : float ; .. &gt;</code>. When you pass in an object, any object will work so long as it has a <code>radius</code> method that returns a float.</p>
 <p>This is awesome! We can write polymorphic code so easily.</p>
-<p>It's called <em>structural typing</em>, and can be compared to compile-time-checked duck typing. (If you ever try to pass an object that doesn't have a radius to <code>get_radius</code>, you'll get a compile time type error.)</p>
-<p>OCaml's object system can ignore what the object is and just focus on what it can do.</p>
-<h1 id="okay-but...">Okay but...</h1>
+<p>It’s called <em>structural typing</em>, and can be compared to compile-time-checked duck typing. (If you ever try to pass an object that doesn’t have a radius to <code>get_radius</code>, you’ll get a compile time type error.)</p>
+<p>OCaml’s object system can ignore what the object is and just focus on what it can do.</p>
+<h1 id="okay-but">Okay but…</h1>
 <p>Objects in OCaml are not perfect.</p>
 <ul>
 <li>The syntax for defining them is clunkier than records.</li>
 <li>They have dynamic dispatched methods which are generally slower than record access.</li>
-<li>Objects can't be used in pattern matching which is pretty unfortunate.</li>
+<li>Objects can’t be used in pattern matching which is pretty unfortunate.</li>
 </ul>
-<p>Also, most people writing OCaml are allergic to the term &quot;object&quot;.</p>
+<p>Also, most people writing OCaml are allergic to the term “object”.</p>
 <p>Nevertheless, OCaml objects are <strong>so cool</strong> and can help you write clean, reusable code: completely without inheritence or subtyping.</p>
 <p>Structural typing for the win!</p>
 <h1 id = 'title' class='title'><a href="/"><span class='wrapper'>

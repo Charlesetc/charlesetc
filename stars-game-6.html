@@ -16,14 +16,14 @@
 <header>
 <h1 class="title">Stars 006 - dark teapot</h1>
 </header>
-<p>Not only does <a href="https://gitlab.com/charlesetc/Stars/tree/91b838a82c39f56c0181703a214c731285105c94">commit 91b838a</a> bring a completely rendered monkey, there's now shading and teapots!</p>
+<p>Not only does <a href="https://gitlab.com/charlesetc/Stars/tree/91b838a82c39f56c0181703a214c731285105c94">commit 91b838a</a> bring a completely rendered monkey, there’s now shading and teapots!</p>
 <video width="600" height="504" autoplay loop>
 <source src="/videos/stars-8.ogv" type='video/ogg; codecs="theora, vorbis"'>
 </video>
-<p>Each vertex of the model should come with a normal, which represents the angle the surface is facing, at that vertex. The shading itself isn't very hard once you've loaded the normals.</p>
-<p>The amount of shadow is calculated by combining the direction of the sunlight and the vertex' normal.</p>
+<p>Each vertex of the model should come with a normal, which represents the angle the surface is facing, at that vertex. The shading itself isn’t very hard once you’ve loaded the normals.</p>
+<p>The amount of shadow is calculated by combining the direction of the sunlight and the vertex’ normal.</p>
 <p>What took me <em>way too long</em> to get here was a bug loading the <code>.obj</code> file. It turns out <code>.obj</code> files specify their faces using 1-indexing. <strong>1-indexing!</strong> So the code change to go from a completely broken state to a working state only took subtracting one in one place and several hours of frustration.</p>
-<p>Anyways, here's what the inside of a monkey looks like:</p>
+<p>Anyways, here’s what the inside of a monkey looks like:</p>
 <video width="600" height="504" controls>
 <source src="/videos/stars-9.ogv" type='video/ogg; codecs="theora, vorbis"'>
 </video>

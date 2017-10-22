@@ -42,7 +42,7 @@ code > span.in { font-style: italic; } /* Information */
 </video>
 <p>Note the very problematic right side!</p>
 <p>I think this is happening because either a vertex is incorrectly inserted or a vertex is lost somewhere along the line.</p>
-<p>I'm parsing what's called a <code>.obj</code> file — an ASCII text format for representing 3D objects. Here's an <code>obj</code> representation of a cube:</p>
+<p>I’m parsing what’s called a <code>.obj</code> file — an ASCII text format for representing 3D objects. Here’s an <code>obj</code> representation of a cube:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">mtllib</span> cube.mtl
 <span class="kw">o</span> Cube
 <span class="kw">v</span> 1.000000 -1.000000 -1.000000
@@ -67,7 +67,7 @@ code > span.in { font-style: italic; } /* Information */
 <span class="kw">f</span> 2//4 6//4 7//4 3//4
 <span class="kw">f</span> 3//5 7//5 8//5 4//5
 <span class="kw">f</span> 5//6 1//6 4//6 8//6</code></pre></div>
-<p>It's really simple — <code>v</code> loads a vertex, <code>vn</code> loads a vertex normal, and <code>f</code> loads a face (i.e. triangle).</p>
+<p>It’s really simple — <code>v</code> loads a vertex, <code>vn</code> loads a vertex normal, and <code>f</code> loads a face (i.e. triangle).</p>
 <p>The color of the monkey currently signifies the normals that have be loaded. You can kind of see how the color changes almost continuously depending on the orientation of the vertex. (Excluding the right side of course.) These normals will be used for lighting and shading the monkey, which is what I plan to implement soon.</p>
 <p>Right after I fix this blasted vertex bug!</p>
 <h3 id="stars-posts-and-adventures">Stars posts and adventures:</h3>

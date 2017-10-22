@@ -50,7 +50,7 @@ print_string (switch my_fruit {
   | Pear =&gt; <span class="st">&quot;you have a pear&quot;</span>
   | _ =&gt; <span class="st">&quot;you have neither an apple or a pear&quot;</span>
 });</code></pre></div>
-<h1 id="except...">Except...</h1>
+<h1 id="except">Except…</h1>
 <p>The cool part is how Reason handles exceptions: as another branch in a switch statement.</p>
 <div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust">exception My_exception;
 
@@ -72,8 +72,8 @@ switch (risky_function ()) {
   | <span class="cn">false</span> =&gt; <span class="st">&quot;handling false&quot;</span>
   | exception My_exception =&gt; <span class="st">&quot;handling my exception&quot;</span>
 };</code></pre></div>
-<p>Throwing an exception is different than returning something - an exception unwinds the stack until it's caught.</p>
-<p>Exceptions don't have to be used just for error scenarios. They are called &quot;exceptions&quot; after all - they are meant to propose an exceptional <strong>case</strong>.</p>
+<p>Throwing an exception is different than returning something - an exception unwinds the stack until it’s caught.</p>
+<p>Exceptions don’t have to be used just for error scenarios. They are called “exceptions” after all - they are meant to propose an exceptional <strong>case</strong>.</p>
 <p>Reason does a nice job of accepting this control flow mechanism as a case in a switch statement, whereas it looks very hacky in languages using try-catch.</p>
 <h4 id="python">Python</h4>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> read_first_line(filename):
@@ -100,8 +100,8 @@ print_string (switch (read_first_line <span class="st">&quot;file.txt&quot;</spa
   | _ =&gt; <span class="st">&quot;You didn&#39;t say hi :(&quot;</span>
   | exception (Sys_error _) =&gt; <span class="st">&quot;error reading your saltation&quot;</span>
 });</code></pre></div>
-<p>That's all!</p>
-<h1 id="whats-reason">What's Reason?</h1>
+<p>That’s all!</p>
+<h1 id="whats-reason">What’s Reason?</h1>
 <p>The code in this post is in <a href="http://facebook.github.io/reason">Reason</a>; an alternative parser for the OCaml compiler.</p>
 <h1 id = 'title' class='title'><a href="/"><span class='wrapper'>
 <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>

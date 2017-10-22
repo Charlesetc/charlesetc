@@ -36,14 +36,14 @@ code > span.in { font-style: italic; } /* Information */
 <header>
 <h1 class="title">Stars Finale</h1>
 </header>
-<p><em>I've been working with graphics on a project dubbed 'Stars'. This is its last hurrah!</em></p>
-<p>Without further ado, here's a bourgeois pig:</p>
+<p><em>I’ve been working with graphics on a project dubbed ‘Stars’. This is its last hurrah!</em></p>
+<p>Without further ado, here’s a bourgeois pig:</p>
 <video width="600" height="504" autoplay loop>
 <source src="/videos/stars-11.ogv" type='video/ogg; codecs="theora, vorbis"'>
 </video>
-<p>(It's bourgeois because it's shiny and therefore expensive.)</p>
-<p>So the lighting here comes in three parts. The first is what is called <strong>diffuse</strong> lighting. It's the kind of light that bounces off a surface equally in every direction.</p>
-<p>This is the bit of the fragment shader that renders diffuse light, i.e. the code run for each pixel on the GPU:</p>
+<p>(It’s bourgeois because it’s shiny and therefore expensive.)</p>
+<p>So the lighting here comes in three parts. The first is what is called <strong>diffuse</strong> lighting. It’s the kind of light that bounces off a surface equally in every direction.</p>
+<p>This is the bit of the fragment shader that renders diffuse light, i.e. the code run for each pixel on the GPU:</p>
 <div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span class="co">// pretend you are given these three vectors</span>
 <span class="dt">vec3</span> position;
 <span class="dt">vec3</span> normal;
@@ -60,8 +60,8 @@ outColor = <span class="fu">mix</span>(<span class="dt">vec3</span>(<span class=
 <figure>
 <img src="/images/just-diffuse-teapot.png" />
 </figure>
-<p>This does render a teapot! But it's a little dark: the backside is completely black and it looks kind of matt or chalky.</p>
-<p>To make it look less chalky, we're going to add a <strong>specular component</strong>. This is the kind of light that reflects unevenly: instead of the diffuse light that spreads out everywhere equally, the specular light highlights spots where the light is shining directly.</p>
+<p>This does render a teapot! But it’s a little dark: the backside is completely black and it looks kind of matt or chalky.</p>
+<p>To make it look less chalky, we’re going to add a <strong>specular component</strong>. This is the kind of light that reflects unevenly: instead of the diffuse light that spreads out everywhere equally, the specular light highlights spots where the light is shining directly.</p>
 <div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span class="co">// do some calculation to get the direction</span>
 <span class="co">// and intensity</span>
 <span class="dt">vec3</span> camera_direction = <span class="fu">normalize</span>(-position);
@@ -80,8 +80,8 @@ outColor = specular * <span class="dt">vec3</span>(<span class="dv">0</span>, <s
 <figure>
 <img src="/images/added-teapot.png" />
 </figure>
-<p>But it's still strangely black in some places! In reality, there is <strong>ambient</strong> light everywhere, bouncing off of walls and floors.</p>
-<p>Unfortunately, reflected light like that is really computationally intensive to calculate, so there's a widespread hack to add ambient lighting:</p>
+<p>But it’s still strangely black in some places! In reality, there is <strong>ambient</strong> light everywhere, bouncing off of walls and floors.</p>
+<p>Unfortunately, reflected light like that is really computationally intensive to calculate, so there’s a widespread hack to add ambient lighting:</p>
 <div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl">outColor = <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>);</code></pre></div>
 <figure>
 <img src="/images/teapot-ambient.png" />
@@ -90,7 +90,7 @@ outColor = specular * <span class="dt">vec3</span>(<span class="dv">0</span>, <s
 <figure>
 <img src="/images/realistic-teapot.png" />
 </figure>
-<p>And that's all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:</p>
+<p>And that’s all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:</p>
 <div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl">brightness = <span class="fu">max</span>(<span class="fu">ceil</span>(brightness * <span class="dv">4</span>), <span class="fl">0.0</span>);</code></pre></div>
 <p>So here are two cel-shaded teapots! (Sorry I know they skip sometimes.)</p>
 <video width="600" height="504" autoplay loop>
@@ -99,7 +99,7 @@ outColor = specular * <span class="dt">vec3</span>(<span class="dv">0</span>, <s
 <video width="600" height="504" autoplay loop>
 <source src="/videos/stars-12.ogv" type='video/ogg; codecs="theora, vorbis"'>
 </video>
-<p>I'm pretty happy with how this project has gone. I've definitely learned a lot about graphics, and even more about <a href="http://www.ponylang.org/discover">Pony</a>. (The entire project is written in Pony.)</p>
+<p>I’m pretty happy with how this project has gone. I’ve definitely learned a lot about graphics, and even more about <a href="http://www.ponylang.org/discover">Pony</a>. (The entire project is written in Pony.)</p>
 <p>Feel free to check out the <a href="https://gitlab.com/charlesetc/Stars">source code</a> on Gitlab!</p>
 <h3 id="stars-posts-and-adventures">Stars posts and adventures:</h3>
 
