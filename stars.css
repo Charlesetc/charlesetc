@@ -62,7 +62,7 @@ img {
   }
 }
 
-header .title {
+#header .title {
   margin-top: 40px;
   font-size: 44px;
   font-family:"Playfair Display", Times, serif;
@@ -78,7 +78,7 @@ p {
 #title a {
   color: black;
   outline: none;
-} 
+}
 .date {
   display: none;
 }

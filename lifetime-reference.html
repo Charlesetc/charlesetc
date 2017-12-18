@@ -1,76 +1,73 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
   <title>Lifetime Reference</title>
   <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="/posts.css">
-  <link rel="stylesheet" href="/charlesetc.github.io.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <link rel="stylesheet" href="././posts.css" type="text/css" />
+  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
 </head>
 <body>
-<header>
+<div id="header">
 <h1 class="title">Lifetime Reference</h1>
 <h3 class="date">2015-10-31 12:31:33</h3>
-</header>
+</div>
 <p>Places in Rust where you use any lifetime syntax will fall into two categories:</p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Concept</th>
-<th style="text-align: left;">Category</th>
-<th style="text-align: left;">Usage</th>
+<th align="left">Concept</th>
+<th align="left">Category</th>
+<th align="left">Usage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>fn</code></td>
-<td style="text-align: left;">creation</td>
-<td style="text-align: left;"><code>fn example_function&lt;'a&gt;()</code></td>
+<td align="left"><code>fn</code></td>
+<td align="left">creation</td>
+<td align="left"><code>fn example_function&lt;'a&gt;()</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>struct</code></td>
-<td style="text-align: left;">creation</td>
-<td style="text-align: left;"><code>struct Example&lt;'a&gt;</code></td>
+<td align="left"><code>struct</code></td>
+<td align="left">creation</td>
+<td align="left"><code>struct Example&lt;'a&gt;</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>enum</code></td>
-<td style="text-align: left;">creation</td>
-<td style="text-align: left;"><code>enum Test&lt;'a&gt;</code></td>
+<td align="left"><code>enum</code></td>
+<td align="left">creation</td>
+<td align="left"><code>enum Test&lt;'a&gt;</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>impl</code></td>
-<td style="text-align: left;">creation</td>
-<td style="text-align: left;"><code>impl&lt;'a&gt; Example&lt;'a&gt;</code></td>
+<td align="left"><code>impl</code></td>
+<td align="left">creation</td>
+<td align="left"><code>impl&lt;'a&gt; Example&lt;'a&gt;</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>struct</code></td>
-<td style="text-align: left;">reference</td>
-<td style="text-align: left;"><code>some_field: Example&lt;'a&gt;</code></td>
+<td align="left"><code>struct</code></td>
+<td align="left">reference</td>
+<td align="left"><code>some_field: Example&lt;'a&gt;</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>enum</code></td>
-<td style="text-align: left;">reference</td>
-<td style="text-align: left;"><code>some_field: Test&lt;'a&gt;</code></td>
+<td align="left"><code>enum</code></td>
+<td align="left">reference</td>
+<td align="left"><code>some_field: Test&lt;'a&gt;</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>&amp;</code></td>
-<td style="text-align: left;">reference</td>
-<td style="text-align: left;"><code>next_field: &amp;'a i32</code></td>
+<td align="left"><code>&amp;</code></td>
+<td align="left">reference</td>
+<td align="left"><code>next_field: &amp;'a i32</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>&amp;mut</code></td>
-<td style="text-align: left;">reference</td>
-<td style="text-align: left;"><code>next_field: &amp;'a mut i32</code></td>
+<td align="left"><code>&amp;mut</code></td>
+<td align="left">reference</td>
+<td align="left"><code>next_field: &amp;'a mut i32</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>Box</code></td>
-<td style="text-align: left;">reference</td>
-<td style="text-align: left;"><code>last_field: Box&lt;i32 + 'a&gt;</code></td>
+<td align="left"><code>Box</code></td>
+<td align="left">reference</td>
+<td align="left"><code>last_field: Box&lt;i32 + 'a&gt;</code></td>
 </tr>
 </tbody>
 </table>
@@ -79,7 +76,7 @@
 <p>When I say <em>‘reference’</em> I mean this is where we are being explicit about the lifetime of some reference type, using a lifetime that already exists.</p>
 <p>This is an important distinction that took me a while to get.</p>
 <h1 id="weird-things">Weird things</h1>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li><p>Yes, we see you <code>Box</code>, we’re ignoring you.</p></li>
 <li><p>Notice that ‘struct’ and ‘enum’ are in both categories. That’s because they use pretty much the same syntax for creation as they do for reference; it’s helpful to acknowledge that.</p></li>
 </ol>

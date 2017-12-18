@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
   <title>Stars Finale</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -11,31 +11,44 @@ div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
 td.sourceCode { padding-left: 5px; }
 code > span.kw { font-weight: bold; } /* Keyword */
-code > span.dt { text-decoration: underline; } /* DataType */
-code > span.co { font-style: italic; } /* Comment */
-code > span.al { font-weight: bold; } /* Alert */
-code > span.er { font-weight: bold; } /* Error */
-code > span.wa { font-style: italic; } /* Warning */
-code > span.cf { font-weight: bold; } /* ControlFlow */
+code > span.dt { color: #800000; } /* DataType */
+code > span.dv { color: #0000ff; } /* DecVal */
+code > span.bn { color: #0000ff; } /* BaseN */
+code > span.fl { color: #800080; } /* Float */
+code > span.ch { color: #ff00ff; } /* Char */
+code > span.st { color: #dd0000; } /* String */
+code > span.co { color: #808080; font-style: italic; } /* Comment */
+code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
+code > span.fu { color: #000080; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #ff00ff; } /* SpecialChar */
+code > span.vs { color: #dd0000; } /* VerbatimString */
+code > span.ss { color: #dd0000; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
 code > span.pp { font-weight: bold; } /* Preprocessor */
-code > span.do { font-style: italic; } /* Documentation */
-code > span.an { font-style: italic; } /* Annotation */
-code > span.cv { font-style: italic; } /* CommentVar */
-code > span.in { font-style: italic; } /* Information */
+code > span.at { } /* Attribute */
+code > span.do { color: #808080; font-style: italic; } /* Documentation */
+code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
   </style>
-  <link rel="stylesheet" href="/stars.css">
-  <link rel="stylesheet" href="/charlesetc.github.io.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <link rel="stylesheet" href="././stars.css" type="text/css" />
+  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
 </head>
 <body>
-<header>
+<div id="header">
 <h1 class="title">Stars Finale</h1>
-</header>
+</div>
 <p><em>I’ve been working with graphics on a project dubbed ‘Stars’. This is its last hurrah!</em></p>
 <p>Without further ado, here’s a bourgeois pig:</p>
 <video width="600" height="504" autoplay loop>
@@ -57,9 +70,10 @@ code > span.in { font-style: italic; } /* Information */
 outColor = <span class="fu">mix</span>(<span class="dt">vec3</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),
                <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>),
                brightness);</code></pre></div>
-<figure>
+<div class="figure">
 <img src="/images/just-diffuse-teapot.png" />
-</figure>
+
+</div>
 <p>This does render a teapot! But it’s a little dark: the backside is completely black and it looks kind of matt or chalky.</p>
 <p>To make it look less chalky, we’re going to add a <strong>specular component</strong>. This is the kind of light that reflects unevenly: instead of the diffuse light that spreads out everywhere equally, the specular light highlights spots where the light is shining directly.</p>
 <div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span class="co">// do some calculation to get the direction</span>
@@ -73,23 +87,27 @@ outColor = <span class="fu">mix</span>(<span class="dt">vec3</span>(<span class=
 <span class="co">// set the color to vary with specular</span>
 outColor = specular * <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>);</code></pre></div>
 <p>This gives us the shiny part of light!</p>
-<figure>
+<div class="figure">
 <img src="/images/just-specular-teapot.png" />
-</figure>
+
+</div>
 <p>Combining these two lighting methods, we get a fairly well-lit teapot:</p>
-<figure>
+<div class="figure">
 <img src="/images/added-teapot.png" />
-</figure>
+
+</div>
 <p>But it’s still strangely black in some places! In reality, there is <strong>ambient</strong> light everywhere, bouncing off of walls and floors.</p>
 <p>Unfortunately, reflected light like that is really computationally intensive to calculate, so there’s a widespread hack to add ambient lighting:</p>
 <div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl">outColor = <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>);</code></pre></div>
-<figure>
+<div class="figure">
 <img src="/images/teapot-ambient.png" />
-</figure>
+
+</div>
 <p>Yep, we just add a lighter color everywhere. And now we finally get a decently lighted teapot!</p>
-<figure>
+<div class="figure">
 <img src="/images/realistic-teapot.png" />
-</figure>
+
+</div>
 <p>And that’s all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:</p>
 <div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl">brightness = <span class="fu">max</span>(<span class="fu">ceil</span>(brightness * <span class="dv">4</span>), <span class="fl">0.0</span>);</code></pre></div>
 <p>So here are two cel-shaded teapots! (Sorry I know they skip sometimes.)</p>

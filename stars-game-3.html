@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
   <title>Stars 003</title>
   <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="/stars.css">
-  <link rel="stylesheet" href="/charlesetc.github.io.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <link rel="stylesheet" href="././stars.css" type="text/css" />
+  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
 </head>
 <body>
-<header>
+<div id="header">
 <h1 class="title">Stars 003</h1>
-</header>
+</div>
 <p>With the release of <a href="https://gitlab.com/charlesetc/Stars/tree/2eeedf9c916958eee5d6aeeb0dbb0f94570fb17c">commit 2eeedf9</a> there is now a three dimensional cube!</p>
 <video width="600" height="504" controls>
 <source src="/videos/stars-4.ogv" type='video/ogg; codecs="theora, vorbis"'>
@@ -24,7 +21,7 @@
 <p>It’s pretty exciting because the rainbow triangle is actually ‘drawn’ after the cube, but the cube shows up on top. The GPU does a second pass after rendering all of the vertices and fragments to decide how they overlap.</p>
 <p>I also spent a fair amount of time today trying to get the cube to rotate. This is done by giving the cube a rotation matrix which you change a bit after each render. It looks very strange at the moment because I think I’m rotating around the origin, whereas a spinning cube should rotate around its center.</p>
 <p>Anyway I have two goals for the upcoming days:</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>Rotate the cube.</li>
 <li>Light the cube so that the faces get darker or lighter as it rotates.</li>
 </ol>
