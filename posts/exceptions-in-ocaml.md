@@ -78,7 +78,7 @@ try:
     print "You didn't say hi :("
 except IOError:
   print "error reading your salutation"
-  
+
 ```
 
 #### Reason

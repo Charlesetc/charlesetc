@@ -71,7 +71,7 @@ let get_radius x = match x with
 | { radius ; _ } -> radius
 
 let () =
-  
+
   (* define some data *)
   let cylinder = { radius = 2. ; height = 3. } in
   let circle = { radius = 1.2 ; color = "blue" } in

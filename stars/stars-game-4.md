@@ -15,7 +15,7 @@ a shape (in this case, a triangle defined by 3 points), and
 calculating each pixel it should take up. The cool thing about
 modern OpenGL, I think, is that there isn't a direct way to say
 `here are triangles; here are their colors; please draw them!`
-Instead, you give the GPU some data and a shader program, and say 
+Instead, you give the GPU some data and a shader program, and say
 `please run this program once for each n bytes of the data`.
 The shader program, which is run many times in
 parallel, then constructs vertices from this data. You, as
