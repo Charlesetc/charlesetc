@@ -4,7 +4,7 @@ name=$(basename $(pwd))
 
 style=kate
 
-flags=" -s --highlight-style $style"
+flags=" -s --smart --highlight-style $style"
 
 if [ -f "$name.html" ] ; then
   flags="$flags -A $name.html "

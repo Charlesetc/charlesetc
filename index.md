@@ -9,6 +9,7 @@ If you want to talk, my e-mail is “charlespipin” at the largest e-mail provi
 <div class='table-of-contents'>
 ## Archive
 
+* _Dec 18, 2017_ - [new font](new-font.html)
 * _Aug 25, 2017_ - [stars finale](stars-game-7.html)
 * _Aug 23, 2017_ - [stars 006 - dark teapot](stars-game-6.html)
 * _Aug 22, 2017_ - [stars 005 - lopsided monkey](stars-game-5.html)
