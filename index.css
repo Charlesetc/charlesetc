@@ -1,4 +1,8 @@
 
+header {
+  display: none;
+}
+
 #title {
   position: absolute;
   top: 80px;
