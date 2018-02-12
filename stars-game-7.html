@@ -1,54 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Stars Finale</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; } /* Keyword */
-code > span.dt { color: #800000; } /* DataType */
-code > span.dv { color: #0000ff; } /* DecVal */
-code > span.bn { color: #0000ff; } /* BaseN */
-code > span.fl { color: #800080; } /* Float */
-code > span.ch { color: #ff00ff; } /* Char */
-code > span.st { color: #dd0000; } /* String */
-code > span.co { color: #808080; font-style: italic; } /* Comment */
-code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
-code > span.fu { color: #000080; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #ff00ff; } /* SpecialChar */
-code > span.vs { color: #dd0000; } /* VerbatimString */
-code > span.ss { color: #dd0000; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { } /* ControlFlow */
-code > span.op { } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #808080; font-style: italic; } /* Documentation */
-code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="././stars.css" type="text/css" />
-  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="././stars.css">
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Stars Finale</h1>
-</div>
+</header>
 <p><em>I’ve been working with graphics on a project dubbed ‘Stars’. This is its last hurrah!</em></p>
 <p>Without further ado, here’s a bourgeois pig:</p>
 <video width="600" height="504" autoplay loop>
@@ -57,59 +97,44 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
 <p>(It’s bourgeois because it’s shiny and therefore expensive.)</p>
 <p>So the lighting here comes in three parts. The first is what is called <strong>diffuse</strong> lighting. It’s the kind of light that bounces off a surface equally in every direction.</p>
 <p>This is the bit of the fragment shader that renders diffuse light, i.e. the code run for each pixel on the GPU:</p>
-<div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span class="co">// pretend you are given these three vectors</span>
-<span class="dt">vec3</span> position;
-<span class="dt">vec3</span> normal;
-<span class="dt">vec3</span> light_direction;
-
-<span class="co">// calculate how light or dark this pixel should be</span>
-<span class="co">// by combining the normal and light direction</span>
-<span class="dt">float</span> brightness = <span class="fu">dot</span>(normal, light_direction);
-
-<span class="co">// set the color between black and cyan</span>
-outColor = <span class="fu">mix</span>(<span class="dt">vec3</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),
-               <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>),
-               brightness);</code></pre></div>
-<div class="figure">
-<img src="/images/just-diffuse-teapot.png" />
-
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode glsl"><code class="sourceCode glsl"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">// pretend you are given these three vectors</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="dt">vec3</span> position;</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="dt">vec3</span> normal;</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="dt">vec3</span> light_direction;</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">// calculate how light or dark this pixel should be</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">// by combining the normal and light direction</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="dt">float</span> brightness = <span class="bu">dot</span>(normal, light_direction);</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">// set the color between black and cyan</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">outColor = <span class="bu">mix</span>(<span class="dt">vec3</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">               <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>),</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">               brightness);</a></code></pre></div>
+<p><img src="/images/just-diffuse-teapot.png" /></p>
 <p>This does render a teapot! But it’s a little dark: the backside is completely black and it looks kind of matt or chalky.</p>
 <p>To make it look less chalky, we’re going to add a <strong>specular component</strong>. This is the kind of light that reflects unevenly: instead of the diffuse light that spreads out everywhere equally, the specular light highlights spots where the light is shining directly.</p>
-<div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span class="co">// do some calculation to get the direction</span>
-<span class="co">// and intensity</span>
-<span class="dt">vec3</span> camera_direction = <span class="fu">normalize</span>(-position);
-<span class="dt">vec3</span> half_direction = <span class="fu">normalize</span>(
-    light_direction + camera_direction);
-<span class="dt">float</span> specular = <span class="fu">pow</span>(
-    <span class="fu">dot</span>(half_direction, normal)), <span class="fl">16.0</span>);
-
-<span class="co">// set the color to vary with specular</span>
-outColor = specular * <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>);</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode glsl"><code class="sourceCode glsl"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">// do some calculation to get the direction</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">// and intensity</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="dt">vec3</span> camera_direction = <span class="bu">normalize</span>(-position);</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="dt">vec3</span> half_direction = <span class="bu">normalize</span>(</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    light_direction + camera_direction);</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="dt">float</span> specular = <span class="bu">pow</span>(</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="bu">dot</span>(half_direction, normal)), <span class="fl">16.0</span>);</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">// set the color to vary with specular</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">outColor = specular * <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>);</a></code></pre></div>
 <p>This gives us the shiny part of light!</p>
-<div class="figure">
-<img src="/images/just-specular-teapot.png" />
-
-</div>
+<p><img src="/images/just-specular-teapot.png" /></p>
 <p>Combining these two lighting methods, we get a fairly well-lit teapot:</p>
-<div class="figure">
-<img src="/images/added-teapot.png" />
-
-</div>
+<p><img src="/images/added-teapot.png" /></p>
 <p>But it’s still strangely black in some places! In reality, there is <strong>ambient</strong> light everywhere, bouncing off of walls and floors.</p>
 <p>Unfortunately, reflected light like that is really computationally intensive to calculate, so there’s a widespread hack to add ambient lighting:</p>
-<div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl">outColor = <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>);</code></pre></div>
-<div class="figure">
-<img src="/images/teapot-ambient.png" />
-
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode glsl"><code class="sourceCode glsl"><a class="sourceLine" id="cb3-1" data-line-number="1">outColor = <span class="dt">vec3</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>);</a></code></pre></div>
+<p><img src="/images/teapot-ambient.png" /></p>
 <p>Yep, we just add a lighter color everywhere. And now we finally get a decently lighted teapot!</p>
-<div class="figure">
-<img src="/images/realistic-teapot.png" />
-
-</div>
+<p><img src="/images/realistic-teapot.png" /></p>
 <p>And that’s all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:</p>
-<div class="sourceCode"><pre class="sourceCode glsl"><code class="sourceCode glsl">brightness = <span class="fu">max</span>(<span class="fu">ceil</span>(brightness * <span class="dv">4</span>), <span class="fl">0.0</span>);</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode glsl"><code class="sourceCode glsl"><a class="sourceLine" id="cb4-1" data-line-number="1">brightness = <span class="bu">max</span>(<span class="bu">ceil</span>(brightness * <span class="dv">4</span>), <span class="fl">0.0</span>);</a></code></pre></div>
 <p>So here are two cel-shaded teapots! (Sorry I know they skip sometimes.)</p>
 <video width="600" height="504" autoplay loop>
 <source src="/videos/stars-13.ogv" type='video/ogg; codecs="theora, vorbis"'>

@@ -1,117 +1,157 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Exceptions in Reason (OCaml)</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; } /* Keyword */
-code > span.dt { color: #800000; } /* DataType */
-code > span.dv { color: #0000ff; } /* DecVal */
-code > span.bn { color: #0000ff; } /* BaseN */
-code > span.fl { color: #800080; } /* Float */
-code > span.ch { color: #ff00ff; } /* Char */
-code > span.st { color: #dd0000; } /* String */
-code > span.co { color: #808080; font-style: italic; } /* Comment */
-code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
-code > span.fu { color: #000080; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #ff00ff; } /* SpecialChar */
-code > span.vs { color: #dd0000; } /* VerbatimString */
-code > span.ss { color: #dd0000; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { } /* ControlFlow */
-code > span.op { } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #808080; font-style: italic; } /* Documentation */
-code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="././posts.css" type="text/css" />
-  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="././posts.css">
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Exceptions in Reason (OCaml)</h1>
-<h3 class="date">2016-06-22 02:00:42 -0400</h3>
-</div>
+<p class="date">2016-06-22 02:00:42 -0400</p>
+</header>
 <h1 id="pattern-matching">Pattern Matching</h1>
 <p>A large part of function programming is pattern matching:</p>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="co">/* A new and delicious enum */</span>
-<span class="kw">type</span> fruit = Apple | Pear | Pineapple | Orange;
-
-<span class="kw">let</span> my_fruit = Pear;
-
-<span class="co">/* print the outcome of the switch statement */</span>
-print_string (switch my_fruit {
-  | Apple =&gt; <span class="st">&quot;you have an apple&quot;</span>
-  | Pear =&gt; <span class="st">&quot;you have a pear&quot;</span>
-  | _ =&gt; <span class="st">&quot;you have neither an apple or a pear&quot;</span>
-});</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">/* A new and delicious enum */</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">type</span> fruit = Apple | Pear | Pineapple | Orange;</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">let</span> my_fruit = Pear;</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">/* print the outcome of the switch statement */</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">print_string (switch my_fruit <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  | Apple =&gt; <span class="st">&quot;you have an apple&quot;</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  | Pear =&gt; <span class="st">&quot;you have a pear&quot;</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  | _ =&gt; <span class="st">&quot;you have neither an apple or a pear&quot;</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="op">}</span>);</a></code></pre></div>
 <h1 id="except">Except…</h1>
 <p>The cool part is how Reason handles exceptions: as another branch in a switch statement.</p>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust">exception My_exception;
-
-<span class="co">/*</span>
-<span class="co"> * Here&#39;s a function that occasionally throws an exception</span>
-<span class="co"> */</span>
-<span class="kw">let</span> risky_function =&gt; switch (Random.<span class="dt">int</span> <span class="dv">3</span>) {
-  | <span class="dv">0</span> =&gt; <span class="cn">true</span>
-  | <span class="dv">1</span> =&gt; <span class="cn">false</span>
-  | <span class="dv">2</span> =&gt; raise My_exception
-};
-
-<span class="co">/*</span>
-<span class="co"> * We can match against the possible cases of risky_function,</span>
-<span class="co"> * even exceptions.</span>
-<span class="co"> */</span>
-switch (risky_function ()) {
-  | <span class="cn">true</span> =&gt; <span class="st">&quot;handling true&quot;</span>
-  | <span class="cn">false</span> =&gt; <span class="st">&quot;handling false&quot;</span>
-  | exception My_exception =&gt; <span class="st">&quot;handling my exception&quot;</span>
-};</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb2-1" data-line-number="1">exception My_exception;</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">/*</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"> * Here&#39;s a function that occasionally throws an exception</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">let</span> risky_function =&gt; switch (Random.<span class="dt">int</span> <span class="dv">3</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  | <span class="dv">0</span> =&gt; <span class="cn">true</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">  | <span class="dv">1</span> =&gt; <span class="cn">false</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  | <span class="dv">2</span> =&gt; raise My_exception</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="op">}</span>;</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">/*</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co"> * We can match against the possible cases of risky_function,</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co"> * even exceptions.</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">switch (risky_function ()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">  | <span class="cn">true</span> =&gt; <span class="st">&quot;handling true&quot;</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">  | <span class="cn">false</span> =&gt; <span class="st">&quot;handling false&quot;</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">  | exception My_exception =&gt; <span class="st">&quot;handling my exception&quot;</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="op">}</span>;</a></code></pre></div>
 <p>Throwing an exception is different than returning something - an exception unwinds the stack until it’s caught.</p>
 <p>Exceptions don’t have to be used just for error scenarios. They are called “exceptions” after all - they are meant to propose an exceptional <strong>case</strong>.</p>
 <p>Reason does a nice job of accepting this control flow mechanism as a case in a switch statement, whereas it looks very hacky in languages using try-catch.</p>
 <h4 id="python">Python</h4>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> read_first_line(filename):
-  f <span class="op">=</span> <span class="bu">open</span>(filename, <span class="st">&quot;r&quot;</span>)
-  <span class="cf">return</span> f.readline()
-
-<span class="cf">try</span>:
-  line <span class="op">=</span> read_first_line(<span class="st">&quot;file.txt&quot;</span>)
-  <span class="cf">if</span> line <span class="op">==</span> <span class="st">&quot;hi&quot;</span>:
-    message<span class="op">=</span> <span class="st">&quot;You said &#39;hi&#39;!&quot;</span>
-  <span class="cf">else</span>:
-    <span class="bu">print</span> <span class="st">&quot;You didn&#39;t say hi :(&quot;</span>
-<span class="cf">except</span> <span class="pp">IOError</span>:
-  <span class="bu">print</span> <span class="st">&quot;error reading your salutation&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">def</span> read_first_line(filename):</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  f <span class="op">=</span> <span class="bu">open</span>(filename, <span class="st">&quot;r&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="cf">return</span> f.readline()</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  line <span class="op">=</span> read_first_line(<span class="st">&quot;file.txt&quot;</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="cf">if</span> line <span class="op">==</span> <span class="st">&quot;hi&quot;</span>:</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    message<span class="op">=</span> <span class="st">&quot;You said &#39;hi&#39;!&quot;</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="bu">print</span> <span class="st">&quot;You didn&#39;t say hi :(&quot;</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="cf">except</span> <span class="pp">IOError</span>:</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  <span class="bu">print</span> <span class="st">&quot;error reading your salutation&quot;</span></a></code></pre></div>
 <h4 id="reason">Reason</h4>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="kw">let</span> read_first_line filename =&gt; {
-  <span class="kw">let</span> f = open_in filename;
-  input_line f
-};
-
-print_string (switch (read_first_line <span class="st">&quot;file.txt&quot;</span>) {
-  | <span class="st">&quot;hi&quot;</span> =&gt; <span class="st">&quot;You said &#39;hi&#39;!&quot;</span>
-  | _ =&gt; <span class="st">&quot;You didn&#39;t say hi :(&quot;</span>
-  | exception (Sys_error _) =&gt; <span class="st">&quot;error reading your saltation&quot;</span>
-});</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">let</span> read_first_line filename =&gt; <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="kw">let</span> f = open_in filename;</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  input_line f</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="op">}</span>;</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">print_string (switch (read_first_line <span class="st">&quot;file.txt&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  | <span class="st">&quot;hi&quot;</span> =&gt; <span class="st">&quot;You said &#39;hi&#39;!&quot;</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  | _ =&gt; <span class="st">&quot;You didn&#39;t say hi :(&quot;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  | exception (Sys_error _) =&gt; <span class="st">&quot;error reading your saltation&quot;</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="op">}</span>);</a></code></pre></div>
 <p>That’s all!</p>
 <h1 id="whats-reason">What’s Reason?</h1>
 <p>The code in this post is in <a href="http://facebook.github.io/reason">Reason</a>; an alternative parser for the OCaml compiler.</p>

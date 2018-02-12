@@ -1,54 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Rust Lifetimes</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; } /* Keyword */
-code > span.dt { color: #800000; } /* DataType */
-code > span.dv { color: #0000ff; } /* DecVal */
-code > span.bn { color: #0000ff; } /* BaseN */
-code > span.fl { color: #800080; } /* Float */
-code > span.ch { color: #ff00ff; } /* Char */
-code > span.st { color: #dd0000; } /* String */
-code > span.co { color: #808080; font-style: italic; } /* Comment */
-code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
-code > span.fu { color: #000080; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #ff00ff; } /* SpecialChar */
-code > span.vs { color: #dd0000; } /* VerbatimString */
-code > span.ss { color: #dd0000; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { } /* ControlFlow */
-code > span.op { } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #808080; font-style: italic; } /* Documentation */
-code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Rust Lifetimes</h1>
-<h3 class="date">2015-10-29 12:31:33</h3>
-</div>
+<p class="date">2015-10-29 12:31:33</p>
+</header>
 <p>Lifetimes are pretty much what makes Rust Rust.</p>
 <p>Easy concurrency, straightforward memory allocation, and overall data safety would not be possible without explicit lifetimes.</p>
 <p>But they are also tricky, and this is aimed at helping people understand the concepts and syntax.</p>
@@ -57,7 +97,7 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
 <p>Each time a reference is returned by or passed into a function, Rust checks at compile time to make sure it fulfills the lifetime requirement specified in the type signature.</p>
 <p>So every reference in Rust (i.e. pointer) has a lifetime. A lifetime is part of the type signature for any reference. Sometimes they can be elided and the compiler can infer them. Nonetheless, you cannot program Rust without knowing how to specify lifetimes.</p>
 <p>Lifetimes fulfill two roles for Rust:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>To know when it’s safe to dereference a pointer</p></li>
 <li><p>To allow data to be shared safely</p></li>
 </ol>
@@ -72,40 +112,40 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
 <p>This is a biggie. A function can define a lifetime that can be used in it’s type declarations.</p>
 <p>This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over. And if not, you need to make sure it has an appropriate lifetime.</p>
 <p>In Go, you can do this:</p>
-<div class="sourceCode"><pre class="sourceCode go"><code class="sourceCode go"><span class="kw">func</span> example_function() *<span class="dt">int</span> {
-  b := <span class="dv">3</span>
-  <span class="kw">return</span> &amp;b
-}
-
-<span class="kw">func</span> main() {
-  fmt.Println(*example_function());
-}</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">func</span> example_function() *<span class="dt">int</span> {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  b := <span class="dv">3</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">return</span> &amp;b</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">func</span> main() {</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  fmt.Println(*example_function());</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">}</a></code></pre></div>
 <p>However, you cannot do that in Rust:</p>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="kw">fn</span> example_function&lt;<span class="ot">&#39;a</span>&gt;() -&gt; &amp;<span class="ot">&#39;a</span> <span class="dt">i32</span> {
-  <span class="kw">let</span> b = <span class="dv">3</span>;
-  &amp;b <span class="co">// this does not compile</span>
-}
-
-<span class="kw">fn</span> main() {
-  <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span>, example_function());
-}</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">fn</span> example_function&lt;<span class="ot">&#39;a</span>&gt;() -&gt; &amp;<span class="ot">&#39;a</span> <span class="dt">i32</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">let</span> b = <span class="dv">3</span>;</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  &amp;b <span class="co">// this does not compile</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">fn</span> main() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span>, example_function());</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="op">}</span></a></code></pre></div>
 <p>The reason is that <code>&amp;b</code> does not live long enough to be dereferenced outside of the function that made it.</p>
 <p>Why is this so important? Because this is what can happen in C:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span>* example_function(<span class="dt">void</span>) {
-  <span class="dt">int</span> a = <span class="dv">2</span>;
-  <span class="kw">return</span> &amp;a;
-}
-
-<span class="dt">void</span> do_something(<span class="dt">int</span> b) {
-  <span class="co">// lies, don&#39;t do anything</span>
-}
-
-<span class="dt">int</span> main(<span class="dt">void</span>) {
-  <span class="dt">int</span>* c = example_function();
-  do_something(<span class="dv">3</span>);
-  <span class="dt">int</span> d = <span class="dv">4</span>;
-  printf(<span class="st">&quot;%i</span><span class="ch">\n</span><span class="st">&quot;</span>, *c);
-}</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">int</span>* example_function(<span class="dt">void</span>) {</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="dt">int</span> a = <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="cf">return</span> &amp;a;</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="dt">void</span> do_something(<span class="dt">int</span> b) {</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="co">// lies, don&#39;t do anything</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="dt">int</span> main(<span class="dt">void</span>) {</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  <span class="dt">int</span>* c = example_function();</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  do_something(<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">  <span class="dt">int</span> d = <span class="dv">4</span>;</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">  printf(<span class="st">&quot;%i</span><span class="sc">\n</span><span class="st">&quot;</span>, *c);</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">}</a></code></pre></div>
 <p>In C this is Undefined Behavior. When I run this, it just prints “3”.</p>
 <p>That’s right, the data can just change under your nose. I was honestly scared when I ran that. But Rust prevents crazy things like that from taking place!</p>
 <p>So just to explicitly point out the syntax:</p>
@@ -119,37 +159,37 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
 <p>If a struct includes a reference to something, then that reference damn sure better last as long as the struct.</p>
 <p>Here’s how you can make sure of that:</p>
 <h2 id="wrong-example">Wrong example:</h2>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="kw">struct</span> Sheep {
-  age: &amp;<span class="dt">i32</span>,
-}
-
-<span class="kw">fn</span> main() {
-    <span class="kw">let</span> a = <span class="dv">3</span>;
-    <span class="kw">let</span> s = Sheep { age: &amp;a };
-    <span class="pp">println!</span>(<span class="st">&quot;{};&quot;</span>, s)
-}</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">struct</span> Sheep <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  age: &amp;<span class="dt">i32</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">fn</span> main() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="kw">let</span> a = <span class="dv">3</span>;</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="kw">let</span> s = Sheep <span class="op">{</span> age: &amp;a <span class="op">}</span>;</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="pp">println!</span>(<span class="st">&quot;{};&quot;</span>, s)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
 <p>This gives the following error:</p>
-<div class="sourceCode"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span class="st">error: </span>missing lifetime specifier [<span class="dt">E0106</span>]
-        <span class="st">age: </span>&amp;i32,
-             ^~~~</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ruby"><code class="sourceCode ruby"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="st">error: </span>missing lifetime specifier [<span class="dt">E0106</span>]</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">        <span class="st">age: </span>&amp;i32,</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">             ^~~~</a></code></pre></div>
 <p>Rust is mad. In the struct definition, you haven’t told it how long the reference to the <code>i32</code> is allowed to stay around. And yet, in order for your code to be safe, it has to stick around for at least as long as the struct.</p>
 <h2 id="right-example">Right Example</h2>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="kw">struct</span> Sheep&lt;<span class="ot">&#39;c</span>&gt; {
-  age: &amp;<span class="ot">&#39;c</span> <span class="dt">i32</span>,
-}
-
-<span class="kw">fn</span> main() {
-    <span class="kw">let</span> a = <span class="dv">3</span>;
-    <span class="kw">let</span> s = Sheep { age: &amp;a };
-    <span class="pp">println!</span>(<span class="st">&quot;{};&quot;</span>, s)
-}</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">struct</span> Sheep&lt;<span class="ot">&#39;c</span>&gt; <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  age: &amp;<span class="ot">&#39;c</span> <span class="dt">i32</span>,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">fn</span> main() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    <span class="kw">let</span> a = <span class="dv">3</span>;</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="kw">let</span> s = Sheep <span class="op">{</span> age: &amp;a <span class="op">}</span>;</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">    <span class="pp">println!</span>(<span class="st">&quot;{};&quot;</span>, s)</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
 <p>You’ll notice that not much here has changed. But now Rust has pronounced your code safe — Hurray!</p>
 <p>Here are the changes:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><code>Sheep&lt;'c&gt;</code> instead of <code>Sheep</code></li>
 </ol>
 <p>This is making a parameter for the struct in Rust — It’s lifetime might have to depend on the lifetimes of its fields, so now you are able to say how and which ones. (Note: you can do things like <code>Sheep&lt;'c, 'd&gt;</code> if you need more than one lifetime.)</p>
-<ol start="2" style="list-style-type: decimal">
+<ol start="2" type="1">
 <li><p><code>age: &amp;'c i32</code> instead of <code>age: &amp;i32</code></p>
 <p>Now this says that the integer has to live for as long as the struct.</p></li>
 </ol>
@@ -158,31 +198,31 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
 <p>There is one other place where a lifetime can be defined — Implementations.</p>
 <p>It’s very similar to structs. Each implementation is an implementation of a certain trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.</p>
 <h2 id="wrong-example-1">Wrong Example</h2>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="kw">struct</span> Sheep&lt;<span class="ot">&#39;c</span>&gt; {
-  age: &amp;<span class="ot">&#39;c</span> <span class="kw">mut</span> <span class="dt">i32</span>,
-}
-
-<span class="kw">impl</span> Sheep {
-    <span class="kw">fn</span> grow_old(&amp;<span class="kw">mut</span> <span class="kw">self</span>)  {
-        *<span class="kw">self</span>.age += <span class="dv">100</span>
-    }
-}</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">struct</span> Sheep&lt;<span class="ot">&#39;c</span>&gt; <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  age: &amp;<span class="ot">&#39;c</span> <span class="kw">mut</span> <span class="dt">i32</span>,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">impl</span> Sheep <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw">fn</span> grow_old(&amp;<span class="kw">mut</span> <span class="kw">self</span>)  <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">        *<span class="kw">self</span>.age += <span class="dv">100</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
 <p>This fails with the following:</p>
-<div class="sourceCode"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span class="st">error: </span>wrong number of lifetime <span class="st">parameters: </span>expected <span class="dv">1</span>, found <span class="dv">0</span> [<span class="dt">E0107</span>]
-        impl <span class="dt">Sheep</span> {
-             ^~~~~</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode ruby"><code class="sourceCode ruby"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="st">error: </span>wrong number of lifetime <span class="st">parameters: </span>expected <span class="dv">1</span>, found <span class="dv">0</span> [<span class="dt">E0107</span>]</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">        impl <span class="dt">Sheep</span> {</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">             ^~~~~</a></code></pre></div>
 <h2 id="right-example-1">Right Example</h2>
 <p>What’s the problem?</p>
 <p><code>Sheep</code> takes a lifetime parameter now, so one must be supplied:</p>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="kw">struct</span> Sheep&lt;<span class="ot">&#39;c</span>&gt; {
-  age: &amp;<span class="ot">&#39;c</span> <span class="kw">mut</span> <span class="dt">i32</span>,
-}
-
-<span class="kw">impl</span>&lt;<span class="ot">&#39;c</span>&gt; Sheep&lt;<span class="ot">&#39;c</span>&gt; {
-    <span class="kw">fn</span> grow_old(&amp;<span class="kw">mut</span> <span class="kw">self</span>) {
-        *<span class="kw">self</span>.age += <span class="dv">100</span>
-    }
-}</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">struct</span> Sheep&lt;<span class="ot">&#39;c</span>&gt; <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  age: &amp;<span class="ot">&#39;c</span> <span class="kw">mut</span> <span class="dt">i32</span>,</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">impl</span>&lt;<span class="ot">&#39;c</span>&gt; Sheep&lt;<span class="ot">&#39;c</span>&gt; <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">    <span class="kw">fn</span> grow_old(&amp;<span class="kw">mut</span> <span class="kw">self</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">        *<span class="kw">self</span>.age += <span class="dv">100</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
 <p>Note that <code>impl&lt;'c&gt;</code> names a new lifetime and <code>Sheep&lt;'c&gt;</code> says that all <code>self</code>’s in this implementation have at least the lifetime <code>'c</code>.</p>
 <p>This is a lot like an extenuation of the lifetimes with structs, but there is strange syntax with the <code>impl&lt;'c&gt; Sheep&lt;'c&gt;</code> so I wanted to point it out.</p>
 <h1 id="the-end">The End</h1>

@@ -62,7 +62,7 @@ img {
   }
 }
 
-#header .title {
+#header .title, header .title {
   margin-top: 40px;
   font-size: 44px;
   font-family:"Playfair Display", Times, serif;

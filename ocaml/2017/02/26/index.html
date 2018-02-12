@@ -1,54 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>OCaml Objects, like wow</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; } /* Keyword */
-code > span.dt { color: #800000; } /* DataType */
-code > span.dv { color: #0000ff; } /* DecVal */
-code > span.bn { color: #0000ff; } /* BaseN */
-code > span.fl { color: #800080; } /* Float */
-code > span.ch { color: #ff00ff; } /* Char */
-code > span.st { color: #dd0000; } /* String */
-code > span.co { color: #808080; font-style: italic; } /* Comment */
-code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
-code > span.fu { color: #000080; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #ff00ff; } /* SpecialChar */
-code > span.vs { color: #dd0000; } /* VerbatimString */
-code > span.ss { color: #dd0000; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { } /* ControlFlow */
-code > span.op { } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #808080; font-style: italic; } /* Documentation */
-code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="/charlesetc.github.io.css" type="text/css" />
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/charlesetc.github.io.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">OCaml Objects, like wow</h1>
-<h3 class="date">2017-02-26 12:14:30 -0700</h3>
-</div>
+<p class="date">2017-02-26 12:14:30 -0700</p>
+</header>
 <p>OCaml is an extremely well-thought out language. Objects might seem like something most languages have, but OCaml brings something pretty special to the table.</p>
 <p>I’ll go over:</p>
 <ul>
@@ -56,77 +96,77 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
 <li><strong>objects</strong> – herein lies awesome 🚀🎩</li>
 </ul>
 <h1 id="records">Records</h1>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> circle = {
-  radius : float ;
-  color : <span class="dt">string</span> ;
-}</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">type</span> circle = {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  radius : <span class="dt">float</span> ;</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  color : <span class="dt">string</span> ;</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">}</a></code></pre></div>
 <p>This makes a circle type with radius and color attributes! Not too fancy yet.</p>
 <p>A basic circle instantiation:</p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">let</span> blue_circle = { radius = <span class="fl">2.0</span> ; color = <span class="st">&quot;blue&quot;</span> }</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">let</span> blue_circle = { radius = <span class="fl">2.0</span> ; color = <span class="st">&quot;blue&quot;</span> }</a></code></pre></div>
 <h2 id="pattern-matching">Pattern matching</h2>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">match</span> circle <span class="kw">with</span>
-| { radius ; color = <span class="st">&quot;red&quot;</span> } -&gt; string_of_float radius
-| { color ; _ } -&gt; color</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">match</span> circle <span class="kw">with</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">| { radius ; color = <span class="st">&quot;red&quot;</span> } -&gt; <span class="dt">string_of_float</span> radius</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">| { color ; _ } -&gt; color</a></code></pre></div>
 <p>In the first branch, <code>radius</code> is a variable for <code>radius</code> field, and we check for only red circles.</p>
 <p>In the second, we ignore all fields other than binding <code>color</code>.</p>
 <h1 id="the-problem">the Problem</h1>
 <p>Let’s consider two very alike record types:</p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* same circle type we started with: *)</span>
-<span class="kw">type</span> circle = {
-  radius : float ;
-  color : <span class="dt">string</span> ;
-}
-
-<span class="co">(* cylinder type is similar but has a height and no color: *)</span>
-<span class="kw">type</span> cylinder = {
-  radius : float ;
-  height : float ;
-}
-
-<span class="co">(* a function to get the radius from an unspecified type *)</span>
-<span class="kw">let</span> get_radius x = <span class="kw">match</span> x <span class="kw">with</span>
-| { radius ; _ } -&gt; radius
-
-<span class="kw">let</span> () =
-
-  <span class="co">(* define some data *)</span>
-  <span class="kw">let</span> cylinder = { radius = <span class="fl">2.</span> ; height = <span class="fl">3.</span> } <span class="kw">in</span>
-  <span class="kw">let</span> circle = { radius = <span class="fl">1.2</span> ; color = <span class="st">&quot;blue&quot;</span> } <span class="kw">in</span>
-
-  <span class="co">(* print the radius of a cylinder *)</span>
-  <span class="co">(* works just fine *)</span>
-  print_float (get_radius cylinder) ;
-
-  <span class="co">(* THIS DOES NOT COMPILE *)</span>
-  print_float (get_radius circle)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">(* same circle type we started with: *)</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">type</span> circle = {</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  radius : <span class="dt">float</span> ;</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  color : <span class="dt">string</span> ;</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">(* cylinder type is similar but has a height and no color: *)</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">type</span> cylinder = {</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  radius : <span class="dt">float</span> ;</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">  height : <span class="dt">float</span> ;</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">}</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">(* a function to get the radius from an unspecified type *)</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="kw">let</span> get_radius x = <span class="kw">match</span> x <span class="kw">with</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">| { radius ; _ } -&gt; radius</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="kw">let</span> () =</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">  <span class="co">(* define some data *)</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">  <span class="kw">let</span> cylinder = { radius = <span class="dv">2</span>. ; height = <span class="dv">3</span>. } <span class="kw">in</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">  <span class="kw">let</span> circle = { radius = <span class="fl">1.2</span> ; color = <span class="st">&quot;blue&quot;</span> } <span class="kw">in</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23">  <span class="co">(* print the radius of a cylinder *)</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">  <span class="co">(* works just fine *)</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25">  <span class="dt">print_float</span> (get_radius cylinder) ;</a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27">  <span class="co">(* THIS DOES NOT COMPILE *)</span></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28">  <span class="dt">print_float</span> (get_radius circle)</a></code></pre></div>
 <p>This doesn’t work! The problem is that when we use <code>get_radius</code> the first time, its type is inferred to be <code>cylinder -&gt; float</code>.</p>
 <p>Now that OCaml knows <code>get_radius</code> takes a cylinder, it couldn’t possibly take a circle!</p>
 <p>What we need is an object.</p>
 <h1 id="objects">Objects</h1>
 <p>Here’s the same code using objects instead:</p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* define a class for cylinders *)</span>
-<span class="kw">class</span> cylinder radius height = <span class="kw">object</span>
-  <span class="kw">method</span> radius : float = radius
-  <span class="kw">method</span> height : float = height
-<span class="kw">end</span>
-
-<span class="co">(* similarly define circles *)</span>
-<span class="kw">class</span> circle radius color = <span class="kw">object</span>
-  <span class="kw">method</span> radius : float = radius
-  <span class="kw">method</span> color : <span class="dt">string</span> = color
-<span class="kw">end</span>
-
-<span class="co">(* our function uses the #radius method call *)</span>
-<span class="kw">let</span> get_radius x = x#radius
-
-<span class="kw">let</span> () =
-  <span class="co">(* make our object instances *)</span>
-  <span class="kw">let</span> circle = <span class="kw">new</span> circle <span class="fl">2.3</span> <span class="st">&quot;blue&quot;</span> <span class="kw">in</span>
-  <span class="kw">let</span> cylinder = <span class="kw">new</span> cylinder <span class="fl">88.</span> <span class="fl">3.5</span> <span class="kw">in</span>
-
-  <span class="co">(* call our function with different types! *)</span>
-  print_float (get_radius circle) ;
-  print_float (get_radius cylinder)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">(* define a class for cylinders *)</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">class</span> cylinder radius height = <span class="kw">object</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="kw">method</span> radius : <span class="dt">float</span> = radius</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="kw">method</span> height : <span class="dt">float</span> = height</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">end</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">(* similarly define circles *)</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">class</span> circle radius color = <span class="kw">object</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="kw">method</span> radius : <span class="dt">float</span> = radius</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">  <span class="kw">method</span> color : <span class="dt">string</span> = color</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw">end</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">(* our function uses the #radius method call *)</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="kw">let</span> get_radius x = x#radius</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="kw">let</span> () =</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">  <span class="co">(* make our object instances *)</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">  <span class="kw">let</span> circle = <span class="kw">new</span> circle <span class="fl">2.3</span> <span class="st">&quot;blue&quot;</span> <span class="kw">in</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">  <span class="kw">let</span> cylinder = <span class="kw">new</span> cylinder <span class="dv">88</span>. <span class="fl">3.5</span> <span class="kw">in</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">  <span class="co">(* call our function with different types! *)</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22">  <span class="dt">print_float</span> (get_radius circle) ;</a>
+<a class="sourceLine" id="cb5-23" data-line-number="23">  <span class="dt">print_float</span> (get_radius cylinder)</a></code></pre></div>
 <p>What happens is that <code>get_radius</code> is inferred to have an <strong>open type</strong>, represented in OCaml as <code>&lt; radius : float ; .. &gt;</code>. When you pass in an object, any object will work so long as it has a <code>radius</code> method that returns a float.</p>
 <p>This is awesome! We can write polymorphic code so easily.</p>
 <p>It’s called <em>structural typing</em>, and can be compared to compile-time-checked duck typing. (If you ever try to pass an object that doesn’t have a radius to <code>get_radius</code>, you’ll get a compile time type error.)</p>
