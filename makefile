@@ -1,5 +1,6 @@
 
 run:
+	@mkdir -p build
 	@./nspace
 	@mv build/posts/* build/
 	@rmdir build/posts
