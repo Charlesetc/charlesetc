@@ -2,7 +2,7 @@
 title: "Rage against the APIs"
 ---
 
-Often times new engineers start off by learning how to use APIs (closed-source http interfaces to make phone calls, view weather data, deploy slack bots, etc).
+Often times new engineers start off by learning how to use APIs. (Closed-source http interfaces to make phone calls, view weather data, deploy slack bots, etc.)
 
 This is sometimes really great! You can get started coding quickly and produce something pretty impressive in very little time. Sometimes, though, developers will start valuing their engineering skill by the number of APIs they've mastered. This makes total sense for things like hackathons or even some interview take-home assignments, but it's missing one of the most important parts of engineering.
 
