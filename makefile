@@ -1,6 +1,6 @@
 
 run:
-	@nspace
+	@./nspace
 	@mv build/posts/* build/
 	@rmdir build/posts
 	@mv build/stars/* build/
