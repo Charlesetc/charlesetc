@@ -1,3 +1,6 @@
+---
+title: "Charles, etc"
+---
 
 Hi! I’m Charles. I like tea, compilers, and have just begun looking into graphics programming.
 

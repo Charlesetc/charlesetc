@@ -14,5 +14,4 @@ And what happens if you encounter a bug? In any normal development environment, 
 
 Again, APIs are a great way to enable developers to use closed-source engineering work. They're all about sharing and an important tool in your toolbox!
 
-I just think when you're using one, you're losing all the hard problems, and all the learning that goes with solving them. You're left with exporting the hard problems through http requests. Actually creating something worthy of an API is where the fun is at and I hope more new developers get to dig into meaty experiences like that.
-
+I just think when you're using one, you're losing all the hard problems, and all the learning that goes with solving them. You're left with exporting the hard problems to http requests. Actually creating something worthy of an API is where the fun is at and I hope more new developers get to dig into meaty experiences like that.
