@@ -5,7 +5,6 @@ I have been known to eat vast quantities of chocolate.
 
 If you want to talk, my e-mail is “charlespipin” at the largest e-mail provider in history, or you can see my [twitter](https://twitter.com/charlesetc).
 
-
 <div class='table-of-contents'>
 ## Archive
 
