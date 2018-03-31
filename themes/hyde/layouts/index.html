@@ -1,0 +1,25 @@
+{{ define "main" -}}
+<h1 id = 'first-title' class='title'><a href="/"><span class='wrapper'>
+      <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+        </span></a></h1>
+
+<p>
+Hi! I’m Charles. I like tea, programming languages, and flying kites.
+</p>
+<p>
+    I have been known to eat a fair bit of chocolate.
+</p>
+<p>
+    If you want to talk, my e-mail is <span>charles</span><span>pipin</span>@gmail.com, or you can see my <a href="https://twitter.com/charlesetc">twitter</a>.
+</p>
+
+<div class="posts table-of-contents">
+<h2 id="archive">Archive</h2>
+<ul class="post">
+{{ range .Data.Pages -}}
+    <li/><em>{{ .Date.Format "Jan 2, 2006" }}</em> — <div style="display:inline-block"><a href="{{ .Permalink }}">{{ lower .Title }}</a></div>
+    <li/>
+{{- end }}
+</ul>
+</div>
+{{- end }}

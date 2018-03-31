@@ -1,0 +1,11 @@
+baseURL = "http://www.charlesetc.com"
+languageCode = "en-us"
+title = "Charles, etc"
+theme = "hyde"
+pygmentsCodeFences = true
+pygmentsStyle = "manni"
+sectionPagesMenu = "main"
+pluralizeListTitles = false
+relativeURLs = true
+
+[params]

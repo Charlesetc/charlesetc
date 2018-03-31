@@ -1,0 +1,13 @@
+digraph "finite state automata" {
+    graph [rankdir=LR nodesep=.4]
+    node [shape=circle]
+    edge [arrowhead=vee arrowsize=.7]
+    start [shape=point height=.1]
+    even
+    odd [shape=doublecircle]
+    start -> even [color="black:invis:black" arrowhead=normal arrowsize=1.3]
+    even -> odd [label=a]
+    odd -> even [label=a]
+    even -> even [label=b]
+    odd -> odd [label=b]
+}

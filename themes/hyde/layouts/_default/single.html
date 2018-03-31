@@ -1,0 +1,18 @@
+{{ define "main" -}}
+<div class="post">
+  <h1 id='title'>{{ .Title }}</h1>
+  <span class="post-date">{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
+  {{ .Content }}
+</div>
+
+
+<h1 id="side-title" class="title"><a href="/"><span class="wrapper">
+    <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+</span></a></h1>
+{{ if .Site.DisqusShortname -}}
+<h2>Comments</h2>
+{{ template "_internal/disqus.html" . }}
+{{- end }}
+<script>renderMathInElement(document.body);</script>
+{{- end }}
+
