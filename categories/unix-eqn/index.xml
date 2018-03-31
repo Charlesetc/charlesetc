@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unix Eqn on Charles, etc</title>
+    <link>http://www.charlesetc.com/categories/unix-eqn/</link>
+    <description>Recent content in Unix Eqn on Charles, etc</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Jan 2017 12:14:30 -0700</lastBuildDate>
+    
+	<atom:link href="http://www.charlesetc.com/categories/unix-eqn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Eqn vs LaTeX</title>
+      <link>http://www.charlesetc.com/eqn-and-groff/</link>
+      <pubDate>Tue, 17 Jan 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/eqn-and-groff/</guid>
+      <description>Take the LaTeX code:
+-1 \cdot \frac{1}{n}}\cup \{-1, \frac{1}{n}\} Do you know what this means?
+ difficult parse visually. uses lots of hard-to-type symbols.  Not only that, TeX by itself takes up 338.8 MB!
+Eqn -1 cdot 1 over n union left { -1 , 1 over n right } How&amp;rsquo;s that for readability!
+This is eqn: a math preprocessor on the layout engine groff. By the same metric, groff takes up 8 MB.</description>
+    </item>
+    
+  </channel>
+</rss>

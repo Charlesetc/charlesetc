@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Languages on Charles, etc</title>
+    <link>http://www.charlesetc.com/categories/languages/</link>
+    <description>Recent content in Languages on Charles, etc</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Oct 2015 12:31:33 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.charlesetc.com/categories/languages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>the Problems</title>
+      <link>http://www.charlesetc.com/the-problems/</link>
+      <pubDate>Wed, 21 Oct 2015 12:31:33 +0000</pubDate>
+      
+      <guid>http://www.charlesetc.com/the-problems/</guid>
+      <description>I like programming languages, so I was thinking about what I would want in my favorite one.
+Here are the basic essentials for a language to have a chance at being my favorite:
+ Strict Type Checking No Nil Pointer Green Threads with both go-like channels and mutexes. Compiles to binary, without a virtual machine. Still runs on all platforms that I care about. Parametric Polymorphism Methods with dot syntax Fast compilation, fast running Lisp- or scheme-style macros of some sort User specified Operators with precedence Mutation A clean syntax (I&amp;rsquo;m aware how subjective this is)  Okay!</description>
+    </item>
+    
+  </channel>
+</rss>

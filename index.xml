@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Charles, etc</title>
+    <link>http://www.charlesetc.com/</link>
+    <description>Recent content on Charles, etc</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 11 Feb 2018 12:14:30 -0700</lastBuildDate>
+    
+	<atom:link href="http://www.charlesetc.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rage against the APIs</title>
+      <link>http://www.charlesetc.com/rage-against-apis/</link>
+      <pubDate>Sun, 11 Feb 2018 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/rage-against-apis/</guid>
+      <description>Often times new engineers start off by learning how to use APIs. (Closed-source http interfaces to make phone calls, view weather data, deploy slack bots, etc.)
+This is sometimes really great! You can get started coding quickly and produce something pretty impressive in very little time. Sometimes, though, developers will start valuing their engineering skill by the number of APIs they&amp;rsquo;ve mastered. This makes total sense for things like hackathons or even some interview take-home assignments, but it&amp;rsquo;s missing one of the most important parts of engineering.</description>
+    </item>
+    
+    <item>
+      <title>New Font</title>
+      <link>http://www.charlesetc.com/new-font/</link>
+      <pubDate>Mon, 18 Dec 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/new-font/</guid>
+      <description>I&amp;rsquo;ve just discovered a new monospace font called &amp;ldquo;Terminus&amp;rdquo;. It&amp;rsquo;s the default font for the ubuntu text-only console, and to me it looks pretty great, but generally only in text-only console mode.
+Why?? Welp, text only-console mode is not antialiased, and Terminus is a bitmapped font. So in console mode it shows up perfectly crisp: every single pixel in the font illuminates one pixel on the screen.
+The problem happens when you try to use Terminus with a gui; it gets antialiased, smudged a bit, and doesn&amp;rsquo;t look good.</description>
+    </item>
+    
+    <item>
+      <title>Stars Finale</title>
+      <link>http://www.charlesetc.com/stars-game-7/</link>
+      <pubDate>Fri, 25 Aug 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/stars-game-7/</guid>
+      <description>I&amp;rsquo;ve been working with graphics on a project dubbed &amp;lsquo;Stars&amp;rsquo;. This is its last hurrah!
+Without further ado, here&amp;rsquo;s a bourgeois pig:
+ (It&amp;rsquo;s bourgeois because it&amp;rsquo;s shiny and therefore expensive.)
+So the lighting here comes in three parts. The first is what is called diffuse lighting. It&amp;rsquo;s the kind of light that bounces off a surface equally in every direction.
+This is the bit of the fragment shader that renders diffuse light, i.</description>
+    </item>
+    
+    <item>
+      <title>Stars 006 - dark teapot</title>
+      <link>http://www.charlesetc.com/stars-game-6/</link>
+      <pubDate>Wed, 23 Aug 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/stars-game-6/</guid>
+      <description>Not only does commit 91b838a bring a completely rendered monkey, there&amp;rsquo;s now shading and teapots!
+ Each vertex of the model should come with a normal, which represents the angle the surface is facing, at that vertex. The shading itself isn&amp;rsquo;t very hard once you&amp;rsquo;ve loaded the normals.
+The amount of shadow is calculated by combining the direction of the sunlight and the vertex&amp;rsquo; normal.
+What took me way too long to get here was a bug loading the .</description>
+    </item>
+    
+    <item>
+      <title>Stars 005 - lopsided monkey</title>
+      <link>http://www.charlesetc.com/stars-game-5/</link>
+      <pubDate>Tue, 22 Aug 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/stars-game-5/</guid>
+      <description>I now have a half-complete monkey being rendered. (commit f1f6b15)
+ Note the very problematic right side!
+I think this is happening because either a vertex is incorrectly inserted or a vertex is lost somewhere along the line.
+I&amp;rsquo;m parsing what&amp;rsquo;s called a .obj file — an ASCII text format for representing 3D objects. Here&amp;rsquo;s an obj representation of a cube:
+mtllib cube.mtl o Cube v 1.000000 -1.000000 -1.000000 v 1.</description>
+    </item>
+    
+    <item>
+      <title>Stars 004 - rotating cube</title>
+      <link>http://www.charlesetc.com/stars-game-4/</link>
+      <pubDate>Sat, 19 Aug 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/stars-game-4/</guid>
+      <description>Commit 7051262 implements the Model-View-Projection method to render a rotating cube.
+ Rasterization OpenGL is essentially a very generic way to draw triangles. This is what &amp;ldquo;rasterization&amp;rdquo; means: it&amp;rsquo;s the process of taking a shape (in this case, a triangle defined by 3 points), and calculating each pixel it should take up. The cool thing about modern OpenGL, I think, is that there isn&amp;rsquo;t a direct way to say here are triangles; here are their colors; please draw them!</description>
+    </item>
+    
+    <item>
+      <title>Stars 003</title>
+      <link>http://www.charlesetc.com/stars-game-3/</link>
+      <pubDate>Thu, 17 Aug 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/stars-game-3/</guid>
+      <description>With the release of commit 2eeedf9 there is now a three dimensional cube!
+ The hard part here wasn&amp;rsquo;t actually putting the vertices in 3 dimensions — the OpenGL API is set up for 3 dimensions already — the difficulty was getting each triangle and pixel to render at the right depth, and in the right order.
+It&amp;rsquo;s pretty exciting because the rainbow triangle is actually &amp;lsquo;drawn&amp;rsquo; after the cube, but the cube shows up on top.</description>
+    </item>
+    
+    <item>
+      <title>Stars 002</title>
+      <link>http://www.charlesetc.com/stars-game-2/</link>
+      <pubDate>Wed, 16 Aug 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/stars-game-2/</guid>
+      <description>I doubt I will post every day, but this is a summary of the progress (commit dfe0df2) made so far:
+ It turns out rendering two objects is a lot harder than rendering one. You have to switch to a different context (vertex buffer) each time you draw a shape.
+I also converted the while-loop design of the game to an async pony behaviour that repeatedly calls itself. This lets the garbage collector run in between renderings and the game run on multiple cores.</description>
+    </item>
+    
+    <item>
+      <title>Stars take-off</title>
+      <link>http://www.charlesetc.com/stars-game-1/</link>
+      <pubDate>Tue, 15 Aug 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/stars-game-1/</guid>
+      <description>I&amp;rsquo;m working on a game Stars . It&amp;rsquo;s going to be a 3D game with cartoon-like graphics, animated blob-like stars, and trippy shader-based skies. But here&amp;rsquo;s the thing, I don&amp;rsquo;t know much about game development.
+So I&amp;rsquo;m in New York, at the Recurse Center, to figure out how to build this game and game engine from the bottom up. It&amp;rsquo;s built with custom OpenGL bindings using SDL for window management and user input.</description>
+    </item>
+    
+    <item>
+      <title>&amp; disown</title>
+      <link>http://www.charlesetc.com/disown/</link>
+      <pubDate>Sat, 10 Jun 2017 08:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/disown/</guid>
+      <description>I&amp;rsquo;ve often wanted to start a subprocess as a daemon in bash or zsh.
+Now I know how!
+the_command &amp;amp; disown You will still see stdout and stderr in the terminal, but you can exit from the shell process without killing the command.
+nohup the_command nohup also works, but will send the stdout to a file instead of your terminal.
+If you want to do this to a running process, you can &amp;lt;C-z&amp;gt;, run bg, and then disown %1.</description>
+    </item>
+    
+    <item>
+      <title>Eqn vs LaTeX</title>
+      <link>http://www.charlesetc.com/eqn-and-groff/</link>
+      <pubDate>Tue, 17 Jan 2017 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/eqn-and-groff/</guid>
+      <description>Take the LaTeX code:
+-1 \cdot \frac{1}{n}}\cup \{-1, \frac{1}{n}\} Do you know what this means?
+ difficult parse visually. uses lots of hard-to-type symbols.  Not only that, TeX by itself takes up 338.8 MB!
+Eqn -1 cdot 1 over n union left { -1 , 1 over n right } How&amp;rsquo;s that for readability!
+This is eqn: a math preprocessor on the layout engine groff. By the same metric, groff takes up 8 MB.</description>
+    </item>
+    
+    <item>
+      <title>tmux sessions</title>
+      <link>http://www.charlesetc.com/tmux-sessions/</link>
+      <pubDate>Sun, 27 Nov 2016 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/tmux-sessions/</guid>
+      <description>tmux is an awesome tool! I&amp;rsquo;ve used it literally constantly for about a year now.
+And guess what! I didn&amp;rsquo;t know about some very basic commands.
+List Sessions Command:
+&amp;lt;prefix&amp;gt;s This shows you an interactive screen where you can which session you want to be in:
+(0) + 0: 3 windows (attached) (1) + 1: 1 windows Switch Session Command:
+&amp;lt;prefix&amp;gt;( # or &amp;lt;prefix&amp;gt;) Move back and forth between sessions.</description>
+    </item>
+    
+    <item>
+      <title>git rebase for fame and power</title>
+      <link>http://www.charlesetc.com/rebase-for-fame/</link>
+      <pubDate>Sat, 30 Jul 2016 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/rebase-for-fame/</guid>
+      <description>While learning git, people kept telling me &amp;ldquo;Don&amp;rsquo;t re-base - you&amp;rsquo;ll never need to re-base and it can screw things up&amp;rdquo;.
+This is terrible advice!
+Re-basing is a great tool!
+When you hear &amp;ldquo;Don&amp;rsquo;t do , you will break things&amp;rdquo; do that thing now!
+and break things!
+Re-basing by itself is not dangerous.
+As long as you avoid git push origin master --force and only run rm -rf .git every once in a while, you&amp;rsquo;ll be totally fine.</description>
+    </item>
+    
+    <item>
+      <title>Exceptions in Reason (OCaml)</title>
+      <link>http://www.charlesetc.com/exceptions-in-ocaml/</link>
+      <pubDate>Wed, 22 Jun 2016 02:00:42 -0400</pubDate>
+      
+      <guid>http://www.charlesetc.com/exceptions-in-ocaml/</guid>
+      <description>Pattern Matching A large part of function programming is pattern matching:
+/* A new and delicious enum */type fruit=Apple|Pear|Pineapple|Orange;letmy_fruit=Pear;/* print the outcome of the switch statement */print_string(switchmy_fruit{|Apple=&amp;gt;&amp;#34;you have an apple&amp;#34;|Pear=&amp;gt;&amp;#34;you have a pear&amp;#34;|_=&amp;gt;&amp;#34;you have neither an apple or a pear&amp;#34;}); Except&amp;hellip; The cool part is how Reason handles exceptions: as another branch in a switch statement.
+exceptionMy_exception;/* * Here&amp;#39;s a function that occasionally throws an exception */letrisky_function=&amp;gt;switch(Random.int3){|0=&amp;gt;true|1=&amp;gt;false|2=&amp;gt;raiseMy_exception};/* * We can match against the possible cases of risky_function, * even exceptions.</description>
+    </item>
+    
+    <item>
+      <title>Lifetime Reference</title>
+      <link>http://www.charlesetc.com/lifetime-reference/</link>
+      <pubDate>Sat, 31 Oct 2015 12:31:33 +0000</pubDate>
+      
+      <guid>http://www.charlesetc.com/lifetime-reference/</guid>
+      <description>Places in Rust where you use any lifetime syntax will fall into two categories:
+   Concept Category Usage     fn creation fn example_function&amp;lt;&#39;a&amp;gt;()   struct creation struct Example&amp;lt;&#39;a&amp;gt;   enum creation enum Test&amp;lt;&#39;a&amp;gt;   impl creation impl&amp;lt;&#39;a&amp;gt; Example&amp;lt;&#39;a&amp;gt;   struct reference some_field: Example&amp;lt;&#39;a&amp;gt;   enum reference some_field: Test&amp;lt;&#39;a&amp;gt;   &amp;amp; reference next_field: &amp;amp;&#39;a i32   &amp;amp;mut reference next_field: &amp;amp;&#39;a mut i32   Box reference last_field: Box&amp;lt;i32 + &#39;a&amp;gt;    What does &amp;lsquo;Category&amp;rsquo; mean?</description>
+    </item>
+    
+    <item>
+      <title>Rust Lifetimes</title>
+      <link>http://www.charlesetc.com/rust-lifetimes/</link>
+      <pubDate>Thu, 29 Oct 2015 12:31:33 +0000</pubDate>
+      
+      <guid>http://www.charlesetc.com/rust-lifetimes/</guid>
+      <description>Lifetimes are pretty much what makes Rust Rust.
+Easy concurrency, straightforward memory allocation, and overall data safety would not be possible without explicit lifetimes.
+But they are also tricky, and this is aimed at helping people understand the concepts and syntax.
+What are Lifetimes? Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call free, while at the same time having no need for a garbage collector.</description>
+    </item>
+    
+    <item>
+      <title>the Problems</title>
+      <link>http://www.charlesetc.com/the-problems/</link>
+      <pubDate>Wed, 21 Oct 2015 12:31:33 +0000</pubDate>
+      
+      <guid>http://www.charlesetc.com/the-problems/</guid>
+      <description>I like programming languages, so I was thinking about what I would want in my favorite one.
+Here are the basic essentials for a language to have a chance at being my favorite:
+ Strict Type Checking No Nil Pointer Green Threads with both go-like channels and mutexes. Compiles to binary, without a virtual machine. Still runs on all platforms that I care about. Parametric Polymorphism Methods with dot syntax Fast compilation, fast running Lisp- or scheme-style macros of some sort User specified Operators with precedence Mutation A clean syntax (I&amp;rsquo;m aware how subjective this is)  Okay!</description>
+    </item>
+    
+  </channel>
+</rss>

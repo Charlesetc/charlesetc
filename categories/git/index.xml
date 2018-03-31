@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Charles, etc</title>
+    <link>http://www.charlesetc.com/categories/git/</link>
+    <description>Recent content in Git on Charles, etc</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 30 Jul 2016 12:14:30 -0700</lastBuildDate>
+    
+	<atom:link href="http://www.charlesetc.com/categories/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>git rebase for fame and power</title>
+      <link>http://www.charlesetc.com/rebase-for-fame/</link>
+      <pubDate>Sat, 30 Jul 2016 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/rebase-for-fame/</guid>
+      <description>While learning git, people kept telling me &amp;ldquo;Don&amp;rsquo;t re-base - you&amp;rsquo;ll never need to re-base and it can screw things up&amp;rdquo;.
+This is terrible advice!
+Re-basing is a great tool!
+When you hear &amp;ldquo;Don&amp;rsquo;t do , you will break things&amp;rdquo; do that thing now!
+and break things!
+Re-basing by itself is not dangerous.
+As long as you avoid git push origin master --force and only run rm -rf .git every once in a while, you&amp;rsquo;ll be totally fine.</description>
+    </item>
+    
+  </channel>
+</rss>

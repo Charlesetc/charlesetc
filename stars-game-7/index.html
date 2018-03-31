@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.36.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+
+  <title>Stars Finale &middot; Charles, etc</title>
+
+  
+  <link rel="stylesheet" href="../css/print.css" media="print">
+  <link rel="stylesheet" href="../css/poole.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/syntax.css">
+  <link rel="stylesheet" href="../css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Charles, etc" />
+
+  
+</head>
+
+  <body class=" ">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="content container">
+    <div class="post">
+  <h1 id='title'>Stars Finale</h1>
+  <span class="post-date">Fri, Aug 25, 2017</span>
+  <p><em>I&rsquo;ve been working with graphics on a project dubbed &lsquo;Stars&rsquo;.
+This is its last hurrah!</em></p>
+
+<p>Without further ado, here&rsquo;s a bourgeois pig:</p>
+
+<video width="600" height="504" autoplay loop> <source src="../videos/stars-11.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
+
+<p>(It&rsquo;s bourgeois because it&rsquo;s shiny and therefore expensive.)</p>
+
+<p>So the lighting here comes in three parts. The first is what is called <strong>diffuse</strong> lighting.
+It&rsquo;s the kind of light that bounces off a surface equally in every direction.</p>
+
+<p>This is the bit of the fragment shader that renders diffuse light, i.e. the
+code run for each pixel on the GPU:</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#09f;font-style:italic">// pretend you are given these three vectors</span>
+<span style="color:#069;font-weight:bold">vec3</span> position;
+<span style="color:#069;font-weight:bold">vec3</span> normal;
+<span style="color:#069;font-weight:bold">vec3</span> light_direction;
+
+<span style="color:#09f;font-style:italic">// calculate how light or dark this pixel should be</span>
+<span style="color:#09f;font-style:italic">// by combining the normal and light direction</span>
+<span style="color:#069;font-weight:bold">float</span> brightness <span style="color:#555">=</span> dot(normal, light_direction);
+
+<span style="color:#09f;font-style:italic">// set the color between black and cyan</span>
+outColor <span style="color:#555">=</span> mix(<span style="color:#069;font-weight:bold">vec3</span>(<span style="color:#f60">0</span>, <span style="color:#f60">0</span>, <span style="color:#f60">0</span>),
+               <span style="color:#069;font-weight:bold">vec3</span>(<span style="color:#f60">0</span>, <span style="color:#f60">0.5</span>, <span style="color:#f60">0.5</span>),
+               brightness);</code></pre></div>
+<p><img src="../images/just-diffuse-teapot.png" alt="" /></p>
+
+<p>This does render a teapot! But it&rsquo;s a little
+dark: the backside is completely black and it
+looks kind of matt or chalky.</p>
+
+<p>To make it look less chalky, we&rsquo;re going to add
+a <strong>specular component</strong>. This is the kind of light
+that reflects unevenly: instead of the diffuse light
+that spreads out everywhere equally, the specular
+light highlights spots where the light is shining
+directly.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#09f;font-style:italic">// do some calculation to get the direction</span>
+<span style="color:#09f;font-style:italic">// and intensity</span>
+<span style="color:#069;font-weight:bold">vec3</span> camera_direction <span style="color:#555">=</span> normalize(<span style="color:#555">-</span>position);
+<span style="color:#069;font-weight:bold">vec3</span> half_direction <span style="color:#555">=</span> normalize(
+    light_direction <span style="color:#555">+</span> camera_direction);
+<span style="color:#069;font-weight:bold">float</span> specular <span style="color:#555">=</span> pow(
+    dot(half_direction, normal)), <span style="color:#f60">16.0</span>);
+
+<span style="color:#09f;font-style:italic">// set the color to vary with specular</span>
+outColor <span style="color:#555">=</span> specular <span style="color:#555">*</span> <span style="color:#069;font-weight:bold">vec3</span>(<span style="color:#f60">0</span>, <span style="color:#f60">0.5</span>, <span style="color:#f60">0.5</span>);</code></pre></div>
+<p>This gives us the shiny part of light!</p>
+
+<p><img src="../images/just-specular-teapot.png" alt="" /></p>
+
+<p>Combining these two lighting methods, we get a fairly well-lit teapot:</p>
+
+<p><img src="../images/added-teapot.png" alt="" /></p>
+
+<p>But it&rsquo;s still strangely black in some places!
+In reality, there is <strong>ambient</strong> light everywhere, bouncing off
+of walls and floors.</p>
+
+<p>Unfortunately, reflected light like that is really computationally
+intensive to calculate, so there&rsquo;s a widespread hack to add ambient
+lighting:</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">outColor <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">vec3</span>(<span style="color:#f60">0</span>, <span style="color:#f60">0.3</span>, <span style="color:#f60">0.3</span>);</code></pre></div>
+<p><img src="../images/teapot-ambient.png" alt="" /></p>
+
+<p>Yep, we just add a lighter color everywhere. And now we finally get a decently lighted teapot!</p>
+
+<p><img src="../images/realistic-teapot.png" alt="" /></p>
+
+<p>And that&rsquo;s all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">brightness <span style="color:#555">=</span> max(ceil(brightness <span style="color:#555">*</span> <span style="color:#f60">4</span>), <span style="color:#f60">0.0</span>);</code></pre></div>
+<p>So here are two cel-shaded teapots! (Sorry I know they skip sometimes.)</p>
+
+<video width="600" height="504" autoplay loop> <source src="../videos/stars-13.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
+<video width="600" height="504" autoplay loop> <source src="../videos/stars-12.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
+
+<p>I&rsquo;m pretty happy with how this project has gone.
+I&rsquo;ve definitely learned a lot about graphics, and even
+more about <a href="http://www.ponylang.org/discover">Pony</a>. (The
+entire project is written in Pony.)</p>
+
+<p>Feel free to check out the <a href="https://gitlab.com/charlesetc/Stars">source code</a> on Gitlab!</p>
+
+</div>
+
+
+<h1 id="side-title" class="title"><a href="../"><span class="wrapper">
+    <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+</span></a></h1>
+
+<script>renderMathInElement(document.body);</script>
+    </div>
+    
+  </body>
+</html>

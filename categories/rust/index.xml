@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rust on Charles, etc</title>
+    <link>http://www.charlesetc.com/categories/rust/</link>
+    <description>Recent content in Rust on Charles, etc</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 31 Oct 2015 12:31:33 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.charlesetc.com/categories/rust/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lifetime Reference</title>
+      <link>http://www.charlesetc.com/lifetime-reference/</link>
+      <pubDate>Sat, 31 Oct 2015 12:31:33 +0000</pubDate>
+      
+      <guid>http://www.charlesetc.com/lifetime-reference/</guid>
+      <description>Places in Rust where you use any lifetime syntax will fall into two categories:
+   Concept Category Usage     fn creation fn example_function&amp;lt;&#39;a&amp;gt;()   struct creation struct Example&amp;lt;&#39;a&amp;gt;   enum creation enum Test&amp;lt;&#39;a&amp;gt;   impl creation impl&amp;lt;&#39;a&amp;gt; Example&amp;lt;&#39;a&amp;gt;   struct reference some_field: Example&amp;lt;&#39;a&amp;gt;   enum reference some_field: Test&amp;lt;&#39;a&amp;gt;   &amp;amp; reference next_field: &amp;amp;&#39;a i32   &amp;amp;mut reference next_field: &amp;amp;&#39;a mut i32   Box reference last_field: Box&amp;lt;i32 + &#39;a&amp;gt;    What does &amp;lsquo;Category&amp;rsquo; mean?</description>
+    </item>
+    
+    <item>
+      <title>Rust Lifetimes</title>
+      <link>http://www.charlesetc.com/rust-lifetimes/</link>
+      <pubDate>Thu, 29 Oct 2015 12:31:33 +0000</pubDate>
+      
+      <guid>http://www.charlesetc.com/rust-lifetimes/</guid>
+      <description>Lifetimes are pretty much what makes Rust Rust.
+Easy concurrency, straightforward memory allocation, and overall data safety would not be possible without explicit lifetimes.
+But they are also tricky, and this is aimed at helping people understand the concepts and syntax.
+What are Lifetimes? Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call free, while at the same time having no need for a garbage collector.</description>
+    </item>
+    
+  </channel>
+</rss>

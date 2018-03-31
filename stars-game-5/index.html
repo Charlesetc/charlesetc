@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.36.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+
+  <title>Stars 005 - lopsided monkey &middot; Charles, etc</title>
+
+  
+  <link rel="stylesheet" href="../css/print.css" media="print">
+  <link rel="stylesheet" href="../css/poole.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/syntax.css">
+  <link rel="stylesheet" href="../css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Charles, etc" />
+
+  
+</head>
+
+  <body class=" ">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="content container">
+    <div class="post">
+  <h1 id='title'>Stars 005 - lopsided monkey</h1>
+  <span class="post-date">Tue, Aug 22, 2017</span>
+  <p>I now have a half-complete monkey being rendered. (<a href="https://gitlab.com/charlesetc/Stars/tree/f1f6b152d09d5601525dd908af3a4e46bf29f659">commit f1f6b15</a>)</p>
+
+<video width="600" height="504" controls> <source src="../videos/stars-7.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
+
+<p>Note the very problematic right side!</p>
+
+<p>I think this is happening because either a vertex is
+incorrectly inserted or a vertex is lost somewhere along the line.</p>
+
+<p>I&rsquo;m parsing what&rsquo;s called a <code>.obj</code> file — an ASCII text format
+for representing 3D objects. Here&rsquo;s an <code>obj</code> representation of
+a cube:</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mtllib cube.mtl
+o Cube
+v <span style="color:#f60">1</span>.000000 -1.000000 -1.000000
+v <span style="color:#f60">1</span>.000000 -1.000000 <span style="color:#f60">1</span>.000000
+v -1.000000 -1.000000 <span style="color:#f60">1</span>.000000
+v -1.000000 -1.000000 -1.000000
+v <span style="color:#f60">1</span>.000000 <span style="color:#f60">1</span>.000000 -0.999999
+v <span style="color:#f60">0</span>.999999 <span style="color:#f60">1</span>.000000 <span style="color:#f60">1</span>.000001
+v -1.000000 <span style="color:#f60">1</span>.000000 <span style="color:#f60">1</span>.000000
+v -1.000000 <span style="color:#f60">1</span>.000000 -1.000000
+vn <span style="color:#f60">0</span>.000000 -1.000000 <span style="color:#f60">0</span>.000000
+vn <span style="color:#f60">0</span>.000000 <span style="color:#f60">1</span>.000000 <span style="color:#f60">0</span>.000000
+vn <span style="color:#f60">1</span>.000000 <span style="color:#f60">0</span>.000000 <span style="color:#f60">0</span>.000000
+vn -0.000000 -0.000000 <span style="color:#f60">1</span>.000000
+vn -1.000000 -0.000000 -0.000000
+vn <span style="color:#f60">0</span>.000000 <span style="color:#f60">0</span>.000000 -1.000000
+usemtl Material
+s off
+f <span style="color:#f60">1</span>//1 <span style="color:#f60">2</span>//1 <span style="color:#f60">3</span>//1 <span style="color:#f60">4</span>//1
+f <span style="color:#f60">5</span>//2 <span style="color:#f60">8</span>//2 <span style="color:#f60">7</span>//2 <span style="color:#f60">6</span>//2
+f <span style="color:#f60">1</span>//3 <span style="color:#f60">5</span>//3 <span style="color:#f60">6</span>//3 <span style="color:#f60">2</span>//3
+f <span style="color:#f60">2</span>//4 <span style="color:#f60">6</span>//4 <span style="color:#f60">7</span>//4 <span style="color:#f60">3</span>//4
+f <span style="color:#f60">3</span>//5 <span style="color:#f60">7</span>//5 <span style="color:#f60">8</span>//5 <span style="color:#f60">4</span>//5
+f <span style="color:#f60">5</span>//6 <span style="color:#f60">1</span>//6 <span style="color:#f60">4</span>//6 <span style="color:#f60">8</span>//6</code></pre></div>
+<p>It&rsquo;s really simple — <code>v</code> loads a vertex, <code>vn</code> loads a vertex normal, and <code>f</code> loads a face (i.e. triangle).</p>
+
+<p>The color of the monkey currently signifies the normals that have be loaded. You can kind of see
+how the color changes almost continuously depending on the orientation of the vertex. (Excluding the
+right side of course.) These normals will be used for lighting and shading the monkey, which is what
+I plan to implement soon.</p>
+
+<p>Right after I fix this blasted vertex bug!</p>
+
+</div>
+
+
+<h1 id="side-title" class="title"><a href="../"><span class="wrapper">
+    <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
+</span></a></h1>
+
+<script>renderMathInElement(document.body);</script>
+    </div>
+    
+  </body>
+</html>

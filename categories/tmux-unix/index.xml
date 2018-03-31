@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tmux Unix on Charles, etc</title>
+    <link>http://www.charlesetc.com/categories/tmux-unix/</link>
+    <description>Recent content in Tmux Unix on Charles, etc</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 27 Nov 2016 12:14:30 -0700</lastBuildDate>
+    
+	<atom:link href="http://www.charlesetc.com/categories/tmux-unix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>tmux sessions</title>
+      <link>http://www.charlesetc.com/tmux-sessions/</link>
+      <pubDate>Sun, 27 Nov 2016 12:14:30 -0700</pubDate>
+      
+      <guid>http://www.charlesetc.com/tmux-sessions/</guid>
+      <description>tmux is an awesome tool! I&amp;rsquo;ve used it literally constantly for about a year now.
+And guess what! I didn&amp;rsquo;t know about some very basic commands.
+List Sessions Command:
+&amp;lt;prefix&amp;gt;s This shows you an interactive screen where you can which session you want to be in:
+(0) + 0: 3 windows (attached) (1) + 1: 1 windows Switch Session Command:
+&amp;lt;prefix&amp;gt;( # or &amp;lt;prefix&amp;gt;) Move back and forth between sessions.</description>
+    </item>
+    
+  </channel>
+</rss>
