@@ -11,6 +11,7 @@ If you want to talk, my e-mail is “charlespipin” at the largest e-mail provi
 <div class='table-of-contents'>
 ## Archive
 
+* _Mar 30, 2018_ - [ocaml for pythonistas](ocaml-for-pythonistas.html)
 * _Feb 11, 2018_ - [rage against apis](rage-against-apis.html)
 * _Dec 18, 2017_ - [new font](new-font.html)
 * _Aug 25, 2017_ - [stars finale](stars-game-7.html)
