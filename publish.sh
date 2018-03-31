@@ -1,1 +1,1 @@
-make && cp -r publish .publish && git checkout master && rm -r * && mv .publish/* ./ && rmdir .publish && git a && git commit -m "update to master from development" && git push && git checkout development
+make && cp -r public .public && git checkout master && rm -r * && mv .public/* ./ && rmdir .public && git a && git commit -m "update to master from development" && git push && git checkout development
