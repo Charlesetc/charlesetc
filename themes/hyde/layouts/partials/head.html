@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
   {{ with .OutputFormats.Get "rss" -}}
   <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ $.Site.Title }}">
-  {{ end -}
+  {{ end -}}
 
   {{ if .IsHome -}}
   <title>{{ .Site.Title }}</title>
