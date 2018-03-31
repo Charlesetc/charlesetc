@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 10 Jun 2017 08:14:30 -0700</lastBuildDate>
     
-	<atom:link href="http://www.charlesetc.com/categories/bash/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://www.charlesetc.com/categories/bash/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,11 +17,19 @@
       <pubDate>Sat, 10 Jun 2017 08:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/disown/</guid>
-      <description>I&amp;rsquo;ve often wanted to start a subprocess as a daemon in bash or zsh.
-Now I know how!
-the_command &amp;amp; disown You will still see stdout and stderr in the terminal, but you can exit from the shell process without killing the command.
-nohup the_command nohup also works, but will send the stdout to a file instead of your terminal.
-If you want to do this to a running process, you can &amp;lt;C-z&amp;gt;, run bg, and then disown %1.</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve often wanted to start a subprocess as a daemon in bash or zsh.&lt;/p&gt;
+
+&lt;p&gt;Now I know how!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;the_command &amp;amp; disown&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You will still see stdout and stderr in the terminal, but you can
+exit from the shell process without killing the command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nohup the_command&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;nohup&lt;/code&gt; also works, but will send the stdout to a file instead of your
+terminal.&lt;/p&gt;
+
+&lt;p&gt;If you want to do this to a running process,
+you can &lt;code&gt;&amp;lt;C-z&amp;gt;&lt;/code&gt;, run &lt;code&gt;bg&lt;/code&gt;, and then &lt;code&gt;disown %1&lt;/code&gt;.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

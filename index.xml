@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 11 Feb 2018 12:14:30 -0700</lastBuildDate>
     
-	<atom:link href="http://www.charlesetc.com/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://www.charlesetc.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,8 +17,20 @@
       <pubDate>Sun, 11 Feb 2018 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/rage-against-apis/</guid>
-      <description>Often times new engineers start off by learning how to use APIs. (Closed-source http interfaces to make phone calls, view weather data, deploy slack bots, etc.)
-This is sometimes really great! You can get started coding quickly and produce something pretty impressive in very little time. Sometimes, though, developers will start valuing their engineering skill by the number of APIs they&amp;rsquo;ve mastered. This makes total sense for things like hackathons or even some interview take-home assignments, but it&amp;rsquo;s missing one of the most important parts of engineering.</description>
+      <description>&lt;p&gt;Often times new engineers start off by learning how to use APIs. (Closed-source http interfaces to make phone calls, view weather data, deploy slack bots, etc.)&lt;/p&gt;
+
+&lt;p&gt;This is sometimes really great! You can get started coding quickly and produce something pretty impressive in very little time. Sometimes, though, developers will start valuing their engineering skill by the number of APIs they&amp;rsquo;ve mastered. This makes total sense for things like hackathons or even some interview take-home assignments, but it&amp;rsquo;s missing one of the most important parts of engineering.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reading code!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;An API generally has a specification, is fairly well documented, usually bug-free, and has absolutely no way of reading the code behind an http wall. Does that sound like any production code you&amp;rsquo;ve interacted with? Probably not! You learn to code by reasoning and understanding large problems, not by interacting with already-specified solutions.&lt;/p&gt;
+
+&lt;p&gt;And what happens if you encounter a bug? In any normal development environment, you&amp;rsquo;d just read the code that was causing the bug. With an API, you throw up your hands in despair.&lt;/p&gt;
+
+&lt;p&gt;Again, APIs are a great way to enable developers to use closed-source engineering work. They&amp;rsquo;re all about sharing and an important tool in your toolbox!&lt;/p&gt;
+
+&lt;p&gt;I just think when you&amp;rsquo;re using one, you&amp;rsquo;re losing many hard problems, and all the learning that goes with solving them. You&amp;rsquo;re left with exporting these hard problems to http requests. Actually creating something worthy of an API is where the fun is at and I hope more new developers get to dig into meaty experiences like that.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -27,9 +39,23 @@ This is sometimes really great! You can get started coding quickly and produce s
       <pubDate>Mon, 18 Dec 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/new-font/</guid>
-      <description>I&amp;rsquo;ve just discovered a new monospace font called &amp;ldquo;Terminus&amp;rdquo;. It&amp;rsquo;s the default font for the ubuntu text-only console, and to me it looks pretty great, but generally only in text-only console mode.
-Why?? Welp, text only-console mode is not antialiased, and Terminus is a bitmapped font. So in console mode it shows up perfectly crisp: every single pixel in the font illuminates one pixel on the screen.
-The problem happens when you try to use Terminus with a gui; it gets antialiased, smudged a bit, and doesn&amp;rsquo;t look good.</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve just discovered a new monospace font called &amp;ldquo;Terminus&amp;rdquo;.
+&lt;img src=&#34;./images/font-window.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s the default font for the ubuntu text-only console, and to me it looks &lt;strong&gt;pretty great&lt;/strong&gt;, but generally only in text-only console mode.&lt;/p&gt;
+
+&lt;p&gt;Why?? Welp, text only-console mode is not antialiased, and Terminus is a bitmapped font. So in console mode it shows up perfectly crisp: every single pixel in the font illuminates one pixel on the screen.&lt;/p&gt;
+
+&lt;p&gt;The problem happens when you try to use Terminus with a gui; it gets antialiased, smudged a bit, and doesn&amp;rsquo;t look good.&lt;/p&gt;
+
+&lt;p&gt;I have in the past tried to code using only the linux console but it can be cumbersome to change the keyboard layout or to, say, view a pdf.&lt;/p&gt;
+
+&lt;p&gt;Luckily, I just discovered a now-obvious way to simulate the looks of a text-only console, while still keeping the X server running &amp;mdash; turning off antialiasing!&lt;/p&gt;
+
+&lt;p&gt;It looks a bit weird it some places, sure, but Firefox does its own antialiasing so only some things are choppy.&lt;/p&gt;
+
+&lt;p&gt;And the terminal is beautiful! Every pixel has it&amp;rsquo;s own spot :)&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -38,11 +64,91 @@ The problem happens when you try to use Terminus with a gui; it gets antialiased
       <pubDate>Fri, 25 Aug 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/stars-game-7/</guid>
-      <description>I&amp;rsquo;ve been working with graphics on a project dubbed &amp;lsquo;Stars&amp;rsquo;. This is its last hurrah!
-Without further ado, here&amp;rsquo;s a bourgeois pig:
- (It&amp;rsquo;s bourgeois because it&amp;rsquo;s shiny and therefore expensive.)
-So the lighting here comes in three parts. The first is what is called diffuse lighting. It&amp;rsquo;s the kind of light that bounces off a surface equally in every direction.
-This is the bit of the fragment shader that renders diffuse light, i.</description>
+      <description>&lt;p&gt;&lt;em&gt;I&amp;rsquo;ve been working with graphics on a project dubbed &amp;lsquo;Stars&amp;rsquo;.
+This is its last hurrah!&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Without further ado, here&amp;rsquo;s a bourgeois pig:&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; autoplay loop&gt; &lt;source src=&#34;./videos/stars-11.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;(It&amp;rsquo;s bourgeois because it&amp;rsquo;s shiny and therefore expensive.)&lt;/p&gt;
+
+&lt;p&gt;So the lighting here comes in three parts. The first is what is called &lt;strong&gt;diffuse&lt;/strong&gt; lighting.
+It&amp;rsquo;s the kind of light that bounces off a surface equally in every direction.&lt;/p&gt;
+
+&lt;p&gt;This is the bit of the fragment shader that renders diffuse light, i.e. the
+code run for each pixel on the GPU:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// pretend you are given these three vectors&lt;/span&gt;
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; position;
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; normal;
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; light_direction;
+
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// calculate how light or dark this pixel should be&lt;/span&gt;
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// by combining the normal and light direction&lt;/span&gt;
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;float&lt;/span&gt; brightness &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; dot(normal, light_direction);
+
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// set the color between black and cyan&lt;/span&gt;
+outColor &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; mix(&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;),
+               &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.5&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.5&lt;/span&gt;),
+               brightness);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;./images/just-diffuse-teapot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This does render a teapot! But it&amp;rsquo;s a little
+dark: the backside is completely black and it
+looks kind of matt or chalky.&lt;/p&gt;
+
+&lt;p&gt;To make it look less chalky, we&amp;rsquo;re going to add
+a &lt;strong&gt;specular component&lt;/strong&gt;. This is the kind of light
+that reflects unevenly: instead of the diffuse light
+that spreads out everywhere equally, the specular
+light highlights spots where the light is shining
+directly.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// do some calculation to get the direction&lt;/span&gt;
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// and intensity&lt;/span&gt;
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; camera_direction &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; normalize(&lt;span style=&#34;color:#555&#34;&gt;-&lt;/span&gt;position);
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; half_direction &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; normalize(
+    light_direction &lt;span style=&#34;color:#555&#34;&gt;+&lt;/span&gt; camera_direction);
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;float&lt;/span&gt; specular &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; pow(
+    dot(half_direction, normal)), &lt;span style=&#34;color:#f60&#34;&gt;16.0&lt;/span&gt;);
+
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// set the color to vary with specular&lt;/span&gt;
+outColor &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; specular &lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.5&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.5&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This gives us the shiny part of light!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./images/just-specular-teapot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Combining these two lighting methods, we get a fairly well-lit teapot:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./images/added-teapot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;But it&amp;rsquo;s still strangely black in some places!
+In reality, there is &lt;strong&gt;ambient&lt;/strong&gt; light everywhere, bouncing off
+of walls and floors.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, reflected light like that is really computationally
+intensive to calculate, so there&amp;rsquo;s a widespread hack to add ambient
+lighting:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;outColor &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.3&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.3&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;./images/teapot-ambient.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yep, we just add a lighter color everywhere. And now we finally get a decently lighted teapot!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./images/realistic-teapot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And that&amp;rsquo;s all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;brightness &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; max(ceil(brightness &lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;), &lt;span style=&#34;color:#f60&#34;&gt;0.0&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So here are two cel-shaded teapots! (Sorry I know they skip sometimes.)&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; autoplay loop&gt; &lt;source src=&#34;./videos/stars-13.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+&lt;video width=&#34;600&#34; height=&#34;504&#34; autoplay loop&gt; &lt;source src=&#34;./videos/stars-12.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;I&amp;rsquo;m pretty happy with how this project has gone.
+I&amp;rsquo;ve definitely learned a lot about graphics, and even
+more about &lt;a href=&#34;http://www.ponylang.org/discover&#34;&gt;Pony&lt;/a&gt;. (The
+entire project is written in Pony.)&lt;/p&gt;
+
+&lt;p&gt;Feel free to check out the &lt;a href=&#34;https://gitlab.com/charlesetc/Stars&#34;&gt;source code&lt;/a&gt; on Gitlab!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -51,10 +157,33 @@ This is the bit of the fragment shader that renders diffuse light, i.</descripti
       <pubDate>Wed, 23 Aug 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/stars-game-6/</guid>
-      <description>Not only does commit 91b838a bring a completely rendered monkey, there&amp;rsquo;s now shading and teapots!
- Each vertex of the model should come with a normal, which represents the angle the surface is facing, at that vertex. The shading itself isn&amp;rsquo;t very hard once you&amp;rsquo;ve loaded the normals.
-The amount of shadow is calculated by combining the direction of the sunlight and the vertex&amp;rsquo; normal.
-What took me way too long to get here was a bug loading the .</description>
+      <description>&lt;p&gt;Not only does &lt;a href=&#34;https://gitlab.com/charlesetc/Stars/tree/91b838a82c39f56c0181703a214c731285105c94&#34;&gt;commit 91b838a&lt;/a&gt;
+bring a completely rendered monkey, there&amp;rsquo;s now shading and teapots!&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; autoplay loop&gt; &lt;source src=&#34;./videos/stars-8.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;Each vertex of the model should come with a normal, which represents
+the angle the surface is facing, at that vertex.
+The shading itself isn&amp;rsquo;t very hard once you&amp;rsquo;ve loaded the normals.&lt;/p&gt;
+
+&lt;p&gt;The amount of shadow is calculated by combining the direction of the sunlight and the vertex&amp;rsquo; normal.&lt;/p&gt;
+
+&lt;p&gt;What took me &lt;em&gt;way too long&lt;/em&gt; to get here was a bug loading the &lt;code&gt;.obj&lt;/code&gt; file.
+It turns out &lt;code&gt;.obj&lt;/code&gt; files specify their faces using 1-indexing. &lt;strong&gt;1-indexing!&lt;/strong&gt;
+So the code change to go from a completely broken state to a working state only took subtracting one in one place and several hours of frustration.&lt;/p&gt;
+
+&lt;p&gt;Anyways, here&amp;rsquo;s what the inside of a monkey looks like:&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-9.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;And this is the monkey, properly shaded, from the outside:&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-10.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;The next step is to try to implement cel-shading, which gives a cartoon-like impression, using only several shades for each shadow:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./images/700px-Celshading_teapot_large.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -63,11 +192,51 @@ What took me way too long to get here was a bug loading the .</description>
       <pubDate>Tue, 22 Aug 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/stars-game-5/</guid>
-      <description>I now have a half-complete monkey being rendered. (commit f1f6b15)
- Note the very problematic right side!
-I think this is happening because either a vertex is incorrectly inserted or a vertex is lost somewhere along the line.
-I&amp;rsquo;m parsing what&amp;rsquo;s called a .obj file — an ASCII text format for representing 3D objects. Here&amp;rsquo;s an obj representation of a cube:
-mtllib cube.mtl o Cube v 1.000000 -1.000000 -1.000000 v 1.</description>
+      <description>&lt;p&gt;I now have a half-complete monkey being rendered. (&lt;a href=&#34;https://gitlab.com/charlesetc/Stars/tree/f1f6b152d09d5601525dd908af3a4e46bf29f659&#34;&gt;commit f1f6b15&lt;/a&gt;)&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-7.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;Note the very problematic right side!&lt;/p&gt;
+
+&lt;p&gt;I think this is happening because either a vertex is
+incorrectly inserted or a vertex is lost somewhere along the line.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m parsing what&amp;rsquo;s called a &lt;code&gt;.obj&lt;/code&gt; file — an ASCII text format
+for representing 3D objects. Here&amp;rsquo;s an &lt;code&gt;obj&lt;/code&gt; representation of
+a cube:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mtllib cube.mtl
+o Cube
+v &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 -1.000000 -1.000000
+v &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000
+v -1.000000 -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000
+v -1.000000 -1.000000 -1.000000
+v &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 -0.999999
+v &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.999999 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000001
+v -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000
+v -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 -1.000000
+vn &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000
+vn &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000
+vn &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000
+vn -0.000000 -0.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000
+vn -1.000000 -0.000000 -0.000000
+vn &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 -1.000000
+usemtl Material
+s off
+f &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;//1 &lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;//1 &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;//1 &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;//1
+f &lt;span style=&#34;color:#f60&#34;&gt;5&lt;/span&gt;//2 &lt;span style=&#34;color:#f60&#34;&gt;8&lt;/span&gt;//2 &lt;span style=&#34;color:#f60&#34;&gt;7&lt;/span&gt;//2 &lt;span style=&#34;color:#f60&#34;&gt;6&lt;/span&gt;//2
+f &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;//3 &lt;span style=&#34;color:#f60&#34;&gt;5&lt;/span&gt;//3 &lt;span style=&#34;color:#f60&#34;&gt;6&lt;/span&gt;//3 &lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;//3
+f &lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;//4 &lt;span style=&#34;color:#f60&#34;&gt;6&lt;/span&gt;//4 &lt;span style=&#34;color:#f60&#34;&gt;7&lt;/span&gt;//4 &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;//4
+f &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;//5 &lt;span style=&#34;color:#f60&#34;&gt;7&lt;/span&gt;//5 &lt;span style=&#34;color:#f60&#34;&gt;8&lt;/span&gt;//5 &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;//5
+f &lt;span style=&#34;color:#f60&#34;&gt;5&lt;/span&gt;//6 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;//6 &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;//6 &lt;span style=&#34;color:#f60&#34;&gt;8&lt;/span&gt;//6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It&amp;rsquo;s really simple — &lt;code&gt;v&lt;/code&gt; loads a vertex, &lt;code&gt;vn&lt;/code&gt; loads a vertex normal, and &lt;code&gt;f&lt;/code&gt; loads a face (i.e. triangle).&lt;/p&gt;
+
+&lt;p&gt;The color of the monkey currently signifies the normals that have be loaded. You can kind of see
+how the color changes almost continuously depending on the orientation of the vertex. (Excluding the
+right side of course.) These normals will be used for lighting and shading the monkey, which is what
+I plan to implement soon.&lt;/p&gt;
+
+&lt;p&gt;Right after I fix this blasted vertex bug!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -76,8 +245,64 @@ mtllib cube.mtl o Cube v 1.000000 -1.000000 -1.000000 v 1.</description>
       <pubDate>Sat, 19 Aug 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/stars-game-4/</guid>
-      <description>Commit 7051262 implements the Model-View-Projection method to render a rotating cube.
- Rasterization OpenGL is essentially a very generic way to draw triangles. This is what &amp;ldquo;rasterization&amp;rdquo; means: it&amp;rsquo;s the process of taking a shape (in this case, a triangle defined by 3 points), and calculating each pixel it should take up. The cool thing about modern OpenGL, I think, is that there isn&amp;rsquo;t a direct way to say here are triangles; here are their colors; please draw them!</description>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://gitlab.com/charlesetc/Stars/tree/7051262a079b50e523421b94e37101ec55a41e33&#34;&gt;Commit 7051262&lt;/a&gt;
+implements the Model-View-Projection method to render a rotating cube.&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-5.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;h1 id=&#34;rasterization&#34;&gt;Rasterization&lt;/h1&gt;
+
+&lt;p&gt;OpenGL is essentially a very generic way to draw triangles.
+This is what &amp;ldquo;rasterization&amp;rdquo; means: it&amp;rsquo;s the process of taking
+a shape (in this case, a triangle defined by 3 points), and
+calculating each pixel it should take up. The cool thing about
+modern OpenGL, I think, is that there isn&amp;rsquo;t a direct way to say
+&lt;code&gt;here are triangles; here are their colors; please draw them!&lt;/code&gt;
+Instead, you give the GPU some data and a shader program, and say
+&lt;code&gt;please run this program once for each n bytes of the data&lt;/code&gt;.
+The shader program, which is run many times in
+parallel, then constructs vertices from this data. You, as
+the programmer, write this shader program and dictate how
+that data translates into vertices.
+Only then does the GPU take the triangles and draw them.&lt;/p&gt;
+
+&lt;p&gt;This lets you include arbitrarily complex information in each
+vertex: depth, color, or any other input to your shading code.&lt;/p&gt;
+
+&lt;h1 id=&#34;model-view-projection&#34;&gt;Model-View-Projection&lt;/h1&gt;
+
+&lt;p&gt;MVP is I think how &lt;em&gt;everyone&lt;/em&gt; does 3D rendering.
+In the &lt;a href=&#34;./stars-game-3.html&#34;&gt;last post&lt;/a&gt;, I did have a 3D perspective,
+but it was accomplished in a different way:&lt;/p&gt;
+
+&lt;p&gt;When rendering the vertices in the shader program, I said the
+magnitude of any vertex (the distance away from the origin) should
+depend on its depth. (i.e. setting &lt;code&gt;w&lt;/code&gt; to &lt;code&gt;z&lt;/code&gt;) This did produce some
+sort of strange perspective but the second I tried to rotate the
+cube, it skewed in a very strange way.&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-6.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;That&amp;rsquo;s supposed to be a rotation around the y axis which is sort of visible but clearly very wrong.&lt;/p&gt;
+
+&lt;p&gt;MVP works differently:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The model - represents the position of the entity you&amp;rsquo;re drawing.&lt;/li&gt;
+&lt;li&gt;The view - represents the position of the camera.&lt;/li&gt;
+&lt;li&gt;The projection - represents the perspective. (Given where the camera is compared to a triangle, will that triangle be rendered larger or smaller?)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Combine these with matrix multiplication and you&amp;rsquo;re left with one matrix that can be applied to each vertex on the GPU, to determine where on the screen it should fall. And that gives you a cube instead of a square! Want the cube to rotate? Multiply the model by a rotation matrix. This works for the camera too! What would have been a lot of confusing 3D calculations (at least for me), is now one 4-by-4 matrix that is multiplied rapidly in parallel.&lt;/p&gt;
+
+&lt;p&gt;This is the same video of the cube spinning.&lt;br/&gt;(I&amp;rsquo;m pretty happy with it 👻)&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-5.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;And that&amp;rsquo;s all I know about cube-making! My next objectives are to render a more complicated 3D model by parsing a &lt;code&gt;.obj&lt;/code&gt; file, and to add light-based shading.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -86,9 +311,33 @@ mtllib cube.mtl o Cube v 1.000000 -1.000000 -1.000000 v 1.</description>
       <pubDate>Thu, 17 Aug 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/stars-game-3/</guid>
-      <description>With the release of commit 2eeedf9 there is now a three dimensional cube!
- The hard part here wasn&amp;rsquo;t actually putting the vertices in 3 dimensions — the OpenGL API is set up for 3 dimensions already — the difficulty was getting each triangle and pixel to render at the right depth, and in the right order.
-It&amp;rsquo;s pretty exciting because the rainbow triangle is actually &amp;lsquo;drawn&amp;rsquo; after the cube, but the cube shows up on top.</description>
+      <description>&lt;p&gt;With the release of
+&lt;a href=&#34;https://gitlab.com/charlesetc/Stars/tree/2eeedf9c916958eee5d6aeeb0dbb0f94570fb17c&#34;&gt;commit 2eeedf9&lt;/a&gt;
+there is now a three dimensional cube!&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-4.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;The hard part here wasn&amp;rsquo;t actually putting the vertices in 3 dimensions —
+the OpenGL API is set up for 3 dimensions already —
+the difficulty was getting each triangle and pixel to render
+at the right depth, and in the right order.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s pretty exciting because the rainbow triangle is actually &amp;lsquo;drawn&amp;rsquo; after
+the cube, but the cube shows up on top. The GPU does a second pass after
+rendering all of the vertices and fragments to decide how they overlap.&lt;/p&gt;
+
+&lt;p&gt;I also spent a fair amount of time today trying to get the cube to rotate.
+This is done by giving the cube a rotation matrix which you change a bit after each render.
+It looks very strange at the moment because I think I&amp;rsquo;m rotating around the origin, whereas
+a spinning cube should rotate around its center.&lt;/p&gt;
+
+&lt;p&gt;Anyway I have two goals for the upcoming days:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Rotate the cube.&lt;/li&gt;
+&lt;li&gt;Light the cube so that the faces get darker or lighter as it rotates.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
     </item>
     
     <item>
@@ -97,9 +346,31 @@ It&amp;rsquo;s pretty exciting because the rainbow triangle is actually &amp;lsq
       <pubDate>Wed, 16 Aug 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/stars-game-2/</guid>
-      <description>I doubt I will post every day, but this is a summary of the progress (commit dfe0df2) made so far:
- It turns out rendering two objects is a lot harder than rendering one. You have to switch to a different context (vertex buffer) each time you draw a shape.
-I also converted the while-loop design of the game to an async pony behaviour that repeatedly calls itself. This lets the garbage collector run in between renderings and the game run on multiple cores.</description>
+      <description>
+
+&lt;p&gt;I doubt I will post every day, but this is a summary of the progress
+(&lt;a href=&#34;https://gitlab.com/charlesetc/Stars/tree/dfe0df2e43aa14676d8c635eb802f25401912fc3&#34;&gt;commit dfe0df2&lt;/a&gt;)
+made so far:&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-3.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;It turns out rendering two objects is a &lt;em&gt;lot&lt;/em&gt; harder than rendering one. You have to switch to a different context (vertex buffer)
+each time you draw a shape.&lt;/p&gt;
+
+&lt;p&gt;I also converted the while-loop design of the game to an async &lt;a href=&#34;https://www.ponylang.org/discover/&#34;&gt;pony&lt;/a&gt; behaviour that repeatedly calls itself. This lets the garbage collector run in between renderings and the game run on multiple cores.&lt;/p&gt;
+
+&lt;h1 id=&#34;blender&#34;&gt;Blender&lt;/h1&gt;
+
+&lt;p&gt;Lastly, I went from zero knowledge of blender to the following, taught by the talented daughter
+of the family I&amp;rsquo;m staying with!&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;398&#34; controls&gt; &lt;source src=&#34;./videos/stars-2.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+
+&lt;p&gt;My goal is to parse the &lt;code&gt;.obj&lt;/code&gt; file that blender can export and then render it within
+&lt;code&gt;Stars&lt;/code&gt;. Hopefully, this will allow for complicated characters and animations.&lt;/p&gt;
+
+&lt;p&gt;The most immediate step, however, is to render and shade a cube. Fingers crossed for tomorrow!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -108,8 +379,20 @@ I also converted the while-loop design of the game to an async pony behaviour th
       <pubDate>Tue, 15 Aug 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/stars-game-1/</guid>
-      <description>I&amp;rsquo;m working on a game Stars . It&amp;rsquo;s going to be a 3D game with cartoon-like graphics, animated blob-like stars, and trippy shader-based skies. But here&amp;rsquo;s the thing, I don&amp;rsquo;t know much about game development.
-So I&amp;rsquo;m in New York, at the Recurse Center, to figure out how to build this game and game engine from the bottom up. It&amp;rsquo;s built with custom OpenGL bindings using SDL for window management and user input.</description>
+      <description>&lt;p&gt;I&amp;rsquo;m working on a game &lt;code&gt;Stars&lt;/code&gt; .
+It&amp;rsquo;s going to be a 3D game with cartoon-like graphics,
+animated blob-like stars, and trippy shader-based skies.
+But here&amp;rsquo;s the thing, I don&amp;rsquo;t know much about game development.&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m in New York, at the &lt;a href=&#34;https://www.recurse.com&#34;&gt;Recurse Center&lt;/a&gt;,
+to figure out how to build this game and game engine from the bottom up. It&amp;rsquo;s built with custom OpenGL bindings using SDL for window management and user input. You can see the source code &lt;a href=&#34;https://gitlab.com/charlesetc/Stars&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Oh, and &lt;code&gt;Stars&lt;/code&gt; is built with the language &lt;a href=&#34;https://www.ponylang.org/discover/&#34;&gt;Pony&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;So far (&lt;a href=&#34;https://gitlab.com/charlesetc/Stars/tree/ae8efe9adf5c80e21d9dda710ffaad74d8e37247&#34;&gt;commit ae8efe9&lt;/a&gt;), I have a beautiful rainbow triangle that I&amp;rsquo;m very proud of:&lt;/p&gt;
+
+&lt;video width=&#34;600&#34; height=&#34;504&#34; controls&gt; &lt;source src=&#34;./videos/stars-1.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
+</description>
     </item>
     
     <item>
@@ -118,11 +401,19 @@ So I&amp;rsquo;m in New York, at the Recurse Center, to figure out how to build 
       <pubDate>Sat, 10 Jun 2017 08:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/disown/</guid>
-      <description>I&amp;rsquo;ve often wanted to start a subprocess as a daemon in bash or zsh.
-Now I know how!
-the_command &amp;amp; disown You will still see stdout and stderr in the terminal, but you can exit from the shell process without killing the command.
-nohup the_command nohup also works, but will send the stdout to a file instead of your terminal.
-If you want to do this to a running process, you can &amp;lt;C-z&amp;gt;, run bg, and then disown %1.</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve often wanted to start a subprocess as a daemon in bash or zsh.&lt;/p&gt;
+
+&lt;p&gt;Now I know how!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;the_command &amp;amp; disown&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You will still see stdout and stderr in the terminal, but you can
+exit from the shell process without killing the command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nohup the_command&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;nohup&lt;/code&gt; also works, but will send the stdout to a file instead of your
+terminal.&lt;/p&gt;
+
+&lt;p&gt;If you want to do this to a running process,
+you can &lt;code&gt;&amp;lt;C-z&amp;gt;&lt;/code&gt;, run &lt;code&gt;bg&lt;/code&gt;, and then &lt;code&gt;disown %1&lt;/code&gt;.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -131,11 +422,48 @@ If you want to do this to a running process, you can &amp;lt;C-z&amp;gt;, run bg
       <pubDate>Tue, 17 Jan 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/eqn-and-groff/</guid>
-      <description>Take the LaTeX code:
--1 \cdot \frac{1}{n}}\cup \{-1, \frac{1}{n}\} Do you know what this means?
- difficult parse visually. uses lots of hard-to-type symbols.  Not only that, TeX by itself takes up 338.8 MB!
-Eqn -1 cdot 1 over n union left { -1 , 1 over n right } How&amp;rsquo;s that for readability!
-This is eqn: a math preprocessor on the layout engine groff. By the same metric, groff takes up 8 MB.</description>
+      <description>
+
+&lt;p&gt;Take the &lt;code&gt;LaTeX&lt;/code&gt; code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;-1 &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\cdot&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\frac&lt;/span&gt;&lt;span style=&#34;color:#366&#34;&gt;{&lt;/span&gt;1&lt;span style=&#34;color:#366&#34;&gt;}{&lt;/span&gt;n&lt;span style=&#34;color:#366&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\cup&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\{&lt;/span&gt;-1, &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\frac&lt;/span&gt;&lt;span style=&#34;color:#366&#34;&gt;{&lt;/span&gt;1&lt;span style=&#34;color:#366&#34;&gt;}{&lt;/span&gt;n&lt;span style=&#34;color:#366&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Do you know what this means?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;difficult parse visually.&lt;/li&gt;
+&lt;li&gt;uses lots of hard-to-type symbols.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Not only that, &lt;code&gt;TeX&lt;/code&gt; by itself takes up 338.8 MB!&lt;/p&gt;
+
+&lt;h1 id=&#34;eqn&#34;&gt;Eqn&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;cdot &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;over n union left { &lt;span style=&#34;color:#555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;over n right }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How&amp;rsquo;s that for readability!&lt;/p&gt;
+
+&lt;p&gt;This is &lt;a href=&#34;http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf&#34;&gt;eqn&lt;/a&gt;:
+a math preprocessor on the layout engine
+&lt;a href=&#34;https://www.gnu.org/software/groff/&#34;&gt;groff&lt;/a&gt;. By the same metric, groff
+takes up 8 MB.&lt;/p&gt;
+
+&lt;p&gt;And it works I promise!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./images/nonsense.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Even if the math is nonsensical, isn&amp;rsquo;t it pretty!&lt;/p&gt;
+
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+
+&lt;p&gt;You might already have groff/eqn on your machine! If not, take a look
+&lt;a href=&#34;https://www.gnu.org/software/groff/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Charlesetc/eqn-template&#34;&gt;This repo&lt;/a&gt; is my template for
+a simple eqn/groff project. &lt;a href=&#34;https://github.com/Charlesetc/eqn-template/blob/master/out.pdf&#34;&gt;Here&amp;rsquo;s&lt;/a&gt;
+what the pdf looks like.&lt;/p&gt;
+
+&lt;p&gt;Lastly, there is
+&lt;a href=&#34;http://www.schaffter.ca/mom/momdoc/toc.html&#34;&gt;documentation&lt;/a&gt; for a groff
+macro system, and &lt;a href=&#34;http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf&#34;&gt;an in-depth
+guide&lt;/a&gt; for eqn!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -144,12 +472,31 @@ This is eqn: a math preprocessor on the layout engine groff. By the same metric,
       <pubDate>Sun, 27 Nov 2016 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/tmux-sessions/</guid>
-      <description>tmux is an awesome tool! I&amp;rsquo;ve used it literally constantly for about a year now.
-And guess what! I didn&amp;rsquo;t know about some very basic commands.
-List Sessions Command:
-&amp;lt;prefix&amp;gt;s This shows you an interactive screen where you can which session you want to be in:
-(0) + 0: 3 windows (attached) (1) + 1: 1 windows Switch Session Command:
-&amp;lt;prefix&amp;gt;( # or &amp;lt;prefix&amp;gt;) Move back and forth between sessions.</description>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/tmux&#34;&gt;tmux&lt;/a&gt; is an awesome tool! I&amp;rsquo;ve used it literally constantly for about a year now.&lt;/p&gt;
+
+&lt;p&gt;And guess what! I didn&amp;rsquo;t know about some very basic commands.&lt;/p&gt;
+
+&lt;h1 id=&#34;list-sessions&#34;&gt;List Sessions&lt;/h1&gt;
+
+&lt;p&gt;Command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This shows you an interactive screen where you can which session you want to be in:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt; + &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt; windows &lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;attached&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt; + &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; windows&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;switch-session&#34;&gt;Switch Session&lt;/h1&gt;
+
+&lt;p&gt;Command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# or
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;&amp;lt;prefix&amp;gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Move back and forth between sessions. Can you imagine!&lt;/p&gt;
+
+&lt;h1 id=&#34;main-development&#34;&gt;Main Development&lt;/h1&gt;
+
+&lt;p&gt;I usually have a single session with several panes and windows. Now this can scale in a whole new dimension with more projects and ideas. Hurray!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -158,13 +505,81 @@ List Sessions Command:
       <pubDate>Sat, 30 Jul 2016 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/rebase-for-fame/</guid>
-      <description>While learning git, people kept telling me &amp;ldquo;Don&amp;rsquo;t re-base - you&amp;rsquo;ll never need to re-base and it can screw things up&amp;rdquo;.
-This is terrible advice!
-Re-basing is a great tool!
-When you hear &amp;ldquo;Don&amp;rsquo;t do , you will break things&amp;rdquo; do that thing now!
-and break things!
-Re-basing by itself is not dangerous.
-As long as you avoid git push origin master --force and only run rm -rf .git every once in a while, you&amp;rsquo;ll be totally fine.</description>
+      <description>
+
+&lt;p&gt;While learning git, people kept telling me &amp;ldquo;Don&amp;rsquo;t re-base - you&amp;rsquo;ll never need to re-base and it can screw things up&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;This is terrible advice!&lt;/p&gt;
+
+&lt;p&gt;Re-basing is a great tool!&lt;/p&gt;
+
+&lt;p&gt;When you hear &amp;ldquo;Don&amp;rsquo;t do &lt;INSERT TOTALLY COOL THING&gt;, you will break things&amp;rdquo; &lt;strong&gt;&lt;em&gt;do that thing now!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;and&lt;/strong&gt; break things!&lt;/p&gt;
+
+&lt;p&gt;Re-basing by itself is not dangerous.&lt;/p&gt;
+
+&lt;p&gt;As long as you avoid &lt;code&gt;git push origin master --force&lt;/code&gt; and only run &lt;code&gt;rm -rf .git&lt;/code&gt;
+every once in a while, you&amp;rsquo;ll be totally fine.&lt;/p&gt;
+
+&lt;h1 id=&#34;git-rebase&#34;&gt;&lt;code&gt;git rebase&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;When you type &lt;code&gt;git rebase master&lt;/code&gt;, you say:&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;I want to re-base my current branch.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Even though I started on &lt;code&gt;20404df&lt;/code&gt;,
+make this branch off of the tip of master instead&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;This works for any git object: commits, tags, branches.&lt;/p&gt;
+
+&lt;h1 id=&#34;why-would-i-need-to-use-this&#34;&gt;Why would I need to use this?&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git checkout master &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+ccccccc -- third commit
+bbbbbbb -- second commit
+aaaaaaa -- first commit
+
+$ git checkout bbbbbbb
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# make a new branch, based off of &amp;#34;second commit&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;$ git checkout -b my_new_branch
+$ touch a_file
+$ git add a_file
+$ git commit -m &lt;span style=&#34;color:#c30&#34;&gt;&amp;#39;I just committed a file!&amp;#39;&lt;/span&gt;
+$ git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+ddddddd -- I just committed a file!
+bbbbbbb -- second commit
+aaaaaaa -- first commit
+
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# But I meant to make this commit on &amp;#34;third commit&amp;#34;, not &amp;#34;second commit&amp;#34;!!!
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# OH NOOOOO
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# wait, I can re-base?
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;$ git rebase ccccccc
+First, rewinding head to replay your work on top of it...
+Applying: I just committed a file!
+
+$ git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+ddddddd -- I just committed a file!
+ccccccc -- third commit
+bbbbbbb -- second commit
+aaaaaaa -- first commit
+
+# We just changed where the branch was based!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;if-things-go-wrong&#34;&gt;If things go wrong&amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;This is a chance you screw everything up. Luckily, there are very few things
+beyond repair in git.&lt;/p&gt;
+
+&lt;p&gt;If you do &lt;code&gt;git reflog&lt;/code&gt;, you will see something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;234320a HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase finished: returning to refs/heads/my-new-branch
+234320a HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase: added a file
+49211d7 HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase: checkout 49211d7
+8c90682 HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: checkout: moving from master to my-new-branch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can then checkout &lt;code&gt;HEAD@{3}&lt;/code&gt; to return to a safe state,
+and then &lt;code&gt;git checkout -b saved-branch&lt;/code&gt; to start committing.&lt;/p&gt;
+
+&lt;p&gt;As long as you don&amp;rsquo;t &lt;code&gt;rm -rf .git&lt;/code&gt;, you should be able to dig
+yourself out of any holes &lt;code&gt;:)&lt;/code&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -173,9 +588,87 @@ As long as you avoid git push origin master --force and only run rm -rf .git eve
       <pubDate>Wed, 22 Jun 2016 02:00:42 -0400</pubDate>
       
       <guid>http://www.charlesetc.com/exceptions-in-ocaml/</guid>
-      <description>Pattern Matching A large part of function programming is pattern matching:
-/* A new and delicious enum */type fruit=Apple|Pear|Pineapple|Orange;letmy_fruit=Pear;/* print the outcome of the switch statement */print_string(switchmy_fruit{|Apple=&amp;gt;&amp;#34;you have an apple&amp;#34;|Pear=&amp;gt;&amp;#34;you have a pear&amp;#34;|_=&amp;gt;&amp;#34;you have neither an apple or a pear&amp;#34;}); Except&amp;hellip; The cool part is how Reason handles exceptions: as another branch in a switch statement.
-exceptionMy_exception;/* * Here&amp;#39;s a function that occasionally throws an exception */letrisky_function=&amp;gt;switch(Random.int3){|0=&amp;gt;true|1=&amp;gt;false|2=&amp;gt;raiseMy_exception};/* * We can match against the possible cases of risky_function, * even exceptions.</description>
+      <description>
+
+&lt;h1 id=&#34;pattern-matching&#34;&gt;Pattern Matching&lt;/h1&gt;
+
+&lt;p&gt;A large part of function programming is pattern matching:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;/* A new and delicious enum */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;fruit&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pineapple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Orange;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;my_fruit&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;/* print the outcome of the switch statement */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;print_string&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;my_fruit&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;you have an apple&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;you have a pear&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;you have neither an apple or a pear&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;});&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;except&#34;&gt;Except&amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;The cool part is how Reason handles exceptions: as another branch in
+a switch statement.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;/*
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; * Here&amp;#39;s a function that occasionally throws an exception
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;risky_function&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(Random.int&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;raise&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;/*
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; * We can match against the possible cases of risky_function,
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; * even exceptions.
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(risky_function&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;())&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;handling true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;handling false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;handling my exception&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;};&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Throwing an exception is different than returning something - an exception unwinds the stack until
+it&amp;rsquo;s caught.&lt;/p&gt;
+
+&lt;p&gt;Exceptions don&amp;rsquo;t have to be used just for error scenarios.
+They are called &amp;ldquo;exceptions&amp;rdquo; after all - they are meant to propose an exceptional &lt;strong&gt;case&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Reason does a nice job of accepting this control flow mechanism as a case
+in a switch statement, whereas it looks very hacky in languages using
+try-catch.&lt;/p&gt;
+
+&lt;h4 id=&#34;python&#34;&gt;Python&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;read_first_line&lt;/span&gt;(filename):
+  f &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#366&#34;&gt;open&lt;/span&gt;(filename, &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;)
+  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;return&lt;/span&gt; f&lt;span style=&#34;color:#555&#34;&gt;.&lt;/span&gt;readline()
+
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;try&lt;/span&gt;:
+  line &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; read_first_line(&lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;)
+  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;if&lt;/span&gt; line &lt;span style=&#34;color:#555&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;:
+    message&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#c00;font-weight:bold&#34;&gt;IOError&lt;/span&gt;:
+  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;error reading your salutation&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;reason&#34;&gt;Reason&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;read_first_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;filename&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;f&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;open_in&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;filename;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;input_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;f&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;print_string&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(read_first_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(Sys_error&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;error reading your saltation&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;});&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That&amp;rsquo;s all!&lt;/p&gt;
+
+&lt;h1 id=&#34;what-s-reason&#34;&gt;What&amp;rsquo;s Reason?&lt;/h1&gt;
+
+&lt;p&gt;The code in this post is in &lt;a href=&#34;http://facebook.github.io/reason&#34;&gt;Reason&lt;/a&gt;; an
+alternative parser for the OCaml compiler.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -184,8 +677,96 @@ exceptionMy_exception;/* * Here&amp;#39;s a function that occasionally throws an
       <pubDate>Sat, 31 Oct 2015 12:31:33 +0000</pubDate>
       
       <guid>http://www.charlesetc.com/lifetime-reference/</guid>
-      <description>Places in Rust where you use any lifetime syntax will fall into two categories:
-   Concept Category Usage     fn creation fn example_function&amp;lt;&#39;a&amp;gt;()   struct creation struct Example&amp;lt;&#39;a&amp;gt;   enum creation enum Test&amp;lt;&#39;a&amp;gt;   impl creation impl&amp;lt;&#39;a&amp;gt; Example&amp;lt;&#39;a&amp;gt;   struct reference some_field: Example&amp;lt;&#39;a&amp;gt;   enum reference some_field: Test&amp;lt;&#39;a&amp;gt;   &amp;amp; reference next_field: &amp;amp;&#39;a i32   &amp;amp;mut reference next_field: &amp;amp;&#39;a mut i32   Box reference last_field: Box&amp;lt;i32 + &#39;a&amp;gt;    What does &amp;lsquo;Category&amp;rsquo; mean?</description>
+      <description>
+
+&lt;p&gt;Places in Rust where you use any lifetime syntax will fall into two categories:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Concept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Category&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;fn&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;creation&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;fn example_function&amp;lt;&#39;a&amp;gt;()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;struct&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;creation&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;struct Example&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;enum&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;creation&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;enum Test&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;impl&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;creation&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;impl&amp;lt;&#39;a&amp;gt; Example&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;struct&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;reference&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;some_field: Example&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;enum&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;reference&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;some_field: Test&amp;lt;&#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;&amp;amp;&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;reference&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;next_field: &amp;amp;&#39;a i32&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;&amp;amp;mut&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;reference&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;next_field: &amp;amp;&#39;a mut i32&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Box&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;reference&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;last_field: Box&amp;lt;i32 + &#39;a&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&#34;what-does-category-mean&#34;&gt;What does &amp;lsquo;Category&amp;rsquo; mean?&lt;/h1&gt;
+
+&lt;p&gt;When I say &lt;em&gt;&amp;lsquo;creation&amp;rsquo;&lt;/em&gt; I mean this is where the lifetime is first defined and named.&lt;/p&gt;
+
+&lt;p&gt;When I say &lt;em&gt;&amp;lsquo;reference&amp;rsquo;&lt;/em&gt; I mean this is where we are being explicit about the lifetime of some reference type, using a lifetime that already exists.&lt;/p&gt;
+
+&lt;p&gt;This is an important distinction that took me a while to get.&lt;/p&gt;
+
+&lt;h1 id=&#34;weird-things&#34;&gt;Weird things&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Yes, we see you &lt;code&gt;Box&lt;/code&gt;, we&amp;rsquo;re ignoring you.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Notice that &amp;lsquo;struct&amp;rsquo; and &amp;lsquo;enum&amp;rsquo; are in both categories. That&amp;rsquo;s because they use pretty much the same syntax for creation as they do for reference; it&amp;rsquo;s helpful to acknowledge that.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;more&#34;&gt;More&lt;/h1&gt;
+
+&lt;p&gt;I go into more detail about lifetimes &lt;a href=&#34;./rust-lifetimes&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -194,10 +775,213 @@ exceptionMy_exception;/* * Here&amp;#39;s a function that occasionally throws an
       <pubDate>Thu, 29 Oct 2015 12:31:33 +0000</pubDate>
       
       <guid>http://www.charlesetc.com/rust-lifetimes/</guid>
-      <description>Lifetimes are pretty much what makes Rust Rust.
-Easy concurrency, straightforward memory allocation, and overall data safety would not be possible without explicit lifetimes.
-But they are also tricky, and this is aimed at helping people understand the concepts and syntax.
-What are Lifetimes? Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call free, while at the same time having no need for a garbage collector.</description>
+      <description>
+
+&lt;p&gt;Lifetimes are pretty much what makes Rust Rust.&lt;/p&gt;
+
+&lt;p&gt;Easy concurrency, straightforward memory allocation,
+and overall data safety would not be possible without explicit lifetimes.&lt;/p&gt;
+
+&lt;p&gt;But they are also tricky, and this is aimed at helping people understand the concepts and syntax.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-are-lifetimes&#34;&gt;What are Lifetimes?&lt;/h1&gt;
+
+&lt;p&gt;Rust is a unique language in that it deallocates memory on the heap without requiring the writer to call &lt;code&gt;free&lt;/code&gt;,
+while at the same time having no need for a garbage collector.
+Rust knows when it&amp;rsquo;s okay to use a reference by keeping track of its lifetime.&lt;/p&gt;
+
+&lt;p&gt;Each time a reference is returned by or passed into a function, Rust checks at compile time to make sure it fulfills the lifetime requirement specified in the type signature.&lt;/p&gt;
+
+&lt;p&gt;So every reference in Rust (i.e. pointer) has a lifetime. A lifetime is part of the type signature for any reference. Sometimes they can be elided
+and the compiler can infer them. Nonetheless, you cannot program Rust without knowing how to specify lifetimes.&lt;/p&gt;
+
+&lt;p&gt;Lifetimes fulfill two roles for Rust:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;To know when it&amp;rsquo;s safe to dereference a pointer&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To allow data to be shared safely&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now, &lt;strong&gt;you are not in charge of defining lifetimes.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Sometimes, however, you will have to give names to existing lifetimes in order to change the default behavior of the compiler.&lt;/p&gt;
+
+&lt;h1 id=&#34;where-do-lifetimes-come-from&#34;&gt;Where do Lifetimes come from?&lt;/h1&gt;
+
+&lt;p&gt;Lifetimes are always named with the same syntax.
+They look like &lt;code&gt;&amp;lt;&#39;a&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;&#39;b&amp;gt;&lt;/code&gt;, or &lt;code&gt;&amp;lt;&#39;c&amp;gt;&lt;/code&gt;,
+and they are generally one letter prefaced
+by an apostrophe.&lt;/p&gt;
+
+&lt;p&gt;When you use one, though, there is more syntax involved.
+Depending on the context they can look like one of: &lt;code&gt;something&amp;lt;&#39;a&amp;gt;&lt;/code&gt;, &lt;code&gt;Box&amp;lt;something + &#39;a&amp;gt;&lt;/code&gt; or &lt;code&gt;&amp;amp;&#39;a something&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Note well: You will only ever write a lifetime within a type declaration.&lt;/p&gt;
+
+&lt;p&gt;So if you don&amp;rsquo;t define lifetimes, what does?&lt;/p&gt;
+
+&lt;h1 id=&#34;functions&#34;&gt;Functions&lt;/h1&gt;
+
+&lt;p&gt;This is a biggie. A function can define a lifetime that can be used in it&amp;rsquo;s type declarations.&lt;/p&gt;
+
+&lt;p&gt;This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over. And if not, you need to make sure it has an appropriate lifetime.&lt;/p&gt;
+
+&lt;p&gt;In Go, you can do this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;func&lt;/span&gt; example_function() &lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; {
+  b &lt;span style=&#34;color:#555&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;
+  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;b
+}
+
+&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;func&lt;/span&gt; main() {
+  fmt.Println(&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;example_function());
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;However, you cannot do that in Rust:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;example_function&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;a&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;-&amp;gt; &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;b&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;b&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// this does not compile
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;println&lt;span style=&#34;color:#555&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;{}&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;example_function());&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The reason is that &lt;code&gt;&amp;amp;b&lt;/code&gt; does not live long enough to be dereferenced outside of the function that made it.&lt;/p&gt;
+
+&lt;p&gt;Why is this so important? Because this is what can happen in C:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;example_function&lt;/span&gt;(&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;void&lt;/span&gt;) {
+  &lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; a &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;;
+  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;a;
+}
+
+&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;do_something&lt;/span&gt;(&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; b) {
+  &lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// lies, don&amp;#39;t do anything
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;}
+
+&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;main&lt;/span&gt;(&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;void&lt;/span&gt;) {
+  &lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt; c &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; example_function();
+  do_something(&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;);
+  &lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; d &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;;
+  printf(&lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%i&lt;/span&gt;&lt;span style=&#34;color:#c30;font-weight:bold&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;c);
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In C this is Undefined Behavior. When I run this, it just prints &amp;ldquo;3&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s right, the data can just change under your nose. I was honestly scared when I ran that. But Rust prevents crazy things like that from taking place!&lt;/p&gt;
+
+&lt;p&gt;So just to explicitly point out the syntax:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;example_function&amp;lt;&#39;a&amp;gt;&lt;/code&gt; is saying &amp;ldquo;for any lifetime called &lt;code&gt;&#39;a&lt;/code&gt;&amp;hellip;&amp;ldquo;. You can then go on to use this lifetime in the remainder of the type definition.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;amp;&#39;a i32&lt;/code&gt; says &amp;ldquo;This is a reference to an integer that has lifetime &lt;code&gt;&#39;a&lt;/code&gt;&amp;rdquo;,
+which means it has to last as long as &amp;ldquo;any lifetime&amp;rdquo;. However, &lt;code&gt;b&lt;/code&gt; happens to only have a lifetime that lasts as long as the function&amp;rsquo;s scope, so Rust complains.&lt;/p&gt;
+
+&lt;p&gt;(Now at this point you might be asking how you actually would return a reference to &lt;code&gt;3&lt;/code&gt; in Rust&amp;hellip;
+that&amp;rsquo;s a more complicated question and the answer is to put it on the heap. Look up the &lt;code&gt;Box&lt;/code&gt; type to learn more.)&lt;/p&gt;
+
+&lt;p&gt;And now on to bigger fish.&lt;/p&gt;
+
+&lt;h1 id=&#34;structs&#34;&gt;Structs&lt;/h1&gt;
+
+&lt;p&gt;Structs also define lifetimes.&lt;/p&gt;
+
+&lt;p&gt;Think about it like this:&lt;/p&gt;
+
+&lt;p&gt;If a struct includes a reference to something, then that reference damn sure better last as long as the struct.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s how you can make sure of that:&lt;/p&gt;
+
+&lt;h2 id=&#34;wrong-example&#34;&gt;Wrong example:&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;a&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color:#555&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;{};&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s)&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This gives the following error:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#fc3&#34;&gt;error&lt;/span&gt;: missing lifetime specifier &lt;span style=&#34;color:#555&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#360&#34;&gt;E0106&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;]&lt;/span&gt;
+        &lt;span style=&#34;color:#fc3&#34;&gt;age&lt;/span&gt;: &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;i32,
+             &lt;span style=&#34;color:#555&#34;&gt;^~~~&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Rust is mad.
+In the struct definition, you haven&amp;rsquo;t told it how long the reference to the &lt;code&gt;i32&lt;/code&gt; is allowed to stay around.
+And yet, in order for your code to be safe, it has to stick around for at least as long as the struct.&lt;/p&gt;
+
+&lt;h2 id=&#34;right-example&#34;&gt;Right Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;a&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color:#555&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;{};&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s)&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You&amp;rsquo;ll notice that not much here has changed. But now Rust has pronounced your code safe &amp;mdash; Hurray!&lt;/p&gt;
+
+&lt;p&gt;Here are the changes:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Sheep&amp;lt;&#39;c&amp;gt;&lt;/code&gt; instead of &lt;code&gt;Sheep&lt;/code&gt;
+&lt;br/&gt;
+This is making a parameter for the struct in Rust &amp;mdash; It&amp;rsquo;s lifetime might have to depend on the lifetimes of its fields, so now you are able to say how and which ones. (Note: you can do things like &lt;code&gt;Sheep&amp;lt;&#39;c, &#39;d&amp;gt;&lt;/code&gt; if you need more than one lifetime.)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;age: &amp;amp;&#39;c i32&lt;/code&gt; instead of &lt;code&gt;age: &amp;amp;i32&lt;/code&gt;
+&lt;br/&gt;
+Now this says that the integer has to live for as long as the struct.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This is &lt;strong&gt;insanely&lt;/strong&gt; impressive.
+With these small additions, Rust will now tell you if there is any chance of you having invalid data,
+even across threads. AND all of this happens at compile time without affecting the efficiency of your code.&lt;/p&gt;
+
+&lt;h1 id=&#34;implementations&#34;&gt;Implementations&lt;/h1&gt;
+
+&lt;p&gt;There is one other place where a lifetime can be defined &amp;mdash; Implementations.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s very similar to structs. Each implementation is an implementation of a certain
+trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.&lt;/p&gt;
+
+&lt;h2 id=&#34;wrong-example-1&#34;&gt;Wrong Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;impl&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;grow_old&lt;/span&gt;(&lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;self)&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;self.age&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;+=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This fails with the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#fc3&#34;&gt;error&lt;/span&gt;: wrong number of lifetime &lt;span style=&#34;color:#fc3&#34;&gt;parameters&lt;/span&gt;: expected &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;, found &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#360&#34;&gt;E0107&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;]&lt;/span&gt;
+        impl &lt;span style=&#34;color:#360&#34;&gt;Sheep&lt;/span&gt; {
+             &lt;span style=&#34;color:#555&#34;&gt;^~~~~&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;right-example-1&#34;&gt;Right Example&lt;/h2&gt;
+
+&lt;p&gt;What&amp;rsquo;s the problem?&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Sheep&lt;/code&gt; takes a lifetime parameter now, so one must be supplied:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;impl&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;grow_old&lt;/span&gt;(&lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;self)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;self.age&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;+=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that &lt;code&gt;impl&amp;lt;&#39;c&amp;gt;&lt;/code&gt; names a new lifetime and &lt;code&gt;Sheep&amp;lt;&#39;c&amp;gt;&lt;/code&gt; says that all
+&lt;code&gt;self&lt;/code&gt;&amp;rsquo;s in this implementation have at least the lifetime &lt;code&gt;&#39;c&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is a lot like an extenuation of the lifetimes with structs, but there
+is strange syntax with the &lt;code&gt;impl&amp;lt;&#39;c&amp;gt; Sheep&amp;lt;&#39;c&amp;gt;&lt;/code&gt; so I wanted to point it out.&lt;/p&gt;
+
+&lt;h1 id=&#34;the-end&#34;&gt;The End&lt;/h1&gt;
+
+&lt;p&gt;And that is all I know about lifetimes in Rust!&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re interested, here is a &lt;a href=&#34;./lifetime-reference&#34;&gt;concise reference&lt;/a&gt; for the syntax used with lifetimes.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -206,9 +990,73 @@ What are Lifetimes? Rust is a unique language in that it deallocates memory on t
       <pubDate>Wed, 21 Oct 2015 12:31:33 +0000</pubDate>
       
       <guid>http://www.charlesetc.com/the-problems/</guid>
-      <description>I like programming languages, so I was thinking about what I would want in my favorite one.
-Here are the basic essentials for a language to have a chance at being my favorite:
- Strict Type Checking No Nil Pointer Green Threads with both go-like channels and mutexes. Compiles to binary, without a virtual machine. Still runs on all platforms that I care about. Parametric Polymorphism Methods with dot syntax Fast compilation, fast running Lisp- or scheme-style macros of some sort User specified Operators with precedence Mutation A clean syntax (I&amp;rsquo;m aware how subjective this is)  Okay!</description>
+      <description>
+
+&lt;p&gt;I like programming languages, so I was thinking about what I would want in my favorite one.&lt;/p&gt;
+
+&lt;p&gt;Here are the basic essentials for a language to have a chance at being my favorite:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Strict Type Checking&lt;/li&gt;
+&lt;li&gt;No Nil Pointer&lt;/li&gt;
+&lt;li&gt;Green Threads with both go-like channels and mutexes.&lt;/li&gt;
+&lt;li&gt;Compiles to binary, without a virtual machine.&lt;/li&gt;
+&lt;li&gt;Still runs on all platforms that I care about.&lt;/li&gt;
+&lt;li&gt;Parametric Polymorphism&lt;/li&gt;
+&lt;li&gt;Methods with dot syntax&lt;/li&gt;
+&lt;li&gt;Fast compilation, fast running&lt;/li&gt;
+&lt;li&gt;Lisp- or scheme-style macros of some sort&lt;/li&gt;
+&lt;li&gt;User specified Operators with precedence&lt;/li&gt;
+&lt;li&gt;Mutation&lt;/li&gt;
+&lt;li&gt;A clean syntax (I&amp;rsquo;m aware how subjective this is)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Okay! Let&amp;rsquo;s see how languages do:&lt;/p&gt;
+
+&lt;h2 id=&#34;go&#34;&gt;Go&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,6,9,10&lt;/p&gt;
+
+&lt;p&gt;Nil pointers are annoying but not a dealbreaker.
+Lack of polymorphism is where it falls apart.&lt;/p&gt;
+
+&lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 1,2,3,4,8,9,10&lt;/p&gt;
+
+&lt;p&gt;Too many to talk about.&lt;/p&gt;
+
+&lt;h2 id=&#34;c&#34;&gt;C++&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,3,8,9,10,12&lt;/p&gt;
+
+&lt;h2 id=&#34;java&#34;&gt;Java&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,4,9,10,12&lt;/p&gt;
+
+&lt;h2 id=&#34;haskell&#34;&gt;Haskell&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 7,9,11&lt;/p&gt;
+
+&lt;p&gt;Easily the best so far, but that lack of mutation is a killer. State is so useful sometimes.
+You&amp;rsquo;ll notice it&amp;rsquo;s the only one that passes 10, and the only one that fails 11.&lt;/p&gt;
+
+&lt;h2 id=&#34;rust&#34;&gt;Rust&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 3,10,12&lt;/p&gt;
+
+&lt;p&gt;The lack of green threads is unfortunate, and damn is it ugly, but other than that rust is a great contender.&lt;/p&gt;
+
+&lt;h1 id=&#34;edit&#34;&gt;Edit&lt;/h1&gt;
+
+&lt;p&gt;Revisiting this post, I see that OCaml wasn&amp;rsquo;t mentioned!&lt;/p&gt;
+
+&lt;h2 id=&#34;ocaml&#34;&gt;OCaml&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 7&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Damn.&lt;/strong&gt; I didn&amp;rsquo;t even know about OCaml!&lt;/p&gt;
+</description>
     </item>
     
   </channel>

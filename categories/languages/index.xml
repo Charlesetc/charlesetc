@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Wed, 21 Oct 2015 12:31:33 +0000</lastBuildDate>
     
-	<atom:link href="http://www.charlesetc.com/categories/languages/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://www.charlesetc.com/categories/languages/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,9 +17,73 @@
       <pubDate>Wed, 21 Oct 2015 12:31:33 +0000</pubDate>
       
       <guid>http://www.charlesetc.com/the-problems/</guid>
-      <description>I like programming languages, so I was thinking about what I would want in my favorite one.
-Here are the basic essentials for a language to have a chance at being my favorite:
- Strict Type Checking No Nil Pointer Green Threads with both go-like channels and mutexes. Compiles to binary, without a virtual machine. Still runs on all platforms that I care about. Parametric Polymorphism Methods with dot syntax Fast compilation, fast running Lisp- or scheme-style macros of some sort User specified Operators with precedence Mutation A clean syntax (I&amp;rsquo;m aware how subjective this is)  Okay!</description>
+      <description>
+
+&lt;p&gt;I like programming languages, so I was thinking about what I would want in my favorite one.&lt;/p&gt;
+
+&lt;p&gt;Here are the basic essentials for a language to have a chance at being my favorite:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Strict Type Checking&lt;/li&gt;
+&lt;li&gt;No Nil Pointer&lt;/li&gt;
+&lt;li&gt;Green Threads with both go-like channels and mutexes.&lt;/li&gt;
+&lt;li&gt;Compiles to binary, without a virtual machine.&lt;/li&gt;
+&lt;li&gt;Still runs on all platforms that I care about.&lt;/li&gt;
+&lt;li&gt;Parametric Polymorphism&lt;/li&gt;
+&lt;li&gt;Methods with dot syntax&lt;/li&gt;
+&lt;li&gt;Fast compilation, fast running&lt;/li&gt;
+&lt;li&gt;Lisp- or scheme-style macros of some sort&lt;/li&gt;
+&lt;li&gt;User specified Operators with precedence&lt;/li&gt;
+&lt;li&gt;Mutation&lt;/li&gt;
+&lt;li&gt;A clean syntax (I&amp;rsquo;m aware how subjective this is)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Okay! Let&amp;rsquo;s see how languages do:&lt;/p&gt;
+
+&lt;h2 id=&#34;go&#34;&gt;Go&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,6,9,10&lt;/p&gt;
+
+&lt;p&gt;Nil pointers are annoying but not a dealbreaker.
+Lack of polymorphism is where it falls apart.&lt;/p&gt;
+
+&lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 1,2,3,4,8,9,10&lt;/p&gt;
+
+&lt;p&gt;Too many to talk about.&lt;/p&gt;
+
+&lt;h2 id=&#34;c&#34;&gt;C++&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,3,8,9,10,12&lt;/p&gt;
+
+&lt;h2 id=&#34;java&#34;&gt;Java&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 2,4,9,10,12&lt;/p&gt;
+
+&lt;h2 id=&#34;haskell&#34;&gt;Haskell&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 7,9,11&lt;/p&gt;
+
+&lt;p&gt;Easily the best so far, but that lack of mutation is a killer. State is so useful sometimes.
+You&amp;rsquo;ll notice it&amp;rsquo;s the only one that passes 10, and the only one that fails 11.&lt;/p&gt;
+
+&lt;h2 id=&#34;rust&#34;&gt;Rust&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 3,10,12&lt;/p&gt;
+
+&lt;p&gt;The lack of green threads is unfortunate, and damn is it ugly, but other than that rust is a great contender.&lt;/p&gt;
+
+&lt;h1 id=&#34;edit&#34;&gt;Edit&lt;/h1&gt;
+
+&lt;p&gt;Revisiting this post, I see that OCaml wasn&amp;rsquo;t mentioned!&lt;/p&gt;
+
+&lt;h2 id=&#34;ocaml&#34;&gt;OCaml&lt;/h2&gt;
+
+&lt;p&gt;Fails on: 7&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Damn.&lt;/strong&gt; I didn&amp;rsquo;t even know about OCaml!&lt;/p&gt;
+</description>
     </item>
     
   </channel>

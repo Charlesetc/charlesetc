@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 30 Jul 2016 12:14:30 -0700</lastBuildDate>
     
-	<atom:link href="http://www.charlesetc.com/categories/git/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://www.charlesetc.com/categories/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,13 +17,81 @@
       <pubDate>Sat, 30 Jul 2016 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/rebase-for-fame/</guid>
-      <description>While learning git, people kept telling me &amp;ldquo;Don&amp;rsquo;t re-base - you&amp;rsquo;ll never need to re-base and it can screw things up&amp;rdquo;.
-This is terrible advice!
-Re-basing is a great tool!
-When you hear &amp;ldquo;Don&amp;rsquo;t do , you will break things&amp;rdquo; do that thing now!
-and break things!
-Re-basing by itself is not dangerous.
-As long as you avoid git push origin master --force and only run rm -rf .git every once in a while, you&amp;rsquo;ll be totally fine.</description>
+      <description>
+
+&lt;p&gt;While learning git, people kept telling me &amp;ldquo;Don&amp;rsquo;t re-base - you&amp;rsquo;ll never need to re-base and it can screw things up&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;This is terrible advice!&lt;/p&gt;
+
+&lt;p&gt;Re-basing is a great tool!&lt;/p&gt;
+
+&lt;p&gt;When you hear &amp;ldquo;Don&amp;rsquo;t do &lt;INSERT TOTALLY COOL THING&gt;, you will break things&amp;rdquo; &lt;strong&gt;&lt;em&gt;do that thing now!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;and&lt;/strong&gt; break things!&lt;/p&gt;
+
+&lt;p&gt;Re-basing by itself is not dangerous.&lt;/p&gt;
+
+&lt;p&gt;As long as you avoid &lt;code&gt;git push origin master --force&lt;/code&gt; and only run &lt;code&gt;rm -rf .git&lt;/code&gt;
+every once in a while, you&amp;rsquo;ll be totally fine.&lt;/p&gt;
+
+&lt;h1 id=&#34;git-rebase&#34;&gt;&lt;code&gt;git rebase&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;When you type &lt;code&gt;git rebase master&lt;/code&gt;, you say:&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;I want to re-base my current branch.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Even though I started on &lt;code&gt;20404df&lt;/code&gt;,
+make this branch off of the tip of master instead&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;This works for any git object: commits, tags, branches.&lt;/p&gt;
+
+&lt;h1 id=&#34;why-would-i-need-to-use-this&#34;&gt;Why would I need to use this?&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git checkout master &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+ccccccc -- third commit
+bbbbbbb -- second commit
+aaaaaaa -- first commit
+
+$ git checkout bbbbbbb
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# make a new branch, based off of &amp;#34;second commit&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;$ git checkout -b my_new_branch
+$ touch a_file
+$ git add a_file
+$ git commit -m &lt;span style=&#34;color:#c30&#34;&gt;&amp;#39;I just committed a file!&amp;#39;&lt;/span&gt;
+$ git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+ddddddd -- I just committed a file!
+bbbbbbb -- second commit
+aaaaaaa -- first commit
+
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# But I meant to make this commit on &amp;#34;third commit&amp;#34;, not &amp;#34;second commit&amp;#34;!!!
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# OH NOOOOO
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# wait, I can re-base?
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;$ git rebase ccccccc
+First, rewinding head to replay your work on top of it...
+Applying: I just committed a file!
+
+$ git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+ddddddd -- I just committed a file!
+ccccccc -- third commit
+bbbbbbb -- second commit
+aaaaaaa -- first commit
+
+# We just changed where the branch was based!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;if-things-go-wrong&#34;&gt;If things go wrong&amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;This is a chance you screw everything up. Luckily, there are very few things
+beyond repair in git.&lt;/p&gt;
+
+&lt;p&gt;If you do &lt;code&gt;git reflog&lt;/code&gt;, you will see something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;234320a HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase finished: returning to refs/heads/my-new-branch
+234320a HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase: added a file
+49211d7 HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase: checkout 49211d7
+8c90682 HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: checkout: moving from master to my-new-branch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can then checkout &lt;code&gt;HEAD@{3}&lt;/code&gt; to return to a safe state,
+and then &lt;code&gt;git checkout -b saved-branch&lt;/code&gt; to start committing.&lt;/p&gt;
+
+&lt;p&gt;As long as you don&amp;rsquo;t &lt;code&gt;rm -rf .git&lt;/code&gt;, you should be able to dig
+yourself out of any holes &lt;code&gt;:)&lt;/code&gt;&lt;/p&gt;
+</description>
     </item>
     
   </channel>

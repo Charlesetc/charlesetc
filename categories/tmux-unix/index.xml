@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 27 Nov 2016 12:14:30 -0700</lastBuildDate>
     
-	<atom:link href="http://www.charlesetc.com/categories/tmux-unix/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://www.charlesetc.com/categories/tmux-unix/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,12 +17,31 @@
       <pubDate>Sun, 27 Nov 2016 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/tmux-sessions/</guid>
-      <description>tmux is an awesome tool! I&amp;rsquo;ve used it literally constantly for about a year now.
-And guess what! I didn&amp;rsquo;t know about some very basic commands.
-List Sessions Command:
-&amp;lt;prefix&amp;gt;s This shows you an interactive screen where you can which session you want to be in:
-(0) + 0: 3 windows (attached) (1) + 1: 1 windows Switch Session Command:
-&amp;lt;prefix&amp;gt;( # or &amp;lt;prefix&amp;gt;) Move back and forth between sessions.</description>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/tmux&#34;&gt;tmux&lt;/a&gt; is an awesome tool! I&amp;rsquo;ve used it literally constantly for about a year now.&lt;/p&gt;
+
+&lt;p&gt;And guess what! I didn&amp;rsquo;t know about some very basic commands.&lt;/p&gt;
+
+&lt;h1 id=&#34;list-sessions&#34;&gt;List Sessions&lt;/h1&gt;
+
+&lt;p&gt;Command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This shows you an interactive screen where you can which session you want to be in:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt; + &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt; windows &lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;attached&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt; + &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; windows&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;switch-session&#34;&gt;Switch Session&lt;/h1&gt;
+
+&lt;p&gt;Command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;
+&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# or
+&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;&amp;lt;prefix&amp;gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Move back and forth between sessions. Can you imagine!&lt;/p&gt;
+
+&lt;h1 id=&#34;main-development&#34;&gt;Main Development&lt;/h1&gt;
+
+&lt;p&gt;I usually have a single session with several panes and windows. Now this can scale in a whole new dimension with more projects and ideas. Hurray!&lt;/p&gt;
+</description>
     </item>
     
   </channel>

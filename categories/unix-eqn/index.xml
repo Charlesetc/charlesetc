@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Tue, 17 Jan 2017 12:14:30 -0700</lastBuildDate>
     
-	<atom:link href="http://www.charlesetc.com/categories/unix-eqn/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://www.charlesetc.com/categories/unix-eqn/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,11 +17,48 @@
       <pubDate>Tue, 17 Jan 2017 12:14:30 -0700</pubDate>
       
       <guid>http://www.charlesetc.com/eqn-and-groff/</guid>
-      <description>Take the LaTeX code:
--1 \cdot \frac{1}{n}}\cup \{-1, \frac{1}{n}\} Do you know what this means?
- difficult parse visually. uses lots of hard-to-type symbols.  Not only that, TeX by itself takes up 338.8 MB!
-Eqn -1 cdot 1 over n union left { -1 , 1 over n right } How&amp;rsquo;s that for readability!
-This is eqn: a math preprocessor on the layout engine groff. By the same metric, groff takes up 8 MB.</description>
+      <description>
+
+&lt;p&gt;Take the &lt;code&gt;LaTeX&lt;/code&gt; code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;-1 &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\cdot&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\frac&lt;/span&gt;&lt;span style=&#34;color:#366&#34;&gt;{&lt;/span&gt;1&lt;span style=&#34;color:#366&#34;&gt;}{&lt;/span&gt;n&lt;span style=&#34;color:#366&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\cup&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\{&lt;/span&gt;-1, &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\frac&lt;/span&gt;&lt;span style=&#34;color:#366&#34;&gt;{&lt;/span&gt;1&lt;span style=&#34;color:#366&#34;&gt;}{&lt;/span&gt;n&lt;span style=&#34;color:#366&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Do you know what this means?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;difficult parse visually.&lt;/li&gt;
+&lt;li&gt;uses lots of hard-to-type symbols.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Not only that, &lt;code&gt;TeX&lt;/code&gt; by itself takes up 338.8 MB!&lt;/p&gt;
+
+&lt;h1 id=&#34;eqn&#34;&gt;Eqn&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;cdot &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;over n union left { &lt;span style=&#34;color:#555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;over n right }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How&amp;rsquo;s that for readability!&lt;/p&gt;
+
+&lt;p&gt;This is &lt;a href=&#34;http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf&#34;&gt;eqn&lt;/a&gt;:
+a math preprocessor on the layout engine
+&lt;a href=&#34;https://www.gnu.org/software/groff/&#34;&gt;groff&lt;/a&gt;. By the same metric, groff
+takes up 8 MB.&lt;/p&gt;
+
+&lt;p&gt;And it works I promise!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../images/nonsense.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Even if the math is nonsensical, isn&amp;rsquo;t it pretty!&lt;/p&gt;
+
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+
+&lt;p&gt;You might already have groff/eqn on your machine! If not, take a look
+&lt;a href=&#34;https://www.gnu.org/software/groff/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Charlesetc/eqn-template&#34;&gt;This repo&lt;/a&gt; is my template for
+a simple eqn/groff project. &lt;a href=&#34;https://github.com/Charlesetc/eqn-template/blob/master/out.pdf&#34;&gt;Here&amp;rsquo;s&lt;/a&gt;
+what the pdf looks like.&lt;/p&gt;
+
+&lt;p&gt;Lastly, there is
+&lt;a href=&#34;http://www.schaffter.ca/mom/momdoc/toc.html&#34;&gt;documentation&lt;/a&gt; for a groff
+macro system, and &lt;a href=&#34;http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf&#34;&gt;an in-depth
+guide&lt;/a&gt; for eqn!&lt;/p&gt;
+</description>
     </item>
     
   </channel>
