@@ -21,14 +21,20 @@ where the added warm-up time is negligible, and it's less well-supported than CP
 
 But you also might enjoy looking into OCaml!
 OCaml is _**fast**_ and _**clean**_ —
-just as clean as Python if you can believe it
+just as clean as Python if you can believe it.
 
-But *how you even do things in OCaml*?
-Let's find out!
+What's that — **prove** it?
+
+`¯\_(ツ)_/¯` Okay.
 
 # Guess the Number
 
+A simple game that chooses a number and
+then let's you guess what it is.
+
 ```python
+# python
+
 import random
 
 def guess_a_number():
@@ -50,17 +56,29 @@ guess(37)
 ```
 
 ```ocaml
+(* ocaml *)
+
 let guess_a_number () =
   let number = Random.int 100 in
   fun guess ->
     print_endline
-      if guess < number then "lower"
-      else if guess > number then "higher"
-      else "you got it!"
+      (if guess < number then "lower"
+       else if guess > number then "higher"
+       else "you got it!")
 
 let guess = guess_a_number () in
 guess 45;
 guess 33;
 guess 37
 ```
+
+I could say that the OCaml is slightly shorter
+or doesn't need as many "print" statements.
+
+But who cares? These programs
+are **_basically_** the same.
+
+Eh, well, that was pretty easy.
+But so was the challenge! Should we
+try something harder?
 
