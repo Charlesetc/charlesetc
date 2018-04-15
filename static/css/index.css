@@ -16,6 +16,7 @@ ul, ol {
 }
 
 #first-title {
+  font-size: 70px;
   font-family: 'Dancing Script', cursive;
 }
 
@@ -25,7 +26,6 @@ ul, ol {
 
 #first-title, #side-title, #title {
   top: 80px;
-  font-size: 80px;
   min-width: 380px;
   display: block;
   font-weight: normal;
@@ -104,7 +104,7 @@ h2 {
 }
 
 h1#title:not(#first-title) {
-    font-size: 56px;
+    font-size: 46px;
 }
 
 h3, h4 {
@@ -126,7 +126,7 @@ li {
 }
 
 pre {
-  background: #fbfcdb !important;
+  background: lavender !important;
 }
 
 pre code {
@@ -278,4 +278,14 @@ video {
 img {
   padding-top: 20px;
   width: 100%;
+}
+
+.postscript {
+  font-size: 12px;
+  padding-top:40px;
+}
+
+.scream {
+  font-size: 50px;
+  display: block;
 }

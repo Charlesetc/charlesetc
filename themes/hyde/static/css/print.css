@@ -17,3 +17,11 @@
   padding-right: 1rem;
   margin: 0 auto;
 }
+#side-title {
+  display: none;
+  color:blue;
+}
+.title {
+  color:blue;
+}
+
