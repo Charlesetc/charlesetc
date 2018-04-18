@@ -283,6 +283,7 @@ img {
 .postscript {
   font-size: 12px;
   padding-top:40px;
+  line-height: 1 !important;
 }
 
 .scream {
