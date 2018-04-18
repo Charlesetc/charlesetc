@@ -109,40 +109,40 @@ Depending on the context they can look like one of: <code>something&lt;'a&gt;</c
 <p>This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over. And if not, you need to make sure it has an appropriate lifetime.</p>
 
 <p>In Go, you can do this:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#069;font-weight:bold">func</span> example_function() <span style="color:#555">*</span><span style="color:#078;font-weight:bold">int</span> {
-  b <span style="color:#555">:=</span> <span style="color:#f60">3</span>
-  <span style="color:#069;font-weight:bold">return</span> <span style="color:#555">&amp;</span>b
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> example_function() *<span style="color:#0aa">int</span> {
+  b := <span style="color:#099">3</span>
+  <span style="color:#00a">return</span> &amp;b
 }
 
-<span style="color:#069;font-weight:bold">func</span> main() {
-  fmt.Println(<span style="color:#555">*</span>example_function());
+<span style="color:#00a">func</span> main() {
+  fmt.Println(*example_function());
 }</code></pre></div>
 <p>However, you cannot do that in Rust:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">example_function</span><span style="color:#555">&lt;</span><span style="color:#309">&#39;a</span><span style="color:#555">&gt;</span>()<span style="color:#bbb"> </span>-&gt; <span style="color:#069">&amp;</span><span style="color:#309">&#39;a</span><span style="color:#bbb"> </span><span style="color:#078;font-weight:bold">i32</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#069;font-weight:bold">let</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#555">=</span><span style="color:#bbb"> </span><span style="color:#f60">3</span>;<span style="color:#bbb">
-</span><span style="color:#bbb">  </span><span style="color:#555">&amp;</span>b<span style="color:#bbb"> </span><span style="color:#09f;font-style:italic">// this does not compile
-</span><span style="color:#09f;font-style:italic"></span>}<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">fn</span> <span style="color:#0a0">example_function</span>&lt;<span style="color:#1e90ff">&#39;a</span>&gt;()<span style="color:#bbb"> </span>-&gt; <span style="color:#00a">&amp;</span><span style="color:#1e90ff">&#39;a</span><span style="color:#bbb"> </span><span style="color:#0aa">i32</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">  </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#099">3</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>&amp;b<span style="color:#bbb"> </span><span style="color:#aaa;font-style:italic">// this does not compile
+</span><span style="color:#aaa;font-style:italic"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>println<span style="color:#555">!</span>(<span style="color:#c30">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>example_function());<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#00a">fn</span> <span style="color:#0a0">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>println!(<span style="color:#a50">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>example_function());<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}</code></pre></div>
 <p>The reason is that <code>&amp;b</code> does not live long enough to be dereferenced outside of the function that made it.</p>
 
 <p>Why is this so important? Because this is what can happen in C:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#078;font-weight:bold">int</span><span style="color:#555">*</span> <span style="color:#c0f">example_function</span>(<span style="color:#078;font-weight:bold">void</span>) {
-  <span style="color:#078;font-weight:bold">int</span> a <span style="color:#555">=</span> <span style="color:#f60">2</span>;
-  <span style="color:#069;font-weight:bold">return</span> <span style="color:#555">&amp;</span>a;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#0aa">int</span>* <span style="color:#0a0">example_function</span>(<span style="color:#0aa">void</span>) {
+  <span style="color:#0aa">int</span> a = <span style="color:#099">2</span>;
+  <span style="color:#00a">return</span> &amp;a;
 }
 
-<span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">do_something</span>(<span style="color:#078;font-weight:bold">int</span> b) {
-  <span style="color:#09f;font-style:italic">// lies, don&#39;t do anything
-</span><span style="color:#09f;font-style:italic"></span>}
+<span style="color:#0aa">void</span> <span style="color:#0a0">do_something</span>(<span style="color:#0aa">int</span> b) {
+  <span style="color:#aaa;font-style:italic">// lies, don&#39;t do anything
+</span><span style="color:#aaa;font-style:italic"></span>}
 
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(<span style="color:#078;font-weight:bold">void</span>) {
-  <span style="color:#078;font-weight:bold">int</span><span style="color:#555">*</span> c <span style="color:#555">=</span> example_function();
-  do_something(<span style="color:#f60">3</span>);
-  <span style="color:#078;font-weight:bold">int</span> d <span style="color:#555">=</span> <span style="color:#f60">4</span>;
-  printf(<span style="color:#c30"></span><span style="color:#c30">&#34;%i</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, <span style="color:#555">*</span>c);
+<span style="color:#0aa">int</span> <span style="color:#0a0">main</span>(<span style="color:#0aa">void</span>) {
+  <span style="color:#0aa">int</span>* c = example_function();
+  do_something(<span style="color:#099">3</span>);
+  <span style="color:#0aa">int</span> d = <span style="color:#099">4</span>;
+  printf(<span style="color:#a50"></span><span style="color:#a50">&#34;%i</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>, *c);
 }</code></pre></div>
 <p>In C this is Undefined Behavior. When I run this, it just prints &ldquo;3&rdquo;.</p>
 
@@ -171,32 +171,32 @@ that&rsquo;s a more complicated question and the answer is to put it on the heap
 <p>Here&rsquo;s how you can make sure of that:</p>
 
 <h2 id="wrong-example">Wrong example:</h2>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#069;font-weight:bold">struct</span> <span style="color:#0a8;font-weight:bold">Sheep</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>age: <span style="color:#069">&amp;</span><span style="color:#078;font-weight:bold">i32</span>,<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0">Sheep</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>age: <span style="color:#00a">&amp;</span><span style="color:#0aa">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#069;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#555">=</span><span style="color:#bbb"> </span><span style="color:#f60">3</span>;<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#069;font-weight:bold">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#555">=</span><span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>age: <span style="color:#069">&amp;</span><span style="color:#0a8;font-weight:bold">a</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>println<span style="color:#555">!</span>(<span style="color:#c30">&#34;{};&#34;</span>,<span style="color:#bbb"> </span>s)<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#00a">fn</span> <span style="color:#0a0">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#099">3</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>age: <span style="color:#00a">&amp;</span><span style="color:#0a0">a</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println!(<span style="color:#a50">&#34;{};&#34;</span>,<span style="color:#bbb"> </span>s)<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}</code></pre></div>
 <p>This gives the following error:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#fc3">error</span>: missing lifetime specifier <span style="color:#555">[</span><span style="color:#360">E0106</span><span style="color:#555">]</span>
-        <span style="color:#fc3">age</span>: <span style="color:#555">&amp;</span>i32,
-             <span style="color:#555">^~~~</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#00a">error</span>: missing lifetime specifier [<span style="color:#a00">E0106</span>]
+        <span style="color:#00a">age</span>: &amp;i32,
+             ^~~~</code></pre></div>
 <p>Rust is mad.
 In the struct definition, you haven&rsquo;t told it how long the reference to the <code>i32</code> is allowed to stay around.
 And yet, in order for your code to be safe, it has to stick around for at least as long as the struct.</p>
 
 <h2 id="right-example">Right Example</h2>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#069;font-weight:bold">struct</span> <span style="color:#0a8;font-weight:bold">Sheep</span><span style="color:#555">&lt;</span><span style="color:#309">&#39;c</span><span style="color:#555">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>age: <span style="color:#069">&amp;</span><span style="color:#309">&#39;c</span><span style="color:#bbb"> </span><span style="color:#078;font-weight:bold">i32</span>,<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>age: <span style="color:#00a">&amp;</span><span style="color:#1e90ff">&#39;c</span><span style="color:#bbb"> </span><span style="color:#0aa">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#069;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#555">=</span><span style="color:#bbb"> </span><span style="color:#f60">3</span>;<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#069;font-weight:bold">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#555">=</span><span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>age: <span style="color:#069">&amp;</span><span style="color:#0a8;font-weight:bold">a</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>println<span style="color:#555">!</span>(<span style="color:#c30">&#34;{};&#34;</span>,<span style="color:#bbb"> </span>s)<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#00a">fn</span> <span style="color:#0a0">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#099">3</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>age: <span style="color:#00a">&amp;</span><span style="color:#0a0">a</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println!(<span style="color:#a50">&#34;{};&#34;</span>,<span style="color:#bbb"> </span>s)<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}</code></pre></div>
 <p>You&rsquo;ll notice that not much here has changed. But now Rust has pronounced your code safe &mdash; Hurray!</p>
 
@@ -224,31 +224,31 @@ even across threads. AND all of this happens at compile time without affecting t
 trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.</p>
 
 <h2 id="wrong-example-1">Wrong Example</h2>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#069;font-weight:bold">struct</span> <span style="color:#0a8;font-weight:bold">Sheep</span><span style="color:#555">&lt;</span><span style="color:#309">&#39;c</span><span style="color:#555">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>age: <span style="color:#069">&amp;</span><span style="color:#309">&#39;c</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#078;font-weight:bold">i32</span>,<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>age: <span style="color:#00a">&amp;</span><span style="color:#1e90ff">&#39;c</span><span style="color:#bbb"> </span><span style="color:#00a">mut</span><span style="color:#bbb"> </span><span style="color:#0aa">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">impl</span><span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">grow_old</span>(<span style="color:#555">&amp;</span><span style="color:#069;font-weight:bold">mut</span><span style="color:#bbb"> </span>self)<span style="color:#bbb">  </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#555">*</span>self.age<span style="color:#bbb"> </span><span style="color:#555">+=</span><span style="color:#bbb"> </span><span style="color:#f60">100</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#00a">impl</span><span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#00a">fn</span> <span style="color:#0a0">grow_old</span>(&amp;<span style="color:#00a">mut</span><span style="color:#bbb"> </span>self)<span style="color:#bbb">  </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>*self.age<span style="color:#bbb"> </span>+=<span style="color:#bbb"> </span><span style="color:#099">100</span><span style="color:#bbb">
 </span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}</code></pre></div>
 <p>This fails with the following:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#fc3">error</span>: wrong number of lifetime <span style="color:#fc3">parameters</span>: expected <span style="color:#f60">1</span><span style="color:#555"></span>, found <span style="color:#f60">0</span> <span style="color:#555">[</span><span style="color:#360">E0107</span><span style="color:#555">]</span>
-        impl <span style="color:#360">Sheep</span> {
-             <span style="color:#555">^~~~~</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#00a">error</span>: wrong number of lifetime <span style="color:#00a">parameters</span>: expected <span style="color:#099">1</span>, found <span style="color:#099">0</span> [<span style="color:#a00">E0107</span>]
+        impl <span style="color:#a00">Sheep</span> {
+             ^~~~~</code></pre></div>
 <h2 id="right-example-1">Right Example</h2>
 
 <p>What&rsquo;s the problem?</p>
 
 <p><code>Sheep</code> takes a lifetime parameter now, so one must be supplied:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#069;font-weight:bold">struct</span> <span style="color:#0a8;font-weight:bold">Sheep</span><span style="color:#555">&lt;</span><span style="color:#309">&#39;c</span><span style="color:#555">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>age: <span style="color:#069">&amp;</span><span style="color:#309">&#39;c</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#078;font-weight:bold">i32</span>,<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>age: <span style="color:#00a">&amp;</span><span style="color:#1e90ff">&#39;c</span><span style="color:#bbb"> </span><span style="color:#00a">mut</span><span style="color:#bbb"> </span><span style="color:#0aa">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">impl</span><span style="color:#555">&lt;</span><span style="color:#309">&#39;c</span><span style="color:#555">&gt;</span><span style="color:#bbb"> </span>Sheep<span style="color:#555">&lt;</span><span style="color:#309">&#39;c</span><span style="color:#555">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">grow_old</span>(<span style="color:#555">&amp;</span><span style="color:#069;font-weight:bold">mut</span><span style="color:#bbb"> </span>self)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#555">*</span>self.age<span style="color:#bbb"> </span><span style="color:#555">+=</span><span style="color:#bbb"> </span><span style="color:#f60">100</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#00a">impl</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>Sheep&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#00a">fn</span> <span style="color:#0a0">grow_old</span>(&amp;<span style="color:#00a">mut</span><span style="color:#bbb"> </span>self)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>*self.age<span style="color:#bbb"> </span>+=<span style="color:#bbb"> </span><span style="color:#099">100</span><span style="color:#bbb">
 </span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}</code></pre></div>
 <p>Note that <code>impl&lt;'c&gt;</code> names a new lifetime and <code>Sheep&lt;'c&gt;</code> says that all
@@ -266,9 +266,9 @@ is strange syntax with the <code>impl&lt;'c&gt; Sheep&lt;'c&gt;</code> so I want
 </div>
 
 
-<h1 id="side-title" class="title"><a href="../"><span class="wrapper">
-    <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
-</span></a></h1>
+<h1 id="side-title" class="title"><span class="wrapper">
+    <span class="inside-wrapper"><a href="../"><span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span></a></span>
+</span></h1>
 
 <script>renderMathInElement(document.body);</script>
     </div>

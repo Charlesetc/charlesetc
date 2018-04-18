@@ -6,10 +6,282 @@
     <description>Recent content on Charles, etc</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Feb 2018 12:14:30 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 17 Apr 2018 00:35:35 -0500</lastBuildDate>
     
         <atom:link href="http://www.charlesetc.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gui development is broken.</title>
+      <link>http://www.charlesetc.com/gui-development-is-broken/</link>
+      <pubDate>Tue, 17 Apr 2018 00:35:35 -0500</pubDate>
+      
+      <guid>http://www.charlesetc.com/gui-development-is-broken/</guid>
+      <description>
+
+&lt;p&gt;This afternoon I sat down to write a mini text editor.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;I wanted something reasonably fast, with a simple way of
+producing graphics.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I wanted to draw a horizontal line between the name of the
+file and its contents.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I wanted to be able to open new instances/windows of this
+text editor quickly to fit into my workflow.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;And I wanted low-level control of how the text was rendered
+(fonts, syntax highlighting, and the ability to add vim
+keybindings.)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I wanted this to be &lt;em&gt;easy&lt;/em&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And I wanted to do it in OCaml. Here&amp;rsquo;s what I found.&lt;/p&gt;
+
+&lt;h1 id=&#34;option-1-the-web&#34;&gt;Option 1: The Web&lt;/h1&gt;
+
+&lt;p&gt;By far the most widely used graphics toolkit in history is
+HTML and CSS. It comes with its own scripting language, and
+tens of thousands of developers willing to lend support.
+Hundreds of companies exist solely to make it easier to make
+websites.&lt;/p&gt;
+
+&lt;p&gt;And it&amp;rsquo;s definitely the easiest option. It&amp;rsquo;s the first thing
+I learned as a programmer and it&amp;rsquo;s ridiculous how much better
+designed, documented, and implemented it is than all the
+alternatives I tried later.&lt;/p&gt;
+
+&lt;p&gt;But it turns out that all that power comes at some cost! It
+takes an enormously complex browser to render a webpage, and
+it&amp;rsquo;s not the most efficient situation. Atom has been widely
+criticized for being slow, in part due to its reliance on
+javascript and the DOM.&lt;/p&gt;
+
+&lt;p&gt;All in all, I decided I didn&amp;rsquo;t want to write or compile to
+javascript, and I didn&amp;rsquo;t want to have a browser as
+a dependency for my text editor. (I wouldn&amp;rsquo;t have been able to
+open new instances of the editor quickly.)&lt;/p&gt;
+
+&lt;p&gt;What other GUI options did I have?&lt;/p&gt;
+
+&lt;h1 id=&#34;option-2-writing-to-the-framebuffer&#34;&gt;Option 2: Writing to the framebuffer&lt;/h1&gt;
+
+&lt;p&gt;I only considered this because of &lt;a href=&#34;http://seenaburns.com/2018/04/04/writing-to-the-framebuffer/&#34;&gt;a really interesting
+blogpost&lt;/a&gt;
+that outlines writing to the framebuffer.&lt;/p&gt;
+
+&lt;p&gt;This strategy, writing pixels directly to the screen,
+is as low-level as I can imagine and I whole-heartedly support
+any courageous soul who attempts to write a text editor this
+way. I&amp;rsquo;m not sure how user-input would work; maybe reading
+directly from a keyboard?&lt;/p&gt;
+
+&lt;p&gt;One huge disadvantage to this option is that it doesn&amp;rsquo;t fit
+within a window manager. I wouldn&amp;rsquo;t be able to use different
+workspaces or alt-tab or anything. Alas! It was a fun thought.&lt;/p&gt;
+
+&lt;h1 id=&#34;option-3-the-terminal&#34;&gt;Option 3: The Terminal&lt;/h1&gt;
+
+&lt;p&gt;Okay, simple. You want to make a text editor, make it like vim
+or nano and run it in a terminal. That&amp;rsquo;s got to be easy,
+right?&lt;/p&gt;
+
+&lt;p&gt;Wrong.&lt;/p&gt;
+
+&lt;p&gt;Terminals communicate with their program through a text-based
+protocol and most allow everything from mouse input to
+colorful ascii-based animation. Specifically, terminals do
+a lot more than just printing text. (Refer to &lt;a href=&#34;https://www.youtube.com/watch?v=rSnMoClPH2E&#34;&gt;this fantastic
+talk&lt;/a&gt; that goes
+into ANSI terminals in much more depth.)&lt;/p&gt;
+
+&lt;p&gt;The protocol is &amp;ldquo;simple&amp;rdquo;, see, the program just outputs text
+and that text is rendered on the screen. &lt;em&gt;Except&lt;/em&gt; if one of
+those pieces of text happens to look like &lt;code&gt;\[033\[3;9H]&lt;/code&gt; or
+like &lt;code&gt;/x1b[31m&lt;/code&gt;, in which case any number of things could
+happen&amp;hellip; from changing the title of the terminal window, to
+&lt;strong&gt;requesting the mouse&amp;rsquo;s current location&lt;/strong&gt;.  But thankfully
+you wouldn&amp;rsquo;t have to do much stuff like that&amp;hellip; unless you&amp;rsquo;re
+writing a text editor.&lt;/p&gt;
+
+&lt;p&gt;Plus, I&amp;rsquo;d still have to choose a terminal emulator. And
+terminals are &lt;strong&gt;not&lt;/strong&gt; simple pieces of software. Xterm is over
+65 thousand lines of code. Even &lt;a href=&#34;https://git.suckless.org/st/tree/st.c&#34;&gt;suckless&amp;rsquo;s
+terminal&lt;/a&gt; is 2619 lines
+of code. Why so complex? &lt;em&gt;Oh right,&lt;/em&gt; terminals use an archaic
+textual interface to render a program graphically.&lt;/p&gt;
+
+&lt;p&gt;Still don&amp;rsquo;t think that terminals expose a graphical interface?
+Consider &lt;a href=&#34;https://github.com/jwilm/alacritty&#34;&gt;alacritty&lt;/a&gt;,
+a terminal that uses the GPU to accelerate this rendering
+process.&lt;/p&gt;
+
+&lt;p&gt;You can definitely make a case for terminals and they have
+their place, but I don&amp;rsquo;t think calling them broken for
+anything more interactive than &lt;code&gt;ed&lt;/code&gt; is at all a longshot. And
+writing an interactive terminal-based text editor, even
+a simple one, would not be easy.&lt;/p&gt;
+
+&lt;h1 id=&#34;option-4-the-x-server&#34;&gt;Option 4: the X server&lt;/h1&gt;
+
+&lt;p&gt;Ah the X server! (Well known for being kind and gentle.) I&amp;rsquo;ll be
+honest, I don&amp;rsquo;t know how the X server works or what its
+protocol looks like. I tried using several different OCaml
+bindings to Xlib, which is the main C interface to the
+X server.&lt;/p&gt;
+
+&lt;p&gt;These worked with varying degrees of success. It certainly
+took more than a few lines of HTML and CSS to display some
+colourful text. My largest issue is that any textual display
+supported by X11 is restricted to bitmap fonts. (Fonts that
+cannot be scaled up or down; each pixel is determined by the
+font.)&lt;/p&gt;
+
+&lt;p&gt;Since I have a high resolution screen, this was kind of
+a deal-breaker for me. Bitmapped fonts look pretty small on
+it. I briefly considered making my own bitmap font before
+taking a look into how most applications use modern, scalable
+fonts.&lt;/p&gt;
+
+&lt;p&gt;There is a library called &amp;ldquo;FreeType&amp;rdquo; that turns vector glyphs
+into pixels. This can be combined with a bare-bones X11
+interface to create the whole glyph set and then try to draw
+each glyph in the right spot. I&amp;rsquo;d much rather have something
+do that for me&amp;hellip;&lt;/p&gt;
+
+&lt;h1 id=&#34;option-5-a-drawing-toolkit&#34;&gt;Option 5: A Drawing toolkit!&lt;/h1&gt;
+
+&lt;p&gt;Yes! There&amp;rsquo;s a toolkit for making drawings
+&lt;a href=&#34;https://cairographics.org/&#34;&gt;Cairo&lt;/a&gt;, more abstract than the
+X server, but less complicated than most GUI libraries. Cairo
+calls FreeType itself to render text, and gives you all the
+drawing primitives I would need. This works pretty well! And
+is probably what I will end up using. :D&lt;/p&gt;
+
+&lt;p&gt;But let&amp;rsquo;s say you also want a button.&lt;/p&gt;
+
+&lt;p&gt;A button?&lt;/p&gt;
+
+&lt;p&gt;Yeah, a button. Or a scrollbar. Or, dare I say, a drop-down
+menu? A drawing toolkit aint gonna work for long.&lt;/p&gt;
+
+&lt;h1 id=&#34;option-6-a-gui-library&#34;&gt;Option 6: A GUI library&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Why,&amp;rdquo; you say, &amp;ldquo;no need to speak to the X-server directly
+— there are plenty of libraries designed for just this
+purpose! GUI libraries!&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Yes! The best set of bindings in OCaml are
+&lt;a href=&#34;http://lablgtk.forge.ocamlcore.org/&#34;&gt;LablGTK&lt;/a&gt; for GTK 2.&lt;/p&gt;
+
+&lt;p&gt;LablGTK is actually quite impressive. I believe it&amp;rsquo;s the most
+extensive use of OCaml objects in history. OCaml&amp;rsquo;s objects were the result of a
+2002 &lt;a href=&#34;https://caml.inria.fr/pub/papers/garrigue-structural_poly-fool02.pdf&#34;&gt;research
+paper&lt;/a&gt;
+on type inference. LablGTK provided a safely-typed interface
+to the highly dynamic GTK API.&lt;/p&gt;
+
+&lt;p&gt;But GTK is so complicated! It&amp;rsquo;s great when you want to make
+something like Gimp, but if you just want a few buttons and
+some text, using GTK is like mowing a lawn with a helicopter.&lt;/p&gt;
+
+&lt;p&gt;And I got lucky that OCaml had this great set of bindings.
+What if I wanted to write a GUI in an &lt;em&gt;even more&lt;/em&gt; obscure
+language? What, I&amp;rsquo;ve just got to link to C libraries and write
+the bindings myself? This seems a bit ridiculous.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-are-we-missing&#34;&gt;What are we missing?&lt;/h1&gt;
+
+&lt;p&gt;Why is this so hard? I just want low-level access to write
+a &lt;strong&gt;simple&lt;/strong&gt; graphical interface in a somewhat obscure
+language.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Okay maybe I get why it&amp;rsquo;s hard.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;But seriously, we&amp;rsquo;ve made lots of language-independent
+systems; why can&amp;rsquo;t this be one? Tons of people must want
+language-agnostic graphics interfaces!&lt;/p&gt;
+
+&lt;p&gt;I think GUI libraries are going down the wrong path. That&amp;rsquo;s
+not to say they don&amp;rsquo;t have a place, but they only expose
+a C interface. This leaves each programming language to figure
+out its own bindings, resulting in poor support and incomplete
+documentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&#34;scream&#34;&gt;We can do better:&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Imagine, if you will, a procedural json interface to the
+screen. Run with the fictitious command &lt;code&gt;graphical python
+example.py&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;(This is similar to the web, really, but it&amp;rsquo;s procedural
+instead of declarative, and the scripting is done
+server-side.)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;import json
+
+&lt;span style=&#34;color:#00a&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;out&lt;/span&gt;(a): &lt;span style=&#34;color:#0aa&#34;&gt;print&lt;/span&gt;(json.dumps(a))
+&lt;span style=&#34;color:#00a&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;get&lt;/span&gt;(): json.parse(input())
+
+out({&lt;span style=&#34;color:#00a&#34;&gt;command&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;new_window&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#00a&#34;&gt;background&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;black&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#00a&#34;&gt;title&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;example!&amp;#34;&lt;/span&gt;})
+
+window_id = get()
+
+out({&lt;span style=&#34;color:#00a&#34;&gt;command&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;new_text_box&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#00a&#34;&gt;border&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;grey&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#00a&#34;&gt;content&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;hi there!&amp;#34;&lt;/span&gt;})
+
+text_box = get()
+
+out({&lt;span style=&#34;color:#00a&#34;&gt;add&lt;/span&gt;: text_box, &lt;span style=&#34;color:#00a&#34;&gt;to&lt;/span&gt;: window_id})
+
+out({&lt;span style=&#34;color:#00a&#34;&gt;command&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;draw_triangle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#00a&#34;&gt;color&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;pink&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#00a&#34;&gt;coordinates&lt;/span&gt;: ... })
+
+out({&lt;span style=&#34;color:#00a&#34;&gt;command&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;pop_event_queue&amp;#34;&lt;/span&gt;})
+
+event = get() &lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# respond to event...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I don&amp;rsquo;t care about the particulars. Maybe not stdin and
+stdout. Maybe it communicates with the graphical process over
+sockets. Point is, I want something simpler and higher-level
+than X11, with a json protocol.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Imagine the advantages.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;All languages speak json fluently.&lt;/li&gt;
+&lt;li&gt;One set of documentation for all languages.&lt;/li&gt;
+&lt;li&gt;It would be lower-level and faster than manipulating a DOM,
+without the need for a browser.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Unit testing for graphical commands&lt;/strong&gt; would suddenly be
+easy.&lt;/li&gt;
+&lt;li&gt;You&amp;rsquo;d get readable and searchable json for debugging.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Graphical user interfaces are truly awesome. They&amp;rsquo;re
+so awesome we don&amp;rsquo;t do anything without them. Let&amp;rsquo;s make them
+easy and fun to write.&lt;/p&gt;
+
+&lt;p class=&#34;postscript&#34;&gt; PS. Now I really want to write GUIs
+with &lt;a href=&#34;https://stedolan.github.io/jq&#34;&gt;jq&lt;/a&gt;.
+&lt;br/&gt;
+Thanks to Laura Lindsey, Paul Gowder, Tom Ballinger, Tobin
+Yehle, and Kevin Lynagh for their feedback on this post!
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Rage against the APIs</title>
@@ -78,18 +350,18 @@ It&amp;rsquo;s the kind of light that bounces off a surface equally in every dir
 
 &lt;p&gt;This is the bit of the fragment shader that renders diffuse light, i.e. the
 code run for each pixel on the GPU:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// pretend you are given these three vectors&lt;/span&gt;
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; position;
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; normal;
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; light_direction;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// pretend you are given these three vectors&lt;/span&gt;
+&lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt; position;
+&lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt; normal;
+&lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt; light_direction;
 
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// calculate how light or dark this pixel should be&lt;/span&gt;
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// by combining the normal and light direction&lt;/span&gt;
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;float&lt;/span&gt; brightness &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; dot(normal, light_direction);
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// calculate how light or dark this pixel should be&lt;/span&gt;
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// by combining the normal and light direction&lt;/span&gt;
+&lt;span style=&#34;color:#00a&#34;&gt;float&lt;/span&gt; brightness = dot(normal, light_direction);
 
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// set the color between black and cyan&lt;/span&gt;
-outColor &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; mix(&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;),
-               &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.5&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.5&lt;/span&gt;),
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// set the color between black and cyan&lt;/span&gt;
+outColor = mix(&lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;),
+               &lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;0.5&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;0.5&lt;/span&gt;),
                brightness);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;./images/just-diffuse-teapot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
@@ -103,16 +375,16 @@ that reflects unevenly: instead of the diffuse light
 that spreads out everywhere equally, the specular
 light highlights spots where the light is shining
 directly.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// do some calculation to get the direction&lt;/span&gt;
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// and intensity&lt;/span&gt;
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; camera_direction &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; normalize(&lt;span style=&#34;color:#555&#34;&gt;-&lt;/span&gt;position);
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt; half_direction &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; normalize(
-    light_direction &lt;span style=&#34;color:#555&#34;&gt;+&lt;/span&gt; camera_direction);
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;float&lt;/span&gt; specular &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; pow(
-    dot(half_direction, normal)), &lt;span style=&#34;color:#f60&#34;&gt;16.0&lt;/span&gt;);
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// do some calculation to get the direction&lt;/span&gt;
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// and intensity&lt;/span&gt;
+&lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt; camera_direction = normalize(-position);
+&lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt; half_direction = normalize(
+    light_direction + camera_direction);
+&lt;span style=&#34;color:#00a&#34;&gt;float&lt;/span&gt; specular = pow(
+    dot(half_direction, normal)), &lt;span style=&#34;color:#099&#34;&gt;16.0&lt;/span&gt;);
 
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// set the color to vary with specular&lt;/span&gt;
-outColor &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; specular &lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.5&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.5&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// set the color to vary with specular&lt;/span&gt;
+outColor = specular * &lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;0.5&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;0.5&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This gives us the shiny part of light!&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;./images/just-specular-teapot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
@@ -128,7 +400,7 @@ of walls and floors.&lt;/p&gt;
 &lt;p&gt;Unfortunately, reflected light like that is really computationally
 intensive to calculate, so there&amp;rsquo;s a widespread hack to add ambient
 lighting:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;outColor &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.3&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;0.3&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;outColor = &lt;span style=&#34;color:#00a&#34;&gt;vec3&lt;/span&gt;(&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;0.3&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;0.3&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;./images/teapot-ambient.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Yep, we just add a lighter color everywhere. And now we finally get a decently lighted teapot!&lt;/p&gt;
@@ -136,7 +408,7 @@ lighting:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./images/realistic-teapot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;And that&amp;rsquo;s all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;brightness &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; max(ceil(brightness &lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;), &lt;span style=&#34;color:#f60&#34;&gt;0.0&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;brightness = max(ceil(brightness * &lt;span style=&#34;color:#099&#34;&gt;4&lt;/span&gt;), &lt;span style=&#34;color:#099&#34;&gt;0.0&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;So here are two cel-shaded teapots! (Sorry I know they skip sometimes.)&lt;/p&gt;
 
 &lt;video width=&#34;600&#34; height=&#34;504&#34; autoplay loop&gt; &lt;source src=&#34;./videos/stars-13.ogv&#34; type=&#39;video/ogg; codecs=&#34;theora, vorbis&#34;&#39;&gt; &lt;/video&gt;
@@ -204,30 +476,30 @@ incorrectly inserted or a vertex is lost somewhere along the line.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m parsing what&amp;rsquo;s called a &lt;code&gt;.obj&lt;/code&gt; file — an ASCII text format
 for representing 3D objects. Here&amp;rsquo;s an &lt;code&gt;obj&lt;/code&gt; representation of
 a cube:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mtllib cube.mtl
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mtllib cube.mtl
 o Cube
-v &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 -1.000000 -1.000000
-v &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000
-v -1.000000 -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000
+v &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 -1.000000 -1.000000
+v &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 -1.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000
+v -1.000000 -1.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000
 v -1.000000 -1.000000 -1.000000
-v &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 -0.999999
-v &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.999999 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000001
-v -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000
-v -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 -1.000000
-vn &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 -1.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000
-vn &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000
-vn &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000
-vn -0.000000 -0.000000 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;.000000
+v &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 -0.999999
+v &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.999999 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000001
+v -1.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000
+v -1.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 -1.000000
+vn &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.000000 -1.000000 &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.000000
+vn &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.000000
+vn &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000 &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.000000
+vn -0.000000 -0.000000 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;.000000
 vn -1.000000 -0.000000 -0.000000
-vn &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;.000000 -1.000000
+vn &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.000000 &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;.000000 -1.000000
 usemtl Material
 s off
-f &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;//1 &lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;//1 &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;//1 &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;//1
-f &lt;span style=&#34;color:#f60&#34;&gt;5&lt;/span&gt;//2 &lt;span style=&#34;color:#f60&#34;&gt;8&lt;/span&gt;//2 &lt;span style=&#34;color:#f60&#34;&gt;7&lt;/span&gt;//2 &lt;span style=&#34;color:#f60&#34;&gt;6&lt;/span&gt;//2
-f &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;//3 &lt;span style=&#34;color:#f60&#34;&gt;5&lt;/span&gt;//3 &lt;span style=&#34;color:#f60&#34;&gt;6&lt;/span&gt;//3 &lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;//3
-f &lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;//4 &lt;span style=&#34;color:#f60&#34;&gt;6&lt;/span&gt;//4 &lt;span style=&#34;color:#f60&#34;&gt;7&lt;/span&gt;//4 &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;//4
-f &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;//5 &lt;span style=&#34;color:#f60&#34;&gt;7&lt;/span&gt;//5 &lt;span style=&#34;color:#f60&#34;&gt;8&lt;/span&gt;//5 &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;//5
-f &lt;span style=&#34;color:#f60&#34;&gt;5&lt;/span&gt;//6 &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;//6 &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;//6 &lt;span style=&#34;color:#f60&#34;&gt;8&lt;/span&gt;//6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+f &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;//1 &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;//1 &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;//1 &lt;span style=&#34;color:#099&#34;&gt;4&lt;/span&gt;//1
+f &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;//2 &lt;span style=&#34;color:#099&#34;&gt;8&lt;/span&gt;//2 &lt;span style=&#34;color:#099&#34;&gt;7&lt;/span&gt;//2 &lt;span style=&#34;color:#099&#34;&gt;6&lt;/span&gt;//2
+f &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;//3 &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;//3 &lt;span style=&#34;color:#099&#34;&gt;6&lt;/span&gt;//3 &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;//3
+f &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;//4 &lt;span style=&#34;color:#099&#34;&gt;6&lt;/span&gt;//4 &lt;span style=&#34;color:#099&#34;&gt;7&lt;/span&gt;//4 &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;//4
+f &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;//5 &lt;span style=&#34;color:#099&#34;&gt;7&lt;/span&gt;//5 &lt;span style=&#34;color:#099&#34;&gt;8&lt;/span&gt;//5 &lt;span style=&#34;color:#099&#34;&gt;4&lt;/span&gt;//5
+f &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;//6 &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;//6 &lt;span style=&#34;color:#099&#34;&gt;4&lt;/span&gt;//6 &lt;span style=&#34;color:#099&#34;&gt;8&lt;/span&gt;//6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It&amp;rsquo;s really simple — &lt;code&gt;v&lt;/code&gt; loads a vertex, &lt;code&gt;vn&lt;/code&gt; loads a vertex normal, and &lt;code&gt;f&lt;/code&gt; loads a face (i.e. triangle).&lt;/p&gt;
 
 &lt;p&gt;The color of the monkey currently signifies the normals that have be loaded. You can kind of see
@@ -404,10 +676,10 @@ to figure out how to build this game and game engine from the bottom up. It&amp;
       <description>&lt;p&gt;I&amp;rsquo;ve often wanted to start a subprocess as a daemon in bash or zsh.&lt;/p&gt;
 
 &lt;p&gt;Now I know how!&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;the_command &amp;amp; disown&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;the_command &amp;amp; disown&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You will still see stdout and stderr in the terminal, but you can
 exit from the shell process without killing the command.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nohup the_command&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nohup the_command&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;nohup&lt;/code&gt; also works, but will send the stdout to a file instead of your
 terminal.&lt;/p&gt;
 
@@ -425,7 +697,7 @@ you can &lt;code&gt;&amp;lt;C-z&amp;gt;&lt;/code&gt;, run &lt;code&gt;bg&lt;/cod
       <description>
 
 &lt;p&gt;Take the &lt;code&gt;LaTeX&lt;/code&gt; code:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;-1 &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\cdot&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\frac&lt;/span&gt;&lt;span style=&#34;color:#366&#34;&gt;{&lt;/span&gt;1&lt;span style=&#34;color:#366&#34;&gt;}{&lt;/span&gt;n&lt;span style=&#34;color:#366&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\cup&lt;/span&gt; &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\{&lt;/span&gt;-1, &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\frac&lt;/span&gt;&lt;span style=&#34;color:#366&#34;&gt;{&lt;/span&gt;1&lt;span style=&#34;color:#366&#34;&gt;}{&lt;/span&gt;n&lt;span style=&#34;color:#366&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;\}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;-1 &lt;span style=&#34;color:#00a&#34;&gt;\cdot&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;\frac&lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;{&lt;/span&gt;1&lt;span style=&#34;color:#0aa&#34;&gt;}{&lt;/span&gt;n&lt;span style=&#34;color:#0aa&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;\cup&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;\{&lt;/span&gt;-1, &lt;span style=&#34;color:#00a&#34;&gt;\frac&lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;{&lt;/span&gt;1&lt;span style=&#34;color:#0aa&#34;&gt;}{&lt;/span&gt;n&lt;span style=&#34;color:#0aa&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;\}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Do you know what this means?&lt;/p&gt;
 
 &lt;ul&gt;
@@ -436,7 +708,7 @@ you can &lt;code&gt;&amp;lt;C-z&amp;gt;&lt;/code&gt;, run &lt;code&gt;bg&lt;/cod
 &lt;p&gt;Not only that, &lt;code&gt;TeX&lt;/code&gt; by itself takes up 338.8 MB!&lt;/p&gt;
 
 &lt;h1 id=&#34;eqn&#34;&gt;Eqn&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;cdot &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;over n union left { &lt;span style=&#34;color:#555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;, &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;over n right }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;-&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; cdot &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; over n union left { -&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; , &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; over n right }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;How&amp;rsquo;s that for readability!&lt;/p&gt;
 
 &lt;p&gt;This is &lt;a href=&#34;http://www.zen89632.zen.co.uk/Groff/Eqn/eqnguide.pdf&#34;&gt;eqn&lt;/a&gt;:
@@ -481,16 +753,16 @@ guide&lt;/a&gt; for eqn!&lt;/p&gt;
 &lt;h1 id=&#34;list-sessions&#34;&gt;List Sessions&lt;/h1&gt;
 
 &lt;p&gt;Command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This shows you an interactive screen where you can which session you want to be in:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt; + &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt; windows &lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;attached&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt; + &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; windows&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;(&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;) + &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt; windows (attached)
+(&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;) + &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; windows&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&#34;switch-session&#34;&gt;Switch Session&lt;/h1&gt;
 
 &lt;p&gt;Command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# or
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;&amp;lt;prefix&amp;gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;(
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# or
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;&amp;lt;prefix&amp;gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Move back and forth between sessions. Can you imagine!&lt;/p&gt;
 
 &lt;h1 id=&#34;main-development&#34;&gt;Main Development&lt;/h1&gt;
@@ -534,30 +806,30 @@ make this branch off of the tip of master instead&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;This works for any git object: commits, tags, branches.&lt;/p&gt;
 
 &lt;h1 id=&#34;why-would-i-need-to-use-this&#34;&gt;Why would I need to use this?&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git checkout master &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git checkout master &amp;amp;&amp;amp; git log --pretty=&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
 ccccccc -- third commit
 bbbbbbb -- second commit
 aaaaaaa -- first commit
 
 $ git checkout bbbbbbb
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# make a new branch, based off of &amp;#34;second commit&amp;#34;
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;$ git checkout -b my_new_branch
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# make a new branch, based off of &amp;#34;second commit&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;$ git checkout -b my_new_branch
 $ touch a_file
 $ git add a_file
-$ git commit -m &lt;span style=&#34;color:#c30&#34;&gt;&amp;#39;I just committed a file!&amp;#39;&lt;/span&gt;
-$ git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+$ git commit -m &lt;span style=&#34;color:#a50&#34;&gt;&amp;#39;I just committed a file!&amp;#39;&lt;/span&gt;
+$ git log --pretty=&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
 ddddddd -- I just committed a file!
 bbbbbbb -- second commit
 aaaaaaa -- first commit
 
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# But I meant to make this commit on &amp;#34;third commit&amp;#34;, not &amp;#34;second commit&amp;#34;!!!
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# OH NOOOOO
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# wait, I can re-base?
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;$ git rebase ccccccc
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# But I meant to make this commit on &amp;#34;third commit&amp;#34;, not &amp;#34;second commit&amp;#34;!!!
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# OH NOOOOO
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# wait, I can re-base?
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;$ git rebase ccccccc
 First, rewinding head to replay your work on top of it...
 Applying: I just committed a file!
 
-$ git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+$ git log --pretty=&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
 ddddddd -- I just committed a file!
 ccccccc -- third commit
 bbbbbbb -- second commit
@@ -570,10 +842,10 @@ aaaaaaa -- first commit
 beyond repair in git.&lt;/p&gt;
 
 &lt;p&gt;If you do &lt;code&gt;git reflog&lt;/code&gt;, you will see something like:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;234320a HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase finished: returning to refs/heads/my-new-branch
-234320a HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase: added a file
-49211d7 HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase: checkout 49211d7
-8c90682 HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: checkout: moving from master to my-new-branch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;234320a HEAD@{&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;}: rebase finished: returning to refs/heads/my-new-branch
+234320a HEAD@{&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;}: rebase: added a file
+49211d7 HEAD@{&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;}: rebase: checkout 49211d7
+8c90682 HEAD@{&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;}: checkout: moving from master to my-new-branch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You can then checkout &lt;code&gt;HEAD@{3}&lt;/code&gt; to return to a safe state,
 and then &lt;code&gt;git checkout -b saved-branch&lt;/code&gt; to start committing.&lt;/p&gt;
 
@@ -593,40 +865,40 @@ yourself out of any holes &lt;code&gt;:)&lt;/code&gt;&lt;/p&gt;
 &lt;h1 id=&#34;pattern-matching&#34;&gt;Pattern Matching&lt;/h1&gt;
 
 &lt;p&gt;A large part of function programming is pattern matching:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;/* A new and delicious enum */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;fruit&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pineapple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Orange;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;/* A new and delicious enum */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;fruit&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pineapple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Orange;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;my_fruit&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;my_fruit&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;/* print the outcome of the switch statement */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;/* print the outcome of the switch statement */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;print_string&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;my_fruit&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;you have an apple&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;you have a pear&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;you have neither an apple or a pear&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;you have an apple&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;you have a pear&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;you have neither an apple or a pear&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;});&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&#34;except&#34;&gt;Except&amp;hellip;&lt;/h1&gt;
 
 &lt;p&gt;The cool part is how Reason handles exceptions: as another branch in
 a switch statement.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;/*
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; * Here&amp;#39;s a function that occasionally throws an exception
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;risky_function&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(Random.int&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;raise&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;/*
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt; * Here&amp;#39;s a function that occasionally throws an exception
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt; */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;risky_function&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(Random.int&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;raise&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;/*
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; * We can match against the possible cases of risky_function,
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; * even exceptions.
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt; */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;/*
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt; * We can match against the possible cases of risky_function,
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt; * even exceptions.
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt; */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(risky_function&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;())&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;handling true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;handling false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;handling my exception&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;handling true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;handling false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;handling my exception&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;};&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Throwing an exception is different than returning something - an exception unwinds the stack until
 it&amp;rsquo;s caught.&lt;/p&gt;
@@ -639,28 +911,28 @@ in a switch statement, whereas it looks very hacky in languages using
 try-catch.&lt;/p&gt;
 
 &lt;h4 id=&#34;python&#34;&gt;Python&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;read_first_line&lt;/span&gt;(filename):
-  f &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#366&#34;&gt;open&lt;/span&gt;(filename, &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;)
-  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;return&lt;/span&gt; f&lt;span style=&#34;color:#555&#34;&gt;.&lt;/span&gt;readline()
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;read_first_line&lt;/span&gt;(filename):
+  f = &lt;span style=&#34;color:#0aa&#34;&gt;open&lt;/span&gt;(filename, &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;)
+  &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt; f.readline()
 
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;try&lt;/span&gt;:
-  line &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; read_first_line(&lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;)
-  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;if&lt;/span&gt; line &lt;span style=&#34;color:#555&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;:
-    message&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;else&lt;/span&gt;:
-    &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#c00;font-weight:bold&#34;&gt;IOError&lt;/span&gt;:
-  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;error reading your salutation&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#00a&#34;&gt;try&lt;/span&gt;:
+  line = read_first_line(&lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;)
+  &lt;span style=&#34;color:#00a&#34;&gt;if&lt;/span&gt; line == &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;:
+    message= &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#00a&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#00a&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#00a&#34;&gt;except&lt;/span&gt; IOError:
+  &lt;span style=&#34;color:#00a&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;error reading your salutation&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;reason&#34;&gt;Reason&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;read_first_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;filename&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;f&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;open_in&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;filename;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;read_first_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;filename&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;f&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;open_in&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;filename;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;input_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;f&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;print_string&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(read_first_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(Sys_error&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;error reading your saltation&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;print_string&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(switch&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(read_first_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(Sys_error&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;error reading your saltation&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;});&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That&amp;rsquo;s all!&lt;/p&gt;
 
@@ -828,40 +1100,40 @@ Depending on the context they can look like one of: &lt;code&gt;something&amp;lt
 &lt;p&gt;This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over. And if not, you need to make sure it has an appropriate lifetime.&lt;/p&gt;
 
 &lt;p&gt;In Go, you can do this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;func&lt;/span&gt; example_function() &lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; {
-  b &lt;span style=&#34;color:#555&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;
-  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;b
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;func&lt;/span&gt; example_function() *&lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt; {
+  b := &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;
+  &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt; &amp;amp;b
 }
 
-&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;func&lt;/span&gt; main() {
-  fmt.Println(&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;example_function());
+&lt;span style=&#34;color:#00a&#34;&gt;func&lt;/span&gt; main() {
+  fmt.Println(*example_function());
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;However, you cannot do that in Rust:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;example_function&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;a&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;-&amp;gt; &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;b&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;b&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// this does not compile
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;example_function&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;a&lt;/span&gt;&amp;gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;-&amp;gt; &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;b&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&amp;amp;b&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// this does not compile
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;println&lt;span style=&#34;color:#555&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;{}&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;example_function());&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;println!(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;{}&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;example_function());&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The reason is that &lt;code&gt;&amp;amp;b&lt;/code&gt; does not live long enough to be dereferenced outside of the function that made it.&lt;/p&gt;
 
 &lt;p&gt;Why is this so important? Because this is what can happen in C:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;example_function&lt;/span&gt;(&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;void&lt;/span&gt;) {
-  &lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; a &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;;
-  &lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;a;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt;* &lt;span style=&#34;color:#0a0&#34;&gt;example_function&lt;/span&gt;(&lt;span style=&#34;color:#0aa&#34;&gt;void&lt;/span&gt;) {
+  &lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt; a = &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;;
+  &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt; &amp;amp;a;
 }
 
-&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;do_something&lt;/span&gt;(&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; b) {
-  &lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;// lies, don&amp;#39;t do anything
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;}
+&lt;span style=&#34;color:#0aa&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;do_something&lt;/span&gt;(&lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt; b) {
+  &lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;// lies, don&amp;#39;t do anything
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;}
 
-&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;main&lt;/span&gt;(&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;void&lt;/span&gt;) {
-  &lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt; c &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; example_function();
-  do_something(&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;);
-  &lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;int&lt;/span&gt; d &lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f60&#34;&gt;4&lt;/span&gt;;
-  printf(&lt;span style=&#34;color:#c30&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%i&lt;/span&gt;&lt;span style=&#34;color:#c30;font-weight:bold&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;c);
+&lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;main&lt;/span&gt;(&lt;span style=&#34;color:#0aa&#34;&gt;void&lt;/span&gt;) {
+  &lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt;* c = example_function();
+  do_something(&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;);
+  &lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt; d = &lt;span style=&#34;color:#099&#34;&gt;4&lt;/span&gt;;
+  printf(&lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%i&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&lt;/span&gt;, *c);
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In C this is Undefined Behavior. When I run this, it just prints &amp;ldquo;3&amp;rdquo;.&lt;/p&gt;
 
@@ -890,32 +1162,32 @@ that&amp;rsquo;s a more complicated question and the answer is to put it on the 
 &lt;p&gt;Here&amp;rsquo;s how you can make sure of that:&lt;/p&gt;
 
 &lt;h2 id=&#34;wrong-example&#34;&gt;Wrong example:&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;a&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color:#555&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;{};&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s)&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;a&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;println!(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;{};&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s)&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This gives the following error:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#fc3&#34;&gt;error&lt;/span&gt;: missing lifetime specifier &lt;span style=&#34;color:#555&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#360&#34;&gt;E0106&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;]&lt;/span&gt;
-        &lt;span style=&#34;color:#fc3&#34;&gt;age&lt;/span&gt;: &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;i32,
-             &lt;span style=&#34;color:#555&#34;&gt;^~~~&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;error&lt;/span&gt;: missing lifetime specifier [&lt;span style=&#34;color:#a00&#34;&gt;E0106&lt;/span&gt;]
+        &lt;span style=&#34;color:#00a&#34;&gt;age&lt;/span&gt;: &amp;amp;i32,
+             ^~~~&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Rust is mad.
 In the struct definition, you haven&amp;rsquo;t told it how long the reference to the &lt;code&gt;i32&lt;/code&gt; is allowed to stay around.
 And yet, in order for your code to be safe, it has to stick around for at least as long as the struct.&lt;/p&gt;
 
 &lt;h2 id=&#34;right-example&#34;&gt;Right Example&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;a&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color:#555&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;{};&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s)&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;a&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;println!(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;{};&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s)&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You&amp;rsquo;ll notice that not much here has changed. But now Rust has pronounced your code safe &amp;mdash; Hurray!&lt;/p&gt;
 
@@ -943,31 +1215,31 @@ even across threads. AND all of this happens at compile time without affecting t
 trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.&lt;/p&gt;
 
 &lt;h2 id=&#34;wrong-example-1&#34;&gt;Wrong Example&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;impl&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;grow_old&lt;/span&gt;(&lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;self)&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;self.age&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;+=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;impl&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;grow_old&lt;/span&gt;(&amp;amp;&lt;span style=&#34;color:#00a&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;self)&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;*self.age&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;+=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This fails with the following:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#fc3&#34;&gt;error&lt;/span&gt;: wrong number of lifetime &lt;span style=&#34;color:#fc3&#34;&gt;parameters&lt;/span&gt;: expected &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&lt;/span&gt;, found &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#360&#34;&gt;E0107&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;]&lt;/span&gt;
-        impl &lt;span style=&#34;color:#360&#34;&gt;Sheep&lt;/span&gt; {
-             &lt;span style=&#34;color:#555&#34;&gt;^~~~~&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;error&lt;/span&gt;: wrong number of lifetime &lt;span style=&#34;color:#00a&#34;&gt;parameters&lt;/span&gt;: expected &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;, found &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt; [&lt;span style=&#34;color:#a00&#34;&gt;E0107&lt;/span&gt;]
+        impl &lt;span style=&#34;color:#a00&#34;&gt;Sheep&lt;/span&gt; {
+             ^~~~~&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;right-example-1&#34;&gt;Right Example&lt;/h2&gt;
 
 &lt;p&gt;What&amp;rsquo;s the problem?&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;Sheep&lt;/code&gt; takes a lifetime parameter now, so one must be supplied:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a8;font-weight:bold&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#069&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#078;font-weight:bold&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;impl&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#555&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#309&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#c0f&#34;&gt;grow_old&lt;/span&gt;(&lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#069;font-weight:bold&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;self)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;*&lt;/span&gt;self.age&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;+=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;impl&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;grow_old&lt;/span&gt;(&amp;amp;&lt;span style=&#34;color:#00a&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;self)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;*self.age&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;+=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that &lt;code&gt;impl&amp;lt;&#39;c&amp;gt;&lt;/code&gt; names a new lifetime and &lt;code&gt;Sheep&amp;lt;&#39;c&amp;gt;&lt;/code&gt; says that all

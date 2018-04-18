@@ -70,18 +70,18 @@ It&rsquo;s the kind of light that bounces off a surface equally in every directi
 
 <p>This is the bit of the fragment shader that renders diffuse light, i.e. the
 code run for each pixel on the GPU:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#09f;font-style:italic">// pretend you are given these three vectors</span>
-<span style="color:#069;font-weight:bold">vec3</span> position;
-<span style="color:#069;font-weight:bold">vec3</span> normal;
-<span style="color:#069;font-weight:bold">vec3</span> light_direction;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#aaa;font-style:italic">// pretend you are given these three vectors</span>
+<span style="color:#00a">vec3</span> position;
+<span style="color:#00a">vec3</span> normal;
+<span style="color:#00a">vec3</span> light_direction;
 
-<span style="color:#09f;font-style:italic">// calculate how light or dark this pixel should be</span>
-<span style="color:#09f;font-style:italic">// by combining the normal and light direction</span>
-<span style="color:#069;font-weight:bold">float</span> brightness <span style="color:#555">=</span> dot(normal, light_direction);
+<span style="color:#aaa;font-style:italic">// calculate how light or dark this pixel should be</span>
+<span style="color:#aaa;font-style:italic">// by combining the normal and light direction</span>
+<span style="color:#00a">float</span> brightness = dot(normal, light_direction);
 
-<span style="color:#09f;font-style:italic">// set the color between black and cyan</span>
-outColor <span style="color:#555">=</span> mix(<span style="color:#069;font-weight:bold">vec3</span>(<span style="color:#f60">0</span>, <span style="color:#f60">0</span>, <span style="color:#f60">0</span>),
-               <span style="color:#069;font-weight:bold">vec3</span>(<span style="color:#f60">0</span>, <span style="color:#f60">0.5</span>, <span style="color:#f60">0.5</span>),
+<span style="color:#aaa;font-style:italic">// set the color between black and cyan</span>
+outColor = mix(<span style="color:#00a">vec3</span>(<span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#099">0</span>),
+               <span style="color:#00a">vec3</span>(<span style="color:#099">0</span>, <span style="color:#099">0.5</span>, <span style="color:#099">0.5</span>),
                brightness);</code></pre></div>
 <p><img src="../images/just-diffuse-teapot.png" alt="" /></p>
 
@@ -95,16 +95,16 @@ that reflects unevenly: instead of the diffuse light
 that spreads out everywhere equally, the specular
 light highlights spots where the light is shining
 directly.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#09f;font-style:italic">// do some calculation to get the direction</span>
-<span style="color:#09f;font-style:italic">// and intensity</span>
-<span style="color:#069;font-weight:bold">vec3</span> camera_direction <span style="color:#555">=</span> normalize(<span style="color:#555">-</span>position);
-<span style="color:#069;font-weight:bold">vec3</span> half_direction <span style="color:#555">=</span> normalize(
-    light_direction <span style="color:#555">+</span> camera_direction);
-<span style="color:#069;font-weight:bold">float</span> specular <span style="color:#555">=</span> pow(
-    dot(half_direction, normal)), <span style="color:#f60">16.0</span>);
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#aaa;font-style:italic">// do some calculation to get the direction</span>
+<span style="color:#aaa;font-style:italic">// and intensity</span>
+<span style="color:#00a">vec3</span> camera_direction = normalize(-position);
+<span style="color:#00a">vec3</span> half_direction = normalize(
+    light_direction + camera_direction);
+<span style="color:#00a">float</span> specular = pow(
+    dot(half_direction, normal)), <span style="color:#099">16.0</span>);
 
-<span style="color:#09f;font-style:italic">// set the color to vary with specular</span>
-outColor <span style="color:#555">=</span> specular <span style="color:#555">*</span> <span style="color:#069;font-weight:bold">vec3</span>(<span style="color:#f60">0</span>, <span style="color:#f60">0.5</span>, <span style="color:#f60">0.5</span>);</code></pre></div>
+<span style="color:#aaa;font-style:italic">// set the color to vary with specular</span>
+outColor = specular * <span style="color:#00a">vec3</span>(<span style="color:#099">0</span>, <span style="color:#099">0.5</span>, <span style="color:#099">0.5</span>);</code></pre></div>
 <p>This gives us the shiny part of light!</p>
 
 <p><img src="../images/just-specular-teapot.png" alt="" /></p>
@@ -120,7 +120,7 @@ of walls and floors.</p>
 <p>Unfortunately, reflected light like that is really computationally
 intensive to calculate, so there&rsquo;s a widespread hack to add ambient
 lighting:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">outColor <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">vec3</span>(<span style="color:#f60">0</span>, <span style="color:#f60">0.3</span>, <span style="color:#f60">0.3</span>);</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">outColor = <span style="color:#00a">vec3</span>(<span style="color:#099">0</span>, <span style="color:#099">0.3</span>, <span style="color:#099">0.3</span>);</code></pre></div>
 <p><img src="../images/teapot-ambient.png" alt="" /></p>
 
 <p>Yep, we just add a lighter color everywhere. And now we finally get a decently lighted teapot!</p>
@@ -128,7 +128,7 @@ lighting:</p>
 <p><img src="../images/realistic-teapot.png" alt="" /></p>
 
 <p>And that&rsquo;s all there is to basic shading! I also wanted to do some cel-shading — cartoon-like graphics. This turned out to be super easy, and took one line of code:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">brightness <span style="color:#555">=</span> max(ceil(brightness <span style="color:#555">*</span> <span style="color:#f60">4</span>), <span style="color:#f60">0.0</span>);</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">brightness = max(ceil(brightness * <span style="color:#099">4</span>), <span style="color:#099">0.0</span>);</code></pre></div>
 <p>So here are two cel-shaded teapots! (Sorry I know they skip sometimes.)</p>
 
 <video width="600" height="504" autoplay loop> <source src="../videos/stars-13.ogv" type='video/ogg; codecs="theora, vorbis"'> </video>
@@ -144,9 +144,9 @@ entire project is written in Pony.)</p>
 </div>
 
 
-<h1 id="side-title" class="title"><a href="../"><span class="wrapper">
-    <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
-</span></a></h1>
+<h1 id="side-title" class="title"><span class="wrapper">
+    <span class="inside-wrapper"><a href="../"><span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span></a></span>
+</span></h1>
 
 <script>renderMathInElement(document.body);</script>
     </div>

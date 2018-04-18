@@ -68,30 +68,30 @@ incorrectly inserted or a vertex is lost somewhere along the line.</p>
 <p>I&rsquo;m parsing what&rsquo;s called a <code>.obj</code> file — an ASCII text format
 for representing 3D objects. Here&rsquo;s an <code>obj</code> representation of
 a cube:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mtllib cube.mtl
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mtllib cube.mtl
 o Cube
-v <span style="color:#f60">1</span>.000000 -1.000000 -1.000000
-v <span style="color:#f60">1</span>.000000 -1.000000 <span style="color:#f60">1</span>.000000
-v -1.000000 -1.000000 <span style="color:#f60">1</span>.000000
+v <span style="color:#099">1</span>.000000 -1.000000 -1.000000
+v <span style="color:#099">1</span>.000000 -1.000000 <span style="color:#099">1</span>.000000
+v -1.000000 -1.000000 <span style="color:#099">1</span>.000000
 v -1.000000 -1.000000 -1.000000
-v <span style="color:#f60">1</span>.000000 <span style="color:#f60">1</span>.000000 -0.999999
-v <span style="color:#f60">0</span>.999999 <span style="color:#f60">1</span>.000000 <span style="color:#f60">1</span>.000001
-v -1.000000 <span style="color:#f60">1</span>.000000 <span style="color:#f60">1</span>.000000
-v -1.000000 <span style="color:#f60">1</span>.000000 -1.000000
-vn <span style="color:#f60">0</span>.000000 -1.000000 <span style="color:#f60">0</span>.000000
-vn <span style="color:#f60">0</span>.000000 <span style="color:#f60">1</span>.000000 <span style="color:#f60">0</span>.000000
-vn <span style="color:#f60">1</span>.000000 <span style="color:#f60">0</span>.000000 <span style="color:#f60">0</span>.000000
-vn -0.000000 -0.000000 <span style="color:#f60">1</span>.000000
+v <span style="color:#099">1</span>.000000 <span style="color:#099">1</span>.000000 -0.999999
+v <span style="color:#099">0</span>.999999 <span style="color:#099">1</span>.000000 <span style="color:#099">1</span>.000001
+v -1.000000 <span style="color:#099">1</span>.000000 <span style="color:#099">1</span>.000000
+v -1.000000 <span style="color:#099">1</span>.000000 -1.000000
+vn <span style="color:#099">0</span>.000000 -1.000000 <span style="color:#099">0</span>.000000
+vn <span style="color:#099">0</span>.000000 <span style="color:#099">1</span>.000000 <span style="color:#099">0</span>.000000
+vn <span style="color:#099">1</span>.000000 <span style="color:#099">0</span>.000000 <span style="color:#099">0</span>.000000
+vn -0.000000 -0.000000 <span style="color:#099">1</span>.000000
 vn -1.000000 -0.000000 -0.000000
-vn <span style="color:#f60">0</span>.000000 <span style="color:#f60">0</span>.000000 -1.000000
+vn <span style="color:#099">0</span>.000000 <span style="color:#099">0</span>.000000 -1.000000
 usemtl Material
 s off
-f <span style="color:#f60">1</span>//1 <span style="color:#f60">2</span>//1 <span style="color:#f60">3</span>//1 <span style="color:#f60">4</span>//1
-f <span style="color:#f60">5</span>//2 <span style="color:#f60">8</span>//2 <span style="color:#f60">7</span>//2 <span style="color:#f60">6</span>//2
-f <span style="color:#f60">1</span>//3 <span style="color:#f60">5</span>//3 <span style="color:#f60">6</span>//3 <span style="color:#f60">2</span>//3
-f <span style="color:#f60">2</span>//4 <span style="color:#f60">6</span>//4 <span style="color:#f60">7</span>//4 <span style="color:#f60">3</span>//4
-f <span style="color:#f60">3</span>//5 <span style="color:#f60">7</span>//5 <span style="color:#f60">8</span>//5 <span style="color:#f60">4</span>//5
-f <span style="color:#f60">5</span>//6 <span style="color:#f60">1</span>//6 <span style="color:#f60">4</span>//6 <span style="color:#f60">8</span>//6</code></pre></div>
+f <span style="color:#099">1</span>//1 <span style="color:#099">2</span>//1 <span style="color:#099">3</span>//1 <span style="color:#099">4</span>//1
+f <span style="color:#099">5</span>//2 <span style="color:#099">8</span>//2 <span style="color:#099">7</span>//2 <span style="color:#099">6</span>//2
+f <span style="color:#099">1</span>//3 <span style="color:#099">5</span>//3 <span style="color:#099">6</span>//3 <span style="color:#099">2</span>//3
+f <span style="color:#099">2</span>//4 <span style="color:#099">6</span>//4 <span style="color:#099">7</span>//4 <span style="color:#099">3</span>//4
+f <span style="color:#099">3</span>//5 <span style="color:#099">7</span>//5 <span style="color:#099">8</span>//5 <span style="color:#099">4</span>//5
+f <span style="color:#099">5</span>//6 <span style="color:#099">1</span>//6 <span style="color:#099">4</span>//6 <span style="color:#099">8</span>//6</code></pre></div>
 <p>It&rsquo;s really simple — <code>v</code> loads a vertex, <code>vn</code> loads a vertex normal, and <code>f</code> loads a face (i.e. triangle).</p>
 
 <p>The color of the monkey currently signifies the normals that have be loaded. You can kind of see
@@ -104,9 +104,9 @@ I plan to implement soon.</p>
 </div>
 
 
-<h1 id="side-title" class="title"><a href="../"><span class="wrapper">
-    <span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span>
-</span></a></h1>
+<h1 id="side-title" class="title"><span class="wrapper">
+    <span class="inside-wrapper"><a href="../"><span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span></a></span>
+</span></h1>
 
 <script>renderMathInElement(document.body);</script>
     </div>

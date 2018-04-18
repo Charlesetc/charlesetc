@@ -26,16 +26,16 @@
 &lt;h1 id=&#34;list-sessions&#34;&gt;List Sessions&lt;/h1&gt;
 
 &lt;p&gt;Command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This shows you an interactive screen where you can which session you want to be in:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt; + &lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt; windows &lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;attached&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt; + &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt; windows&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;(&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;) + &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt; windows (attached)
+(&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;) + &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; windows&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&#34;switch-session&#34;&gt;Switch Session&lt;/h1&gt;
 
 &lt;p&gt;Command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;&lt;span style=&#34;color:#555&#34;&gt;(&lt;/span&gt;
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# or
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;&amp;lt;prefix&amp;gt;&lt;span style=&#34;color:#555&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;prefix&amp;gt;(
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# or
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;&amp;lt;prefix&amp;gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Move back and forth between sessions. Can you imagine!&lt;/p&gt;
 
 &lt;h1 id=&#34;main-development&#34;&gt;Main Development&lt;/h1&gt;

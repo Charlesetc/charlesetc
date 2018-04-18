@@ -46,30 +46,30 @@ make this branch off of the tip of master instead&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;This works for any git object: commits, tags, branches.&lt;/p&gt;
 
 &lt;h1 id=&#34;why-would-i-need-to-use-this&#34;&gt;Why would I need to use this?&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git checkout master &lt;span style=&#34;color:#555&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git checkout master &amp;amp;&amp;amp; git log --pretty=&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
 ccccccc -- third commit
 bbbbbbb -- second commit
 aaaaaaa -- first commit
 
 $ git checkout bbbbbbb
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# make a new branch, based off of &amp;#34;second commit&amp;#34;
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;$ git checkout -b my_new_branch
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# make a new branch, based off of &amp;#34;second commit&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;$ git checkout -b my_new_branch
 $ touch a_file
 $ git add a_file
-$ git commit -m &lt;span style=&#34;color:#c30&#34;&gt;&amp;#39;I just committed a file!&amp;#39;&lt;/span&gt;
-$ git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+$ git commit -m &lt;span style=&#34;color:#a50&#34;&gt;&amp;#39;I just committed a file!&amp;#39;&lt;/span&gt;
+$ git log --pretty=&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
 ddddddd -- I just committed a file!
 bbbbbbb -- second commit
 aaaaaaa -- first commit
 
-&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# But I meant to make this commit on &amp;#34;third commit&amp;#34;, not &amp;#34;second commit&amp;#34;!!!
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# OH NOOOOO
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;# wait, I can re-base?
-&lt;/span&gt;&lt;span style=&#34;color:#09f;font-style:italic&#34;&gt;&lt;/span&gt;$ git rebase ccccccc
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# But I meant to make this commit on &amp;#34;third commit&amp;#34;, not &amp;#34;second commit&amp;#34;!!!
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# OH NOOOOO
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# wait, I can re-base?
+&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;$ git rebase ccccccc
 First, rewinding head to replay your work on top of it...
 Applying: I just committed a file!
 
-$ git log --pretty&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c30&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
+$ git log --pretty=&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%h -- %s&amp;#34;&lt;/span&gt;
 ddddddd -- I just committed a file!
 ccccccc -- third commit
 bbbbbbb -- second commit
@@ -82,10 +82,10 @@ aaaaaaa -- first commit
 beyond repair in git.&lt;/p&gt;
 
 &lt;p&gt;If you do &lt;code&gt;git reflog&lt;/code&gt;, you will see something like:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;234320a HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase finished: returning to refs/heads/my-new-branch
-234320a HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase: added a file
-49211d7 HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: rebase: checkout 49211d7
-8c90682 HEAD@&lt;span style=&#34;color:#555&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#f60&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#555&#34;&gt;}&lt;/span&gt;: checkout: moving from master to my-new-branch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;234320a HEAD@{&lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;}: rebase finished: returning to refs/heads/my-new-branch
+234320a HEAD@{&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;}: rebase: added a file
+49211d7 HEAD@{&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;}: rebase: checkout 49211d7
+8c90682 HEAD@{&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;}: checkout: moving from master to my-new-branch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You can then checkout &lt;code&gt;HEAD@{3}&lt;/code&gt; to return to a safe state,
 and then &lt;code&gt;git checkout -b saved-branch&lt;/code&gt; to start committing.&lt;/p&gt;
 

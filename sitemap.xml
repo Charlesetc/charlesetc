@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://www.charlesetc.com/gui-development-is-broken/</loc>
+    <lastmod>2018-04-17T00:35:35-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.charlesetc.com/rage-against-apis/</loc>
     <lastmod>2018-02-11T12:14:30-07:00</lastmod>
   </url>
@@ -101,7 +106,7 @@
   
   <url>
     <loc>http://www.charlesetc.com/</loc>
-    <lastmod>2018-02-11T12:14:30-07:00</lastmod>
+    <lastmod>2018-04-17T00:35:35-05:00</lastmod>
     <priority>0</priority>
   </url>
   
