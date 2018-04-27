@@ -6,10 +6,63 @@
     <description>Recent content on Charles, etc</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Apr 2018 00:35:35 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 26 Apr 2018 22:42:15 -0500</lastBuildDate>
     
         <atom:link href="http://www.charlesetc.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>My Favorite Unix Commands</title>
+      <link>http://www.charlesetc.com/favorite-unix-commands/</link>
+      <pubDate>Thu, 26 Apr 2018 22:42:15 -0500</pubDate>
+      
+      <guid>http://www.charlesetc.com/favorite-unix-commands/</guid>
+      <description>&lt;p&gt;This list is as much for me as for anyone else but I hope
+it&amp;rsquo;ll be useful to all parties in the future!&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hanslub43/rlwrap&#34;&gt;rlwrap&lt;/a&gt; — turn any
+repl into one that supports arrow keys and control-r to
+search through history.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/junegunn/fzf&#34;&gt;fzf&lt;/a&gt; — fuzzy find
+anything.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cups.org/doc/options.html&#34;&gt;lp&lt;/a&gt; — print from the
+command line.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Tree_(Unix)&#34;&gt;tree&lt;/a&gt; — pretty
+prints an entire directory.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/astrand/xclip&#34;&gt;xclip&lt;/a&gt; — pipe into your
+clipboard.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/wting/autojump&#34;&gt;j&lt;/a&gt; — jump around instead
+of cd-ing.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://entrproject.org/&#34;&gt;entr&lt;/a&gt; — run a command when a file
+changes.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pwmt.org/projects/zathura/&#34;&gt;zathura&lt;/a&gt; — miles ahead
+of any other pdf viewer I&amp;rsquo;ve ever used. Live reload
+alongside with keyboard navigation.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Locate_(Unix)&#34;&gt;locate&lt;/a&gt; — find
+files all over your hard drive quickly.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Scrot&#34;&gt;scrot&lt;/a&gt; — good for
+capturing screenshots.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/BurntSushi/ripgrep&#34;&gt;rg&lt;/a&gt; — I&amp;rsquo;ve also used
+&lt;a href=&#34;https://geoff.greer.fm/ag/&#34;&gt;ag&lt;/a&gt; for a long time quite
+happily.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ruby-lang.org/en/&#34;&gt;ruby&lt;/a&gt; — pretty obscure
+scripting language you might want to check out.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stedolan.github.io/jq/manual/&#34;&gt;jq&lt;/a&gt; — awesome
+language for manipulating json.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;whitespace&lt;/strong&gt;  (alias) recursively removes whitespace.
+&lt;code&gt;whitespace=&amp;quot;find -type f -exec sed -i &#39;s/ *$//&#39; {} +&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;static&lt;/strong&gt;  (alias) statically serve files in current
+directory &lt;code&gt;alias static=&#39;ruby -run -e httpd . -p 9000&#39;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;More to come when I find them! I&amp;rsquo;d love to hear about any
+other good ones people know about.&lt;/p&gt;
+
+&lt;p&gt;P.S. I&amp;rsquo;m leaving out my favorite window manager, terminal,
+shell, etc. That&amp;rsquo;s another post :)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Gui development is broken.</title>
