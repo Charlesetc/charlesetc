@@ -22,6 +22,7 @@ ul, ol {
 
 #side-title {
   font-family: 'Dancing Script', cursive;
+  z-index: -1;
 }
 
 #first-title, #side-title, #title {

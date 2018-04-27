@@ -70,14 +70,14 @@ Okay, simple. You want to make a text editor, make it like vim
 or nano and run it in a terminal. That's got to be easy,
 right?
 
-Wrong. 
+Wrong.
 
 Terminals communicate with their program through a text-based
 protocol and most allow everything from mouse input to
 colorful ascii-based animation. Specifically, terminals do
 a lot more than just printing text. (Refer to [this fantastic
 talk](https://www.youtube.com/watch?v=rSnMoClPH2E) that goes
-into ANSI terminals in much more depth.) 
+into ANSI terminals in much more depth.)
 
 The protocol is "simple", see, the program just outputs text
 and that text is rendered on the screen. *Except* if one of
@@ -133,7 +133,7 @@ interface to create the whole glyph set and then try to draw
 each glyph in the right spot. I'd much rather have something
 do that for me...
 
-# Option 5: A Drawing toolkit! 
+# Option 5: A Drawing toolkit!
 
 Yes! There's a toolkit for making drawings
 [Cairo](https://cairographics.org/), more abstract than the
