@@ -39,3 +39,9 @@ it'll be useful to all parties in the future!
   `whitespace="find -type f -exec sed -i 's/ *$//' {} +"`
 * **static**  (alias) statically serve files in current
   directory `alias static='ruby -run -e httpd . -p 9000'`
+
+More to come when I find them! I'd love to hear about any
+other good ones people know about.
+
+P.S. I'm leaving out my favorite window manager, terminal,
+shell, etc. That's another post :)
