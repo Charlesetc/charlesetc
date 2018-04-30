@@ -21,6 +21,8 @@
 it&amp;rsquo;ll be useful to all parties in the future!&lt;/p&gt;
 
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://midnight-commander.org/&#34;&gt;midnight commander&lt;/a&gt;
+— command line file explorer.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/hanslub42/rlwrap&#34;&gt;rlwrap&lt;/a&gt; — turn any
 repl into one that supports arrow keys and control-r to
 search through history.&lt;/li&gt;
