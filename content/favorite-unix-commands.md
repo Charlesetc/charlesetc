@@ -6,6 +6,8 @@ date: 2018-04-26T22:42:15-05:00
 This list is as much for me as for anyone else but I hope
 it'll be useful to all parties in the future!
 
+* [midnight commander](http://midnight-commander.org/)
+  — command line file explorer.
 * [rlwrap](https://github.com/hanslub42/rlwrap) — turn any
   repl into one that supports arrow keys and control-r to
   search through history.
