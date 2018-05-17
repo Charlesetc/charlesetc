@@ -26,7 +26,7 @@ allow me to do things like&lt;/p&gt;
 
 &lt;p&gt;It&amp;rsquo;s a bit easier than typing out &lt;code&gt;git clone git@github.com:ocaml/ocaml&lt;/code&gt; and much more fun :)&lt;/p&gt;
 
-&lt;p&gt;These lines in your &lt;code&gt;~/.gitconfig&lt;/code&gt; should get this working.&lt;/p&gt;
+&lt;p&gt;These lines in your &lt;code&gt;~/.gitconfig&lt;/code&gt; should get it working.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;[&lt;span style=&#34;color:#0a0&#34;&gt;alias&lt;/span&gt;]
 &lt;span style=&#34;color:#0a0&#34;&gt;hub&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;!f() { git clone git@github.com:$1; }; f&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#0a0&#34;&gt;lab&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;!f() { git clone git@gitlab.com:$1; }; f&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
