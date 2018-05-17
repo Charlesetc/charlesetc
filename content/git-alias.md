@@ -1,7 +1,6 @@
 ---
 title: "Git Aliases"
 date: 2018-05-16T21:39:00-05:00
-draft: true
 ---
 
 I've just created two new git aliases that
