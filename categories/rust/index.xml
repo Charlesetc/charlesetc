@@ -201,7 +201,7 @@ Depending on the context they can look like one of: &lt;code&gt;something&amp;lt
   &lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt;* c = example_function();
   do_something(&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;);
   &lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt; d = &lt;span style=&#34;color:#099&#34;&gt;4&lt;/span&gt;;
-  printf(&lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%i&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&lt;/span&gt;, *c);
+  printf(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;%i&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&lt;/span&gt;, *c);
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In C this is Undefined Behavior. When I run this, it just prints &amp;ldquo;3&amp;rdquo;.&lt;/p&gt;
 

@@ -69,17 +69,17 @@ try-catch.&lt;/p&gt;
 
 &lt;h4 id=&#34;python&#34;&gt;Python&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;read_first_line&lt;/span&gt;(filename):
-  f = &lt;span style=&#34;color:#0aa&#34;&gt;open&lt;/span&gt;(filename, &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;)
+  f = &lt;span style=&#34;color:#0aa&#34;&gt;open&lt;/span&gt;(filename, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;)
   &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt; f.readline()
 
 &lt;span style=&#34;color:#00a&#34;&gt;try&lt;/span&gt;:
-  line = read_first_line(&lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;)
-  &lt;span style=&#34;color:#00a&#34;&gt;if&lt;/span&gt; line == &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;:
-    message= &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;
+  line = read_first_line(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;)
+  &lt;span style=&#34;color:#00a&#34;&gt;if&lt;/span&gt; line == &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;:
+    message= &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;
   &lt;span style=&#34;color:#00a&#34;&gt;else&lt;/span&gt;:
-    &lt;span style=&#34;color:#00a&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#00a&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#00a&#34;&gt;except&lt;/span&gt; IOError:
-  &lt;span style=&#34;color:#00a&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;error reading your salutation&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span style=&#34;color:#00a&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;error reading your salutation&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;reason&#34;&gt;Reason&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;read_first_line&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;filename&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;f&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;open_in&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;filename;&lt;span style=&#34;color:#bbb&#34;&gt;

@@ -3,7 +3,7 @@
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.36.1" />
+  <meta name="generator" content="Hugo 0.40.3" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -108,17 +108,17 @@ try-catch.</p>
 
 <h4 id="python">Python</h4>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a">def</span> <span style="color:#0a0">read_first_line</span>(filename):
-  f = <span style="color:#0aa">open</span>(filename, <span style="color:#a50"></span><span style="color:#a50">&#34;r&#34;</span>)
+  f = <span style="color:#0aa">open</span>(filename, <span style="color:#a50">&#34;r&#34;</span>)
   <span style="color:#00a">return</span> f.readline()
 
 <span style="color:#00a">try</span>:
-  line = read_first_line(<span style="color:#a50"></span><span style="color:#a50">&#34;file.txt&#34;</span>)
-  <span style="color:#00a">if</span> line == <span style="color:#a50"></span><span style="color:#a50">&#34;hi&#34;</span>:
-    message= <span style="color:#a50"></span><span style="color:#a50">&#34;You said &#39;hi&#39;!&#34;</span>
+  line = read_first_line(<span style="color:#a50">&#34;file.txt&#34;</span>)
+  <span style="color:#00a">if</span> line == <span style="color:#a50">&#34;hi&#34;</span>:
+    message= <span style="color:#a50">&#34;You said &#39;hi&#39;!&#34;</span>
   <span style="color:#00a">else</span>:
-    <span style="color:#00a">print</span> <span style="color:#a50"></span><span style="color:#a50">&#34;You didn&#39;t say hi :(&#34;</span>
+    <span style="color:#00a">print</span> <span style="color:#a50">&#34;You didn&#39;t say hi :(&#34;</span>
 <span style="color:#00a">except</span> IOError:
-  <span style="color:#00a">print</span> <span style="color:#a50"></span><span style="color:#a50">&#34;error reading your salutation&#34;</span></code></pre></div>
+  <span style="color:#00a">print</span> <span style="color:#a50">&#34;error reading your salutation&#34;</span></code></pre></div>
 <h4 id="reason">Reason</h4>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">let</span><span style="color:#bbb"> </span>read_first_line<span style="color:#bbb"> </span>filename<span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">  </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>f<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>open_in<span style="color:#bbb"> </span>filename;<span style="color:#bbb">
