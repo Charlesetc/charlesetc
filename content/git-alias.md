@@ -20,7 +20,7 @@ to clone the respective repositories.
 
 It's a bit easier than typing out `git clone git@github.com:ocaml/ocaml` and much more fun :)
 
-These lines in your `~/.gitconfig` should get this working.
+These lines in your `~/.gitconfig` should get it working.
 
 ```haskell
 [alias]
