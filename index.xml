@@ -6,10 +6,58 @@
     <description>Recent content on Charles, etc</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 May 2018 21:39:00 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 05 Oct 2018 22:42:15 -0500</lastBuildDate>
     
         <atom:link href="http://www.charlesetc.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Install a tar file</title>
+      <link>http://www.charlesetc.com/install-tar-file/</link>
+      <pubDate>Fri, 05 Oct 2018 22:42:15 -0500</pubDate>
+      
+      <guid>http://www.charlesetc.com/install-tar-file/</guid>
+      <description>&lt;p&gt;There have been a few times when I&amp;rsquo;ve been hoping to install some software, but it&amp;rsquo;s distributed as a tar file of a directory structure.&lt;/p&gt;
+
+&lt;p&gt;The files are organized by where they should be installed, like so (shortened for clarity):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tree -L 3 swift-release-4.2
+swift-release-4.2
+└── usr
+    ├── bin
+    │   ├── lldb
+    │   ├── repl_swift
+    │   ├── swift
+    ├── include
+    │   └── lldb
+    ├── lib
+    │   ├── lldb
+    │   ├── python2.7
+    │   ├── swift
+    ├── libexec
+    │   └── swift
+    ├── local
+    │   └── include
+    └── share
+        ├── man
+        └── swift
+
+16 directories, 24 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the task of actually putting these files under the root filesystem (&lt;code&gt;/&lt;/code&gt;) instead of this &lt;code&gt;swift-release-4.2&lt;/code&gt; directory is left up to the user.&lt;/p&gt;
+
+&lt;p&gt;This was something I struggled with the first couple times! I think I finally found a clean solution so I thought I&amp;rsquo;d share it.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;for&lt;/span&gt; line in &lt;span style=&#34;color:#00a&#34;&gt;$(&lt;/span&gt;find * -type d&lt;span style=&#34;color:#00a&#34;&gt;)&lt;/span&gt;; &lt;span style=&#34;color:#00a&#34;&gt;do&lt;/span&gt;
+  sudo mkdir -p /&lt;span style=&#34;color:#a00&#34;&gt;$line&lt;/span&gt;
+&lt;span style=&#34;color:#00a&#34;&gt;done&lt;/span&gt;
+
+&lt;span style=&#34;color:#00a&#34;&gt;for&lt;/span&gt; line in &lt;span style=&#34;color:#00a&#34;&gt;$(&lt;/span&gt;find * -type f&lt;span style=&#34;color:#00a&#34;&gt;)&lt;/span&gt;; &lt;span style=&#34;color:#00a&#34;&gt;do&lt;/span&gt;
+  sudo cp &lt;span style=&#34;color:#a00&#34;&gt;$line&lt;/span&gt; /&lt;span style=&#34;color:#a00&#34;&gt;$line&lt;/span&gt;
+&lt;span style=&#34;color:#00a&#34;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It seems like there might be a canonical or easy way to do this. If so, let me know!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Git Aliases</title>

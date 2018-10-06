@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.40.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+  <title>OCaml in 5 minutes &middot; Charles, etc</title>
+
+  
+  <link rel="stylesheet" href="../css/print.css" media="print">
+  <link rel="stylesheet" href="../css/poole.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/syntax.css">
+  <link rel="stylesheet" href="../css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Charles, etc" />
+
+  
+</head>
+
+  <body class=" ">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="content container">
+    <div class="post">
+  <h1 id='title'>OCaml in 5 minutes</h1>
+  <span class="post-date">Sun, Aug 12, 2018</span>
+  
+
+<p>I think OCaml is a great language. This will teach you enough to start
+coding in it. Not enough to understand other people&rsquo;s OCaml, not enough to say
+you know most of OCaml, but just enough to start actually writing your own
+code and reaping OCaml&rsquo;s benefits!</p>
+
+<h1 id="development-environment">Development environment</h1>
+
+<p>Vim, Emacs, Atom, VSCode, whatever. OCaml has great editor integration,
+but we only have 5 minutes. When you have more time, check out
+<a href="https://github.com/ocaml/merlin">merlin</a>. For now, so long as you&rsquo;re using
+a file ending in <code>.ml</code>, you&rsquo;re doing it right.</p>
+
+<h1 id="install-ocaml">Install OCaml</h1>
+
+<p>Again, 5 minutes, so let&rsquo;s keep this brief:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin
+
+$ opam init -y --compiler=<span style="color:#099">4</span>.06.1
+
+$ <span style="color:#0aa">eval</span> <span style="color:#a50">`</span>opam config env<span style="color:#a50">`</span>
+
+$ opam install -y utop ocamlbuild  # a repl and a build system, respectively</code></pre></div>
+<p>(taken from the <a href="https://opam.ocaml.org/doc/Install.html">opam installation
+guide</a> and <a href="https://github.com/janestreet/install-ocaml">Jane Street&rsquo;s
+guide</a>)</p>
+
+<h1 id="write-ocaml">Write OCaml</h1>
+
+<p>Okay now it&rsquo;s time to learn some OCaml! Luckily we&rsquo;re only going to learn
+5 concepts!</p>
+
+<h2 id="concept-1-constants">Concept 1: Constants</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#a50">&#34;hi there&#34;</span>                : <span style="color:#0aa">string</span>
+2.4                       : <span style="color:#0aa">float</span>
+[2; 3; 4]                 : <span style="color:#0aa">int</span> <span style="color:#0aa">list</span>
+[[true, false], [true]]   : <span style="color:#0aa">bool</span> <span style="color:#0aa">list</span> <span style="color:#0aa">list</span>
+()                        : <span style="color:#0aa">unit</span>
+(2, <span style="color:#a50">&#34;okay&#34;</span>)               : <span style="color:#0aa">int</span> * <span style="color:#0aa">string</span>
+<span style="color:#aaa;font-style:italic">(* yeah, tuples are weird. *)</span>
+<span style="color:#aaa;font-style:italic">(* also, this is a comment. who knew! *)</span></code></pre></div>
+<p>The <code>:</code> is a type assertion. Types are on the right. Think that was
+7 concepts? Too bad we have to move on!</p>
+
+<h2 id="concept-2-functions">Concept 2: Functions!</h2>
+
+<p>OCaml doesn&rsquo;t use parenthesis for function calls, they are separated from
+their arguments by spaces.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">print_endline <span style="color:#a50">&#34;Hi there&#34;</span></code></pre></div>
+<p>Function definitions?</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#00a">let</span> <span style="color:#00a">rec</span> repeat s n =
+  <span style="color:#00a">if</span> n = 0
+  <span style="color:#00a">then</span> <span style="color:#a50">&#34;&#34;</span>
+  <span style="color:#00a">else</span> s ^ repeat s (n - 1)</code></pre></div>
+<p>Whoops learned <code>if</code> by accident. <code>^</code> is string concatenation. <code>let rec</code>
+means this function is recursive. Just use <code>let</code> if you&rsquo;re not writing
+a recursive function.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">print_endline (repeat <span style="color:#a50">&#34;Let it snow, &#34;</span> 3)</code></pre></div>
+<p>This prints <code>Let it snow, Let it snow, Let it snow,</code>. Next!</p>
+
+<h2 id="concept-3-custom-datatypes">Concept 3: Custom datatypes.</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#00a">type</span> only_apple = <span style="color:#0a0">Apple</span> <span style="color:#00a">of</span> { color : <span style="color:#0aa">string</span>
+                          ; sweetness : <span style="color:#0aa">int</span> }
+
+<span style="color:#00a">let</span> best_apple_ever = <span style="color:#0a0">Apple</span> { color = <span style="color:#a50">&#34;red&#34;</span>; sweetness = 10000 }
+
+<span style="color:#aaa;font-style:italic">(* how do you get the sweetness of an Apple?
+</span><span style="color:#aaa;font-style:italic">   why, pattern match against it! *)</span>
+<span style="color:#00a">let</span> what_was_the_sweetness_again =
+  <span style="color:#00a">match</span> best_apple_ever <span style="color:#00a">with</span>
+  | <span style="color:#0a0">Apple</span> { sweetness ; _ } -&gt; sweetness
+
+<span style="color:#aaa;font-style:italic">(* actually let&#39;s have more kinds of fruit *)</span>
+
+<span style="color:#00a">type</span> fruit = <span style="color:#0a0">Pear</span> <span style="color:#00a">of</span> { color : <span style="color:#0aa">string</span>
+                     ; sweetness : <span style="color:#0aa">int</span> }
+           | <span style="color:#0a0">Grapes</span> <span style="color:#00a">of</span> <span style="color:#0aa">int</span>
+           <span style="color:#aaa;font-style:italic">(* This one doesn&#39;t carry data,
+</span><span style="color:#aaa;font-style:italic">              apart from being a banana *)</span>
+           | <span style="color:#0a0">Banana</span>
+
+<span style="color:#00a">let</span> best_pear_ever = <span style="color:#0a0">Pear</span> { color = <span style="color:#a50">&#34;green&#34;</span>; sweetness = 5 }
+
+<span style="color:#00a">let</span> what_was_the_sweetness_again =
+  <span style="color:#00a">match</span> best_pear_ever <span style="color:#00a">with</span>
+  | <span style="color:#0a0">Pear</span> { sweetness ; _ } -&gt; sweetness
+  | <span style="color:#0a0">Grapes</span> _
+  | <span style="color:#0a0">Banana</span> -&gt;
+    <span style="color:#00a">raise</span> (<span style="color:#0a0">Failure</span> <span style="color:#a50">&#34;can&#39;t find out the
+</span><span style="color:#a50">           sweetness of grapes or bananas&#34;</span>)</code></pre></div>
+<p>There are other ways to define datatypes in OCaml! Search for
+&ldquo;Structures&rdquo;, &ldquo;GADT&rsquo;s&rdquo;, &ldquo;Polymorphic Variants&rdquo;, and &ldquo;Objects&rdquo; if you want.
+That said, you should be able to write most things with these normal
+variants we have here.</p>
+
+<h2 id="concept-4-bingings-mutable-variables">Concept 4: Bingings &amp; mutable variables</h2>
+
+<p>So up until now we&rsquo;ve only actually seen top-level bindings.  Say you&rsquo;re
+defining a function and you want to make a new binding, you must use <code>let
+... in</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#00a">let</span> to_the_fourth x =
+  <span style="color:#00a">let</span> x_squared = x * x <span style="color:#00a">in</span>
+  x_squared * x_squared</code></pre></div>
+<p>Aaand let&rsquo;s also learn how to make mutable references:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#aaa;font-style:italic">(* top-level statement that moves from using
+</span><span style="color:#aaa;font-style:italic">   the top-level let syntax to the
+</span><span style="color:#aaa;font-style:italic">   expression-level let syntax... :/
+</span><span style="color:#aaa;font-style:italic">   i.e `let ... in`, instead of just `let`
+</span><span style="color:#aaa;font-style:italic">   *)</span>
+<span style="color:#00a">let</span> () =
+
+  <span style="color:#00a">let</span> i = ref 0 <span style="color:#00a">in</span>
+  <span style="color:#00a">while</span> i &lt;= 10 <span style="color:#00a">do</span>
+    print_endline (string_of_int !i);
+    i := !i + 1
+  <span style="color:#00a">done</span></code></pre></div>
+<p>So <code>ref</code> creates a mutable reference, given an initial value. <code>!</code> gets the
+value of a reference when it&rsquo;s executed, and <code>:=</code> updates a reference to
+a new value. Also <code>;</code> chains statements together!</p>
+
+<h2 id="concept-5-modules">Concept 5: Modules</h2>
+
+<p>There&rsquo;s a whole bunch of language features that happen at the module level. Here&rsquo;s what you need to get started:</p>
+
+<ol>
+<li>Every file defines a module. &ldquo;fire.ml&rdquo; will create a &ldquo;Fire&rdquo; module. All modules are capitalized.</li>
+<li>Use <code>module Your_module_name = struct ... end</code> to define a module within a module.</li>
+<li>Use <code>String.sub</code> gets the function <code>sub</code> from the <code>String</code> module.</li>
+<li>A common idiom is to have a <code>type t</code> in a module. For example <code>Queue.t</code>
+would be a queue, and <code>Hashtbl.t</code> would be a hashtable.</li>
+</ol>
+
+<p>Here&rsquo;s an example using the <code>Queue</code> module from the standard library:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#00a">let</span> () =
+  <span style="color:#00a">let</span> q = <span style="color:#0aa">Queue</span>.create () <span style="color:#00a">in</span>
+  <span style="color:#0aa">Queue</span>.add <span style="color:#a50">&#34;hi&#34;</span> q;
+  <span style="color:#0aa">Queue</span>.add <span style="color:#a50">&#34;you&#34;</span> q;
+  print_endline (<span style="color:#0aa">Queue</span>.pop q);
+  print_endline (<span style="color:#0aa">Queue</span>.pop q)
+
+  <span style="color:#aaa;font-style:italic">(* it&#39;ll print &#34;hi&#34; and then &#34;you&#34; *)</span></code></pre></div>
+<h1 id="running-ocaml">Running OCaml</h1>
+
+<p>Okay! You made it! Congrats!</p>
+
+<p>So if you run <code>utop</code> in your shell, it should open an OCaml repl that you
+can experiment with.</p>
+
+<p>Alternatively, write some OCaml code to <code>your_module.ml</code> and then, in the
+same directory, run <code>ocamlbuild your_module.byte</code>. This will give you an
+executable <code>./your_module.byte</code>.</p>
+
+<h1 id="recap">Recap</h1>
+
+<p>So you now know about OCaml&rsquo;s</p>
+
+<ul>
+<li>constants,</li>
+<li>functions,</li>
+<li>datatypes,</li>
+<li>bindings &amp; references,</li>
+<li>and modules.</li>
+</ul>
+
+<p>And you know how to run your code! This leaves out <strong>a whole lot</strong>, but  <a href="https://caml.inria.fr/pub/docs/manual-ocaml/stdlib.html">The
+Standard Library</a>
+reference is useful to have, as is <a href="https://caml.inria.fr/pub/docs/manual-ocaml/index.html">The OCaml
+manual</a>. Also <a href="https://v1.realworldocaml.org/">Real
+World OCaml</a> is great learning material for the
+rest of OCaml.</p>
+
+</div>
+
+
+<h1 id="side-title" class="title"><span class="wrapper">
+    <span class="inside-wrapper"><a href="../"><span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span></a></span>
+</span></h1>
+
+<script>renderMathInElement(document.body);</script>
+    </div>
+    
+  </body>
+</html>
