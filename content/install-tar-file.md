@@ -3,6 +3,18 @@ title: "Install a tar file"
 date: 2018-10-05T22:42:15-05:00
 ---
 
+**Update!** Turns out the command I was looking for was:
+
+```
+tar --extract -f swift-release-4.2 \
+  --strip-components=1 \
+  --directory=/
+```
+
+Thanks to [Kamal](https://twitter.com/kamalmarhubi) for teaching me this!
+
+---
+
 There have been a few times when I've been hoping to install some software, but it's distributed as a tar file of a directory structure.
 
 The files are organized by where they should be installed, like so (shortened for clarity):
