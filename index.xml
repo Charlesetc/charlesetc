@@ -17,7 +17,18 @@
       <pubDate>Fri, 05 Oct 2018 22:42:15 -0500</pubDate>
       
       <guid>http://www.charlesetc.com/install-tar-file/</guid>
-      <description>&lt;p&gt;There have been a few times when I&amp;rsquo;ve been hoping to install some software, but it&amp;rsquo;s distributed as a tar file of a directory structure.&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;Update!&lt;/strong&gt; Turns out the command I was looking for was:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;tar --extract -f swift-release-4.2 \
+  --strip-components=1 \
+  --directory=/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&#34;https://twitter.com/kamalmarhubi&#34;&gt;Kamal&lt;/a&gt; for teaching me this!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;There have been a few times when I&amp;rsquo;ve been hoping to install some software, but it&amp;rsquo;s distributed as a tar file of a directory structure.&lt;/p&gt;
 
 &lt;p&gt;The files are organized by where they should be installed, like so (shortened for clarity):&lt;/p&gt;
 

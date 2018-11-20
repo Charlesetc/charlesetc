@@ -56,7 +56,18 @@
     <div class="post">
   <h1 id='title'>Install a tar file</h1>
   <span class="post-date">Fri, Oct 5, 2018</span>
-  <p>There have been a few times when I&rsquo;ve been hoping to install some software, but it&rsquo;s distributed as a tar file of a directory structure.</p>
+  <p><strong>Update!</strong> Turns out the command I was looking for was:</p>
+
+<pre><code>tar --extract -f swift-release-4.2 \
+  --strip-components=1 \
+  --directory=/
+</code></pre>
+
+<p>Thanks to <a href="https://twitter.com/kamalmarhubi">Kamal</a> for teaching me this!</p>
+
+<hr />
+
+<p>There have been a few times when I&rsquo;ve been hoping to install some software, but it&rsquo;s distributed as a tar file of a directory structure.</p>
 
 <p>The files are organized by where they should be installed, like so (shortened for clarity):</p>
 
