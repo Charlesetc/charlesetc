@@ -3,7 +3,7 @@
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.40.1" />
+  <meta name="generator" content="Hugo 0.52" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -109,13 +109,13 @@ Depending on the context they can look like one of: <code>something&lt;'a&gt;</c
 <p>This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over. And if not, you need to make sure it has an appropriate lifetime.</p>
 
 <p>In Go, you can do this:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> example_function() *<span style="color:#0aa">int</span> {
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> <span style="color:#0a0">example_function</span>() *<span style="color:#0aa">int</span> {
   b := <span style="color:#099">3</span>
   <span style="color:#00a">return</span> &amp;b
 }
 
-<span style="color:#00a">func</span> main() {
-  fmt.Println(*example_function());
+<span style="color:#00a">func</span> <span style="color:#0a0">main</span>() {
+  fmt.<span style="color:#0a0">Println</span>(*<span style="color:#0a0">example_function</span>());
 }</code></pre></div>
 <p>However, you cannot do that in Rust:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">fn</span> <span style="color:#0a0">example_function</span>&lt;<span style="color:#1e90ff">&#39;a</span>&gt;()<span style="color:#bbb"> </span>-&gt; <span style="color:#00a">&amp;</span><span style="color:#1e90ff">&#39;a</span><span style="color:#bbb"> </span><span style="color:#0aa">i32</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
@@ -125,7 +125,8 @@ Depending on the context they can look like one of: <code>something&lt;'a&gt;</c
 </span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#00a">fn</span> <span style="color:#0a0">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>println!(<span style="color:#a50">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>example_function());<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}</code></pre></div>
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span></code></pre></div>
 <p>The reason is that <code>&amp;b</code> does not live long enough to be dereferenced outside of the function that made it.</p>
 
 <p>Why is this so important? Because this is what can happen in C:</p>
@@ -171,15 +172,16 @@ that&rsquo;s a more complicated question and the answer is to put it on the heap
 <p>Here&rsquo;s how you can make sure of that:</p>
 
 <h2 id="wrong-example">Wrong example:</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0">Sheep</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0;text-decoration:underline">Sheep</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>age: <span style="color:#00a">&amp;</span><span style="color:#0aa">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#00a">fn</span> <span style="color:#0a0">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#099">3</span>;<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>age: <span style="color:#00a">&amp;</span><span style="color:#0a0">a</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>age: <span style="color:#00a">&amp;</span><span style="color:#0a0;text-decoration:underline">a</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>println!(<span style="color:#a50">&#34;{};&#34;</span>,<span style="color:#bbb"> </span>s)<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}</code></pre></div>
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span></code></pre></div>
 <p>This gives the following error:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#00a">error</span>: missing lifetime specifier [<span style="color:#a00">E0106</span>]
         <span style="color:#00a">age</span>: &amp;i32,
@@ -189,15 +191,16 @@ In the struct definition, you haven&rsquo;t told it how long the reference to th
 And yet, in order for your code to be safe, it has to stick around for at least as long as the struct.</p>
 
 <h2 id="right-example">Right Example</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0;text-decoration:underline">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>age: <span style="color:#00a">&amp;</span><span style="color:#1e90ff">&#39;c</span><span style="color:#bbb"> </span><span style="color:#0aa">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#00a">fn</span> <span style="color:#0a0">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#099">3</span>;<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>age: <span style="color:#00a">&amp;</span><span style="color:#0a0">a</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#00a">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>age: <span style="color:#00a">&amp;</span><span style="color:#0a0;text-decoration:underline">a</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>println!(<span style="color:#a50">&#34;{};&#34;</span>,<span style="color:#bbb"> </span>s)<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}</code></pre></div>
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span></code></pre></div>
 <p>You&rsquo;ll notice that not much here has changed. But now Rust has pronounced your code safe &mdash; Hurray!</p>
 
 <p>Here are the changes:</p>
@@ -224,7 +227,7 @@ even across threads. AND all of this happens at compile time without affecting t
 trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.</p>
 
 <h2 id="wrong-example-1">Wrong Example</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0;text-decoration:underline">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>age: <span style="color:#00a">&amp;</span><span style="color:#1e90ff">&#39;c</span><span style="color:#bbb"> </span><span style="color:#00a">mut</span><span style="color:#bbb"> </span><span style="color:#0aa">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
@@ -232,7 +235,8 @@ trait for a struct. So if the struct requires an explicit lifetime, you need to 
 </span><span style="color:#bbb">    </span><span style="color:#00a">fn</span> <span style="color:#0a0">grow_old</span>(&amp;<span style="color:#00a">mut</span><span style="color:#bbb"> </span>self)<span style="color:#bbb">  </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">        </span>*self.age<span style="color:#bbb"> </span>+=<span style="color:#bbb"> </span><span style="color:#099">100</span><span style="color:#bbb">
 </span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}</code></pre></div>
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span></code></pre></div>
 <p>This fails with the following:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#00a">error</span>: wrong number of lifetime <span style="color:#00a">parameters</span>: expected <span style="color:#099">1</span>, found <span style="color:#099">0</span> [<span style="color:#a00">E0107</span>]
         impl <span style="color:#a00">Sheep</span> {
@@ -242,7 +246,7 @@ trait for a struct. So if the struct requires an explicit lifetime, you need to 
 <p>What&rsquo;s the problem?</p>
 
 <p><code>Sheep</code> takes a lifetime parameter now, so one must be supplied:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a">struct</span> <span style="color:#0a0;text-decoration:underline">Sheep</span>&lt;<span style="color:#1e90ff">&#39;c</span>&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>age: <span style="color:#00a">&amp;</span><span style="color:#1e90ff">&#39;c</span><span style="color:#bbb"> </span><span style="color:#00a">mut</span><span style="color:#bbb"> </span><span style="color:#0aa">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb">
@@ -250,7 +254,8 @@ trait for a struct. So if the struct requires an explicit lifetime, you need to 
 </span><span style="color:#bbb">    </span><span style="color:#00a">fn</span> <span style="color:#0a0">grow_old</span>(&amp;<span style="color:#00a">mut</span><span style="color:#bbb"> </span>self)<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">        </span>*self.age<span style="color:#bbb"> </span>+=<span style="color:#bbb"> </span><span style="color:#099">100</span><span style="color:#bbb">
 </span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}</code></pre></div>
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span></code></pre></div>
 <p>Note that <code>impl&lt;'c&gt;</code> names a new lifetime and <code>Sheep&lt;'c&gt;</code> says that all
 <code>self</code>&rsquo;s in this implementation have at least the lifetime <code>'c</code>.</p>
 

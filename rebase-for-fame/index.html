@@ -3,7 +3,7 @@
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.40.1" />
+  <meta name="generator" content="Hugo 0.52" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -91,8 +91,8 @@ bbbbbbb -- second commit
 aaaaaaa -- first commit
 
 $ git checkout bbbbbbb
-<span style="color:#aaa;font-style:italic"># make a new branch, based off of &#34;second commit&#34;
-</span><span style="color:#aaa;font-style:italic"></span>$ git checkout -b my_new_branch
+<span style="color:#aaa;font-style:italic"># make a new branch, based off of &#34;second commit&#34;</span>
+$ git checkout -b my_new_branch
 $ touch a_file
 $ git add a_file
 $ git commit -m <span style="color:#a50">&#39;I just committed a file!&#39;</span>
@@ -101,10 +101,10 @@ ddddddd -- I just committed a file!
 bbbbbbb -- second commit
 aaaaaaa -- first commit
 
-<span style="color:#aaa;font-style:italic"># But I meant to make this commit on &#34;third commit&#34;, not &#34;second commit&#34;!!!
-</span><span style="color:#aaa;font-style:italic"># OH NOOOOO
-</span><span style="color:#aaa;font-style:italic"># wait, I can re-base?
-</span><span style="color:#aaa;font-style:italic"></span>$ git rebase ccccccc
+<span style="color:#aaa;font-style:italic"># But I meant to make this commit on &#34;third commit&#34;, not &#34;second commit&#34;!!!</span>
+<span style="color:#aaa;font-style:italic"># OH NOOOOO</span>
+<span style="color:#aaa;font-style:italic"># wait, I can re-base?</span>
+$ git rebase ccccccc
 First, rewinding head to replay your work on top of it...
 Applying: I just committed a file!
 
@@ -114,7 +114,7 @@ ccccccc -- third commit
 bbbbbbb -- second commit
 aaaaaaa -- first commit
 
-# We just changed where the branch was based!</code></pre></div>
+<span style="color:#aaa;font-style:italic"># We just changed where the branch was based!</span></code></pre></div>
 <h1 id="if-things-go-wrong">If things go wrong&hellip;</h1>
 
 <p>This is a chance you screw everything up. Luckily, there are very few things

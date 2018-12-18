@@ -3,7 +3,7 @@
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.40.1" />
+  <meta name="generator" content="Hugo 0.52" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -62,7 +62,7 @@
 
 <p>A large part of function programming is pattern matching:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#aaa;font-style:italic">/* A new and delicious enum */</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#00a">type</span> <span style="color:#0a0">fruit</span><span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Apple<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>Pear<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>Pineapple<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>Orange;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#00a">type</span> <span style="color:#0a0;text-decoration:underline">fruit</span><span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Apple<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>Pear<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>Pineapple<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>Orange;<span style="color:#bbb">
 </span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#00a">let</span><span style="color:#bbb"> </span>my_fruit<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Pear;<span style="color:#bbb">
 </span><span style="color:#bbb">
@@ -71,7 +71,8 @@
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span>Apple<span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;you have an apple&#34;</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span>Pear<span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;you have a pear&#34;</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span>_<span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;you have neither an apple or a pear&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>});</code></pre></div>
+</span><span style="color:#bbb"></span>});<span style="color:#bbb">
+</span><span style="color:#bbb"></span></code></pre></div>
 <h1 id="except">Except&hellip;</h1>
 
 <p>The cool part is how Reason handles exceptions: as another branch in
@@ -95,7 +96,8 @@ a switch statement.</p>
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span><span style="color:#00a">true</span><span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;handling true&#34;</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span><span style="color:#00a">false</span><span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;handling false&#34;</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span>exception<span style="color:#bbb"> </span>My_exception<span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;handling my exception&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>};</code></pre></div>
+</span><span style="color:#bbb"></span>};<span style="color:#bbb">
+</span><span style="color:#bbb"></span></code></pre></div>
 <p>Throwing an exception is different than returning something - an exception unwinds the stack until
 it&rsquo;s caught.</p>
 
@@ -129,7 +131,8 @@ try-catch.</p>
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span><span style="color:#a50">&#34;hi&#34;</span><span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;You said &#39;hi&#39;!&#34;</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span>_<span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;You didn&#39;t say hi :(&#34;</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>|<span style="color:#bbb"> </span>exception<span style="color:#bbb"> </span>(Sys_error<span style="color:#bbb"> </span>_)<span style="color:#bbb"> </span>=&gt;<span style="color:#bbb"> </span><span style="color:#a50">&#34;error reading your saltation&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>});</code></pre></div>
+</span><span style="color:#bbb"></span>});<span style="color:#bbb">
+</span><span style="color:#bbb"></span></code></pre></div>
 <p>That&rsquo;s all!</p>
 
 <h1 id="what-s-reason">What&rsquo;s Reason?</h1>

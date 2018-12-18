@@ -23,7 +23,7 @@
 
 &lt;p&gt;A large part of function programming is pattern matching:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;/* A new and delicious enum */&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;fruit&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pineapple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Orange;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;fruit&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pineapple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Orange;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;my_fruit&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
@@ -32,7 +32,8 @@
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Apple&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;you have an apple&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Pear&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;you have a pear&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;you have neither an apple or a pear&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;});&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;});&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&#34;except&#34;&gt;Except&amp;hellip;&lt;/h1&gt;
 
 &lt;p&gt;The cool part is how Reason handles exceptions: as another branch in
@@ -56,7 +57,8 @@ a switch statement.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;handling true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;handling false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;My_exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;handling my exception&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;};&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Throwing an exception is different than returning something - an exception unwinds the stack until
 it&amp;rsquo;s caught.&lt;/p&gt;
 
@@ -90,7 +92,8 @@ try-catch.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You said &amp;#39;hi&amp;#39;!&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;You didn&amp;#39;t say hi :(&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exception&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(Sys_error&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;_)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;error reading your saltation&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;});&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;});&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That&amp;rsquo;s all!&lt;/p&gt;
 
 &lt;h1 id=&#34;what-s-reason&#34;&gt;What&amp;rsquo;s Reason?&lt;/h1&gt;

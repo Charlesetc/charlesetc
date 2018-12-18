@@ -168,13 +168,13 @@ Depending on the context they can look like one of: &lt;code&gt;something&amp;lt
 &lt;p&gt;This makes sense: If you want to take a reference to something on the function stack, you have to be prepared for it to disappear when the function is over. And if not, you need to make sure it has an appropriate lifetime.&lt;/p&gt;
 
 &lt;p&gt;In Go, you can do this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;func&lt;/span&gt; example_function() *&lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt; {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;example_function&lt;/span&gt;() *&lt;span style=&#34;color:#0aa&#34;&gt;int&lt;/span&gt; {
   b := &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;
   &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt; &amp;amp;b
 }
 
-&lt;span style=&#34;color:#00a&#34;&gt;func&lt;/span&gt; main() {
-  fmt.Println(*example_function());
+&lt;span style=&#34;color:#00a&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;main&lt;/span&gt;() {
+  fmt.&lt;span style=&#34;color:#0a0&#34;&gt;Println&lt;/span&gt;(*&lt;span style=&#34;color:#0a0&#34;&gt;example_function&lt;/span&gt;());
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;However, you cannot do that in Rust:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;example_function&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;a&lt;/span&gt;&amp;gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;-&amp;gt; &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
@@ -184,7 +184,8 @@ Depending on the context they can look like one of: &lt;code&gt;something&amp;lt
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;println!(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;{}&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;example_function());&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The reason is that &lt;code&gt;&amp;amp;b&lt;/code&gt; does not live long enough to be dereferenced outside of the function that made it.&lt;/p&gt;
 
 &lt;p&gt;Why is this so important? Because this is what can happen in C:&lt;/p&gt;
@@ -230,15 +231,16 @@ that&amp;rsquo;s a more complicated question and the answer is to put it on the 
 &lt;p&gt;Here&amp;rsquo;s how you can make sure of that:&lt;/p&gt;
 
 &lt;h2 id=&#34;wrong-example&#34;&gt;Wrong example:&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;Sheep&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;a&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;println!(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;{};&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s)&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This gives the following error:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;error&lt;/span&gt;: missing lifetime specifier [&lt;span style=&#34;color:#a00&#34;&gt;E0106&lt;/span&gt;]
         &lt;span style=&#34;color:#00a&#34;&gt;age&lt;/span&gt;: &amp;amp;i32,
@@ -248,15 +250,16 @@ In the struct definition, you haven&amp;rsquo;t told it how long the reference t
 And yet, in order for your code to be safe, it has to stick around for at least as long as the struct.&lt;/p&gt;
 
 &lt;h2 id=&#34;right-example&#34;&gt;Right Example&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;a&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Sheep&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;};&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;println!(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;{};&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;s)&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You&amp;rsquo;ll notice that not much here has changed. But now Rust has pronounced your code safe &amp;mdash; Hurray!&lt;/p&gt;
 
 &lt;p&gt;Here are the changes:&lt;/p&gt;
@@ -283,7 +286,7 @@ even across threads. AND all of this happens at compile time without affecting t
 trait for a struct. So if the struct requires an explicit lifetime, you need to have one to give it.&lt;/p&gt;
 
 &lt;h2 id=&#34;wrong-example-1&#34;&gt;Wrong Example&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
@@ -291,7 +294,8 @@ trait for a struct. So if the struct requires an explicit lifetime, you need to 
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;grow_old&lt;/span&gt;(&amp;amp;&lt;span style=&#34;color:#00a&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;self)&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;*self.age&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;+=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This fails with the following:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;error&lt;/span&gt;: wrong number of lifetime &lt;span style=&#34;color:#00a&#34;&gt;parameters&lt;/span&gt;: expected &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;, found &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt; [&lt;span style=&#34;color:#a00&#34;&gt;E0107&lt;/span&gt;]
         impl &lt;span style=&#34;color:#a00&#34;&gt;Sheep&lt;/span&gt; {
@@ -301,7 +305,7 @@ trait for a struct. So if the struct requires an explicit lifetime, you need to 
 &lt;p&gt;What&amp;rsquo;s the problem?&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;Sheep&lt;/code&gt; takes a lifetime parameter now, so one must be supplied:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#00a&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;Sheep&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;age: &lt;span style=&#34;color:#00a&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;&amp;#39;c&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
@@ -309,7 +313,8 @@ trait for a struct. So if the struct requires an explicit lifetime, you need to 
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#00a&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#0a0&#34;&gt;grow_old&lt;/span&gt;(&amp;amp;&lt;span style=&#34;color:#00a&#34;&gt;mut&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;self)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;*self.age&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;+=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that &lt;code&gt;impl&amp;lt;&#39;c&amp;gt;&lt;/code&gt; names a new lifetime and &lt;code&gt;Sheep&amp;lt;&#39;c&amp;gt;&lt;/code&gt; says that all
 &lt;code&gt;self&lt;/code&gt;&amp;rsquo;s in this implementation have at least the lifetime &lt;code&gt;&#39;c&lt;/code&gt;.&lt;/p&gt;
 

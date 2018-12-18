@@ -52,8 +52,8 @@ bbbbbbb -- second commit
 aaaaaaa -- first commit
 
 $ git checkout bbbbbbb
-&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# make a new branch, based off of &amp;#34;second commit&amp;#34;
-&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;$ git checkout -b my_new_branch
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# make a new branch, based off of &amp;#34;second commit&amp;#34;&lt;/span&gt;
+$ git checkout -b my_new_branch
 $ touch a_file
 $ git add a_file
 $ git commit -m &lt;span style=&#34;color:#a50&#34;&gt;&amp;#39;I just committed a file!&amp;#39;&lt;/span&gt;
@@ -62,10 +62,10 @@ ddddddd -- I just committed a file!
 bbbbbbb -- second commit
 aaaaaaa -- first commit
 
-&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# But I meant to make this commit on &amp;#34;third commit&amp;#34;, not &amp;#34;second commit&amp;#34;!!!
-&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# OH NOOOOO
-&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# wait, I can re-base?
-&lt;/span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;&lt;/span&gt;$ git rebase ccccccc
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# But I meant to make this commit on &amp;#34;third commit&amp;#34;, not &amp;#34;second commit&amp;#34;!!!&lt;/span&gt;
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# OH NOOOOO&lt;/span&gt;
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# wait, I can re-base?&lt;/span&gt;
+$ git rebase ccccccc
 First, rewinding head to replay your work on top of it...
 Applying: I just committed a file!
 
@@ -75,7 +75,7 @@ ccccccc -- third commit
 bbbbbbb -- second commit
 aaaaaaa -- first commit
 
-# We just changed where the branch was based!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# We just changed where the branch was based!&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&#34;if-things-go-wrong&#34;&gt;If things go wrong&amp;hellip;&lt;/h1&gt;
 
 &lt;p&gt;This is a chance you screw everything up. Luckily, there are very few things

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.52" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+  <title>Fuzzy find your $PATH &middot; Charles, etc</title>
+
+  
+  <link rel="stylesheet" href="../css/print.css" media="print">
+  <link rel="stylesheet" href="../css/poole.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/syntax.css">
+  <link rel="stylesheet" href="../css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Charles, etc" />
+
+  
+</head>
+
+  <body class=" ">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="content container">
+    <div class="post">
+  <h1 id='title'>Fuzzy find your $PATH</h1>
+  <span class="post-date">Mon, Dec 17, 2018</span>
+  <p>So I&rsquo;ve been fzf&rsquo;ing things again.</p>
+
+<p><img src="../images/hmmm.gif" alt="eye-roll" />
+<br/></p>
+
+<p><a href="https://github.com/junegunn/fzf">Fzf</a> is an tool that lets you search through lines of text interactively. My most common use-cases are fuzzy-finding all files in the current directory and its children, and fuzzy-finding through my shell history.</p>
+
+<p>Fzf saves you from typing out long, exact pieces of text when there&rsquo;s a
+relatively small search space of things you might want to type.  It occurred to me recently that the executables your $PATH (cat, grep, basename, etc) are things that we type all the time, with a very small, easily-identifiable search space.</p>
+
+<p>So I made some keybindings! The code is mostly copied from the official fzf
+keybindings.</p>
+
+<p>For zsh, add this to your <code>.zshrc</code></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">fzf-binary-widget() {
+  <span style="color:#a00">selected</span>=( <span style="color:#00a">$(</span> whence -pm <span style="color:#a50">&#39;*&#39;</span> | <span style="color:#a50">\
+</span><span style="color:#a50"></span>    xargs -IX basename X | <span style="color:#a50">\
+</span><span style="color:#a50"></span>    <span style="color:#a00">FZF_DEFAULT_OPTS</span>=<span style="color:#a50">&#34;--height \
+</span><span style="color:#a50">    </span><span style="color:#a50">${</span><span style="color:#a00">FZF_TMUX_HEIGHT</span><span style="color:#00a">:-</span><span style="color:#a00">40</span>%<span style="color:#a50">}</span><span style="color:#a50"> </span><span style="color:#a00">$FZF_DEFAULT_OPTS</span><span style="color:#a50"> \
+</span><span style="color:#a50">    -n2..,.. --tiebreak=index \
+</span><span style="color:#a50">    --bind=ctrl-r:toggle-sort \
+</span><span style="color:#a50">    </span><span style="color:#a00">$FZF_CTRL_R_OPTS</span><span style="color:#a50"> --query=</span><span style="color:#a50">${</span>(qqq)LBUFFER<span style="color:#a50">}</span><span style="color:#a50"> \
+</span><span style="color:#a50">      +m&#34;</span> <span style="color:#00a">$(</span>__fzfcmd<span style="color:#00a">))</span> )
+  <span style="color:#0aa">local</span> <span style="color:#a00">ret</span>=<span style="color:#a00">$?</span>
+  <span style="color:#00a">if</span> [ -n <span style="color:#a50">&#34;</span><span style="color:#a00">$selected</span><span style="color:#a50">&#34;</span> ]; <span style="color:#00a">then</span>
+    <span style="color:#a00">LBUFFER</span>=<span style="color:#a50">&#34;</span><span style="color:#a50">${</span><span style="color:#a00">RBUFFER</span><span style="color:#a50">}</span><span style="color:#a00">$selected</span><span style="color:#a50"> &#34;</span>
+  <span style="color:#00a">fi</span>
+  zle redisplay
+  <span style="color:#00a">return</span> <span style="color:#a50">&#34;</span><span style="color:#a00">$ret</span><span style="color:#a50">&#34;</span>
+}
+zle     -N   fzf-binary-widget
+<span style="color:#aaa;font-style:italic"># bind to Control-h, change this if you want a different key</span>
+bindkey <span style="color:#a50">&#39;^H&#39;</span> fzf-binary-widget</code></pre></div>
+<p>For bash, add this to your <code>.bashrc</code></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#00a">function</span> __fzf_binary__() {
+  <span style="color:#0aa">local</span> <span style="color:#a00">selected</span>=<span style="color:#a50">&#34;</span><span style="color:#00a">$(</span><span style="color:#0aa">compgen</span> -c<span style="color:#a50">\
+</span><span style="color:#a50"></span>    | <span style="color:#a00">FZF_DEFAULT_OPTS</span>=<span style="color:#a50">&#34;--height </span><span style="color:#a50">${</span><span style="color:#a00">FZF_TMUX_HEIGHT</span><span style="color:#00a">:-</span><span style="color:#a00">80</span>%<span style="color:#a50">}</span><span style="color:#a50">\
+</span><span style="color:#a50">    --reverse </span><span style="color:#a00">$FZF_DEFAULT_OPTS</span><span style="color:#a50"> </span><span style="color:#a00">$FZF_CTRL_T_OPTS</span><span style="color:#a50">&#34;</span> fzf -m <span style="color:#a50">&#34;</span><span style="color:#a00">$@</span><span style="color:#a50">&#34;</span><span style="color:#00a">)</span><span style="color:#a50">&#34;</span>
+  <span style="color:#a00">READLINE_LINE</span>=<span style="color:#a50">&#34;\
+</span><span style="color:#a50">  </span><span style="color:#a50">${</span><span style="color:#a00">READLINE_LINE</span>:<span style="color:#a00">0</span>:<span style="color:#a00">$READLINE_POINT</span><span style="color:#a50">}</span><span style="color:#a50">\
+</span><span style="color:#a50">  </span><span style="color:#a00">$selected</span><span style="color:#a50">${</span><span style="color:#a00">READLINE_LINE</span>:<span style="color:#a00">$READLINE_POINT</span><span style="color:#a50">}</span><span style="color:#a50">&#34;</span>
+  <span style="color:#0aa">echo</span> -ne <span style="color:#a50">&#34;</span><span style="color:#a00">$selected</span><span style="color:#a50">&#34;</span>
+  <span style="color:#a00">READLINE_POINT</span>=<span style="color:#00a">$((</span> READLINE_POINT + <span style="color:#a50">${#</span><span style="color:#a00">selected</span><span style="color:#a50">}</span> <span style="color:#00a">))</span>
+}
+<span style="color:#aaa;font-style:italic"># bind to Control-h, change this if you want a different key</span>
+<span style="color:#0aa">bind</span> <span style="color:#a50">&#39;&#34;\C-h&#34;: &#34; \C-e\C-u\C-y\ey\C-u`__fzf_binary__`\e\C-e\er\e^&#34;&#39;</span>
+<span style="color:#aaa;font-style:italic"># Required to refresh the prompt after fzf</span>
+<span style="color:#0aa">bind</span> <span style="color:#a50">&#39;&#34;\er&#34;: redraw-current-line&#39;</span>
+<span style="color:#0aa">bind</span> <span style="color:#a50">&#39;&#34;\e^&#34;: history-expand-line&#39;</span></code></pre></div>
+<p>Most of this was copied from the official Fzf keybindings, so I can&rsquo;t
+explain much. <code>whence</code> and <code>compgen</code> list available binaries in zsh and bash respectively.</p>
+
+<p>Then you can hit Control-H to fuzzy-find your path!</p>
+
+<p><img src="../images/done-with-that.gif" alt="done with that" /></p>
+
+</div>
+
+
+<h1 id="side-title" class="title"><span class="wrapper">
+    <span class="inside-wrapper"><a href="../"><span>C</span><span>h</span><span>a</span><span>r</span><span>l</span><span>e</span><span>s</span><span>, </span><span>e</span><span>t</span><span>c</span></a></span>
+</span></h1>
+
+<script>renderMathInElement(document.body);</script>
+    </div>
+    
+  </body>
+</html>
