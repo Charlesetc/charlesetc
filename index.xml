@@ -30,8 +30,7 @@ relatively small search space of things you might want to type.  It occurred to 
 &lt;p&gt;You can see almost what it looks like by running &lt;code&gt;compgen -c | fzf&lt;/code&gt; in bash or
 &lt;code&gt;whence -pm &#39;*&#39; | fzf&lt;/code&gt; in zsh.&lt;/p&gt;
 
-&lt;p&gt;So I made some keybindings! The code is mostly copied from the official fzf
-keybindings.&lt;/p&gt;
+&lt;p&gt;So I made some keybindings! I wasn&amp;rsquo;t able to get bash to add a space after the executable, just zsh. Let me know if anyone can figure it out.&lt;/p&gt;
 
 &lt;p&gt;For zsh, add this to your &lt;code&gt;.zshrc&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-zsh&#34; data-lang=&#34;zsh&#34;&gt;fzf-binary-widget() {
