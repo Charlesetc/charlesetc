@@ -27,6 +27,9 @@
 &lt;p&gt;Fzf saves you from typing out long, exact pieces of text when there&amp;rsquo;s a
 relatively small search space of things you might want to type.  It occurred to me recently that the executables your $PATH (cat, grep, basename, etc) are things that we type all the time, with a very small, easily-identifiable search space.&lt;/p&gt;
 
+&lt;p&gt;You can see almost what it looks like by running &lt;code&gt;compgen -c | fzf&lt;/code&gt; in bash or
+&lt;code&gt;whence -pm &#39;*&#39; | fzf&lt;/code&gt; in zsh.&lt;/p&gt;
+
 &lt;p&gt;So I made some keybindings! The code is mostly copied from the official fzf
 keybindings.&lt;/p&gt;
 
