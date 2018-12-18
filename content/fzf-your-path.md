@@ -17,7 +17,8 @@ relatively small search space of things you might want to type.  It occurred to 
 You can see almost what it looks like by running `compgen -c | fzf` in bash or
 `whence -pm '*' | fzf` in zsh.
 
-So I made some keybindings!
+
+So I made some keybindings! I wasn't able to get bash to add a space after the executable, just zsh. Let me know if anyone can figure it out.
 
 For zsh, add this to your `.zshrc`
 ```zsh
