@@ -17,8 +17,7 @@ relatively small search space of things you might want to type.  It occurred to 
 You can see almost what it looks like by running `compgen -c | fzf` in bash or
 `whence -pm '*' | fzf` in zsh.
 
-So I made some keybindings! The code is mostly copied from the official fzf
-keybindings.
+So I made some keybindings!
 
 For zsh, add this to your `.zshrc`
 ```zsh
