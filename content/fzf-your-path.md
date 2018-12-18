@@ -13,6 +13,10 @@ So I've been fzf'ing things again.
 Fzf saves you from typing out long, exact pieces of text when there's a
 relatively small search space of things you might want to type.  It occurred to me recently that the executables your $PATH (cat, grep, basename, etc) are things that we type all the time, with a very small, easily-identifiable search space.
 
+
+You can see almost what it looks like by running `compgen -c | fzf` in bash or
+`whence -pm '*' | fzf` in zsh.
+
 So I made some keybindings! The code is mostly copied from the official fzf
 keybindings.
 
